@@ -36,4 +36,3 @@ integration/      — Einbindung in bestehende Projekte
 - **Prototyp ≠ Production** — Schnell generierter Code muss geprueft werden
 - **Kontext ist Pflicht** — AI ohne Kontext erfindet Dinge
 - **Inkrementell** — Kleine Schritte mit Validation nach jedem Schritt
-- **Screenshot-First** — Visuelles Feedback wo moeglich
