@@ -20,17 +20,17 @@
     <th>Key Output</th>
   </tr>
   <tr>
-    <td><strong><a href="01-context/">1. Context</a></strong></td>
+    <td><strong><a href="01-context/">Context</a></strong></td>
     <td>Understand the problem, gather context, confirm scope</td>
     <td>Problem description, affected modules, confirmed scope</td>
   </tr>
   <tr>
-    <td><strong><a href="02-exploration/">2. Exploration</a></strong></td>
+    <td><strong><a href="02-exploration/">Exploration</a></strong></td>
     <td>Plan the solution, prototype, validate the approach</td>
     <td>Approved plan/spec, prototype, ADR</td>
   </tr>
   <tr>
-    <td><strong><a href="03-production/">3. Production</a></strong></td>
+    <td><strong><a href="03-production/">Production</a></strong></td>
     <td>Build, verify, ship</td>
     <td>Production code, passing tests, commit on main</td>
   </tr>
