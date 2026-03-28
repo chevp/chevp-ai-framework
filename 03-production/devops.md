@@ -1,0 +1,62 @@
+# DevOps in Production
+
+> Build, verify, commit, deliver.
+
+## Responsibilities
+
+- Build verification after each implementation step
+- Test execution
+- Git commit workflow
+- Delivery pipeline
+
+## Build Verification
+
+After every implementation step:
+- Run the build
+- Verify compilation / no errors
+- Run existing tests (if test suite exists)
+
+## Commit Workflow
+
+```bash
+git add <changed-files>    # Only specific files, NOT git add .
+git commit -m "<type>(<scope>): <description>
+
+<what and why>"
+```
+
+### Commit Rules
+
+- Directly to main (no feature branches for plans, unless explicitly desired)
+- Meaningful messages (what AND why)
+- Only stage changed files — never `git add .`
+- Build must be successful before committing
+
+### Commit Convention for Plans
+
+```
+plan(NNN): <short description>
+```
+
+## AI Behavior
+
+### MUST
+- Verify build after each implementation step
+- Wait for explicit commit request from the human
+- Stage specific files (not `git add .`)
+- Write meaningful commit messages
+
+### MUST NOT
+- Commit without being asked
+- Push without being asked
+- Force-push
+- Skip git hooks (`--no-verify`)
+- Commit code that does not compile
+
+## Checklist
+
+- [ ] Build is successful
+- [ ] Tests pass (if applicable)
+- [ ] Commit uses specific file staging
+- [ ] Commit message is meaningful
+- [ ] Human authorized the commit

@@ -1,52 +1,52 @@
 # CLAUDE.md Integration
 
-> Wie CLAUDE.md das Framework durchsetzt.
+> How CLAUDE.md enforces the framework.
 
-## Warum CLAUDE.md?
+## Why CLAUDE.md?
 
-`CLAUDE.md` ist die Datei die Claude (AI) automatisch liest wenn sie ein Projekt oeffnet.
-Sie ist das primaere Steuerungs-Instrument fuer AI-Verhalten in einem Projekt.
+`CLAUDE.md` is the file that Claude (AI) automatically reads when opening a project.
+It is the primary control mechanism for AI behavior in a project.
 
-## Verbindlicher Verweis
+## Binding Reference
 
-Der wichtigste Block in jeder Projekt-CLAUDE.md:
+The most important block in every project CLAUDE.md:
 
 ```markdown
-## Entwicklungsprozess
+## Development Process
 
-Dieses Projekt folgt dem [chevp-ai-framework](https://github.com/chevp/chevp-ai-framework) Lifecycle.
+This project follows the [chevp-ai-framework](https://github.com/chevp/chevp-ai-framework) lifecycle.
 
-### Phasen (sequentiell, nicht ueberspringbar)
-1. **Discovery** — Problem verstehen, Kontext sammeln
-2. **Specification** — Plan/Spec erstellen, Freigabe einholen
-3. **UX-Prototype** — Visuelles Feedback (Pflicht bei UI/Shader/Szenen)
-4. **Implementation** — Production Code laut Plan
-5. **Validation** — Build, Screenshot-Vergleich, Spec-Abgleich
-6. **Delivery** — Commit, Doku nachziehen
+### Steps (sequential, not skippable)
+1. **Context** — Understand problem, gather context, confirm scope
+2. **Exploration** — Create plan/spec, prototype (where applicable), obtain approval
+3. **Production** — Implement according to plan, validate, deliver
 
-### Regeln
-- Kein Code ohne vorherige Spec (Phase 2)
-- Kein Production Code ohne Prototyp-Bestaetigung (Phase 3, wo anwendbar)
-- Kein Commit ohne Validation (Phase 5)
-- Bei Unsicherheit: STOPP und fragen
+### Roles (cross-cutting across all steps)
+SDLC, AI-Plans, UX-Tooling, DevOps, Software-Architecture, Context-Engineering
+
+### Rules
+- No code without a prior spec (Exploration)
+- No production code without prototype confirmation (where applicable)
+- No commit without validation (Production)
+- When uncertain: STOP and ask
 ```
 
-## Hierarchie
+## Hierarchy
 
 ```
-chevp-ai-framework/CLAUDE.md     ← Framework-Regeln (generisch)
-    ↓ wird referenziert von
-<projekt>/CLAUDE.md               ← Projekt-Regeln (spezifisch)
-    ↓ wird ergaenzt durch
-<projekt>/context/guidelines/     ← Detail-Regeln
+chevp-ai-framework/CLAUDE.md     ← Framework rules (generic)
+    ↓ referenced by
+<project>/CLAUDE.md               ← Project rules (specific)
+    ↓ supplemented by
+<project>/context/guidelines/     ← Detailed rules
 ```
 
-Das Projekt kann Framework-Regeln **verschaerfen** aber nicht **aufweichen**.
+The project can **tighten** framework rules but not **loosen** them.
 
-## Effektivitaet
+## Effectiveness
 
-CLAUDE.md wirkt weil:
-1. Claude liest es automatisch bei jeder Konversation
-2. Es steht im Repo und wird versioniert
-3. Jeder AI-Agent (auch parallele) liest dieselben Regeln
-4. Aenderungen am Prozess sind Git-Commits (reviewbar)
+CLAUDE.md works because:
+1. Claude reads it automatically at every conversation
+2. It lives in the repo and is versioned
+3. Every AI agent (including parallel ones) reads the same rules
+4. Process changes are git commits (reviewable)

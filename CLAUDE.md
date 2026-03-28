@@ -1,29 +1,34 @@
 # CLAUDE.md — chevp-ai-framework
 
-Dies ist ein Prozess-Framework fuer AI-gestuetzte Softwareentwicklung.
-Es definiert den uebergeordneten Lifecycle, den Claude in allen Projekten einhalten muss.
+This is a process framework for AI-assisted software development.
+It defines the overarching lifecycle that Claude must follow in all projects.
 
-## Kernregeln
+## Core Rules
 
-1. **Phasen sind sequentiell** — Keine Phase darf uebersprungen werden
-2. **Mensch entscheidet** — Bei jedem Phase-Uebergang muss der Mensch explizit bestaetigen
-3. **Kontext vor Code** — AI schreibt keinen Production Code ohne vorherige Spec
-4. **Prototyp vor Production** — UX-Prototypen validieren bevor implementiert wird (wo anwendbar)
-5. **Ownership bleibt beim Menschen** — AI liefert Vorschlaege, Entwickler tragen Verantwortung
+1. **Steps are sequential** — No step may be skipped
+2. **Human decides** — At every step transition, the human must explicitly confirm
+3. **Context before code** — AI writes no production code without a prior spec
+4. **Prototype before production** — Validate UX prototypes before implementing (where applicable)
+5. **Ownership stays with the human** — AI delivers suggestions, developers bear responsibility
 
-## Lifecycle-Phasen
+## Lifecycle: 3 Steps × 6 Roles
 
 ```
-1. Discovery → 2. Specification → 3. UX-Prototype → 4. Implementation → 5. Validation → 6. Delivery
+1. Context → 2. Exploration → 3. Production
 ```
 
-Details: [process/LIFECYCLE.md](process/LIFECYCLE.md)
+Within each step, 6 cross-cutting roles operate:
+**SDLC** · **AI-Plans** · **UX-Tooling** · **DevOps** · **Software-Architecture** · **Context-Engineering**
 
-## Dokumentation
+Full matrix: [LIFECYCLE.md](LIFECYCLE.md)
 
-| Ordner | Inhalt |
-|--------|--------|
-| [process/](process/) | Lifecycle-Phasen und Uebergaenge |
-| [artifacts/](artifacts/) | Templates fuer Plans, Specs, ADRs, CLAUDE.md |
-| [guidelines/](guidelines/) | Qualitaetsregeln fuer AI-Zusammenarbeit |
-| [integration/](integration/) | Wie man das Framework in Projekte einbindet |
+## Documentation
+
+| Folder | Content |
+|--------|---------|
+| [01-context/](01-context/) | Step 1: Understand problem, gather context |
+| [02-exploration/](02-exploration/) | Step 2: Plan, prototype, validate approach |
+| [03-production/](03-production/) | Step 3: Build, verify, ship |
+| [templates/](templates/) | Templates for plans, specs, ADRs, CLAUDE.md, prototypes |
+| [guidelines/](guidelines/) | Cross-cutting quality rules for AI collaboration |
+| [integration/](integration/) | How to integrate the framework into projects |
