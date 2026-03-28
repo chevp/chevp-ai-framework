@@ -28,7 +28,7 @@ CLAUDE.md (project root)
 | Feature work | + relevant plan/spec |
 | Architecture change | + ADRs + architecture docs |
 | Code change | + existing code that is affected |
-| Visuals | + screenshot of current state |
+| Visual / physical output | + preview of current state |
 
 ## AI Behavior
 

@@ -41,5 +41,5 @@ It **does not decide** about:
 |---------|------------|--------|
 | "Build the complete feature" | Inconsistent results | Step by step with feedback |
 | Let AI work without context | Hallucinated APIs, wrong patterns | Provide CLAUDE.md + API reference |
-| Visuals without screenshot | Invisible errors | Screenshot feedback loop |
+| Output without preview | Invisible errors | Preview feedback loop |
 | Change too much at once | Hard to review, regressions | Small steps |

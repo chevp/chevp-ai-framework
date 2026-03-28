@@ -48,7 +48,7 @@ Six cross-cutting roles operate within each step:
 |:-----|:------|
 | **SDLC** | Process governance, quality gates, step transitions |
 | **AI-Plans** | Plan/spec artifacts, acceptance criteria, scope management |
-| **UX-Tooling** | Prototypes, screenshot feedback loops, visual validation |
+| **UX-Tooling** | Prototypes, preview feedback loops, visual/physical validation |
 | **DevOps** | Build verification, commit workflow, CI/CD |
 | **Software-Architecture** | ADRs, pattern enforcement, design decisions |
 | **Context-Engineering** | CLAUDE.md, context hierarchy, what AI must read |

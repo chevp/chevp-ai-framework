@@ -9,7 +9,7 @@
 Link to the spec / plan being prototyped.
 
 ## Prototype Form
-<Shadertoy GLSL | HTML/CSS Mockup | Scene JSON | Mermaid Diagram>
+<GLSL Shader | HTML/CSS Mockup | Vanilla JS Web Components | Scene JSON | Diagram>
 
 ## Goal
 What should the prototype show? What question should it answer?
@@ -20,7 +20,7 @@ What should the prototype show? What question should it answer?
 - Interaction: ...
 
 ## References
-- <Screenshots, links, inspiration>
+- <Previews, renders, reference images, links, inspiration>
 
 ## Iteration Log
 

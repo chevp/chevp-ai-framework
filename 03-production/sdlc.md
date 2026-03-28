@@ -27,7 +27,7 @@
 | Method | When |
 |--------|------|
 | Build verification | Always |
-| Screenshot comparison | For visual output |
+| Preview comparison | For visual or physical output |
 | Spec comparison | Always (check all acceptance criteria) |
 | Tests | When test suite exists |
 | Manual review | For complex logic |

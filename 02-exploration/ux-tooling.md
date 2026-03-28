@@ -4,18 +4,19 @@
 
 ## Responsibilities
 
-- Create prototypes for visual/UX validation
-- Run screenshot feedback loops with the human
-- Iterate until the human confirms the visual direction
+- Create prototypes for visual/functional validation
+- Run preview feedback loops with the human
+- Iterate until the human confirms the direction
 
 ## Prototype Forms
 
-| Domain | Prototype Form | Tool |
-|--------|---------------|------|
-| Shader / VFX | GLSL prototype | Shadertoy |
-| UI / Layout | HTML/CSS mockup | Browser / Codepen |
-| 3D Scene | Scene JSON + screenshot | Nuna Renderer |
-| Data flow | Diagram | Mermaid / ASCII |
+| Domain | Prototype Form | Approach |
+|--------|---------------|----------|
+| Shader / VFX | GLSL prototype | Online shader editor or local preview |
+| UI / Layout | HTML/CSS mockup or vanilla JS web components | Browser-based prototype or design tool |
+| 3D Object / Print | 3D model + rendered preview | 3D modeling tool or slicer preview |
+| 3D Scene | Scene JSON + rendered preview | 3D renderer or engine preview |
+| Data flow | Diagram | Diagramming tool or ASCII sketch |
 
 See [ux-prototype-template](../templates/ux-prototype-template.md) for the artifact structure.
 
@@ -23,34 +24,36 @@ See [ux-prototype-template](../templates/ux-prototype-template.md) for the artif
 
 ```
 1. AI creates prototype based on spec
-2. Human reviews visually (screenshot, preview)
+2. Human reviews the result (preview, render, physical sample)
 3. Human gives feedback ("more to the left", "darker", "different layout")
 4. AI iterates
-5. Human confirms: "This is how it should look"
+5. Human confirms: "This is how it should look / work"
 6. Prototype becomes reference for Production
 ```
 
-## Screenshot Feedback Loop
+## Preview Feedback Loop
 
-- **Without screenshot**: AI guesses at coordinates → many failed attempts
-- **With screenshot**: AI sees the problem → 1-2 corrections
+For any product with a visual or physical result:
 
-AI must request or generate a screenshot after every major visual change.
+- **Without preview**: AI guesses at parameters → many failed attempts
+- **With preview**: AI sees the problem → 1-2 corrections
+
+AI must request or generate a preview after every major change. This applies equally to screen-based UIs, rendered 3D models, printed outputs, or any other presentable artifact.
 
 ## AI Behavior
 
 ### MUST
 - Create prototype as a separate file (not directly modify production code)
-- Ask for screenshot/preview after each iteration
+- Ask for a preview/render after each iteration
 - Iterate until human is satisfied
 
 ### MUST NOT
-- Skip prototype for visual output
+- Skip prototype for visual or physical output
 - Commit prototype directly as production code
-- Continue without visual feedback
+- Continue without feedback on the result
 
 ## Checklist
 
 - [ ] Prototype exists as a separate file
-- [ ] Human has visually confirmed ("this is how it should look")
+- [ ] Human has confirmed the result ("this is how it should look / work")
 - [ ] Insights have been fed back into spec/plan
