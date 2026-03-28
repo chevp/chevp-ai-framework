@@ -37,7 +37,7 @@ After Context is complete (G1 passed). Always for features, architecture changes
 |------|---------------|
 | [SDLC](sdlc.md) | Spec + prototype governance, when to require what |
 | [AI-Plans](ai-plans.md) | Plan/spec creation, scope definition, acceptance criteria |
-| [UX-Tooling](ux-tooling.md) | Prototype creation, screenshot feedback loop |
+| [UX-Tooling](ux-tooling.md) | Prototype creation, preview feedback loop |
 | [Software-Architecture](software-architecture.md) | ADR creation, design alternatives, trade-offs |
 | [Context-Engineering](context-engineering.md) | Storing specs/plans in context/ |
 

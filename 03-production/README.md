@@ -40,7 +40,7 @@ After Exploration is complete (G2 passed). Plan/spec is approved, prototype is c
 |------|---------------|
 | [SDLC](sdlc.md) | Implementation + validation + delivery rules |
 | [AI-Plans](ai-plans.md) | Plan execution tracking, finalization |
-| [UX-Tooling](ux-tooling.md) | Visual validation, screenshot comparison |
+| [UX-Tooling](ux-tooling.md) | Visual validation, preview comparison |
 | [DevOps](devops.md) | Build verification, commit workflow, CI |
 | [Software-Architecture](software-architecture.md) | Pattern enforcement, anti-patterns |
 | [Context-Engineering](context-engineering.md) | Post-delivery: update CLAUDE.md, docs |

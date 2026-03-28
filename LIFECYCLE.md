@@ -29,7 +29,7 @@ Each step produces defined artifacts. No step is skipped. The human approves eve
 |------|-------|
 | **SDLC** | Process governance, step transitions, quality gates, iteration rules |
 | **AI-Plans** | Plan/spec artifacts, acceptance criteria, scope management |
-| **UX-Tooling** | Prototypes, screenshot feedback loops, visual validation |
+| **UX-Tooling** | Prototypes, preview feedback loops, visual/physical validation |
 | **DevOps** | Build verification, commit workflow, CI/CD, delivery pipeline |
 | **Software-Architecture** | Architecture analysis, ADRs, pattern enforcement, design decisions |
 | **Context-Engineering** | CLAUDE.md, context hierarchy, what AI must read, context freshness |
