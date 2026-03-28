@@ -1,31 +1,51 @@
 # chevp-ai-framework
 
-> AI-assisted Software Development Lifecycle Framework
+**A structured lifecycle for AI-assisted software development.**
 
-A structured process for human-AI (Claude) collaboration in software development.
+> Vibe Coding is not progress — it's technical recklessness.
+> AI writes code, but it doesn't take responsibility. This framework does.
 
-## Why?
+---
 
-Vibe Coding is not progress — it is technical recklessness. AI writes code, but it does not take responsibility. This framework defines clear steps, quality gates, and responsibilities.
+## Lifecycle
 
-## Lifecycle: 3 Steps
+<p align="center">
+  <img src="images/chevp-ai-framework.png" alt="chevp-ai-framework" width="680" />
+</p>
 
-![chevp-ai-framework](chevp-ai-framework.png)
+<table>
+  <tr>
+    <th>Step</th>
+    <th>Purpose</th>
+    <th>Key Output</th>
+  </tr>
+  <tr>
+    <td><strong><a href="01-context/">1. Context</a></strong></td>
+    <td>Understand the problem, gather context, confirm scope</td>
+    <td>Problem description, affected modules, confirmed scope</td>
+  </tr>
+  <tr>
+    <td><strong><a href="02-exploration/">2. Exploration</a></strong></td>
+    <td>Plan the solution, prototype, validate the approach</td>
+    <td>Approved plan/spec, prototype, ADR</td>
+  </tr>
+  <tr>
+    <td><strong><a href="03-production/">3. Production</a></strong></td>
+    <td>Build, verify, ship</td>
+    <td>Production code, passing tests, commit on main</td>
+  </tr>
+</table>
 
-Each step produces defined artifacts. No step is skipped.
+Quality gates **G1**, **G2**, **G3** enforce human approval at every transition. See [LIFECYCLE.md](LIFECYCLE.md) for the full matrix.
 
-### Steps
+---
 
-| Step | Purpose |
-|------|---------|
-| [Context](01-context/) | Understand the problem, gather context, confirm scope |
-| [Exploration](02-exploration/) | Plan the solution, prototype, validate the approach |
-| [Production](03-production/) | Build, verify, ship |
+## Roles
 
-### Roles (cross-cutting)
+Six cross-cutting roles operate within each step:
 
 | Role | Scope |
-|------|-------|
+|:-----|:------|
 | **SDLC** | Process governance, quality gates, step transitions |
 | **AI-Plans** | Plan/spec artifacts, acceptance criteria, scope management |
 | **UX-Tooling** | Prototypes, screenshot feedback loops, visual validation |
@@ -33,27 +53,48 @@ Each step produces defined artifacts. No step is skipped.
 | **Software-Architecture** | ADRs, pattern enforcement, design decisions |
 | **Context-Engineering** | CLAUDE.md, context hierarchy, what AI must read |
 
-See [LIFECYCLE.md](LIFECYCLE.md) for the full steps × roles matrix.
+---
 
 ## Quick Start
 
-1. Read [LIFECYCLE.md](LIFECYCLE.md) for the overall overview
-2. Copy [templates/claude-md-template.md](templates/claude-md-template.md) as `CLAUDE.md` into your project
-3. Reference this framework in your project's CLAUDE.md
+```bash
+# 1. Copy the CLAUDE.md template into your project
+cp templates/claude-md-template.md <your-project>/CLAUDE.md
 
-## Structure
+# 2. Create the context directory structure
+mkdir -p <your-project>/context/{architecture,adr,guidelines,plans/finished,specs}
+
+# 3. Reference the framework in your project's CLAUDE.md
+```
+
+See [integration/](integration/) for detailed setup guides.
+
+---
+
+## Repository Structure
 
 ```
-01-context/       — Step 1: Understand the problem
-02-exploration/   — Step 2: Plan and prototype
-03-production/    — Step 3: Build, verify, ship
-templates/        — Templates for all artifacts
-guidelines/       — Cross-cutting quality rules
-integration/      — Integration into existing projects
+01-context/       Step 1 — Understand the problem
+02-exploration/   Step 2 — Plan and prototype
+03-production/    Step 3 — Build, verify, ship
+templates/        Plan, spec, ADR, CLAUDE.md, prototype templates
+guidelines/       Cross-cutting quality rules
+integration/      Integration into existing projects
 ```
+
+---
 
 ## Principles
 
-- **Prototype ≠ Production** — Quickly generated code must be reviewed
-- **Context is mandatory** — AI without context invents things
-- **Incremental** — Small steps with validation after each step
+| Principle | Why |
+|:----------|:----|
+| **Prototype ≠ Production** | Quickly generated code must be reviewed and understood |
+| **Context is mandatory** | AI without context invents things |
+| **Incremental** | Small steps with validation after each step |
+| **Human decides** | AI suggests, the developer bears responsibility |
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

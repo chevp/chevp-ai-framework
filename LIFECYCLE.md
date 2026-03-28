@@ -2,15 +2,9 @@
 
 ## The 3-Step Model
 
-```
-┌──────────────┐       ┌──────────────────┐       ┌──────────────────┐
-│  1. CONTEXT  │──────→│  2. EXPLORATION  │──────→│  3. PRODUCTION   │
-│              │       │                  │       │                  │
-│  Understand  │  G1   │  Plan & Proto-   │  G2   │  Build, Verify   │
-│  the problem │──────→│  type the        │──────→│  & Ship          │
-│              │       │  solution        │       │                  │
-└──────────────┘       └──────────────────┘       └──────────────────┘
-```
+<p align="center">
+  <img src="images/chevp-ai-framework.png" alt="chevp-ai-framework" width="680" />
+</p>
 
 Each step produces defined artifacts. No step is skipped. The human approves every transition.
 
