@@ -1,65 +1,65 @@
 # Monorepo Integration
 
-> Wie du das Framework in ein bestehendes Monorepo einbindest.
+> How to integrate the framework into an existing monorepo.
 
-## Empfohlene Verzeichnisstruktur
+## Recommended Directory Structure
 
 ```
-<projekt-root>/
-├── CLAUDE.md                    ← Projekt-CLAUDE.md (verweist auf Framework)
+<project-root>/
+├── CLAUDE.md                    ← Project CLAUDE.md (references framework)
 ├── context/
-│   ├── README.md                ← Uebersicht ueber context/
-│   ├── architecture/            ← Architektur-Dokumente
+│   ├── README.md                ← Overview of context/
+│   ├── architecture/            ← Architecture documents
 │   ├── adr/                     ← Architecture Decision Records
-│   ├── guidelines/              ← Entwicklungsrichtlinien
-│   ├── plans/                   ← Umsetzungsplaene
-│   │   └── finished/            ← Abgeschlossene Plaene
-│   ├── specs/                   ← Feature-Spezifikationen
-│   └── workflows/               ← Wiederkehrende Ablaeufe
-├── src/                         ← Production Code
+│   ├── guidelines/              ← Development guidelines
+│   ├── plans/                   ← Implementation plans
+│   │   └── finished/            ← Completed plans
+│   ├── specs/                   ← Feature specifications
+│   └── workflows/               ← Recurring workflows
+├── src/                         ← Production code
 └── ...
 ```
 
-## Einrichtung
+## Setup
 
-### 1. CLAUDE.md erstellen
+### 1. Create CLAUDE.md
 
-Kopiere [claude-md-template.md](../artifacts/claude-md-template.md) als `CLAUDE.md` ins Projekt-Root.
+Copy [claude-md-template.md](../templates/claude-md-template.md) as `CLAUDE.md` into the project root.
 
-### 2. context/ Ordner anlegen
+### 2. Create context/ folder
 
 ```bash
 mkdir -p context/{architecture,adr,guidelines,plans/finished,specs}
 ```
 
-### 3. Framework-Verweis in CLAUDE.md
+### 3. Framework reference in CLAUDE.md
 
-Fuege folgenden Block in deine Projekt-CLAUDE.md ein:
+Add the following block to your project CLAUDE.md:
 
 ```markdown
-## Entwicklungsprozess
+## Development Process
 
-Dieses Projekt folgt dem [chevp-ai-framework](https://github.com/chevp/chevp-ai-framework) Lifecycle.
-Claude MUSS die Phasen-Reihenfolge einhalten:
-1. Discovery → 2. Spec → 3. UX-Prototype → 4. Implementation → 5. Validation → 6. Delivery
+This project follows the [chevp-ai-framework](https://github.com/chevp/chevp-ai-framework) lifecycle.
+Claude MUST follow the 3-step order:
+1. Context → 2. Exploration → 3. Production
 ```
 
-### 4. Guidelines anpassen
+### 4. Customize guidelines
 
-Die Guidelines in `context/guidelines/` koennen projekt-spezifisch sein.
-Generische Guidelines kommen aus dem Framework, spezifische bleiben im Projekt.
+The guidelines in `context/guidelines/` can be project-specific.
+Generic guidelines come from the framework, specific ones stay in the project.
 
-## Plan-Workflow
+## Plan Workflow
 
-Plans folgen der Konvention aus dem Framework:
-
-```
-PLAN-NNN-<beschreibung>.md       ← Offen
-finished/PLAN-FNNN-<beschreibung>.md  ← Abgeschlossen
-```
-
-Commit-Convention fuer Plan-Umsetzung:
+Plans follow the convention from the framework:
 
 ```
-plan(NNN): <kurze Beschreibung>
+PLAN-NNN-<description>.md       ← Open
+finished/PLAN-FNNN-<description>.md  ← Completed
+```
+
+Commit convention for plan implementation:
+
+```
+plan(NNN): <short description>
 ```

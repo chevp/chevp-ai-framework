@@ -1,45 +1,45 @@
 # AI-Collaboration Guidelines
 
-> Wie Mensch und AI effektiv zusammenarbeiten.
+> How human and AI collaborate effectively.
 
-## Grundverstaendnis
+## Core Understanding
 
-- **Prototyp ≠ Production** — Schnell generierter Code muss geprueft und verstanden werden
-- **Ownership bleibt beim Menschen** — AI liefert Vorschlaege, Entwickler tragen Verantwortung
-- **Verstaendnis vor Geschwindigkeit** — Lieber langsamer, aber mit vollem Durchblick
+- **Prototype ≠ Production** — Quickly generated code must be reviewed and understood
+- **Ownership stays with the human** — AI delivers suggestions, developers bear responsibility
+- **Understanding before speed** — Better slower, but with full clarity
 
-## AI als Akteur
+## AI as an Actor
 
-AI ist ein Werkzeug, kein autonomer Entwickler. Sie:
-- **Analysiert** Codebase und identifiziert Patterns
-- **Schlaegt vor** Loesungen mit Trade-offs
-- **Setzt um** nach expliziter Freigabe
-- **Validiert** gegen Spec und visuelle Referenzen
+AI is a tool, not an autonomous developer. It:
+- **Analyzes** the codebase and identifies patterns
+- **Suggests** solutions with trade-offs
+- **Implements** after explicit approval
+- **Validates** against spec and visual references
 
-Sie **entscheidet nicht** ueber:
-- Scope und Prioritaeten
-- Architektur-Richtung
-- Wann etwas "fertig" ist
-- Ob Code committet/gepusht wird
+It **does not decide** about:
+- Scope and priorities
+- Architecture direction
+- When something is "done"
+- Whether code gets committed/pushed
 
-## Effektive Kommunikation
+## Effective Communication
 
-### Mensch → AI
-- Kontext geben: Was ist das Ziel, nicht nur die Aufgabe
-- Constraints benennen: Was darf NICHT geaendert werden
-- Feedback spezifisch: "weiter links" statt "das passt nicht"
+### Human → AI
+- Provide context: What is the goal, not just the task
+- Name constraints: What MUST NOT be changed
+- Be specific with feedback: "more to the left" instead of "that doesn't work"
 
-### AI → Mensch
-- Fragen stellen statt Annahmen treffen
-- Alternativen aufzeigen mit Trade-offs
-- Stoppen bei Unsicherheit
-- Keine Zusammenfassungen am Ende (der Mensch kann den Diff lesen)
+### AI → Human
+- Ask questions instead of making assumptions
+- Present alternatives with trade-offs
+- Stop when uncertain
+- No summaries at the end (the human can read the diff)
 
 ## Anti-Patterns
 
-| Fehler | Konsequenz | Besser |
-|--------|-----------|--------|
-| "Mach das komplette Feature" | Inkonsistente Ergebnisse | Schrittweise mit Feedback |
-| AI ohne Kontext arbeiten lassen | Halluzinierte APIs, falsche Patterns | CLAUDE.md + API-Referenz mitgeben |
-| Visuelles ohne Screenshot | Unsichtbare Fehler | Screenshot-Feedback-Loop |
-| Zu viel auf einmal aendern | Schwer zu reviewen, Regressionen | Kleine Schritte |
+| Mistake | Consequence | Better |
+|---------|------------|--------|
+| "Build the complete feature" | Inconsistent results | Step by step with feedback |
+| Let AI work without context | Hallucinated APIs, wrong patterns | Provide CLAUDE.md + API reference |
+| Visuals without screenshot | Invisible errors | Screenshot feedback loop |
+| Change too much at once | Hard to review, regressions | Small steps |

@@ -1,6 +1,12 @@
-# Context Management
+# Context-Engineering in Context
 
-> AI without context invents things. Context is mandatory.
+> What AI must read before any work begins.
+
+## Responsibilities
+
+- Ensure AI has gathered the minimum required context
+- Follow the context hierarchy
+- Verify that CLAUDE.md and relevant documentation are loaded
 
 ## Context Hierarchy
 
@@ -24,20 +30,20 @@ CLAUDE.md (project root)
 | Code change | + existing code that is affected |
 | Visuals | + screenshot of current state |
 
-## CLAUDE.md Maintenance
+## AI Behavior
 
-Every active project needs a CLAUDE.md with:
-- What is the project (1-2 sentences)
-- Current state
-- File system overview
-- Technical constraints
-- Decisions made
+### MUST
+- Read CLAUDE.md at the start of every task
+- Load relevant context files before analyzing
+- Verify that context is current (not outdated)
 
-This file is the briefing for every AI agent.
+### MUST NOT
+- Work without reading CLAUDE.md
+- Invent APIs or functions without checking references
+- Assume context from a previous conversation is still valid
 
-## Context Rules
+## Checklist
 
-1. **Read before write** — Read existing code before modifying it
-2. **Use API references** — Do not invent functions that do not exist
-3. **Use templates as a guide** — Follow existing patterns, do not invent new ones
-4. **Keep context up to date** — Update CLAUDE.md and docs when things change
+- [ ] CLAUDE.md has been read
+- [ ] Relevant context files are loaded
+- [ ] Context is verified as current
