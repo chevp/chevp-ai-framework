@@ -8,13 +8,9 @@ A structured process for human-AI (Claude) collaboration in software development
 
 Vibe Coding is not progress — it is technical recklessness. AI writes code, but it does not take responsibility. This framework defines clear steps, quality gates, and responsibilities.
 
-## Lifecycle: 3 Steps × 6 Roles
+## Lifecycle: 3 Steps
 
-```
-┌──────────┐     ┌──────────────┐     ┌────────────┐
-│ CONTEXT  │────→│ EXPLORATION  │────→│ PRODUCTION │
-└──────────┘     └──────────────┘     └────────────┘
-```
+![chevp-ai-framework](chevp-ai-framework.png)
 
 Each step produces defined artifacts. No step is skipped.
 
