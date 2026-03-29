@@ -1,6 +1,7 @@
 # AI-Plans in Exploration
 
 > Plan and specify concrete features before writing code.
+> Mode: `chp-exploration:` — AI plans, prototypes, and documents. No production code.
 
 ## Responsibilities
 
@@ -37,6 +38,7 @@ For small changes, a verbal description in chat is sufficient — but the human 
 
 ### MUST NOT
 - Write a plan AND immediately implement it
+- Write production code (wrong mode — that belongs to `chp-production:`)
 - Hide risks
 - Secretly expand scope
 - Leave acceptance criteria vague

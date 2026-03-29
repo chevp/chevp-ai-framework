@@ -1,6 +1,7 @@
 # Step 1: Context
 
 > Understand the system and the problem before proposing solutions.
+> Mode: `chp-context:` — AI reads, verifies, and asks. No code, no feature plans.
 
 ## Goal
 
@@ -22,11 +23,12 @@ Always. No exceptions. Even trivial changes require reading CLAUDE.md and confir
 
 | # | Deliverable | Description |
 |---|-------------|-------------|
-| 1 | **System Spec** | What the system is, what it does, who it serves, which components it has |
-| 2 | **Software Architecture** | High-level architecture: layers, modules, communication paths, technology stack |
-| 3 | **ADRs** | Architecture Decision Records for all fundamental design decisions |
-| 4 | **Context Inventory** | Catalogue of existing artifacts: code, docs, schemas, conventions, dependencies |
-| 5 | **Scope Confirmation** | Only after 1-4: confirm scope with the human |
+| 1 | **Context-Plan (CPLAN)** | Lightweight plan: what to read/verify, open questions, draft scope boundaries |
+| 2 | **System Spec** | What the system is, what it does, who it serves, which components it has |
+| 3 | **Software Architecture** | High-level architecture: layers, modules, communication paths, technology stack |
+| 4 | **ADRs** | Architecture Decision Records for all fundamental design decisions |
+| 5 | **Context Inventory** | Catalogue of existing artifacts: code, docs, schemas, conventions, dependencies |
+| 6 | **Scope Confirmation** | Only after 1-5: confirm scope with the human |
 
 For small changes (< 10 lines), deliverables 1-3 may already exist. In that case, **read and verify** them — do not skip them.
 
@@ -34,6 +36,7 @@ For small changes (< 10 lines), deliverables 1-3 may already exist. In that case
 
 ## Activities
 
+- Produce Context-Plan as the first activity
 - Read CLAUDE.md and project documentation
 - Explore and understand the codebase
 - Identify existing patterns, conventions, and dependencies
@@ -44,6 +47,7 @@ For small changes (< 10 lines), deliverables 1-3 may already exist. In that case
 
 ## Outputs
 
+- Context-Plan (confirmed by human)
 - System Spec (written document or verified existing)
 - Software Architecture document (written or verified existing)
 - ADRs for fundamental decisions (written or verified existing)
@@ -61,6 +65,7 @@ For small changes (< 10 lines), deliverables 1-3 may already exist. In that case
 
 ## Quality Gate G1: Context Complete
 
+- [ ] Context-Plan exists and is confirmed by human
 - [ ] System Spec exists (what the system is, who it serves, which components)
 - [ ] Software Architecture is documented (layers, modules, communication)
 - [ ] ADRs exist for fundamental decisions (why this language, protocol, structure)

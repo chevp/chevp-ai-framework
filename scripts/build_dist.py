@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-MAX_LINES = 290  # Compact runtime file with efficiency rules
+MAX_LINES = 360  # Compact runtime file with efficiency rules + AI modes + prompt structure
 
 
 # ---------------------------------------------------------------------------
@@ -153,6 +153,59 @@ def build_roles() -> str:
     return f"## Roles\n\n{table}"
 
 
+def build_ai_modes() -> str:
+    mode_table = extract_table(SRC["lifecycle"], "AI Modes")
+    return f"""\
+## AI Modes
+
+AI operates in exactly one mode at a time. Each mode is signaled by a prompt prefix and enforced through a prompt header.
+
+{mode_table}
+
+### Prompt Header (every prompt begins with this)
+
+```
+# CHEVP-AI-FRAMEWORK
+current_mode: <context|exploration|production>
+human_approved: <true|false>
+approved_plan: <PLAN-NNN.md or null>
+prototype_confirmed: <true|false>
+context_verified: <true|false>
+```
+
+### Prompt Structure
+
+```
+chp-<current_mode>:
+- Goal: <goal within this mode>
+- Inputs: <artifacts/plans needed>
+- Output: <what AI delivers>
+- Forbidden: <prohibited actions in this mode>
+```
+
+### AI Status-Check (before every response)
+
+```
+Status: current_mode=X, human_approved=Y, prototype_confirmed=Z
+Allowed: <actions>
+Forbidden: <actions>
+```
+
+### Mode Transitions
+
+`Context ──[G1 + Human]──→ Exploration ──[G2 + Human]──→ Production ──[G3 + Human]──→ Done`
+
+Backward jumps: Production → Exploration (plan wrong), Exploration → Context (requirements misunderstood).
+
+### Session State (in project CLAUDE.md)
+
+```
+Mode: chp-context | chp-exploration | chp-production
+Active Plan: PLAN-NNN (or none)
+Gate Status: G1 ○/✓ | G2 ○/✓ | G3 ○/✓
+```"""
+
+
 def build_step_context() -> str:
     readme = SRC["ctx_readme"]
     deliverables = extract_table(readme, "Mandatory Deliverables (in order)")
@@ -264,7 +317,7 @@ If the approved plan has not changed since G2: execute directly — do not re-an
 
 - Stage specific files only (never `git add .`)
 - Meaningful messages (what + why)
-- Plan commits: `plan(NNN): <description>`
+- Plan commits: `cplan(NNN):`, `plan(NNN):`, `pplan(NNN):`
 - Never commit/push without being asked
 - Never force-push or skip hooks
 - Never commit non-compiling code
@@ -275,7 +328,7 @@ If the approved plan has not changed since G2: execute directly — do not re-an
 
 ### Post-Delivery
 
-- Move plan to `context/plans/finished/`
+- Move plans to `context/plans/finished/` (PPLAN + PLAN)
 - Update CLAUDE.md if context changed
 - Write ADR if architecture decision made
 - Flag outdated docs
@@ -300,24 +353,29 @@ def build_ai_behavior() -> str:
 | Ask questions instead of assuming | Always |
 | Wait for explicit human approval at every gate | Always |
 | Follow existing patterns and conventions | Always |
-| Produce/verify System Spec, Architecture, ADRs, Context Inventory | Context |
-| State understanding and surface ambiguities | Context |
-| Wait for explicit scope confirmation | Context |
-| Create feature plan/spec before any code | Exploration |
-| Define acceptance criteria | Exploration |
-| Create and iterate prototype for visual output until confirmed | Exploration |
-| Verify G1 + G2 deliverables before starting | Production |
-| Implement step-by-step per plan, build-verify after each step | Production |
-| Check each acceptance criterion individually | Production |
-| Stage specific files only, commit only when asked | Production |
-| Move completed plan to `finished/`, update docs | Production |
+| Produce Context-Plan (CPLAN) as first activity | Context (`chp-context:`) |
+| Produce/verify System Spec, Architecture, ADRs, Context Inventory | Context (`chp-context:`) |
+| State understanding and surface ambiguities | Context (`chp-context:`) |
+| Wait for explicit scope confirmation | Context (`chp-context:`) |
+| Create feature plan/spec before any code | Exploration (`chp-exploration:`) |
+| Define acceptance criteria | Exploration (`chp-exploration:`) |
+| Create and iterate prototype for visual output until confirmed | Exploration (`chp-exploration:`) |
+| Produce Production-Plan (PPLAN) and get human approval before any code | Production (`chp-production:`) |
+| Verify G1 + G2 deliverables before starting | Production (`chp-production:`) |
+| Implement step-by-step per plan, build-verify after each step | Production (`chp-production:`) |
+| Check each acceptance criterion individually | Production (`chp-production:`) |
+| Stage specific files only, commit only when asked | Production (`chp-production:`) |
+| Move completed plans to `finished/` (PPLAN + PLAN), update docs | Production (`chp-production:`) |
 
 ### MUST NOT
 
-- Skip steps or gates
+- Skip steps, gates, or modes
 - Expand scope ("I also improved X")
 - Assume requirements without checking
 - Write plan AND immediately implement
+- Write production code in `chp-context:` or `chp-exploration:` mode
+- Create feature plans in `chp-production:` mode
+- Start implementing without approved Production-Plan (PPLAN)
 - Skip prototype for visual output
 - Commit/push without being asked, force-push, or skip hooks
 - Commit non-compiling code
@@ -350,7 +408,7 @@ def build_context_hierarchy() -> str:
 CLAUDE.md (project root)          ← always read first
 ├── context/architecture/         ← for architecture changes
 ├── context/adr/                  ← architecture decisions
-├── context/plans/ (+ finished/)  ← active/completed plans
+├── context/plans/ (+ finished/)  ← CPLAN/PLAN/PPLAN artifacts
 └── context/specs/                ← feature specifications
 ```"""
 
@@ -365,6 +423,7 @@ def build() -> str:
         build_core_rules(),
         build_lifecycle(),
         build_roles(),
+        build_ai_modes(),
         build_step_context(),
         build_step_exploration(),
         build_step_production(),
