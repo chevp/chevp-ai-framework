@@ -30,10 +30,9 @@ jobs:
         run: |
           mkdir -p _site
           cp dist/chevp-ai-framework.md _site/chevp-ai-framework.md
-          cat > _site/index.html << 'EOF'
-          <!DOCTYPE html>
-          <html><head><meta http-equiv="refresh" content="0;url=https://github.com/chevp/chevp-ai-framework"></head></html>
-          EOF
+          cp docs/index.html _site/index.html
+          cp docs/presentation.html _site/presentation.html
+          cp -r docs/images _site/images 2>/dev/null || true
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
