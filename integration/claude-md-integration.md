@@ -17,7 +17,7 @@ The most important block in every project CLAUDE.md — place it at the top, bef
 DO NOT create, edit, or delete any file before:
 1. The chevp-ai-framework has been loaded:
    @url https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
-2. The current phase-step (Context / Exploration / Production) is confirmed with the human
+2. The AI has determined the current lifecycle step (Context / Exploration / Production) and announced it
 ```
 
 ## Hierarchy

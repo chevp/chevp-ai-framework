@@ -1,7 +1,7 @@
 # AI-Plans in Context
 
 > System-level specification and scope definition.
-> Mode: `chp-context:` — AI reads, verifies, and asks. No code, no feature plans.
+> The AI enters Context mode automatically for this role. Optional prefix: `chp-context:`. AI reads, verifies, and asks. No code, no feature plans.
 
 ## Responsibilities
 
@@ -47,8 +47,8 @@ Template: [spec-template](../templates/spec-template.md)
 - Distinguish between "what the user asked" and "what might also be needed"
 
 ### MUST NOT
-- Start writing a feature plan/spec (wrong mode — that belongs to `chp-exploration:`)
-- Write production code (wrong mode — that belongs to `chp-production:`)
+- Start writing a feature plan/spec (wrong mode — that belongs to Exploration)
+- Write production code (wrong mode — that belongs to Production)
 - Make assumptions about priorities or ordering
 - Commit to a solution approach yet
 - Skip the System Spec because "the project already exists"

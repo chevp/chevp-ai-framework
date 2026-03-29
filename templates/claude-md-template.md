@@ -10,7 +10,7 @@
 DO NOT create, edit, or delete any file before:
 1. The chevp-ai-framework has been loaded:
    @url https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
-2. The lifecycle step (Context / Exploration / Production) for the current task is confirmed with the human
+2. The AI has determined the current lifecycle step (Context / Exploration / Production) and announced it
 
 > Note: The 3-step lifecycle applies per task, not per project. Every change starts at Context.
 

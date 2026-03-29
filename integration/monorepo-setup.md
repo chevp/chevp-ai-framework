@@ -72,13 +72,8 @@ plan(NNN): <short description>     ← Exploration phase
 pplan(NNN): <short description>    ← Production phase
 ```
 
-## AI Modes
+## AI Mode Tracking
 
-Add a Session State block to your project CLAUDE.md to track the current AI mode:
+The AI automatically detects and tracks the current lifecycle mode. No manual session state block is needed in your project CLAUDE.md. The AI will announce its detected mode at the start of each response.
 
-```markdown
-## Current Session State
-- **Mode**: chp-context | chp-exploration | chp-production
-- **Active Plan**: PLAN-NNN (or none)
-- **Gate Status**: G1 ○/✓ | G2 ○/✓ | G3 ○/✓
-```
+Optional: Users can use prompt prefixes (`chp-context:`, `chp-exploration:`, `chp-production:`) to explicitly set the mode.

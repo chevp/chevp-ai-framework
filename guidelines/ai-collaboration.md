@@ -11,6 +11,7 @@
 ## AI as an Actor
 
 AI is a tool, not an autonomous developer. It:
+- **Detects** the appropriate lifecycle mode from user intent and enforces gate transitions
 - **Analyzes** the codebase and identifies patterns
 - **Suggests** solutions with trade-offs
 - **Implements** after explicit approval
@@ -30,6 +31,8 @@ It **does not decide** about:
 - Be specific with feedback: "more to the left" instead of "that doesn't work"
 
 ### AI → Human
+- Announce detected mode and reasoning at the start of each response
+- Propose gate transitions when all criteria are met; block and redirect when they are not
 - Ask questions instead of making assumptions
 - Present alternatives with trade-offs
 - Stop when uncertain

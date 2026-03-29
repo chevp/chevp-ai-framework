@@ -1,7 +1,7 @@
 # Step 3: Production
 
 > Build, verify, ship — nothing more, nothing less.
-> Mode: `chp-production:` — AI implements the approved plan. No new plans, no scope changes.
+> The AI enters Production mode when the user requests implementation of an approved plan. Optional prefix: `chp-production:`. In this mode, AI implements the approved plan. No new plans, no scope changes.
 
 ## Goal
 
