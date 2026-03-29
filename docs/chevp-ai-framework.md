@@ -17,27 +17,45 @@
 Context (G1) → Exploration (G2) → Production (G3)
 ```
 
-### Step 1: Context — Understand the problem
+### Step 1: Context — Understand the system and the problem
 
 - Read existing code and documentation before proposing anything
 - State understanding: "I understand you want X. This affects Y and Z."
-- Identify affected files, patterns, conventions, dependencies
 - Surface open questions — ask, don't assume
-- Wait for human to confirm scope
 
-**Gate G1**: Problem understood, affected modules identified, scope confirmed by human.
+**Mandatory Deliverables (in order):**
 
-### Step 2: Exploration — Plan and prototype
+1. **System Spec** — Full system specification: what the system is, what it does, who it serves, which components it has
+2. **Software Architecture** — High-level architecture: layers, modules, communication paths, technology stack
+3. **ADRs** — Architecture Decision Records for all fundamental design decisions (why this language? why this protocol? why this structure?)
+4. **Context Inventory** — Read and catalogue existing artifacts: code, docs, schemas, conventions, dependencies
+5. **Scope Confirmation** — Only after 1–4 are complete: confirm scope with human
 
-- Create plan/spec with: goal, scope (in/out), steps, affected files, risks, acceptance criteria
+**Gate G1**: System spec exists, architecture documented, ADRs for fundamental decisions written, existing artifacts catalogued, scope confirmed by human.
+
+### Step 2: Exploration — Plan features and prototype
+
+System-level architecture is already established in Step 1. This step focuses on **concrete features**.
+
+- Create feature plan/spec with: goal, scope (in/out), steps, affected files, risks, acceptance criteria
 - Written spec required for: features, architecture changes, complex bugfixes
 - Verbal confirmation sufficient for: trivial changes (<10 lines)
-- Create ADR if architectural decision is made
+- Create ADR only for **new** decisions arising during exploration (fundamental ADRs belong in Step 1)
 - Create prototype for visual/UX work (UI, shaders, 3D scenes)
 - Prototype workflow: create → human reviews → feedback → iterate → confirm
 - Prototype becomes reference for Production
 
-**Gate G2**: Plan/spec approved, prototype confirmed (where applicable), risks documented.
+**Artifact Boundary:**
+
+| Artifact | Step 1: Context | Step 2: Exploration |
+|----------|----------------|-------------------|
+| System Spec (whole system) | ✅ Mandatory | — |
+| Software Architecture | ✅ Mandatory | — |
+| ADRs (fundamental decisions) | ✅ Mandatory | Only for new decisions during exploration |
+| Feature Plan/Spec | — | ✅ Mandatory |
+| UX Prototype | — | ✅ Mandatory (where applicable) |
+
+**Gate G2**: Feature plan/spec approved, prototype confirmed (where applicable), risks documented.
 
 ### Step 3: Production — Build, verify, ship
 
@@ -72,8 +90,10 @@ Context (G1) → Exploration (G2) → Production (G3)
 
 - Begin every task by reading existing code and CLAUDE.md
 - Ask open questions instead of assuming
+- Produce system spec, architecture doc, and fundamental ADRs before leaving Context
+- Catalogue existing artifacts (code, docs, schemas, conventions) in Context
 - Wait for human scope confirmation before proceeding
-- Create plan/spec before any code
+- Create feature plan/spec before any code (Exploration)
 - Wait for human approval before proceeding to next step
 - Proceed step-by-step according to plan
 - Verify build after each step
@@ -142,7 +162,7 @@ This project follows the [chevp-ai-framework](https://github.com/chevp/chevp-ai-
 Read and follow: https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
 
 ### Steps (sequential, not skippable)
-1. **Context** — Understand problem, gather context, confirm scope
+1. **Context** — System spec, architecture, ADRs, context inventory, confirm scope
 2. **Exploration** — Create plan/spec, prototype (where applicable), obtain approval
 3. **Production** — Implement according to plan, validate, deliver
 
