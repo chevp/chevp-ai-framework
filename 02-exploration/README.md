@@ -4,7 +4,7 @@
 
 ## Goal
 
-Plan the solution, prototype it where applicable, and validate the approach before writing production code.
+Plan concrete features, prototype them where applicable, and validate the approach before writing production code. System-level architecture is already established in Context — this step focuses on **feature-level** planning.
 
 ## When
 
@@ -13,22 +13,31 @@ After Context is complete (G1 passed). Always for features, architecture changes
 ## Inputs
 
 - Confirmed scope from Context (G1)
-- Existing architecture docs, ADRs
+- System Spec, Architecture document, ADRs from Context
+- Existing code and conventions (from Context Inventory)
 - Design references (if available)
+
+## Mandatory Deliverables
+
+| # | Deliverable | When Required |
+|---|-------------|---------------|
+| 1 | **Feature Plan/Spec** | Always (written for features/complex changes, verbal for trivial) |
+| 2 | **ADR** | Only for new decisions arising during exploration |
+| 3 | **UX Prototype** | Mandatory for visual/physical output |
 
 ## Activities
 
-- Create plan or spec (depending on scope)
+- Create feature plan or spec (depending on scope)
 - Define steps, affected files, risks, acceptance criteria
-- Create ADR if architectural decision is involved
+- Create ADR if a new architectural decision is involved
 - Create prototype for visual/UX work
 - Iterate on prototype with human feedback
-- Obtain human approval before proceeding
+- Obtain **explicit human approval** before proceeding
 
 ## Outputs
 
 - **Plan/Spec**: Written and approved (PLAN-NNN-*.md or verbal confirmation)
-- **ADR**: If architecture decision was made
+- **ADR**: If a new architecture decision was made (not fundamental — those belong in Context)
 - **Prototype**: Visual reference file(s) + human confirmation (where applicable)
 
 ## Roles Active in This Step
@@ -36,19 +45,31 @@ After Context is complete (G1 passed). Always for features, architecture changes
 | Role | Responsibility |
 |------|---------------|
 | [SDLC](sdlc.md) | Spec + prototype governance, when to require what |
-| [AI-Plans](ai-plans.md) | Plan/spec creation, scope definition, acceptance criteria |
+| [AI-Plans](ai-plans.md) | Feature plan/spec creation, acceptance criteria |
 | [UX-Tooling](ux-tooling.md) | Prototype creation, preview feedback loop |
-| [Software-Architecture](software-architecture.md) | ADR creation, design alternatives, trade-offs |
+| [Software-Architecture](software-architecture.md) | ADR for new decisions, design alternatives |
 | [Context-Engineering](context-engineering.md) | Storing specs/plans in context/ |
+
+## Artifact Boundary
+
+| Artifact | Context (Step 1) | Exploration (Step 2) |
+|----------|-----------------|---------------------|
+| System Spec (whole system) | Mandatory | — |
+| Software Architecture | Mandatory | — |
+| ADRs (fundamental decisions) | Mandatory | — |
+| Feature Plan/Spec | — | **Mandatory** |
+| ADRs (new decisions during exploration) | — | As needed |
+| UX Prototype | — | **Mandatory** (where applicable) |
 
 ## Quality Gate G2: Exploration Complete
 
-- [ ] Plan/spec exists (as file or confirmed in chat)
+- [ ] Feature plan/spec exists (as file or confirmed in chat)
 - [ ] Steps are concrete enough for direct implementation
 - [ ] Scope and non-scope are clearly defined
 - [ ] Risks and alternatives are documented
-- [ ] Human has approved the plan/spec
+- [ ] Acceptance criteria are defined
 - [ ] Prototype exists and is visually confirmed (where applicable)
 - [ ] Insights from prototype have been fed back into spec (if needed)
+- [ ] **Human has approved the plan/spec**
 
-**Only proceed to [Production](../03-production/) after G2 is passed.**
+**BLOCKER: Do NOT proceed to [Production](../03-production/) until every checkbox is satisfied.**

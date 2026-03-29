@@ -10,9 +10,14 @@ Write production-ready code that follows the plan, validate it against the spec 
 
 After Exploration is complete (G2 passed). Plan/spec is approved, prototype is confirmed (where applicable).
 
+## Prerequisites (from prior steps)
+
+- **From Context (G1)**: System Spec, Architecture, ADRs, Context Inventory — all verified
+- **From Exploration (G2)**: Feature plan/spec approved, prototype confirmed (where applicable), acceptance criteria defined
+
 ## Inputs
 
-- Approved plan/spec from Exploration
+- Approved feature plan/spec from Exploration
 - UX prototype as visual reference (where applicable)
 - Confirmed acceptance criteria
 
@@ -48,17 +53,16 @@ After Exploration is complete (G2 passed). Plan/spec is approved, prototype is c
 ## Quality Gate G3: Production Complete
 
 - [ ] Code compiles / build is successful
-- [ ] Only changes specified in the plan
+- [ ] Only changes specified in the plan — no scope expansion
 - [ ] Existing patterns followed
 - [ ] No over-engineering, no extra features
 - [ ] All acceptance criteria from spec fulfilled
 - [ ] Visual result matches prototype (if applicable)
 - [ ] No regressions
 - [ ] Tests pass (if test suite exists)
-- [ ] Human has given final approval
-- [ ] Commit is on main
-- [ ] Plan status updated
-- [ ] Documentation is up to date
+- [ ] Plan status updated (moved to `finished/`)
+- [ ] Documentation is up to date (CLAUDE.md, ADRs if needed)
 - [ ] No open TODOs
+- [ ] **Human has given final approval**
 
 **Production is complete when G3 is fully passed.**

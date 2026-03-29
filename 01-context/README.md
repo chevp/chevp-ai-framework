@@ -1,14 +1,14 @@
 # Step 1: Context
 
-> Understand the problem before proposing solutions.
+> Understand the system and the problem before proposing solutions.
 
 ## Goal
 
-Understand the problem, gather context, define scope. Every change begins with understanding.
+Understand the system, the problem, and the scope. Produce the foundational artifacts that all subsequent work builds on. Every change — no matter how small — begins with understanding.
 
 ## When
 
-Always. No exceptions.
+Always. No exceptions. Even trivial changes require reading CLAUDE.md and confirming scope.
 
 ## Inputs
 
@@ -16,36 +16,56 @@ Always. No exceptions.
 - Existing code / architecture
 - CLAUDE.md and project documentation
 
+## Mandatory Deliverables (in order)
+
+| # | Deliverable | Description |
+|---|-------------|-------------|
+| 1 | **System Spec** | What the system is, what it does, who it serves, which components it has |
+| 2 | **Software Architecture** | High-level architecture: layers, modules, communication paths, technology stack |
+| 3 | **ADRs** | Architecture Decision Records for all fundamental design decisions |
+| 4 | **Context Inventory** | Catalogue of existing artifacts: code, docs, schemas, conventions, dependencies |
+| 5 | **Scope Confirmation** | Only after 1-4: confirm scope with the human |
+
+For small changes (< 10 lines), deliverables 1-3 may already exist. In that case, **read and verify** them — do not skip them.
+
 ## Activities
 
+- Read CLAUDE.md and project documentation
 - Explore and understand the codebase
 - Identify existing patterns, conventions, and dependencies
-- Capture constraints and open questions
-- Formulate scope clearly
+- Produce System Spec, Architecture doc, and fundamental ADRs (if they don't exist yet)
+- Catalogue existing artifacts (Context Inventory)
+- Capture constraints and resolve open questions with the human
+- Formulate scope and obtain **explicit human confirmation**
 
 ## Outputs
 
-- Clear problem description (1-2 sentences)
-- List of affected components/modules
-- Open questions resolved with the human
+- System Spec (written document or verified existing)
+- Software Architecture document (written or verified existing)
+- ADRs for fundamental decisions (written or verified existing)
+- Context Inventory (list of existing artifacts, patterns, conventions)
 - Human-confirmed scope
 
 ## Roles Active in This Step
 
 | Role | Responsibility |
 |------|---------------|
-| [SDLC](sdlc.md) | Process governance, scope confirmation |
-| [AI-Plans](ai-plans.md) | Problem formulation, initial scope definition |
-| [Software-Architecture](software-architecture.md) | Codebase analysis, dependency mapping |
-| [Context-Engineering](context-engineering.md) | What AI must read, context hierarchy |
+| [SDLC](sdlc.md) | Process governance, scope confirmation, gate enforcement |
+| [AI-Plans](ai-plans.md) | System Spec, problem formulation, initial scope definition |
+| [Software-Architecture](software-architecture.md) | Architecture document, ADRs, codebase analysis |
+| [Context-Engineering](context-engineering.md) | Context Inventory, what AI must read, context hierarchy |
 
 ## Quality Gate G1: Context Complete
 
+- [ ] System Spec exists (what the system is, who it serves, which components)
+- [ ] Software Architecture is documented (layers, modules, communication)
+- [ ] ADRs exist for fundamental decisions (why this language, protocol, structure)
+- [ ] Existing artifacts are catalogued (code, docs, schemas, conventions)
 - [ ] Problem is understood and can be described in 1-2 sentences
 - [ ] Affected files/modules are identified
 - [ ] Existing patterns are understood
 - [ ] Dependencies are known
 - [ ] All open questions are resolved with the human
-- [ ] Human has confirmed scope
+- [ ] **Human has explicitly confirmed scope**
 
-**Only proceed to [Exploration](../02-exploration/) after G1 is passed.**
+**BLOCKER: Do NOT proceed to [Exploration](../02-exploration/) until every checkbox is satisfied.**

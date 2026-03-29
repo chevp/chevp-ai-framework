@@ -17,26 +17,26 @@
   <tr>
     <th>Step</th>
     <th>Purpose</th>
-    <th>Key Output</th>
+    <th>Mandatory Deliverables</th>
   </tr>
   <tr>
     <td><strong><a href="01-context/">Context</a></strong></td>
-    <td>Understand the problem, gather context, confirm scope</td>
-    <td>Problem description, affected modules, confirmed scope</td>
+    <td>Understand the system and problem, produce foundational artifacts</td>
+    <td>System Spec, Architecture, ADRs, Context Inventory, Scope Confirmation</td>
   </tr>
   <tr>
     <td><strong><a href="02-exploration/">Exploration</a></strong></td>
-    <td>Plan the solution, prototype, validate the approach</td>
-    <td>Approved plan/spec, prototype, ADR</td>
+    <td>Plan features, prototype, validate the approach</td>
+    <td>Feature Plan/Spec, UX Prototype (where applicable)</td>
   </tr>
   <tr>
     <td><strong><a href="03-production/">Production</a></strong></td>
     <td>Build, verify, ship</td>
-    <td>Production code, passing tests, commit on main</td>
+    <td>Production code, validation result, updated documentation</td>
   </tr>
 </table>
 
-Quality gates **G1**, **G2**, **G3** enforce human approval at every transition. See [LIFECYCLE.md](LIFECYCLE.md) for the full matrix.
+Quality gates **G1**, **G2**, **G3** enforce human approval at every transition. Gates are **blockers** — all criteria must be satisfied before forward movement. See [LIFECYCLE.md](LIFECYCLE.md) for the full matrix.
 
 ---
 
@@ -74,12 +74,13 @@ See [integration/](integration/) for detailed setup guides.
 ## Repository Structure
 
 ```
-01-context/       Step 1 — Understand the problem
-02-exploration/   Step 2 — Plan and prototype
+01-context/       Step 1 — Understand the system and problem
+02-exploration/   Step 2 — Plan features and prototype
 03-production/    Step 3 — Build, verify, ship
 templates/        Plan, spec, ADR, CLAUDE.md, prototype templates
 guidelines/       Cross-cutting quality rules
 integration/      Integration into existing projects
+docs/             Machine-readable AI reference
 ```
 
 ---
@@ -100,6 +101,8 @@ The architecture follows a layered approach:
 
 This layered model ensures that domain-specific knowledge (scenes, NPCs, components, pipelines, schemas) lives in the right place — separate from the universal process rules, but built on top of them.
 
+Projects can **tighten** framework rules but never **loosen** them.
+
 ---
 
 ## Principles
@@ -110,6 +113,7 @@ This layered model ensures that domain-specific knowledge (scenes, NPCs, compone
 | **Context is mandatory** | AI without context invents things |
 | **Incremental** | Small steps with validation after each step |
 | **Human decides** | AI suggests, the developer bears responsibility |
+| **Gates are blockers** | No forward movement without all criteria satisfied |
 
 ---
 
