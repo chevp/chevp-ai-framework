@@ -7,18 +7,18 @@
 
 ## Development Process
 
-This project follows the [chevp-ai-framework](https://github.com/chevp/chevp-ai-framework) lifecycle.
-Claude MUST follow the 3-step order:
+This project follows the [chevp-ai-framework](https://github.com/chevp/chevp-ai-framework).
+Read and follow: https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
 
+### Steps (sequential, not skippable)
 1. **Context** — Understand problem, gather context, confirm scope
 2. **Exploration** — Create plan/spec, prototype (where applicable), obtain approval
-3. **Production** — Implement, validate, deliver
+3. **Production** — Implement according to plan, validate, deliver
 
 No code without a prior spec. No production code without a prior UX prototype (where applicable).
 
 ### Roles
 Each step involves cross-cutting roles: SDLC, AI-Plans, UX-Tooling, DevOps, Software-Architecture, Context-Engineering.
-See [LIFECYCLE.md](https://github.com/chevp/chevp-ai-framework/blob/main/LIFECYCLE.md) for the full matrix.
 
 ## What Is This Project?
 
