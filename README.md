@@ -10,7 +10,7 @@
 ## Lifecycle
 
 <p align="center">
-  <img src="images/chevp-ai-framework.png" alt="chevp-ai-framework" width="680" />
+  <img src="images/chevp-ai-framework-v2.png" alt="chevp-ai-framework" width="680" />
 </p>
 
 <table>
