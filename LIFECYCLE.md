@@ -1,5 +1,7 @@
 # AI-Assisted Development Lifecycle
 
+> **Scope: The 3-step lifecycle applies to EVERY individual change — not to the product as a whole. Each task (feature, bugfix, refactoring) starts fresh at Context and progresses through Exploration to Production. The lifecycle is independent of the project's SDLC phase.**
+
 ## The 3-Step Model
 
 <p align="center">

@@ -9,27 +9,15 @@ It is the primary control mechanism for AI behavior in a project.
 
 ## Binding Reference
 
-The most important block in every project CLAUDE.md:
+The most important block in every project CLAUDE.md — place it at the top, before any project-specific content:
 
 ```markdown
-## Development Process
+## STOP — Before Any Change
 
-This project follows the [chevp-ai-framework](https://github.com/chevp/chevp-ai-framework).
-@url https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
-
-### Steps (sequential, not skippable)
-1. **Context** — System spec, architecture, ADRs, context inventory, confirm scope
-2. **Exploration** — Feature plan/spec, prototype (where applicable), obtain approval
-3. **Production** — Implement per plan, validate, deliver
-
-### Gates (blockers)
-- **G1**: System Spec + Architecture + ADRs + Context Inventory, scope confirmed
-- **G2**: Plan/spec approved, prototype confirmed (where applicable)
-- **G3**: All criteria fulfilled, build passes, human approved
-
-### Rules
-- No code without spec — no production without prototype (where applicable)
-- Gates are blockers — when uncertain: STOP and ask
+DO NOT create, edit, or delete any file before:
+1. The chevp-ai-framework has been loaded:
+   @url https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
+2. The current phase-step (Context / Exploration / Production) is confirmed with the human
 ```
 
 ## Hierarchy

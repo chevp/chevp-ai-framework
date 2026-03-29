@@ -6,6 +6,8 @@
 
 Understand the system, the problem, and the scope. Produce the foundational artifacts that all subsequent work builds on. Every change — no matter how small — begins with understanding.
 
+> **Important:** The Context step is not a project-level phase. Every individual task (feature, bugfix, refactoring) starts at Context, regardless of the project's overall maturity or SDLC stage.
+
 ## When
 
 Always. No exceptions. Even trivial changes require reading CLAUDE.md and confirming scope.
