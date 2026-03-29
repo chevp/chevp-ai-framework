@@ -15,6 +15,8 @@ After Exploration is complete (G2 passed). Plan/spec is approved, prototype is c
 - **From Context (G1)**: System Spec, Architecture, ADRs, Context Inventory — all verified
 - **From Exploration (G2)**: Feature plan/spec approved, prototype confirmed (where applicable), acceptance criteria defined
 
+**Stable Plan Rule**: If the approved plan has not changed since G2, execute directly — do not re-analyze goals, re-evaluate alternatives, or re-justify the approach.
+
 ## Inputs
 
 - Approved feature plan/spec from Exploration
@@ -65,4 +67,4 @@ After Exploration is complete (G2 passed). Plan/spec is approved, prototype is c
 - [ ] No open TODOs
 - [ ] **Human has given final approval**
 
-**Production is complete when G3 is fully passed.**
+**Production is complete when G3 is fully passed.** Single-pass check: verify each criterion once. Do not re-evaluate unless the human flags an issue.

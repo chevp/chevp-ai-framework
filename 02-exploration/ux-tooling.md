@@ -12,11 +12,10 @@
 
 | Domain | Prototype Form | Approach |
 |--------|---------------|----------|
-| Shader / VFX | GLSL prototype | Online shader editor or local preview |
-| UI / Layout | HTML/CSS mockup or vanilla JS web components | Browser-based prototype or design tool |
-| 3D Object / Print | 3D model + rendered preview | 3D modeling tool or slicer preview |
-| 3D Scene | Scene JSON + rendered preview | 3D renderer or engine preview |
-| Data flow | Diagram | Diagramming tool or ASCII sketch |
+| UI / Layout | HTML/CSS mockup or web components | Browser-based prototype or design tool |
+| Visual output (graphics, effects) | Rendered preview | Editor or local preview |
+| Interactive / spatial content | Scene or model + rendered preview | Engine, renderer, or tool preview |
+| Data flow / architecture | Diagram | Diagramming tool or ASCII sketch |
 
 See [ux-prototype-template](../templates/ux-prototype-template.md) for the artifact structure.
 
