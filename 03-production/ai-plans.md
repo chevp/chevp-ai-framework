@@ -1,7 +1,7 @@
 # AI-Plans in Production
 
 > Commit to scope, execute the plan, track progress, finalize.
-> The AI enters Production mode automatically for this role. Optional prefix: `chp-production:`. AI implements the approved plan. No new plans, no scope changes.
+> The AI enters Production mode automatically for this role. AI implements the approved plan. No new plans, no scope changes.
 
 ## Responsibilities
 

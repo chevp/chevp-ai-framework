@@ -1,7 +1,7 @@
 # Step 1: Context
 
 > Understand the system and the problem before proposing solutions.
-> The AI enters Context mode automatically when it detects the user wants to understand the system or start a new task. Optional prefix: `chp-context:`. In this mode, AI reads, verifies, and asks. No code, no feature plans.
+> The AI enters Context mode automatically when it detects the user wants to understand the system or start a new task. In this mode, AI reads, verifies, and asks. No code, no feature plans.
 
 ## Goal
 

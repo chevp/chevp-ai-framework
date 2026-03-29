@@ -3,10 +3,16 @@
 This is a process framework for AI-assisted software development.
 It defines the overarching lifecycle that Claude must follow in all projects.
 
+## Core Principle
+
+The human writes naturally. The AI owns the process.
+
+The AI continuously detects intent, maintains the current mode, enforces all gates, and blocks violations — automatically. The human never needs to manage modes, declare state, or remember which step comes next. The process is rigorous; the experience is natural.
+
 ## Core Rules
 
 1. **Steps are sequential** — No step may be skipped
-2. **Human decides** — At every step transition, the human must explicitly confirm
+2. **AI enforces, human decides** — AI drives the process and blocks violations; human approves every transition
 3. **Context before code** — AI writes no production code without a prior spec
 4. **Prototype before production** — Validate UX prototypes before implementing (where applicable)
 5. **Ownership stays with the human** — AI delivers suggestions, developers bear responsibility
@@ -18,7 +24,14 @@ It defines the overarching lifecycle that Claude must follow in all projects.
 1. Context → 2. Exploration → 3. Production
 ```
 
-AI operates in exactly one mode at a time. The AI **auto-detects** the current mode from user intent and conversation state — no manual prompt prefixes or headers required. The human writes naturally; the AI determines the mode, enforces gates, and blocks violations.
+AI operates in exactly one mode at a time. The AI **infers** the current mode from user intent and conversation history — the human simply talks. No structured prompts, no mode declarations, no manual state management required.
+
+Before every response the AI:
+1. **Infers** the mode from intent and conversation state
+2. **Announces** the detected mode and reasoning (brief natural-language header)
+3. **Checks** gate prerequisites — blocks if unmet, explains what is missing
+4. **Acts** within the boundaries of the current mode
+5. **Guides** the human to the correct step when a request conflicts with gate state
 
 | Intent Signals | Detected Mode |
 |---------------|---------------|
@@ -26,9 +39,7 @@ AI operates in exactly one mode at a time. The AI **auto-detects** the current m
 | "plan", "design", "prototype", "spec" | **Exploration** — Plan, prototype, document. No production code. |
 | "implement", "build", "code", "execute the plan" | **Production** — Implement approved plan. No new plans, no scope changes. |
 
-Optional shortcut prefixes (`chp-context:`, `chp-exploration:`, `chp-production:`) override auto-detection.
-
-AI outputs a mode-awareness header before every response. Details: [LIFECYCLE.md — AI Modes](LIFECYCLE.md#ai-modes)
+Details: [LIFECYCLE.md — AI Modes](LIFECYCLE.md#ai-modes)
 
 ### Mandatory Deliverables
 

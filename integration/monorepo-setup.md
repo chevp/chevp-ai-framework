@@ -76,4 +76,4 @@ pplan(NNN): <short description>    ← Production phase
 
 The AI automatically detects and tracks the current lifecycle mode. No manual session state block is needed in your project CLAUDE.md. The AI will announce its detected mode at the start of each response.
 
-Optional: Users can use prompt prefixes (`chp-context:`, `chp-exploration:`, `chp-production:`) to explicitly set the mode.
+The AI infers the mode automatically from user intent — no manual mode declarations needed.

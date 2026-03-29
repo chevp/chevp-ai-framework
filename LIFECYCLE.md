@@ -8,7 +8,7 @@
   <img src="images/chevp-ai-framework.png" alt="chevp-ai-framework" width="680" />
 </p>
 
-Each step produces defined artifacts. No step is skipped. The human approves every transition.
+Each step produces defined artifacts. No step is skipped. The AI enforces the process; the human approves every transition.
 
 ---
 
@@ -40,29 +40,30 @@ Each step produces defined artifacts. No step is skipped. The human approves eve
 
 ## AI Modes
 
-AI operates in exactly one mode at a time. The mode determines what AI may and may not do. The AI **auto-detects** the current mode from user intent and conversation state. Optional prompt prefixes (`chp-context:`, `chp-exploration:`, `chp-production:`) can be used as shortcuts to override auto-detection.
+The AI owns the process. The human writes naturally; the AI infers the mode, enforces gates, and blocks violations — automatically. No structured prompts, mode declarations, or manual state management required.
 
-| Mode | Intent Signals | Optional Prefix | Allowed | Not Allowed |
-|------|---------------|-----------------|---------|-------------|
-| **Context** | "what does", "explain", "analyze", "understand", new task, ambiguous start | `chp-context:` | Read/verify artifacts, ask questions, create Context-Plan, produce System Spec | Change code, create feature plans, alter scope |
-| **Exploration** | "plan", "design", "prototype", "spec", "how should we" | `chp-exploration:` | Create Feature Plan/Spec, write ADRs, iterate prototypes, document risks | Write production code, expand scope unilaterally |
-| **Production** | "implement", "build", "code", "execute the plan", "fix" (with approved plan) | `chp-production:` | Execute approved plan, run tests, verify build, create commits | Create new plans, expand scope, make unplanned changes |
+AI operates in exactly one mode at a time. The mode determines what AI may and may not do.
+
+| Mode | Intent Signals | Allowed | Not Allowed |
+|------|---------------|---------|-------------|
+| **Context** | "what does", "explain", "analyze", "understand", new task, ambiguous start | Read/verify artifacts, ask questions, create Context-Plan, produce System Spec | Change code, create feature plans, alter scope |
+| **Exploration** | "plan", "design", "prototype", "spec", "how should we" | Create Feature Plan/Spec, write ADRs, iterate prototypes, document risks | Write production code, expand scope unilaterally |
+| **Production** | "implement", "build", "code", "execute the plan", "fix" (with approved plan) | Execute approved plan, run tests, verify build, create commits | Create new plans, expand scope, make unplanned changes |
 
 ### AI Mode-Detection Protocol
 
-The AI determines the current mode through this priority order:
+Before every response, the AI determines the current mode through this priority order:
 
-1. **Explicit prefix** — If the user writes `chp-context:`, `chp-exploration:`, or `chp-production:`, use that mode (but still validate against gate state)
-2. **Conversation state** — If a mode is already active and no transition has occurred, stay in that mode
-3. **Intent classification** — Classify user intent from natural language using the signal words above
-4. **Default to Context** — When intent is ambiguous and no mode is active, start in Context (the safest mode)
-5. **Ask when conflicting** — If the user's intent conflicts with the current gate state (e.g., asks for code but G2 is not passed), explain the conflict and redirect
+1. **Conversation state** — If a mode is already active and no transition has occurred, stay in that mode
+2. **Intent classification** — Classify user intent from natural language using the signal words above
+3. **Default to Context** — When intent is ambiguous and no mode is active, start in Context (the safest mode)
+4. **Block when conflicting** — If the user's intent requires a later mode but the gate is not passed, the AI blocks the request, explains what prerequisites are missing, and guides the user back to the correct step
 
-The AI **MUST NOT** silently switch modes. Any mode change must be announced and, for forward transitions, approved by the human.
+The AI **MUST NOT** silently switch modes. Any mode change must be explicitly announced with reasoning. Forward transitions require human approval.
 
 ### AI Mode-Awareness Header (before every response)
 
-AI outputs a brief natural-language header before acting:
+The AI outputs a brief natural-language header before acting:
 
 ```
 [Context] Understanding the system — you're asking about how the codebase works.
@@ -75,20 +76,23 @@ The header states:
 - Gate progress — what is satisfied, what is still missing
 - What the AI will do next (or why it is blocking)
 
+The header is the AI's responsibility — the human never needs to provide or manage it.
+
 ### AI Gatekeeper Behavior
 
-The AI acts as an autonomous gatekeeper. Before every response, the AI:
+The AI acts as an autonomous process enforcer. Before every response, the AI:
 
-1. **Detects** the mode from user intent (see Mode-Detection Protocol above)
+1. **Infers** the mode from user intent and conversation history
 2. **Checks** whether the current gate prerequisites are met
-3. **Blocks** if the user's request belongs to a later mode and the gate is not passed — the AI explains what is missing and redirects to the current step
+3. **Blocks** if the user's request belongs to a later mode and the gate is not passed — the AI states the specific missing prerequisites and redirects to the current step
 4. **Proposes** forward transitions when all gate criteria are satisfied: "All Context deliverables are ready. G1 is satisfied. Shall we move to Exploration?"
 5. **Detects** backward jumps when the conversation shifts (e.g., "actually, the requirements are wrong") and proposes the jump
+6. **Guides** — when blocking, the AI does not just say "no" but actively helps the user complete the missing prerequisites
 
 **Examples of blocking:**
 
-- User asks "implement feature X" but no plan exists → AI blocks: "We need a feature plan first. Let me help you create one in Exploration mode."
-- User asks "write the code" but G1 is not passed → AI blocks: "We haven't confirmed the context yet. Let's finish Context first: [lists missing items]."
+- User asks "implement feature X" but no plan exists → AI blocks: "We need a feature plan first. Let me help you create one — what problem does feature X solve?"
+- User asks "write the code" but G1 is not passed → AI blocks: "We haven't confirmed the context yet. Here's what's still missing: [lists items]. Let me help with those first."
 
 ### Mode Transitions
 
@@ -106,13 +110,13 @@ Production ──[G3 passed + Human approves]──→ Done
 
 ### State Tracking
 
-The AI tracks session state internally:
+The AI tracks all session state internally — the human never manages state:
 - Current mode (Context / Exploration / Production)
 - Active plan reference (if any)
 - Gate status (G1, G2, G3 — passed or pending with specific missing items)
 - Whether the human has approved the current gate
 
-No manual session state block is required in the project CLAUDE.md. The AI announces state changes through its mode-awareness header.
+No manual session state block, prompt headers, or mode declarations are required from the human. The AI announces state changes through its mode-awareness header and is solely responsible for maintaining process continuity.
 
 ---
 
