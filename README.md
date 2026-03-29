@@ -57,17 +57,24 @@ Six cross-cutting roles operate within each step:
 
 ## Quick Start
 
-```bash
-# 1. Copy the CLAUDE.md template into your project
-cp templates/claude-md-template.md <your-project>/CLAUDE.md
+Add this block to your project's `CLAUDE.md`:
 
-# 2. Create the context directory structure
-mkdir -p <your-project>/context/{architecture,adr,guidelines,plans/finished,specs}
+```markdown
+## STOP — Before Any Change
 
-# 3. Reference the framework in your project's CLAUDE.md
+DO NOT create, edit, or delete any file before:
+1. The chevp-ai-framework has been loaded:
+   @url https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
+2. The current phase-step (Context / Exploration / Production) is confirmed with the human
 ```
 
-See [integration/](integration/) for detailed setup guides.
+Then create the context directory structure:
+
+```bash
+mkdir -p context/{architecture,adr,guidelines,plans/finished,specs}
+```
+
+That's it. Claude loads the framework automatically via `@url` and enforces the lifecycle. See [integration/](integration/) for details.
 
 ---
 

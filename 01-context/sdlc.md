@@ -4,7 +4,7 @@
 
 ## Responsibilities
 
-- Ensure that every change starts with understanding, never with code
+- Ensure that every individual change starts with understanding, never with code — the lifecycle is per-task, not per-project
 - Enforce the rule: no phase is skipped, Context is always the first step
 - Enforce mandatory deliverables before gate transition
 - Ensure the human confirms scope before moving forward
