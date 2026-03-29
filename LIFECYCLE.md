@@ -36,13 +36,32 @@ Each step produces defined artifacts. No step is skipped. The human approves eve
 
 ---
 
+## Mandatory Deliverables per Step
+
+| Deliverable | Context | Exploration | Production |
+|-------------|---------|-------------|------------|
+| System Spec | **Mandatory** | — | — |
+| Software Architecture | **Mandatory** | — | — |
+| ADRs (fundamental) | **Mandatory** | — | — |
+| Context Inventory | **Mandatory** | — | — |
+| Scope Confirmation | **Mandatory** | — | — |
+| Feature Plan/Spec | — | **Mandatory** | — |
+| ADRs (new decisions) | — | As needed | — |
+| UX Prototype | — | **Mandatory** (where applicable) | — |
+| Production Code | — | — | **Mandatory** |
+| Validation Result | — | — | **Mandatory** |
+
+---
+
 ## Quality Gates
 
 | Transition | Gate | Key Criteria |
 |------------|------|--------------|
-| Context → Exploration | **G1** | Problem understood, affected modules identified, scope confirmed by human |
-| Exploration → Production | **G2** | Plan/spec approved, prototype visually confirmed (where applicable) |
-| Production → Done | **G3** | All acceptance criteria fulfilled, no regressions, human has approved |
+| Context → Exploration | **G1** | System Spec exists, Architecture documented, fundamental ADRs written, existing artifacts catalogued, scope confirmed by human |
+| Exploration → Production | **G2** | Feature plan/spec approved, prototype visually confirmed (where applicable), acceptance criteria defined, human approved |
+| Production → Done | **G3** | All acceptance criteria fulfilled, build passes, no regressions, documentation updated, human approved |
+
+**Gates are blockers.** No forward movement until every criterion is satisfied. The human must explicitly approve each gate transition.
 
 Details in each step's [README.md](01-context/README.md).
 
@@ -52,11 +71,13 @@ Details in each step's [README.md](01-context/README.md).
 
 | Scenario | Allowed |
 |----------|---------|
-| Small bugfix (< 10 lines) | Exploration can be verbal (no written spec), UX-Tooling omitted |
+| Small bugfix (< 10 lines) | Exploration can be verbal (no written spec), UX-Tooling omitted. Context deliverables must still be **read and verified**. |
 | Purely technical refactoring | UX-Tooling omitted in Exploration and Production |
 | Visual feature (UI, shader) | No step is skippable |
 | Architecture decision | UX-Tooling omitted, but ADR is mandatory |
 | Exploration / spike | Only Context + Exploration, no Production code |
+
+Even when abbreviated: **no step is skipped entirely**, and **human approval is always required**.
 
 ---
 

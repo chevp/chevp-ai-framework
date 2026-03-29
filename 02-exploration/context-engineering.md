@@ -25,11 +25,13 @@ context/
 - Store plans/specs in `context/` following naming conventions
 - Cross-reference related artifacts (plan → ADR, spec → prototype)
 - Ensure naming conventions are followed (PLAN-NNN, ADR-NNN)
+- Verify that Context Inventory from Step 1 is still current
 
 ### MUST NOT
 - Store plans/specs in ad-hoc locations
 - Leave artifacts without clear naming
 - Create duplicate artifacts
+- Overwrite Context-phase artifacts (System Spec, Architecture) without going back to Context
 
 ## Checklist
 

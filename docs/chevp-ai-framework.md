@@ -31,7 +31,9 @@ Context (G1) → Exploration (G2) → Production (G3)
 4. **Context Inventory** — Read and catalogue existing artifacts: code, docs, schemas, conventions, dependencies
 5. **Scope Confirmation** — Only after 1–4 are complete: confirm scope with human
 
-**Gate G1**: System spec exists, architecture documented, ADRs for fundamental decisions written, existing artifacts catalogued, scope confirmed by human.
+For small changes (< 10 lines) where deliverables 1-3 already exist: **read and verify** them — do not skip.
+
+**Gate G1**: System Spec exists, Architecture documented, ADRs for fundamental decisions written, existing artifacts catalogued, scope confirmed by human. **BLOCKER — do not proceed without all criteria satisfied.**
 
 ### Step 2: Exploration — Plan features and prototype
 
@@ -52,13 +54,15 @@ System-level architecture is already established in Step 1. This step focuses on
 | System Spec (whole system) | ✅ Mandatory | — |
 | Software Architecture | ✅ Mandatory | — |
 | ADRs (fundamental decisions) | ✅ Mandatory | Only for new decisions during exploration |
+| Context Inventory | ✅ Mandatory | — |
 | Feature Plan/Spec | — | ✅ Mandatory |
 | UX Prototype | — | ✅ Mandatory (where applicable) |
 
-**Gate G2**: Feature plan/spec approved, prototype confirmed (where applicable), risks documented.
+**Gate G2**: Feature plan/spec approved, prototype confirmed (where applicable), acceptance criteria defined, risks documented, human approved. **BLOCKER — do not proceed without all criteria satisfied.**
 
 ### Step 3: Production — Build, verify, ship
 
+- Verify G1 and G2 deliverables exist before starting
 - Implement step-by-step according to plan
 - One step at a time, build after each step
 - Minimal changes — only what the plan specifies, no scope expansion
@@ -69,9 +73,9 @@ System-level architecture is already established in Step 1. This step focuses on
 - Move completed plan to `context/plans/finished/`
 - Update CLAUDE.md and docs if context changed
 
-**Gate G3**: All acceptance criteria fulfilled, build passes, no regressions, human approved.
+**Gate G3**: All acceptance criteria fulfilled, build passes, no regressions, documentation updated, human approved. **BLOCKER — do not deliver without all criteria satisfied.**
 
-**Backward jumps allowed**: Production → Exploration (plan wrong), Production → Context (fundamental problem). Forward only with passed gate.
+**Backward jumps allowed**: Production → Exploration (plan wrong), Production → Context (fundamental problem). Forward only with passed gate. **No jump from Context to Production.**
 
 ## 6 Cross-Cutting Roles
 
@@ -90,11 +94,12 @@ System-level architecture is already established in Step 1. This step focuses on
 
 - Begin every task by reading existing code and CLAUDE.md
 - Ask open questions instead of assuming
-- Produce system spec, architecture doc, and fundamental ADRs before leaving Context
+- Produce system spec, architecture doc, and fundamental ADRs before leaving Context (or verify they exist)
 - Catalogue existing artifacts (code, docs, schemas, conventions) in Context
-- Wait for human scope confirmation before proceeding
+- Wait for **explicit** human scope confirmation before proceeding
 - Create feature plan/spec before any code (Exploration)
 - Wait for human approval before proceeding to next step
+- State when a gate is satisfied and request human approval to transition
 - Proceed step-by-step according to plan
 - Verify build after each step
 - Check each acceptance criterion individually
@@ -103,6 +108,7 @@ System-level architecture is already established in Step 1. This step focuses on
 ### MUST NOT
 
 - Skip Context and jump to code
+- Move forward without all gate criteria satisfied
 - Expand scope ("I also improved X while I was at it")
 - Assume requirements without checking
 - Write a plan AND immediately implement it
@@ -113,16 +119,19 @@ System-level architecture is already established in Step 1. This step focuses on
 - Add docstrings/comments/types to unchanged code
 - Over-engineer, add feature flags, or create premature abstractions
 - Commit code that does not compile
+- Confuse system-level artifacts (Context) with feature-level artifacts (Exploration)
 
 ## When Steps May Be Abbreviated
 
 | Scenario | Allowed |
 |----------|---------|
-| Small bugfix (<10 lines) | Exploration verbal, UX-Tooling omitted |
+| Small bugfix (<10 lines) | Exploration verbal, UX-Tooling omitted. Context deliverables still read and verified. |
 | Technical refactoring | UX-Tooling omitted |
 | Visual feature (UI, shader) | No step skippable |
 | Architecture decision | UX-Tooling omitted, ADR mandatory |
 | Spike / exploration | Context + Exploration only, no Production |
+
+Even when abbreviated: no step is skipped entirely, human approval always required.
 
 ## Context Hierarchy
 
@@ -163,13 +172,14 @@ Read and follow: https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.m
 
 ### Steps (sequential, not skippable)
 1. **Context** — System spec, architecture, ADRs, context inventory, confirm scope
-2. **Exploration** — Create plan/spec, prototype (where applicable), obtain approval
+2. **Exploration** — Create feature plan/spec, prototype (where applicable), obtain approval
 3. **Production** — Implement according to plan, validate, deliver
 
 ### Rules
 - No code without a prior spec (Exploration)
 - No production code without prototype confirmation (where applicable)
 - No commit without validation (Production)
+- Gates are blockers — all criteria must be satisfied before transition
 - When uncertain: STOP and ask
 ```
 

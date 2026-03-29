@@ -18,9 +18,14 @@ This project follows the [chevp-ai-framework](https://github.com/chevp/chevp-ai-
 Read and follow: https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
 
 ### Steps (sequential, not skippable)
-1. **Context** — Understand problem, gather context, confirm scope
-2. **Exploration** — Create plan/spec, prototype (where applicable), obtain approval
+1. **Context** — System spec, architecture, ADRs, context inventory, confirm scope
+2. **Exploration** — Create feature plan/spec, prototype (where applicable), obtain approval
 3. **Production** — Implement according to plan, validate, deliver
+
+### Quality Gates (blockers)
+- **G1**: System Spec + Architecture + ADRs + Context Inventory exist, scope confirmed
+- **G2**: Feature plan/spec approved, prototype confirmed (where applicable)
+- **G3**: All acceptance criteria fulfilled, build passes, human approved
 
 ### Roles (cross-cutting across all steps)
 SDLC, AI-Plans, UX-Tooling, DevOps, Software-Architecture, Context-Engineering
@@ -29,6 +34,7 @@ SDLC, AI-Plans, UX-Tooling, DevOps, Software-Architecture, Context-Engineering
 - No code without a prior spec (Exploration)
 - No production code without prototype confirmation (where applicable)
 - No commit without validation (Production)
+- Gates are blockers — all criteria must be satisfied before transition
 - When uncertain: STOP and ask
 ```
 

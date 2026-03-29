@@ -1,13 +1,15 @@
 # AI-Plans in Exploration
 
-> Plan and specify the solution before writing code.
+> Plan and specify concrete features before writing code.
 
 ## Responsibilities
 
-- Create concrete implementation plans with defined steps
+- Create concrete **feature** implementation plans with defined steps
 - Define scope boundaries and acceptance criteria
 - Identify risks and alternatives
 - List affected files and expected changes
+
+**Important**: System Spec and Architecture belong to Context (Step 1). This step focuses on **feature-level** planning only.
 
 ## Artifact Types
 
@@ -18,7 +20,7 @@ For concrete implementation tasks with defined steps. See [plan-template](../tem
 For detailed feature specifications. See [spec-template](../templates/spec-template.md).
 
 ### Architecture Decision Record (ADR-NNN-*.md)
-For architecture decisions with alternatives and trade-offs. See [adr-template](../templates/adr-template.md).
+Only for **new** decisions arising during exploration. Fundamental ADRs belong in Context. See [adr-template](../templates/adr-template.md).
 
 ### Informal Spec
 For small changes, a verbal description in chat is sufficient — but the human must confirm.
@@ -26,6 +28,7 @@ For small changes, a verbal description in chat is sufficient — but the human 
 ## AI Behavior
 
 ### MUST
+- Verify that System Spec + Architecture from Context are current before planning
 - Formulate steps concretely enough for direct implementation
 - List all affected files
 - Name alternatives where appropriate
@@ -37,10 +40,12 @@ For small changes, a verbal description in chat is sufficient — but the human 
 - Hide risks
 - Secretly expand scope
 - Leave acceptance criteria vague
+- Re-create system-level artifacts that should already exist from Context
 
 ## Checklist
 
-- [ ] Plan/spec exists (file or chat confirmation)
+- [ ] System Spec and Architecture from Context are verified as current
+- [ ] Feature plan/spec exists (file or chat confirmation)
 - [ ] Steps are actionable and ordered
 - [ ] Affected files are listed
 - [ ] Scope and non-scope are explicit

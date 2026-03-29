@@ -4,7 +4,7 @@
 
 ## Responsibilities
 
-- Enforce that a plan/spec exists before any production code
+- Enforce that a feature plan/spec exists before any production code
 - Determine when a prototype is mandatory vs. optional
 - Ensure human approval at every transition
 
@@ -21,9 +21,9 @@
 
 | Scenario | Prototype Required? |
 |----------|-------------------|
-| UI changes (layouts, forms, dashboards) | Mandatory |
-| Shaders / visual effects | Mandatory |
-| 3D scenes and levels | Mandatory |
+| UI changes (layouts, forms, dashboards) | **Mandatory** |
+| Shaders / visual effects | **Mandatory** |
+| 3D scenes and levels | **Mandatory** |
 | Backend APIs, database migrations | Omitted |
 | Refactoring without visual output | Omitted |
 | Build system changes | Omitted |
@@ -31,17 +31,22 @@
 ## AI Behavior
 
 ### MUST
-- Create plan/spec before any code
+- Create feature plan/spec before any code
+- Verify that System Spec + Architecture + ADRs from Context exist before planning features
 - Wait for human approval before proceeding
 - Flag when a prototype is required but missing
+- State when Gate G2 is satisfied and request human approval to move to Production
 
 ### MUST NOT
 - Write a plan AND immediately implement it
 - Skip prototype for visual output
 - Proceed without human approval
+- Create system-level specs (those belong in Context)
+- Confuse feature-level planning with system-level architecture
 
 ## Checklist
 
-- [ ] Plan/spec exists and is appropriate for the scope
+- [ ] G1 deliverables verified (System Spec, Architecture, ADRs exist)
+- [ ] Feature plan/spec exists and is appropriate for the scope
 - [ ] Prototype is created where mandatory
 - [ ] Human has approved before moving to Production
