@@ -130,7 +130,7 @@ def build_header() -> str:
 # chevp-ai-framework
 
 > PROCESS: Context (G1) → Exploration (G2) → Production (G3). Sequential. Gates are blockers.
-> RULE: No code without spec. No delivery without validation. Human approves every transition.
+> RULE: No code without spec. No delivery without validation. Human approves every transition. AI auto-detects mode and acts as gatekeeper.
 > Source: https://github.com/chevp/chevp-ai-framework — auto-generated, do not edit."""
 
 
@@ -158,38 +158,23 @@ def build_ai_modes() -> str:
     return f"""\
 ## AI Modes
 
-AI operates in exactly one mode at a time. Each mode is signaled by a prompt prefix and enforced through a prompt header.
+AI operates in exactly one mode at a time. The AI **auto-detects** the current mode from user intent and conversation state. Optional prefixes (`chp-context:`, `chp-exploration:`, `chp-production:`) override auto-detection.
 
 {mode_table}
 
-### Prompt Header (every prompt begins with this)
+### Mode-Detection Protocol
 
-```
-# CHEVP-AI-FRAMEWORK
-current_mode: <context|exploration|production>
-human_approved: <true|false>
-approved_plan: <PLAN-NNN.md or null>
-prototype_confirmed: <true|false>
-context_verified: <true|false>
-```
+Priority order: 1. Explicit prefix → 2. Conversation state (stay in active mode) → 3. Intent classification (signal words) → 4. Default to Context → 5. Ask when conflicting.
 
-### Prompt Structure
+AI MUST NOT silently switch modes. Any mode change must be announced. Forward transitions require human approval.
 
-```
-chp-<current_mode>:
-- Goal: <goal within this mode>
-- Inputs: <artifacts/plans needed>
-- Output: <what AI delivers>
-- Forbidden: <prohibited actions in this mode>
-```
+### Mode-Awareness Header (before every response)
 
-### AI Status-Check (before every response)
+AI outputs a brief natural-language header: detected mode + reasoning, gate progress (what is satisfied / missing), what AI will do next (or why it blocks).
 
-```
-Status: current_mode=X, human_approved=Y, prototype_confirmed=Z
-Allowed: <actions>
-Forbidden: <actions>
-```
+### Gatekeeper Behavior
+
+AI blocks requests that belong to a later mode when the gate is not passed. AI explains what is missing and redirects to the current step. AI proposes forward transitions when all gate criteria are satisfied.
 
 ### Mode Transitions
 
@@ -197,13 +182,9 @@ Forbidden: <actions>
 
 Backward jumps: Production → Exploration (plan wrong), Exploration → Context (requirements misunderstood).
 
-### Session State (in project CLAUDE.md)
+### State Tracking
 
-```
-Mode: chp-context | chp-exploration | chp-production
-Active Plan: PLAN-NNN (or none)
-Gate Status: G1 ○/✓ | G2 ○/✓ | G3 ○/✓
-```"""
+AI tracks state internally: current mode, active plan, gate status (G1/G2/G3), human approval. No manual session state block required."""
 
 
 def build_step_context() -> str:
@@ -349,32 +330,36 @@ def build_ai_behavior() -> str:
 
 | Rule | When |
 |------|------|
+| Auto-detect mode from user intent; announce detected mode before acting | Always |
+| Block forward transitions when gate criteria are not met; list missing items | Always |
+| Propose gate transitions when all criteria are satisfied | Always |
 | Read existing code and CLAUDE.md before any work | Always |
 | Ask questions instead of assuming | Always |
 | Wait for explicit human approval at every gate | Always |
 | Follow existing patterns and conventions | Always |
-| Produce Context-Plan (CPLAN) as first activity | Context (`chp-context:`) |
-| Produce/verify System Spec, Architecture, ADRs, Context Inventory | Context (`chp-context:`) |
-| State understanding and surface ambiguities | Context (`chp-context:`) |
-| Wait for explicit scope confirmation | Context (`chp-context:`) |
-| Create feature plan/spec before any code | Exploration (`chp-exploration:`) |
-| Define acceptance criteria | Exploration (`chp-exploration:`) |
-| Create and iterate prototype for visual output until confirmed | Exploration (`chp-exploration:`) |
-| Produce Production-Plan (PPLAN) and get human approval before any code | Production (`chp-production:`) |
-| Verify G1 + G2 deliverables before starting | Production (`chp-production:`) |
-| Implement step-by-step per plan, build-verify after each step | Production (`chp-production:`) |
-| Check each acceptance criterion individually | Production (`chp-production:`) |
-| Stage specific files only, commit only when asked | Production (`chp-production:`) |
-| Move completed plans to `finished/` (PPLAN + PLAN), update docs | Production (`chp-production:`) |
+| Produce Context-Plan (CPLAN) as first activity | Context |
+| Produce/verify System Spec, Architecture, ADRs, Context Inventory | Context |
+| State understanding and surface ambiguities | Context |
+| Wait for explicit scope confirmation | Context |
+| Create feature plan/spec before any code | Exploration |
+| Define acceptance criteria | Exploration |
+| Create and iterate prototype for visual output until confirmed | Exploration |
+| Produce Production-Plan (PPLAN) and get human approval before any code | Production |
+| Verify G1 + G2 deliverables before starting | Production |
+| Implement step-by-step per plan, build-verify after each step | Production |
+| Check each acceptance criterion individually | Production |
+| Stage specific files only, commit only when asked | Production |
+| Move completed plans to `finished/` (PPLAN + PLAN), update docs | Production |
 
 ### MUST NOT
 
+- Silently switch modes without announcing
 - Skip steps, gates, or modes
 - Expand scope ("I also improved X")
 - Assume requirements without checking
 - Write plan AND immediately implement
-- Write production code in `chp-context:` or `chp-exploration:` mode
-- Create feature plans in `chp-production:` mode
+- Write production code in Context or Exploration mode
+- Create feature plans in Production mode
 - Start implementing without approved Production-Plan (PPLAN)
 - Skip prototype for visual output
 - Commit/push without being asked, force-push, or skip hooks

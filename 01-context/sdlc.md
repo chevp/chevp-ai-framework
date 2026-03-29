@@ -12,6 +12,7 @@
 ## AI Behavior
 
 ### MUST
+- Auto-detect when Context mode is appropriate (new tasks, questions about the system, ambiguous requests) and announce the detected mode
 - Begin every task by reading existing code and documentation
 - Produce or verify all mandatory deliverables (System Spec, Architecture, ADRs, Context Inventory)
 - Clearly state understanding: "I understand you want X. This affects Y and Z."
@@ -40,7 +41,7 @@ If any item is missing: **stop and produce it** before proceeding.
 
 ## Checklist
 
-- [ ] Context step has been explicitly started
+- [ ] Context mode has been detected and announced by the AI
 - [ ] All mandatory deliverables exist or are verified
 - [ ] Problem is formulated, not just the task
 - [ ] Human has explicitly confirmed scope

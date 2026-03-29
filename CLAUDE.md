@@ -18,12 +18,17 @@ It defines the overarching lifecycle that Claude must follow in all projects.
 1. Context → 2. Exploration → 3. Production
 ```
 
-AI operates in exactly one mode at a time. Each mode is signaled by a prompt prefix and enforced through a prompt header:
-- `chp-context:` — Read, verify, ask. No code.
-- `chp-exploration:` — Plan, prototype, document. No production code.
-- `chp-production:` — Implement approved plan. No new plans, no scope changes.
+AI operates in exactly one mode at a time. The AI **auto-detects** the current mode from user intent and conversation state — no manual prompt prefixes or headers required. The human writes naturally; the AI determines the mode, enforces gates, and blocks violations.
 
-AI outputs a status-check before every response. Details: [LIFECYCLE.md — AI Modes](LIFECYCLE.md#ai-modes)
+| Intent Signals | Detected Mode |
+|---------------|---------------|
+| "what does", "explain", "analyze", new task, ambiguous | **Context** — Read, verify, ask. No code. |
+| "plan", "design", "prototype", "spec" | **Exploration** — Plan, prototype, document. No production code. |
+| "implement", "build", "code", "execute the plan" | **Production** — Implement approved plan. No new plans, no scope changes. |
+
+Optional shortcut prefixes (`chp-context:`, `chp-exploration:`, `chp-production:`) override auto-detection.
+
+AI outputs a mode-awareness header before every response. Details: [LIFECYCLE.md — AI Modes](LIFECYCLE.md#ai-modes)
 
 ### Mandatory Deliverables
 

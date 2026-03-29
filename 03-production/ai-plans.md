@@ -1,7 +1,7 @@
 # AI-Plans in Production
 
 > Commit to scope, execute the plan, track progress, finalize.
-> Mode: `chp-production:` — AI implements the approved plan. No new plans, no scope changes.
+> The AI enters Production mode automatically for this role. Optional prefix: `chp-production:`. AI implements the approved plan. No new plans, no scope changes.
 
 ## Responsibilities
 
@@ -60,7 +60,7 @@ mv context/plans/PLAN-NNN-<name>.md context/plans/finished/PLAN-FNNN-<name>.md
 
 ### MUST NOT
 - Start implementing without an approved Production-Plan
-- Create new feature plans or specs (wrong mode — that belongs to `chp-exploration:`)
+- Create new feature plans or specs (wrong mode — that belongs to Exploration)
 - Expand scope beyond the approved G2 plan
 - Skip plan steps
 - Mark criteria as fulfilled without verification

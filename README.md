@@ -65,7 +65,7 @@ Add this block to your project's `CLAUDE.md`:
 DO NOT create, edit, or delete any file before:
 1. The chevp-ai-framework has been loaded:
    @url https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
-2. The current phase-step (Context / Exploration / Production) is confirmed with the human
+2. The AI has determined the current lifecycle step (Context / Exploration / Production) and announced it
 ```
 
 Then create the context directory structure:
@@ -74,7 +74,7 @@ Then create the context directory structure:
 mkdir -p context/{architecture,adr,guidelines,plans/finished,specs}
 ```
 
-That's it. Claude loads the framework automatically via `@url` and enforces the lifecycle. See [integration/](integration/) for details.
+That's it. Claude loads the framework automatically via `@url`, detects the current lifecycle mode from your intent, and enforces the lifecycle as an autonomous gatekeeper. No manual mode flags or prompt headers required. See [integration/](integration/) for details.
 
 ---
 

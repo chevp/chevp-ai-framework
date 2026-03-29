@@ -40,55 +40,55 @@ Each step produces defined artifacts. No step is skipped. The human approves eve
 
 ## AI Modes
 
-AI operates in exactly one mode at a time. The mode determines what AI may and may not do. Each mode is signaled by a **prompt prefix** and enforced through a **prompt header**.
+AI operates in exactly one mode at a time. The mode determines what AI may and may not do. The AI **auto-detects** the current mode from user intent and conversation state. Optional prompt prefixes (`chp-context:`, `chp-exploration:`, `chp-production:`) can be used as shortcuts to override auto-detection.
 
-| Mode | Prompt Prefix | Purpose | Allowed | Not Allowed |
-|------|---------------|---------|---------|-------------|
-| **Context** | `chp-context:` | Understand system & problem | Read/verify artifacts, ask questions, create Context-Plan, produce System Spec | Change code, create feature plans, alter scope |
-| **Exploration** | `chp-exploration:` | Plan features & prototype | Create Feature Plan/Spec, write ADRs, iterate prototypes, document risks | Write production code, expand scope unilaterally |
-| **Production** | `chp-production:` | Implement & validate | Execute approved plan, run tests, verify build, create commits | Create new plans, expand scope, make unplanned changes |
+| Mode | Intent Signals | Optional Prefix | Allowed | Not Allowed |
+|------|---------------|-----------------|---------|-------------|
+| **Context** | "what does", "explain", "analyze", "understand", new task, ambiguous start | `chp-context:` | Read/verify artifacts, ask questions, create Context-Plan, produce System Spec | Change code, create feature plans, alter scope |
+| **Exploration** | "plan", "design", "prototype", "spec", "how should we" | `chp-exploration:` | Create Feature Plan/Spec, write ADRs, iterate prototypes, document risks | Write production code, expand scope unilaterally |
+| **Production** | "implement", "build", "code", "execute the plan", "fix" (with approved plan) | `chp-production:` | Execute approved plan, run tests, verify build, create commits | Create new plans, expand scope, make unplanned changes |
 
-### Prompt Header (Meta-Strategy)
+### AI Mode-Detection Protocol
 
-Every prompt begins with the framework header. This reminds both human and AI of the current mode and its constraints:
+The AI determines the current mode through this priority order:
 
-```
-# CHEVP-AI-FRAMEWORK
-# Mode Reminder:
-# 1. Context (G1)     → Read, verify, ask questions, create Context-Plan
-# 2. Exploration (G2)  → Plans, specs, prototypes, document risks
-# 3. Production (G3)   → Implement approved plan step-by-step, validate
+1. **Explicit prefix** — If the user writes `chp-context:`, `chp-exploration:`, or `chp-production:`, use that mode (but still validate against gate state)
+2. **Conversation state** — If a mode is already active and no transition has occurred, stay in that mode
+3. **Intent classification** — Classify user intent from natural language using the signal words above
+4. **Default to Context** — When intent is ambiguous and no mode is active, start in Context (the safest mode)
+5. **Ask when conflicting** — If the user's intent conflicts with the current gate state (e.g., asks for code but G2 is not passed), explain the conflict and redirect
 
-current_mode: <context|exploration|production>
-human_approved: <true|false>
-approved_plan: <PLAN-NNN.md or null>
-prototype_confirmed: <true|false>
-context_verified: <true|false>
-```
+The AI **MUST NOT** silently switch modes. Any mode change must be announced and, for forward transitions, approved by the human.
 
-### Prompt Structure for Actions
+### AI Mode-Awareness Header (before every response)
 
-After the header, each prompt follows this structure:
+AI outputs a brief natural-language header before acting:
 
 ```
-chp-<current_mode>:
-- Goal: <Describe goal within this mode>
-- Inputs: <Which artifacts/plans/prototypes are needed>
-- Output: <What AI should deliver>
-- Forbidden in this mode: <List of prohibited actions>
+[Context] Understanding the system — you're asking about how the codebase works.
+Gate: G1 not yet passed (missing: System Spec, Scope Confirmation)
+Next: Complete remaining Context deliverables before moving to Exploration.
 ```
 
-### AI Status-Check (before every response)
+The header states:
+- The detected mode and the reasoning behind it
+- Gate progress — what is satisfied, what is still missing
+- What the AI will do next (or why it is blocking)
 
-AI outputs a brief status check before acting:
+### AI Gatekeeper Behavior
 
-```
-Status: current_mode=exploration, human_approved=true, prototype_confirmed=false
-Allowed: Create Plan/Spec, iterate prototype
-Forbidden: Write production code, commit changes
-```
+The AI acts as an autonomous gatekeeper. Before every response, the AI:
 
-This ensures the human sees whether the prompt is mode-compliant before AI proceeds.
+1. **Detects** the mode from user intent (see Mode-Detection Protocol above)
+2. **Checks** whether the current gate prerequisites are met
+3. **Blocks** if the user's request belongs to a later mode and the gate is not passed — the AI explains what is missing and redirects to the current step
+4. **Proposes** forward transitions when all gate criteria are satisfied: "All Context deliverables are ready. G1 is satisfied. Shall we move to Exploration?"
+5. **Detects** backward jumps when the conversation shifts (e.g., "actually, the requirements are wrong") and proposes the jump
+
+**Examples of blocking:**
+
+- User asks "implement feature X" but no plan exists → AI blocks: "We need a feature plan first. Let me help you create one in Exploration mode."
+- User asks "write the code" but G1 is not passed → AI blocks: "We haven't confirmed the context yet. Let's finish Context first: [lists missing items]."
 
 ### Mode Transitions
 
@@ -98,21 +98,21 @@ Exploration ──[G2 passed + Human approves]──→ Production
 Production ──[G3 passed + Human approves]──→ Done
 ```
 
-Backward jumps allowed: Production → Exploration (plan wrong), Production → Context (fundamental problem), Exploration → Context (requirements misunderstood).
+**Forward transitions**: AI verifies all gate criteria, lists them, proposes the transition, and waits for human approval.
+
+**Backward jumps**: AI detects when the conversation shifts backward (plan is wrong, requirements misunderstood, fundamental problem discovered) and proposes the jump. Human confirms.
 
 **Rule:** Forward only with passed gate + human confirmation. Backward at any time when needed.
 
-### Session State (in project CLAUDE.md)
+### State Tracking
 
-```markdown
-## Current Session State
-- **Mode**: chp-context | chp-exploration | chp-production
-- **Active Plan**: PLAN-NNN (or none)
-- **Gate Status**: G1 ○/✓ | G2 ○/✓ | G3 ○/✓
-- **human_approved**: true/false
-- **prototype_confirmed**: true/false
-- **context_verified**: true/false
-```
+The AI tracks session state internally:
+- Current mode (Context / Exploration / Production)
+- Active plan reference (if any)
+- Gate status (G1, G2, G3 — passed or pending with specific missing items)
+- Whether the human has approved the current gate
+
+No manual session state block is required in the project CLAUDE.md. The AI announces state changes through its mode-awareness header.
 
 ---
 

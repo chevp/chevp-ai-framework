@@ -43,6 +43,8 @@ If anything is missing: **stop and go back** to the appropriate step.
 ## AI Behavior
 
 ### MUST
+- Auto-detect when Production mode is appropriate (user asks to implement, build, or execute an approved plan) and announce the detected mode
+- Block entry to Production if G1 or G2 are not passed — redirect the user to the appropriate step
 - Verify G1 and G2 deliverables exist before starting
 - Proceed step by step according to plan
 - Verify build success after each step

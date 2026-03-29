@@ -31,6 +31,7 @@
 ## AI Behavior
 
 ### MUST
+- Auto-detect when Exploration mode is appropriate (user asks to plan, design, or prototype) and announce the detected mode
 - Create feature plan/spec before any code
 - Verify that System Spec + Architecture + ADRs from Context exist before planning features
 - Wait for human approval before proceeding
