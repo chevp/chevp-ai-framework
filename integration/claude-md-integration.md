@@ -14,7 +14,8 @@ The most important block in every project CLAUDE.md:
 ```markdown
 ## Development Process
 
-This project follows the [chevp-ai-framework](https://github.com/chevp/chevp-ai-framework) lifecycle.
+This project follows the [chevp-ai-framework](https://github.com/chevp/chevp-ai-framework).
+Read and follow: https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
 
 ### Steps (sequential, not skippable)
 1. **Context** — Understand problem, gather context, confirm scope

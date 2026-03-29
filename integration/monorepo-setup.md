@@ -39,7 +39,9 @@ Add the following block to your project CLAUDE.md:
 ```markdown
 ## Development Process
 
-This project follows the [chevp-ai-framework](https://github.com/chevp/chevp-ai-framework) lifecycle.
+This project follows the [chevp-ai-framework](https://github.com/chevp/chevp-ai-framework).
+Read and follow: https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
+
 Claude MUST follow the 3-step order:
 1. Context → 2. Exploration → 3. Production
 ```
