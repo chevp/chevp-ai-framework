@@ -84,6 +84,24 @@ integration/      Integration into existing projects
 
 ---
 
+## Domain Extension
+
+The chevp-ai-framework is designed as a **generic, reusable, domain-agnostic** core. For domain-specific projects, it can be extended through a **domain-ai-framework** layer.
+
+<p align="center">
+  <img src="images/domain-ai-framework.png" alt="Domain AI Framework Architecture" width="680" />
+</p>
+
+The architecture follows a layered approach:
+
+- **chevp-ai-framework** (bottom layer) — The core lifecycle with Context, Exploration, and Production. Generic and reusable across all domains.
+- **domain-ai-framework** (middle layer) — A domain-specific extension that adds specialized rules, templates, and conventions for a particular field (e.g., Game, UI, Data Pipelines, or any custom domain). Included as a Git submodule.
+- **Project frameworks** (top layer) — Concrete project frameworks (e.g., `nuna-ai-framework`) that inherit from the domain layer and produce the final artifacts for human and AI collaboration.
+
+This layered model ensures that domain-specific knowledge (scenes, NPCs, components, pipelines, schemas) lives in the right place — separate from the universal process rules, but built on top of them.
+
+---
+
 ## Principles
 
 | Principle | Why |
