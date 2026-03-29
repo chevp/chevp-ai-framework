@@ -1,7 +1,7 @@
 # Production-Plan Template
 
 > For the Production phase (Step 3). Location: `context/plans/PPLAN-NNN-<description>.md`
-> Mode: Production (optional prefix: `chp-production:`)
+> Mode: Production
 
 ```markdown
 # PPLAN-NNN: <Production-Plan Title>

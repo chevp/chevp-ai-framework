@@ -1,7 +1,7 @@
 # Context-Plan Template
 
 > For the Context phase (Step 1). Location: `context/plans/CPLAN-NNN-<description>.md`
-> Mode: Context (optional prefix: `chp-context:`)
+> Mode: Context
 
 ```markdown
 # CPLAN-NNN: <Context-Plan Title>

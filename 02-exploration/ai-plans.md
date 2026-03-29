@@ -1,7 +1,7 @@
 # AI-Plans in Exploration
 
 > Plan and specify concrete features before writing code.
-> The AI enters Exploration mode automatically for this role. Optional prefix: `chp-exploration:`. AI plans, prototypes, and documents. No production code.
+> The AI enters Exploration mode automatically for this role. AI plans, prototypes, and documents. No production code.
 
 ## Responsibilities
 

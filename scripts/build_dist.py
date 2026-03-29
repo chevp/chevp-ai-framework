@@ -130,12 +130,16 @@ def build_header() -> str:
 # chevp-ai-framework
 
 > PROCESS: Context (G1) → Exploration (G2) → Production (G3). Sequential. Gates are blockers.
-> RULE: No code without spec. No delivery without validation. Human approves every transition. AI auto-detects mode and acts as gatekeeper.
+> RULE: No code without spec. No delivery without validation. AI owns the process — infers mode, enforces gates, blocks violations. Human approves transitions.
 > Source: https://github.com/chevp/chevp-ai-framework — auto-generated, do not edit."""
 
 
 def build_core_rules() -> str:
     section = extract_section(SRC["claude_md"], "Core Rules")
+    # Also include the core principle
+    principle = extract_section(SRC["claude_md"], "Core Principle")
+    if principle:
+        return f"## Core Principle\n\n{principle}\n\n## Core Rules\n\n{section}"
     return f"## Core Rules\n\n{section}"
 
 
@@ -158,23 +162,25 @@ def build_ai_modes() -> str:
     return f"""\
 ## AI Modes
 
-AI operates in exactly one mode at a time. The AI **auto-detects** the current mode from user intent and conversation state. Optional prefixes (`chp-context:`, `chp-exploration:`, `chp-production:`) override auto-detection.
+The AI owns the process. The human writes naturally; the AI infers the mode, enforces gates, and blocks violations — automatically. No structured prompts, mode declarations, or manual state management required.
+
+AI operates in exactly one mode at a time.
 
 {mode_table}
 
 ### Mode-Detection Protocol
 
-Priority order: 1. Explicit prefix → 2. Conversation state (stay in active mode) → 3. Intent classification (signal words) → 4. Default to Context → 5. Ask when conflicting.
+Priority order: 1. Conversation state (stay in active mode) → 2. Intent classification (signal words) → 3. Default to Context → 4. Block when conflicting (explain missing prerequisites, guide user back).
 
-AI MUST NOT silently switch modes. Any mode change must be announced. Forward transitions require human approval.
+AI MUST NOT silently switch modes. Any mode change must be announced with reasoning. Forward transitions require human approval.
 
 ### Mode-Awareness Header (before every response)
 
-AI outputs a brief natural-language header: detected mode + reasoning, gate progress (what is satisfied / missing), what AI will do next (or why it blocks).
+AI outputs a brief natural-language header: detected mode + reasoning, gate progress (what is satisfied / missing), what AI will do next (or why it blocks). This is the AI's responsibility — the human never provides or manages it.
 
 ### Gatekeeper Behavior
 
-AI blocks requests that belong to a later mode when the gate is not passed. AI explains what is missing and redirects to the current step. AI proposes forward transitions when all gate criteria are satisfied.
+AI acts as an autonomous process enforcer. AI blocks requests that belong to a later mode when the gate is not passed. AI states the specific missing prerequisites and actively helps the user complete them. AI proposes forward transitions when all gate criteria are satisfied.
 
 ### Mode Transitions
 
@@ -184,7 +190,7 @@ Backward jumps: Production → Exploration (plan wrong), Exploration → Context
 
 ### State Tracking
 
-AI tracks state internally: current mode, active plan, gate status (G1/G2/G3), human approval. No manual session state block required."""
+AI tracks all state internally: current mode, active plan, gate status (G1/G2/G3), human approval. No manual session state, prompt headers, or mode declarations required from the human."""
 
 
 def build_step_context() -> str:
@@ -330,8 +336,9 @@ def build_ai_behavior() -> str:
 
 | Rule | When |
 |------|------|
-| Auto-detect mode from user intent; announce detected mode before acting | Always |
-| Block forward transitions when gate criteria are not met; list missing items | Always |
+| Infer mode from user intent and conversation history; announce detected mode with reasoning before acting | Always |
+| Block forward transitions when gate criteria are not met; state specific missing prerequisites | Always |
+| Guide user toward completing missing prerequisites (don't just block — help) | Always |
 | Propose gate transitions when all criteria are satisfied | Always |
 | Read existing code and CLAUDE.md before any work | Always |
 | Ask questions instead of assuming | Always |
@@ -354,6 +361,7 @@ def build_ai_behavior() -> str:
 ### MUST NOT
 
 - Silently switch modes without announcing
+- Require the human to declare modes, manage state, or use structured prompts
 - Skip steps, gates, or modes
 - Expand scope ("I also improved X")
 - Assume requirements without checking

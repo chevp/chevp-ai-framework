@@ -1,7 +1,7 @@
 # AI-Plans in Context
 
 > System-level specification and scope definition.
-> The AI enters Context mode automatically for this role. Optional prefix: `chp-context:`. AI reads, verifies, and asks. No code, no feature plans.
+> The AI enters Context mode automatically for this role. AI reads, verifies, and asks. No code, no feature plans.
 
 ## Responsibilities
 
