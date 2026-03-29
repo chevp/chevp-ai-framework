@@ -12,7 +12,7 @@
 <p align="center">
   <img src="images/chevp-ai-framework-v2.png" alt="chevp-ai-framework" width="680" />
 </p>
-
+ 
 <table>
   <tr>
     <th>Step</th>
