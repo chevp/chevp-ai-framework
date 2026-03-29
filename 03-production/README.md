@@ -1,6 +1,7 @@
 # Step 3: Production
 
 > Build, verify, ship — nothing more, nothing less.
+> Mode: `chp-production:` — AI implements the approved plan. No new plans, no scope changes.
 
 ## Goal
 
@@ -25,6 +26,8 @@ After Exploration is complete (G2 passed). Plan/spec is approved, prototype is c
 
 ## Activities
 
+- Produce Production-Plan (PPLAN) referencing the approved G2 plan
+- Obtain human approval of Production-Plan before writing code
 - Step-by-step implementation according to plan
 - Build verification after each step
 - Visual validation against prototype (where applicable)
@@ -35,10 +38,11 @@ After Exploration is complete (G2 passed). Plan/spec is approved, prototype is c
 
 ## Outputs
 
+- Production-Plan (approved by human)
 - Production code (compiles, follows plan, follows patterns)
 - Validation result (all acceptance criteria passed)
 - Commit(s) on main
-- Plan moved to `finished/` (if plan-based)
+- Plans moved to `finished/` (PPLAN + PLAN)
 - Up-to-date documentation
 
 ## Roles Active in This Step
@@ -54,6 +58,7 @@ After Exploration is complete (G2 passed). Plan/spec is approved, prototype is c
 
 ## Quality Gate G3: Production Complete
 
+- [ ] Production-Plan exists and was approved by human before implementation
 - [ ] Code compiles / build is successful
 - [ ] Only changes specified in the plan — no scope expansion
 - [ ] Existing patterns followed
@@ -62,7 +67,7 @@ After Exploration is complete (G2 passed). Plan/spec is approved, prototype is c
 - [ ] Visual result matches prototype (if applicable)
 - [ ] No regressions
 - [ ] Tests pass (if test suite exists)
-- [ ] Plan status updated (moved to `finished/`)
+- [ ] Plans moved to `finished/` (PPLAN + PLAN)
 - [ ] Documentation is up to date (CLAUDE.md, ADRs if needed)
 - [ ] No open TODOs
 - [ ] **Human has given final approval**

@@ -12,27 +12,34 @@ It defines the overarching lifecycle that Claude must follow in all projects.
 5. **Ownership stays with the human** — AI delivers suggestions, developers bear responsibility
 6. **Gates are blockers** — All criteria must be satisfied before forward transition
 
-## Lifecycle: 3 Steps × 6 Roles
+## Lifecycle: 3 Steps × 6 Roles × 3 Modes
 
 ```
 1. Context → 2. Exploration → 3. Production
 ```
 
+AI operates in exactly one mode at a time. Each mode is signaled by a prompt prefix and enforced through a prompt header:
+- `chp-context:` — Read, verify, ask. No code.
+- `chp-exploration:` — Plan, prototype, document. No production code.
+- `chp-production:` — Implement approved plan. No new plans, no scope changes.
+
+AI outputs a status-check before every response. Details: [LIFECYCLE.md — AI Modes](LIFECYCLE.md#ai-modes)
+
 ### Mandatory Deliverables
 
 | Step | Deliverables |
 |------|-------------|
-| **Context** | System Spec, Software Architecture, ADRs (fundamental), Context Inventory, Scope Confirmation |
-| **Exploration** | Feature Plan/Spec, ADRs (new decisions), UX Prototype (where applicable) |
-| **Production** | Production Code, Validation Result, Updated Documentation |
+| **Context** | Context-Plan (CPLAN), System Spec, Software Architecture, ADRs (fundamental), Context Inventory, Scope Confirmation |
+| **Exploration** | Feature Plan/Spec (PLAN), ADRs (new decisions), UX Prototype (where applicable) |
+| **Production** | Production-Plan (PPLAN), Production Code, Validation Result, Updated Documentation |
 
 ### Quality Gates
 
 | Gate | Transition | Key Rule |
 |------|-----------|----------|
-| **G1** | Context → Exploration | System Spec + Architecture + ADRs + Context Inventory exist, scope confirmed |
+| **G1** | Context → Exploration | Context-Plan confirmed, System Spec + Architecture + ADRs + Context Inventory exist, scope confirmed |
 | **G2** | Exploration → Production | Feature plan/spec approved, prototype confirmed (where applicable) |
-| **G3** | Production → Done | All acceptance criteria fulfilled, build passes, human approved |
+| **G3** | Production → Done | Production-Plan approved, all acceptance criteria fulfilled, build passes, human approved |
 
 Within each step, 6 cross-cutting roles operate:
 **SDLC** · **AI-Plans** · **UX-Tooling** · **DevOps** · **Software-Architecture** · **Context-Engineering**

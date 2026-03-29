@@ -53,15 +53,32 @@ Generic guidelines come from the framework, specific ones stay in the project.
 
 ## Plan Workflow
 
-Plans follow the convention from the framework:
+Three plan types follow the convention from the framework:
 
 ```
-PLAN-NNN-<description>.md       ← Open
-finished/PLAN-FNNN-<description>.md  ← Completed
+CPLAN-NNN-<description>.md             ← Context Plan (open)
+PLAN-NNN-<description>.md              ← Feature Plan (open)
+PPLAN-NNN-<description>.md             ← Production Plan (open)
+finished/CPLAN-FNNN-<description>.md   ← Context Plan (completed)
+finished/PLAN-FNNN-<description>.md    ← Feature Plan (completed)
+finished/PPLAN-FNNN-<description>.md   ← Production Plan (completed)
 ```
 
 Commit convention for plan implementation:
 
 ```
-plan(NNN): <short description>
+cplan(NNN): <short description>    ← Context phase
+plan(NNN): <short description>     ← Exploration phase
+pplan(NNN): <short description>    ← Production phase
+```
+
+## AI Modes
+
+Add a Session State block to your project CLAUDE.md to track the current AI mode:
+
+```markdown
+## Current Session State
+- **Mode**: chp-context | chp-exploration | chp-production
+- **Active Plan**: PLAN-NNN (or none)
+- **Gate Status**: G1 ○/✓ | G2 ○/✓ | G3 ○/✓
 ```
