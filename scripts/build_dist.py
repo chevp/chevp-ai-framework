@@ -174,9 +174,13 @@ Priority order: 1. Conversation state (stay in active mode) → 2. Intent classi
 
 AI MUST NOT silently switch modes. Any mode change must be announced with reasoning. Forward transitions require human approval.
 
-### Mode-Awareness Header (before every response)
+### Mixed-Intent Resolution
 
-AI outputs a brief natural-language header: detected mode + reasoning, gate progress (what is satisfied / missing), what AI will do next (or why it blocks). This is the AI's responsibility — the human never provides or manages it.
+When a message contains signals for multiple modes, the AI decomposes intents, sequences them by lifecycle order (earlier first), executes the earliest mode's portion, and stops at the gate boundary — stating what remains.
+
+### Adaptive Mode-Awareness Header
+
+Header detail adapts to context: **Full** (mode + reasoning + gate progress) on mode changes, gate transitions, or blocking. **Short** (mode confirmation only) when continuing work in the same mode. The header is the AI's responsibility.
 
 ### Gatekeeper Behavior
 
@@ -187,6 +191,10 @@ AI acts as an autonomous process enforcer. AI blocks requests that belong to a l
 `Context ──[G1 + Human]──→ Exploration ──[G2 + Human]──→ Production ──[G3 + Human]──→ Done`
 
 Backward jumps: Production → Exploration (plan wrong), Exploration → Context (requirements misunderstood).
+
+### Production → Exploration Fallback
+
+During Production, AI MUST propose fallback to Exploration when: plan is incomplete/ambiguous, technical constraint makes the approach unviable, or human requests a scope change. AI stops, states the trigger, and asks before continuing.
 
 ### State Tracking
 
@@ -336,7 +344,8 @@ def build_ai_behavior() -> str:
 
 | Rule | When |
 |------|------|
-| Infer mode from user intent and conversation history; announce detected mode with reasoning before acting | Always |
+| Infer mode from user intent and conversation history; output adaptive header (full on changes, short when continuing) | Always |
+| Decompose mixed-intent messages by lifecycle order; execute earliest mode first, stop at gate boundary | Always |
 | Block forward transitions when gate criteria are not met; state specific missing prerequisites | Always |
 | Guide user toward completing missing prerequisites (don't just block — help) | Always |
 | Propose gate transitions when all criteria are satisfied | Always |
@@ -354,6 +363,7 @@ def build_ai_behavior() -> str:
 | Produce Production-Plan (PPLAN) and get human approval before any code | Production |
 | Verify G1 + G2 deliverables before starting | Production |
 | Implement step-by-step per plan, build-verify after each step | Production |
+| Propose fallback to Exploration when plan is incomplete, approach is unviable, or scope changes | Production |
 | Check each acceptance criterion individually | Production |
 | Stage specific files only, commit only when asked | Production |
 | Move completed plans to `finished/` (PPLAN + PLAN), update docs | Production |
