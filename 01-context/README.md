@@ -28,6 +28,8 @@ Always. No exceptions. Even trivial changes require reading CLAUDE.md and confir
 
 For small changes (< 10 lines), deliverables 1-3 may already exist. In that case, **read and verify** them — do not skip them.
 
+**Efficiency: Verify Once per Session** — If deliverables already exist and have not changed since last verified in this session, confirm they exist and are current in one sentence. Only re-read if the human modifies key artifacts or flags them as outdated.
+
 ## Activities
 
 - Read CLAUDE.md and project documentation

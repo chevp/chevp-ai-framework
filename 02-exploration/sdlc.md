@@ -22,11 +22,11 @@
 | Scenario | Prototype Required? |
 |----------|-------------------|
 | UI changes (layouts, forms, dashboards) | **Mandatory** |
-| Shaders / visual effects | **Mandatory** |
-| 3D scenes and levels | **Mandatory** |
-| Backend APIs, database migrations | Omitted |
+| Visual output (graphics, animations, effects) | **Mandatory** |
+| Interactive / spatial content (3D, maps, diagrams) | **Mandatory** |
+| Non-visual changes (APIs, data, logic) | Omitted |
 | Refactoring without visual output | Omitted |
-| Build system changes | Omitted |
+| Build / infrastructure changes | Omitted |
 
 ## AI Behavior
 
