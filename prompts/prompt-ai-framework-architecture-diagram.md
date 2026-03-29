@@ -9,7 +9,7 @@ Create a technical architecture graphic that shows the 2-layer model of the AI f
 ```
 Create a clean, modern technical architecture diagram on a dark background (#1a1a2e) with the following structure:
 
-TITLE at top: "AI-Framework Architecture" in white, modern sans-serif font.
+TITLE at top: "chevp-ai-framework" in white, modern sans-serif font.
 
 TWO MAIN LAYERS stacked vertically, each as a rounded rectangle:
 
