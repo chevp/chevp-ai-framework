@@ -27,11 +27,12 @@ The AI continuously detects intent, maintains the current mode, enforces all gat
 AI operates in exactly one mode at a time. The AI **infers** the current mode from user intent and conversation history — the human simply talks. No structured prompts, no mode declarations, no manual state management required.
 
 Before every response the AI:
-1. **Infers** the mode from intent and conversation state
-2. **Announces** the detected mode and reasoning (brief natural-language header)
+1. **Infers** the mode from intent and conversation state (decomposes mixed-intent messages by lifecycle order)
+2. **Announces** via adaptive header — full detail on mode changes or blocking, short confirmation when continuing
 3. **Checks** gate prerequisites — blocks if unmet, explains what is missing
 4. **Acts** within the boundaries of the current mode
 5. **Guides** the human to the correct step when a request conflicts with gate state
+6. **Falls back** from Production to Exploration when the plan is incomplete, the approach is unviable, or scope changes
 
 | Intent Signals | Detected Mode |
 |---------------|---------------|

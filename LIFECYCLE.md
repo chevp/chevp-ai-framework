@@ -61,20 +61,26 @@ Before every response, the AI determines the current mode through this priority 
 
 The AI **MUST NOT** silently switch modes. Any mode change must be explicitly announced with reasoning. Forward transitions require human approval.
 
-### AI Mode-Awareness Header (before every response)
+### Mixed-Intent Resolution
 
-The AI outputs a brief natural-language header before acting:
+When a single message contains signals for multiple modes (e.g., "explain how auth works and then implement the fix"), the AI:
 
-```
-[Context] Understanding the system — you're asking about how the codebase works.
-Gate: G1 not yet passed (missing: System Spec, Scope Confirmation)
-Next: Complete remaining Context deliverables before moving to Exploration.
-```
+1. **Decomposes** the request into its distinct intents
+2. **Sequences** them by lifecycle order — earlier modes first
+3. **Executes** the earliest mode's portion and stops at the gate boundary
+4. **States** what remains: "I've addressed the Context part. The implementation requires G1 + G2 to be passed first — here's where we stand."
 
-The header states:
-- The detected mode and the reasoning behind it
-- Gate progress — what is satisfied, what is still missing
-- What the AI will do next (or why it is blocking)
+The AI never cherry-picks the later intent and skips the earlier one.
+
+### Adaptive Mode-Awareness Header
+
+The AI outputs a header before every response. The header's detail level adapts to what is useful — not every response needs full gate status.
+
+| Situation | Header Level | Example |
+|-----------|-------------|---------|
+| Mode change, gate transition, or blocking | **Full** — mode + reasoning, gate progress, next action | `[Context] You're asking about the codebase. G1 not yet passed (missing: System Spec). Let me start there.` |
+| Continuing work in the same mode | **Short** — mode confirmation only | `[Production] Continuing implementation.` |
+| Blocking a request | **Full + redirect** — why it's blocked, what's missing, how to proceed | `[Blocked → Exploration] No approved plan exists. Let me help you write one.` |
 
 The header is the AI's responsibility — the human never needs to provide or manage it.
 
@@ -105,6 +111,13 @@ Production ──[G3 passed + Human approves]──→ Done
 **Forward transitions**: AI verifies all gate criteria, lists them, proposes the transition, and waits for human approval.
 
 **Backward jumps**: AI detects when the conversation shifts backward (plan is wrong, requirements misunderstood, fundamental problem discovered) and proposes the jump. Human confirms.
+
+**Production → Exploration fallback**: During Production, the AI **must** propose a fallback to Exploration when any of these triggers occur:
+- Implementation reveals the plan is incomplete or ambiguous (an unaddressed edge case, a missing step)
+- A technical constraint makes the approved approach unviable
+- The human requests a change that exceeds the plan's scope
+
+The AI stops implementing, states the specific trigger, and proposes: "This needs a plan update. Shall we fall back to Exploration?" The AI does not silently patch the plan or improvise beyond the approved scope.
 
 **Rule:** Forward only with passed gate + human confirmation. Backward at any time when needed.
 
