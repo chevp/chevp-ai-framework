@@ -194,6 +194,65 @@ But: **Forward only with a passed quality gate.** No jump from Context to Produc
 
 ---
 
+## Multi-Agent Execution
+
+Multiple AI agents can work in parallel, each following the lifecycle independently for its own task.
+
+### Isolation Rule
+
+**One agent = one branch = one working directory.**
+
+If two agents share the same working directory, they **must** operate on the same branch. Conversely, if agents need separate branches, they **must** work in separate directories (e.g., git worktrees).
+
+| Setup | Branch | Safe? |
+|-------|--------|-------|
+| Separate directories (worktrees) | Separate branches | Yes — full parallel lifecycle |
+| Same directory | Same branch | Context/Exploration parallel, Production sequential |
+| Same directory | Different branches | **Forbidden** — undefined state |
+
+### Lifecycle Scope per Agent
+
+Each agent runs its own lifecycle instance for its assigned task. Gates are per-agent, per-task — one agent passing G1 does not affect another agent's gate status.
+
+```
+Agent A (feature/auth):       [Context] → G1 → [Exploration] → G2 → [Production] → G3 → PR
+Agent B (feature/dashboard):  [Context] → G1 → [Exploration] → G2 → [Production] → G3 → PR
+Agent C (feature/csv-import): [Context] → G1 → [Exploration] → G2 → [Production] → G3 → PR
+```
+
+The human assigns tasks with clear scope boundaries before agents start. Each agent receives:
+1. The project's CLAUDE.md (loads the framework automatically)
+2. A task description in natural language
+3. Explicit scope boundaries (what is in scope, what is not)
+
+### Parallelism by Step
+
+| Step | Parallel-safe? | Reason |
+|------|---------------|--------|
+| **Context** | Yes | Read-only — agents read code and produce plans |
+| **Exploration** | Yes | Agents write branch-local artifacts (plans, specs, ADRs) |
+| **Production** | Only with separate branches | Agents write production code — concurrent writes to the same branch cause conflicts |
+
+### Shared vs. Branch-Local Artifacts
+
+| Artifact | Scope | Rule |
+|----------|-------|------|
+| CLAUDE.md | Shared (main) | Never modified in parallel — update only after merge |
+| System Spec, Software Architecture | Shared (main) | Read during Context, modified only via PR |
+| Plans (CTX/EXP/PRD) | Branch-local | Each agent creates plans on its own branch |
+| Feature Specs | Branch-local | Scoped to the agent's task |
+| ADRs | Branch-local, reconciled at merge | Conflicting ADRs require human resolution |
+
+### Merge Point
+
+After G3 is passed, each agent's branch is merged via pull request. The human is responsible for:
+- Resolving merge conflicts (especially in shared artifacts)
+- Reconciling contradictory ADRs from parallel agents
+- Ensuring CLAUDE.md is updated consistently after merge
+- Verifying that combined changes do not introduce regressions
+
+---
+
 ## Project-Specific Extension Points
 
 This framework defines the core process. The following aspects are **intentionally not part of the core** and must be defined per project in `context/guidelines/`:
