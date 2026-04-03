@@ -12,8 +12,8 @@
 
 ```
 context/
-├── plans/            — PLAN-NNN-<description>.md
-│   └── finished/     — PLAN-FNNN-<description>.md (completed)
+├── plans/            — EXP-NNN-<description>.md
+│   └── finished/     — EXP-FNNN-<description>.md (completed)
 ├── specs/            — Feature specifications
 ├── adr/              — ADR-NNN-<description>.md
 └── architecture/     — Architecture overview documents
@@ -24,7 +24,7 @@ context/
 ### MUST
 - Store plans/specs in `context/` following naming conventions
 - Cross-reference related artifacts (plan → ADR, spec → prototype)
-- Ensure naming conventions are followed (PLAN-NNN, ADR-NNN)
+- Ensure naming conventions are followed (EXP-NNN, ADR-NNN)
 - Verify that Context Inventory from Step 1 is still current
 
 ### MUST NOT

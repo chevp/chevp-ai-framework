@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-MAX_LINES = 360  # Compact runtime file with efficiency rules + AI modes + prompt structure
+MAX_LINES = 400  # Compact runtime file with efficiency rules + AI modes + prompt structure + governance extensions
 
 
 # ---------------------------------------------------------------------------
@@ -267,7 +267,7 @@ Plan concrete features, prototype where applicable. System architecture is from 
 
 ### Efficiency: Template-First Deliverables
 
-Use existing templates (`context/plans/PLAN-NNN-*.md`, `context/adr/ADR-NNN-*.md`) to structure deliverables. Auto-fill fields from Context artifacts, ask only about gaps. Human verifies deviations, not boilerplate.
+Use existing templates (`context/plans/EXP-NNN-*.md`, `context/adr/ADR-NNN-*.md`) to structure deliverables. Auto-fill fields from Context artifacts, ask only about gaps. Human verifies deviations, not boilerplate.
 
 ### Gate G2
 
@@ -303,6 +303,11 @@ If the approved plan has not changed since G2: execute directly — do not re-an
 3. Minimal changes — plan only
 4. No scope expansion
 5. Validate every acceptance criterion
+6. Verify architecture-to-code alignment (drift detection) before implementing
+
+### Decision Comments
+
+When a code change has a non-obvious reason, add a brief inline comment explaining the reason directly — no references to plans, ADRs, or external artifacts. The comment must be self-contained.
 
 ### Validation
 
@@ -312,7 +317,7 @@ If the approved plan has not changed since G2: execute directly — do not re-an
 
 - Stage specific files only (never `git add .`)
 - Meaningful messages (what + why)
-- Plan commits: `cplan(NNN):`, `plan(NNN):`, `pplan(NNN):`
+- Plan commits: `ctx(NNN):`, `exp(NNN):`, `prd(NNN):`
 - Never commit/push without being asked
 - Never force-push or skip hooks
 - Never commit non-compiling code
@@ -323,7 +328,7 @@ If the approved plan has not changed since G2: execute directly — do not re-an
 
 ### Post-Delivery
 
-- Move plans to `context/plans/finished/` (PPLAN + PLAN)
+- Move plans to `context/plans/finished/` (PRD + EXP)
 - Update CLAUDE.md if context changed
 - Write ADR if architecture decision made
 - Flag outdated docs
@@ -353,20 +358,22 @@ def build_ai_behavior() -> str:
 | Ask questions instead of assuming | Always |
 | Wait for explicit human approval at every gate | Always |
 | Follow existing patterns and conventions | Always |
-| Produce Context-Plan (CPLAN) as first activity | Context |
+| Produce Context-Plan (CTX) as first activity | Context |
 | Produce/verify System Spec, Architecture, ADRs, Context Inventory | Context |
 | State understanding and surface ambiguities | Context |
 | Wait for explicit scope confirmation | Context |
 | Create feature plan/spec before any code | Exploration |
 | Define acceptance criteria | Exploration |
 | Create and iterate prototype for visual output until confirmed | Exploration |
-| Produce Production-Plan (PPLAN) and get human approval before any code | Production |
+| Produce Production-Plan (PRD) and get human approval before any code | Production |
 | Verify G1 + G2 deliverables before starting | Production |
 | Implement step-by-step per plan, build-verify after each step | Production |
 | Propose fallback to Exploration when plan is incomplete, approach is unviable, or scope changes | Production |
 | Check each acceptance criterion individually | Production |
 | Stage specific files only, commit only when asked | Production |
-| Move completed plans to `finished/` (PPLAN + PLAN), update docs | Production |
+| Move completed plans to `finished/` (PRD + EXP), update docs | Production |
+| Verify architecture-to-code alignment (drift detection) before implementing | Production |
+| Add self-contained inline comment when a code change has a non-obvious reason | Production |
 
 ### MUST NOT
 
@@ -378,7 +385,7 @@ def build_ai_behavior() -> str:
 - Write plan AND immediately implement
 - Write production code in Context or Exploration mode
 - Create feature plans in Production mode
-- Start implementing without approved Production-Plan (PPLAN)
+- Start implementing without approved Production-Plan (PRD)
 - Skip prototype for visual output
 - Commit/push without being asked, force-push, or skip hooks
 - Commit non-compiling code
@@ -386,7 +393,8 @@ def build_ai_behavior() -> str:
 - Over-engineer, premature abstractions, feature flags
 - Introduce new patterns without ADR
 - Re-analyze artifacts that haven't changed since last verification
-- Re-justify decisions already approved at a prior gate"""
+- Re-justify decisions already approved at a prior gate
+- Reference plans, ADRs, or external artifacts in inline code comments"""
 
 
 def build_abbreviations() -> str:
@@ -411,9 +419,19 @@ def build_context_hierarchy() -> str:
 CLAUDE.md (project root)          ← always read first
 ├── context/architecture/         ← for architecture changes
 ├── context/adr/                  ← architecture decisions
-├── context/plans/ (+ finished/)  ← CPLAN/PLAN/PPLAN artifacts
+├── context/guidelines/           ← extension points (if present, AI must enforce)
+├── context/plans/ (+ finished/)  ← CTX/EXP/PRD artifacts
 └── context/specs/                ← feature specifications
-```"""
+```
+
+## Extension Points
+
+Projects may activate optional extensions by creating files in `context/guidelines/`. If a file exists, the AI must read and enforce it:
+
+- `architecture-invariants.md` — layer rules, forbidden patterns, dependency direction
+- `review-criteria.md` — what the human reviewer checks at each gate
+- `testing-strategy.md` — when/what tests are required
+- `risk-classification.md` — severity levels, how risk affects process depth"""
 
 
 # ---------------------------------------------------------------------------

@@ -57,10 +57,10 @@ Template: [spec-template](../templates/spec-template.md)
 
 | Artifact | Context (Step 1) | Exploration (Step 2) | Production (Step 3) |
 |----------|-----------------|---------------------|---------------------|
-| Context-Plan (CPLAN) | **Mandatory** | — | — |
+| Context-Plan (CTX) | **Mandatory** | — | — |
 | System Spec (whole system) | **Mandatory** | — | — |
-| Feature Plan/Spec (PLAN) | — | **Mandatory** | — |
-| Production-Plan (PPLAN) | — | — | **Mandatory** |
+| Feature Plan/Spec (EXP) | — | **Mandatory** | — |
+| Production-Plan (PRD) | — | — | **Mandatory** |
 
 ## Checklist
 

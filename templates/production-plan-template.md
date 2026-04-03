@@ -1,13 +1,13 @@
 # Production-Plan Template
 
-> For the Production phase (Step 3). Location: `context/plans/PPLAN-NNN-<description>.md`
+> For the Production phase (Step 3). Location: `context/plans/PRD-NNN-<description>.md`
 > Mode: Production
 
 ```markdown
-# PPLAN-NNN: <Production-Plan Title>
+# PRD-NNN: <Production-Plan Title>
 
 ## Reference
-- Feature Plan: `PLAN-NNN-<description>.md` (approved at G2)
+- Feature Plan: `EXP-NNN-<description>.md` (approved at G2)
 - Prototype: <reference if applicable>
 
 ## Implementation Scope
@@ -36,9 +36,9 @@ Which steps from the G2 plan will be implemented in this production cycle?
 
 ## Naming Convention
 
-- Open: `PPLAN-NNN-<description>.md` (three digits, sequential)
-- Completed: `finished/PPLAN-FNNN-<description>.md`
+- Open: `PRD-NNN-<description>.md` (three digits, sequential)
+- Completed: `finished/PRD-FNNN-<description>.md`
 
 ## Abbreviation
 
-For trivial changes (< 10 lines), a one-line Production-Plan is sufficient: `Implements PLAN-NNN`. Human must still approve before implementation begins.
+For trivial changes (< 10 lines), a one-line Production-Plan is sufficient: `Implements EXP-NNN`. Human must still approve before implementation begins.

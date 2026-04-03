@@ -39,6 +39,12 @@ Before requesting gate transition, verify:
 
 If any item is missing: **stop and produce it** before proceeding.
 
+## Review Criteria (Extension Point)
+
+Projects **may** define review criteria in `context/guidelines/review-criteria.md`. If this file exists, the AI **must** list the relevant criteria when proposing a gate transition, so the human reviewer knows exactly what to check.
+
+The framework mandates that the human approves every gate — but what the human reviews is project-specific.
+
 ## Checklist
 
 - [ ] Context mode has been detected and announced by the AI

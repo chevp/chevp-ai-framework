@@ -48,17 +48,17 @@ Details: [LIFECYCLE.md — AI Modes](LIFECYCLE.md#ai-modes)
 
 | Step | Deliverables |
 |------|-------------|
-| **Context** | Context-Plan (CPLAN), System Spec, Software Architecture, ADRs (fundamental), Context Inventory, Scope Confirmation |
-| **Exploration** | Feature Plan/Spec (PLAN), ADRs (new decisions), UX Prototype (where applicable) |
-| **Production** | Production-Plan (PPLAN), Production Code, Validation Result, Updated Documentation |
+| **Context** | Context-Plan (CTX), System Spec, Software Architecture, ADRs (fundamental), Context Inventory, Scope Confirmation |
+| **Exploration** | Feature Plan/Spec (EXP), ADRs (new decisions), UX Prototype (where applicable) |
+| **Production** | Production-Plan (PRD), Production Code, Validation Result, Updated Documentation |
 
 ### Quality Gates
 
 | Gate | Transition | Key Rule |
 |------|-----------|----------|
-| **G1** | Context → Exploration | Context-Plan confirmed, System Spec + Architecture + ADRs + Context Inventory exist, scope confirmed |
+| **G1** | Context → Exploration | Context-Plan (CTX) confirmed, System Spec + Architecture + ADRs + Context Inventory exist, scope confirmed |
 | **G2** | Exploration → Production | Feature plan/spec approved, prototype confirmed (where applicable) |
-| **G3** | Production → Done | Production-Plan approved, all acceptance criteria fulfilled, build passes, human approved |
+| **G3** | Production → Done | Production-Plan (PRD) approved, all acceptance criteria fulfilled, build passes, human approved |
 
 Within each step, 6 cross-cutting roles operate:
 **SDLC** · **AI-Plans** · **UX-Tooling** · **DevOps** · **Software-Architecture** · **Context-Engineering**

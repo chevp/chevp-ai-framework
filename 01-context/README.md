@@ -23,7 +23,7 @@ Always. No exceptions. Even trivial changes require reading CLAUDE.md and confir
 
 | # | Deliverable | Description |
 |---|-------------|-------------|
-| 1 | **Context-Plan (CPLAN)** | Lightweight plan: what to read/verify, open questions, draft scope boundaries |
+| 1 | **Context-Plan (CTX)** | Lightweight plan: what to read/verify, open questions, draft scope boundaries |
 | 2 | **System Spec** | What the system is, what it does, who it serves, which components it has |
 | 3 | **Software Architecture** | High-level architecture: layers, modules, communication paths, technology stack |
 | 4 | **ADRs** | Architecture Decision Records for all fundamental design decisions |

@@ -18,7 +18,7 @@ The Production-Plan is an execution commitment that must be created and approved
 - Which files are affected?
 - How will the result be validated?
 
-For trivial changes (< 10 lines), a one-liner is sufficient: "Implements PLAN-NNN".
+For trivial changes (< 10 lines), a one-liner is sufficient: "Implements EXP-NNN".
 
 Template: [production-plan-template](../templates/production-plan-template.md)
 
@@ -46,8 +46,8 @@ Go through each acceptance criterion individually:
 After successful delivery:
 
 ```bash
-mv context/plans/PPLAN-NNN-<name>.md context/plans/finished/PPLAN-FNNN-<name>.md
-mv context/plans/PLAN-NNN-<name>.md context/plans/finished/PLAN-FNNN-<name>.md
+mv context/plans/PRD-NNN-<name>.md context/plans/finished/PRD-FNNN-<name>.md
+mv context/plans/EXP-NNN-<name>.md context/plans/finished/EXP-FNNN-<name>.md
 ```
 
 ## AI Behavior
@@ -56,10 +56,10 @@ mv context/plans/PLAN-NNN-<name>.md context/plans/finished/PLAN-FNNN-<name>.md
 - Produce a Production-Plan and obtain human approval before writing any code
 - Track which plan steps are complete
 - Verify each acceptance criterion explicitly
-- Move plans (PPLAN + PLAN) to `finished/` after delivery
+- Move plans (PRD + EXP) to `finished/` after delivery
 
 ### MUST NOT
-- Start implementing without an approved Production-Plan
+- Start implementing without an approved Production-Plan (PRD)
 - Create new feature plans or specs (wrong mode — that belongs to Exploration)
 - Expand scope beyond the approved G2 plan
 - Skip plan steps
@@ -71,4 +71,4 @@ mv context/plans/PLAN-NNN-<name>.md context/plans/finished/PLAN-FNNN-<name>.md
 - [ ] Production-Plan exists and is approved by human
 - [ ] All plan steps executed in order
 - [ ] All acceptance criteria verified
-- [ ] Plans moved to `finished/` (PPLAN + PLAN)
+- [ ] Plans moved to `finished/` (PRD + EXP)

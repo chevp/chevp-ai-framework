@@ -1,9 +1,9 @@
 # Plan Template
 
-> For concrete implementation tasks. Location: `context/plans/PLAN-NNN-<description>.md`
+> For concrete implementation tasks. Location: `context/plans/EXP-NNN-<description>.md`
 
 ```markdown
-# PLAN-NNN: <Plan Title>
+# EXP-NNN: <Plan Title>
 
 ## Goal
 What should be achieved?
@@ -34,5 +34,5 @@ Why is this needed? What dependencies exist?
 
 ## Naming Convention
 
-- Open plans: `PLAN-NNN-<description>.md` (three digits, sequential)
-- Completed: `finished/PLAN-FNNN-<description>.md`
+- Open plans: `EXP-NNN-<description>.md` (three digits, sequential)
+- Completed: `finished/EXP-FNNN-<description>.md`

@@ -1,10 +1,10 @@
 # Context-Plan Template
 
-> For the Context phase (Step 1). Location: `context/plans/CPLAN-NNN-<description>.md`
+> For the Context phase (Step 1). Location: `context/plans/CTX-NNN-<description>.md`
 > Mode: Context
 
 ```markdown
-# CPLAN-NNN: <Context-Plan Title>
+# CTX-NNN: <Context-Plan Title>
 
 ## Task
 What is the user requesting? (1-2 sentences)
@@ -31,8 +31,8 @@ What specifically must the human confirm before proceeding to Exploration?
 
 ## Naming Convention
 
-- Open: `CPLAN-NNN-<description>.md` (three digits, sequential)
-- Completed: `finished/CPLAN-FNNN-<description>.md`
+- Open: `CTX-NNN-<description>.md` (three digits, sequential)
+- Completed: `finished/CTX-FNNN-<description>.md`
 
 ## Abbreviation
 
