@@ -55,6 +55,34 @@ prd(NNN): <short description>     ← Production phase
 - Skip git hooks (`--no-verify`)
 - Commit code that does not compile
 
+## Multi-Agent: Branch and Merge Workflow
+
+When multiple agents work in parallel on separate branches, production delivery follows a branch-based workflow:
+
+### Branch Strategy
+
+- Each agent works on its own feature branch (e.g., `feature/auth`, `feature/dashboard`)
+- Commits go to the feature branch, not to main
+- The commit convention includes the branch context: `prd(NNN): <description>`
+
+### Pull Request as Merge Gate
+
+After G3 is passed, the agent's work is delivered via pull request:
+
+1. Agent pushes its feature branch
+2. Agent creates a PR against main
+3. **Human reviews** the PR — this is the merge decision point
+4. Human resolves merge conflicts (especially in shared artifacts: CLAUDE.md, Architecture docs, ADRs)
+5. Human merges after verification
+
+### Post-Merge Responsibilities
+
+After merge, the human (or a designated agent on main) ensures:
+- CLAUDE.md reflects the merged changes
+- No contradictory ADRs exist
+- Shared architecture docs are consistent
+- No regressions from combined changes
+
 ## Checklist
 
 - [ ] Build is successful
@@ -62,3 +90,5 @@ prd(NNN): <short description>     ← Production phase
 - [ ] Commit uses specific file staging
 - [ ] Commit message is meaningful
 - [ ] Human authorized the commit
+- [ ] Feature branch is up to date with main before PR (multi-agent scenarios)
+- [ ] PR created for human review (multi-agent scenarios)
