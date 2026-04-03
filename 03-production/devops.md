@@ -44,6 +44,7 @@ prd(NNN): <short description>     ← Production phase
 
 ### MUST
 - Verify build after each implementation step
+- **Check existing ADRs when implementation conflicts or ambiguities arise** — ADRs document prior decisions and their rationale, which may resolve the conflict without human intervention
 - Wait for explicit commit request from the human
 - Stage specific files (not `git add .`)
 - Write meaningful commit messages
@@ -54,6 +55,7 @@ prd(NNN): <short description>     ← Production phase
 - Force-push
 - Skip git hooks (`--no-verify`)
 - Commit code that does not compile
+- **Resolve implementation conflicts by guessing when a relevant ADR exists**
 
 ## Multi-Agent: Branch and Merge Workflow
 

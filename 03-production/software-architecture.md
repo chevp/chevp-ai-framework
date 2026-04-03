@@ -64,6 +64,7 @@ results.sort(byDate, DESC);
 - Add error handling for impossible scenarios
 - Create helpers/utilities for one-time operations
 - Introduce new patterns without an ADR
+- **Implement an architectural decision that has no corresponding ADR** — if the implementation requires a decision not covered by an existing ADR, the AI must stop and propose a fallback to Exploration to create the ADR first
 - **Reference plans, ADRs, or external artifacts in inline code comments**
 
 ## Checklist
