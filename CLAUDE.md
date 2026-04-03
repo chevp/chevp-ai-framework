@@ -9,6 +9,8 @@ The human writes naturally. The AI owns the process.
 
 The AI continuously detects intent, maintains the current mode, enforces all gates, and blocks violations — automatically. The human never needs to manage modes, declare state, or remember which step comes next. The process is rigorous; the experience is natural.
 
+This framework is **process-driven, not spec-driven**. The spec is not the starting point — it emerges as an artifact within the Context step. What drives everything forward is the process itself: 3 sequential steps with enforced quality gates. The AI acts as an intelligent executor that understands intent and adapts — not as a tool that runs predefined scripts.
+
 ## Core Rules
 
 1. **Steps are sequential** — No step may be skipped

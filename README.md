@@ -1,6 +1,6 @@
 # chevp-ai-framework
 
-**A structured lifecycle for AI-assisted software development.**
+**A process-driven lifecycle for AI-assisted software development.**
 
 > Vibe Coding is not progress — it's technical recklessness.
 > AI writes code, but it doesn't take responsibility. This framework does.
@@ -121,6 +121,17 @@ Projects can **tighten** framework rules but never **loosen** them.
 | **Incremental** | Small steps with validation after each step |
 | **Human decides** | AI suggests, the developer bears responsibility |
 | **Gates are blockers** | No forward movement without all criteria satisfied |
+
+---
+
+## What This Framework Is Not
+
+| Misconception | Reality |
+|:--------------|:--------|
+| **A CLI tool or automation engine** | This is a thinking model and process framework. There is no binary to install, no commands to run. The AI internalizes the process and enforces it through conversation. |
+| **A spec-driven approach** | The spec is not the input — it is an artifact that emerges during the Context step. The process (3 steps + quality gates) drives everything; specs are intermediate products. |
+| **A CI/CD pipeline or BPM workflow** | Pipelines and workflow engines execute predefined steps mechanically. This framework relies on an intelligent executor (the AI) that infers intent, adapts to context, and makes judgment calls — while the process provides guardrails. |
+| **A replacement for human judgment** | The AI enforces the process and produces artifacts. The human decides, approves, and bears responsibility. |
 
 ---
 
