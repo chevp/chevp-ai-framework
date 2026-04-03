@@ -32,10 +32,17 @@ These are **system-level** decisions. Feature-level decisions belong in Explorat
 
 Template: [adr-template](../templates/adr-template.md)
 
+## Architecture Drift Detection
+
+Before proceeding, the AI **must** verify that the Architecture document still matches the actual codebase. If drift is detected (e.g., modules added/removed, communication paths changed, technology stack updated), the Architecture document must be updated **before** any other work continues.
+
+This is a process rule, not a domain rule — it ensures the documented architecture remains a reliable source of truth.
+
 ## AI Behavior
 
 ### MUST
 - Produce or verify the Architecture document before any solution is proposed
+- **Verify architecture-to-code alignment** (drift detection) before proceeding
 - Produce or verify fundamental ADRs
 - Read existing code before proposing any changes
 - Identify patterns and conventions used in the project
@@ -47,6 +54,7 @@ Template: [adr-template](../templates/adr-template.md)
 - Propose architectural changes during Context (solution design belongs to Exploration)
 - Overlook existing conventions
 - Skip ADRs because "the decisions are obvious"
+- **Proceed with outdated Architecture documentation when drift is detected**
 
 ## Artifact Boundary
 
@@ -55,9 +63,18 @@ Template: [adr-template](../templates/adr-template.md)
 | Architecture Document | **Mandatory** | — |
 | ADRs (fundamental decisions) | **Mandatory** | Only for new decisions arising during exploration |
 
+## Architecture Invariants (Extension Point)
+
+Projects **may** define architecture invariants in `context/guidelines/architecture-invariants.md`. If this file exists, the AI **must** check every invariant when making or reviewing code changes.
+
+The framework defines the mechanism — the invariants themselves are project-specific. Examples of what projects might define:
+- Layer dependency rules (e.g., "UI must not import from DB directly")
+- Forbidden patterns (e.g., "no God objects", "no Service Locator")
+- Module boundary rules (e.g., "module A must not depend on module B")
+
 ## Checklist
 
-- [ ] Architecture document exists and is current
+- [ ] Architecture document exists and is current (drift detection passed)
 - [ ] Fundamental ADRs are written
 - [ ] Existing code in the affected area has been read
 - [ ] Patterns and conventions are identified

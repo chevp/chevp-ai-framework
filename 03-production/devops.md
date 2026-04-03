@@ -35,7 +35,9 @@ git commit -m "<type>(<scope>): <description>
 ### Commit Convention for Plans
 
 ```
-plan(NNN): <short description>
+ctx(NNN): <short description>     ← Context phase
+exp(NNN): <short description>     ← Exploration phase
+prd(NNN): <short description>     ← Production phase
 ```
 
 ## AI Behavior

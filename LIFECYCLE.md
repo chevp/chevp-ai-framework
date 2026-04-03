@@ -137,7 +137,7 @@ No manual session state block, prompt headers, or mode declarations are required
 
 | Deliverable | Context | Exploration | Production |
 |-------------|---------|-------------|------------|
-| Context-Plan (CPLAN) | **Mandatory** | — | — |
+| Context-Plan (CTX) | **Mandatory** | — | — |
 | System Spec | **Mandatory** | — | — |
 | Software Architecture | **Mandatory** | — | — |
 | ADRs (fundamental) | **Mandatory** | — | — |
@@ -146,7 +146,7 @@ No manual session state block, prompt headers, or mode declarations are required
 | Feature Plan/Spec | — | **Mandatory** | — |
 | ADRs (new decisions) | — | As needed | — |
 | UX Prototype | — | **Mandatory** (where applicable) | — |
-| Production-Plan (PPLAN) | — | — | **Mandatory** |
+| Production-Plan (PRD) | — | — | **Mandatory** |
 | Production Code | — | — | **Mandatory** |
 | Validation Result | — | — | **Mandatory** |
 
@@ -170,13 +170,15 @@ Details in each step's [README.md](01-context/README.md).
 
 | Scenario | Allowed |
 |----------|---------|
-| Small bugfix (< 10 lines) | CPLAN and PLAN can be verbal, PPLAN one-liner ("Implements PLAN-NNN"), UX-Tooling omitted. Context deliverables must still be **read and verified**. |
+| Small bugfix (< 10 lines) | CTX and EXP can be verbal, PRD one-liner ("Implements EXP-NNN"), UX-Tooling omitted. Context deliverables must still be **read and verified**. |
 | Purely technical refactoring | UX-Tooling omitted in Exploration and Production |
 | Visual feature (UI, shader) | No step is skippable, all plans must be written |
 | Architecture decision | UX-Tooling omitted, but ADR is mandatory |
 | Exploration / spike | Only Context + Exploration, no Production code |
 
 Even when abbreviated: **no step is skipped entirely**, and **human approval is always required**.
+
+**Abbreviation Justification Rule**: When the AI abbreviates a step, it **must** state which abbreviation condition applies and why (e.g., "< 10 lines, trivial bugfix — verbal CTX sufficient"). Silent abbreviation is not allowed.
 
 ---
 
@@ -189,3 +191,20 @@ The lifecycle is not strictly linear. Backward jumps are allowed:
 - **Exploration → Context**: Discovery reveals misunderstood requirements
 
 But: **Forward only with a passed quality gate.** No jump from Context to Production.
+
+---
+
+## Project-Specific Extension Points
+
+This framework defines the core process. The following aspects are **intentionally not part of the core** and must be defined per project in `context/guidelines/`:
+
+| Extension Point | File | Purpose |
+|----------------|------|---------|
+| Architecture Invariants | `context/guidelines/architecture-invariants.md` | Layer rules, forbidden patterns, dependency direction |
+| Review Criteria | `context/guidelines/review-criteria.md` | What the human reviewer checks at each gate |
+| Testing Strategy | `context/guidelines/testing-strategy.md` | When tests are required, what kind, coverage expectations |
+| Dependency Management | `context/guidelines/dependency-management.md` | Update policy, security patches, breaking change handling |
+| Rollback / Hotfix Process | `context/guidelines/rollback-process.md` | How to revert, hotfix paths, incident handling |
+| Risk Classification | `context/guidelines/risk-classification.md` | Severity levels, how risk affects process depth |
+
+**Rule**: If an extension point file exists, the AI **must** read and enforce it. If it does not exist, the core process applies without the extension.

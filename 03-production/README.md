@@ -26,7 +26,7 @@ After Exploration is complete (G2 passed). Plan/spec is approved, prototype is c
 
 ## Activities
 
-- Produce Production-Plan (PPLAN) referencing the approved G2 plan
+- Produce Production-Plan (PRD) referencing the approved G2 plan
 - Obtain human approval of Production-Plan before writing code
 - Step-by-step implementation according to plan
 - Build verification after each step
@@ -42,7 +42,7 @@ After Exploration is complete (G2 passed). Plan/spec is approved, prototype is c
 - Production code (compiles, follows plan, follows patterns)
 - Validation result (all acceptance criteria passed)
 - Commit(s) on main
-- Plans moved to `finished/` (PPLAN + PLAN)
+- Plans moved to `finished/` (PRD + EXP)
 - Up-to-date documentation
 
 ## Roles Active in This Step
@@ -67,7 +67,7 @@ After Exploration is complete (G2 passed). Plan/spec is approved, prototype is c
 - [ ] Visual result matches prototype (if applicable)
 - [ ] No regressions
 - [ ] Tests pass (if test suite exists)
-- [ ] Plans moved to `finished/` (PPLAN + PLAN)
+- [ ] Plans moved to `finished/` (PRD + EXP)
 - [ ] Documentation is up to date (CLAUDE.md, ADRs if needed)
 - [ ] No open TODOs
 - [ ] **Human has given final approval**

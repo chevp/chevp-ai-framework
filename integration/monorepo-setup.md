@@ -11,8 +11,12 @@
 │   ├── README.md                ← Overview of context/
 │   ├── architecture/            ← Architecture documents
 │   ├── adr/                     ← Architecture Decision Records
-│   ├── guidelines/              ← Development guidelines
-│   ├── plans/                   ← Implementation plans
+│   ├── guidelines/              ← Development guidelines + extension points
+│   │   ├── architecture-invariants.md  ← (optional) Layer rules, forbidden patterns
+│   │   ├── review-criteria.md          ← (optional) What to check at each gate
+│   │   ├── testing-strategy.md         ← (optional) When/what tests are required
+│   │   └── ...                         ← See LIFECYCLE.md § Extension Points
+│   ├── plans/                   ← Implementation plans (CTX/EXP/PRD)
 │   │   └── finished/            ← Completed plans
 │   ├── specs/                   ← Feature specifications
 │   └── workflows/               ← Recurring workflows
@@ -56,21 +60,25 @@ Generic guidelines come from the framework, specific ones stay in the project.
 Three plan types follow the convention from the framework:
 
 ```
-CPLAN-NNN-<description>.md             ← Context Plan (open)
-PLAN-NNN-<description>.md              ← Feature Plan (open)
-PPLAN-NNN-<description>.md             ← Production Plan (open)
-finished/CPLAN-FNNN-<description>.md   ← Context Plan (completed)
-finished/PLAN-FNNN-<description>.md    ← Feature Plan (completed)
-finished/PPLAN-FNNN-<description>.md   ← Production Plan (completed)
+CTX-NNN-<description>.md               ← Context Plan (open)
+EXP-NNN-<description>.md              ← Feature Plan (open)
+PRD-NNN-<description>.md              ← Production Plan (open)
+finished/CTX-FNNN-<description>.md    ← Context Plan (completed)
+finished/EXP-FNNN-<description>.md    ← Feature Plan (completed)
+finished/PRD-FNNN-<description>.md    ← Production Plan (completed)
 ```
 
 Commit convention for plan implementation:
 
 ```
-cplan(NNN): <short description>    ← Context phase
-plan(NNN): <short description>     ← Exploration phase
-pplan(NNN): <short description>    ← Production phase
+ctx(NNN): <short description>      ← Context phase
+exp(NNN): <short description>      ← Exploration phase
+prd(NNN): <short description>      ← Production phase
 ```
+
+## Extension Points
+
+The framework defines optional extension points that projects can activate by creating files in `context/guidelines/`. If a file exists, the AI enforces it. See [LIFECYCLE.md § Project-Specific Extension Points](../LIFECYCLE.md#project-specific-extension-points) for the full list.
 
 ## AI Mode Tracking
 

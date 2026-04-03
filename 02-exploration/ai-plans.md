@@ -14,7 +14,7 @@
 
 ## Artifact Types
 
-### Plan (PLAN-NNN-*.md)
+### Plan (EXP-NNN-*.md)
 For concrete implementation tasks with defined steps. See [plan-template](../templates/plan-template.md).
 
 ### Spec

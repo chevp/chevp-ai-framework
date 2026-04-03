@@ -36,7 +36,7 @@ After Context is complete (G1 passed). Always for features, architecture changes
 
 ## Outputs
 
-- **Plan/Spec**: Written and approved (PLAN-NNN-*.md or verbal confirmation)
+- **Plan/Spec**: Written and approved (EXP-NNN-*.md or verbal confirmation)
 - **ADR**: If a new architecture decision was made (not fundamental — those belong in Context)
 - **Prototype**: Visual reference file(s) + human confirmation (where applicable)
 
