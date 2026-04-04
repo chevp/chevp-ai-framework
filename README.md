@@ -88,7 +88,34 @@ templates/        Plan, spec, ADR, CLAUDE.md, prototype templates
 guidelines/       Cross-cutting quality rules
 integration/      Integration into existing projects
 docs/             Machine-readable AI reference
+.claude-plugin/   Claude Code plugin manifest (optional)
+commands/         Slash commands (plugin layer)
+agents/           Subagents (plugin layer)
+skills/           Skills wrapping templates (plugin layer)
+hooks/            Python scripts for mechanical gate enforcement
 ```
+
+---
+
+## Plugin Layer (Claude Code, optional)
+
+The markdown files above are the **source of truth**. On top of them, a thin Claude Code plugin layer provides an executable interface:
+
+| Layer | Files | Purpose |
+|-------|-------|---------|
+| Slash Commands | [commands/](commands/) | `/context`, `/explore`, `/produce`, `/gate-check`, `/new-adr` — explicit mode transitions |
+| Subagents | [agents/](agents/) | `gate-validator` (validates G1/G2/G3), `architecture-reviewer` (enforces invariants/ADRs) |
+| Skills | [skills/](skills/) | Template-driven artifact creation (`create-ctx-plan`, `create-exp-plan`, `create-adr`) |
+| Hooks | [hooks/](hooks/) | `mode-context.py` injects lifecycle reminder every turn; `gate-check.py` blocks code writes without an approved EXP plan |
+
+The plugin makes Gate-Enforcement **mechanical** (via hooks) rather than relying solely on AI discipline. Without the plugin, the framework still works — Claude reads the markdown files via `@url` or project references.
+
+Install (once `chevp-ai-framework` is on a marketplace):
+```
+/plugin install chevp-ai-framework
+```
+
+Or use locally during development by referencing this repo as a plugin source.
 
 ---
 

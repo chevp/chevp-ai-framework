@@ -19,6 +19,7 @@ This framework is **process-driven, not spec-driven**. The spec is not the start
 4. **Prototype before production** — Validate UX prototypes before implementing (where applicable)
 5. **Ownership stays with the human** — AI delivers suggestions, developers bear responsibility
 6. **Gates are blockers** — All criteria must be satisfied before forward transition
+7. **Decisions are signed** — Every governed artifact records who proposed and who decided it; AI never writes human decision fields (see [architecture-governance](guidelines/architecture-governance.md))
 
 ## Lifecycle: 3 Steps × 6 Roles × 3 Modes
 
@@ -75,3 +76,17 @@ Full matrix: [LIFECYCLE.md](LIFECYCLE.md)
 | [templates/](templates/) | Templates for plans, specs, ADRs, CLAUDE.md, prototypes |
 | [guidelines/](guidelines/) | Cross-cutting quality rules for AI collaboration |
 | [integration/](integration/) | How to integrate the framework into projects |
+
+## Plugin Layer (Claude Code, optional)
+
+An executable layer that sits on top of the markdown files. The markdown is source-of-truth; the plugin turns the lifecycle into callable surface area.
+
+| Folder | Content |
+|--------|---------|
+| [.claude-plugin/](.claude-plugin/) | Plugin manifest (hooks registered here) |
+| [commands/](commands/) | Slash commands: `/context`, `/explore`, `/produce`, `/gate-check`, `/new-adr`, `/approve` |
+| [agents/](agents/) | Subagents: `gate-validator` (validates G1/G2/G3), `architecture-reviewer` |
+| [skills/](skills/) | Skills: `create-ctx-plan`, `create-exp-plan`, `create-adr` |
+| [hooks/](hooks/) | Python hooks: `mode-context.py` (per-turn reminder), `gate-check.py` (blocks code writes without approved EXP plan), `provenance-check.py` (enforces human-only decision fields) |
+
+The plugin is **additive** — without it, the framework still works via `@url` loading and AI discipline. With it, gate enforcement becomes mechanical (hooks) and mode transitions become explicit (slash commands).

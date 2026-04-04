@@ -4,6 +4,16 @@
 > Mode: Context
 
 ```markdown
+---
+id: CTX-NNN
+type: CTX
+status: draft            # draft | proposed | approved
+proposed-by: ai          # ai | human | pair
+decided-by: —            # human (required at G1)
+approved-by: —           # human identifier
+approved-at: —           # YYYY-MM-DD
+---
+
 # CTX-NNN: <Context-Plan Title>
 
 ## Task
@@ -37,3 +47,7 @@ What specifically must the human confirm before proceeding to Exploration?
 ## Abbreviation
 
 For small changes (< 10 lines), a verbal Context-Plan is sufficient — but the human must still confirm scope.
+
+## Provenance
+
+Frontmatter governed by [architecture-governance](../guidelines/architecture-governance.md). G1 requires `status: approved` with `approved-by` filled (via `/approve CTX-NNN`).
