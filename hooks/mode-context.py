@@ -18,8 +18,9 @@ Before responding you MUST:
 3. If the user's request belongs to a later mode but the gate is not passed, BLOCK and redirect.
 4. Never write production code without an approved EXP plan (G2 passed).
 5. Never create an EXP plan without G1 passed.
+6. Never write `decided-by`/`approved-by`/`approved-at` on artifacts — those are human-only, set via /approve.
 
-Slash commands: /context /explore /produce /gate-check G1|G2|G3 /new-adr
+Slash commands: /context /explore /produce /gate-check G1|G2|G3 /new-adr /approve
 Subagents: gate-validator, architecture-reviewer
 </chevp-ai-framework>"""
 

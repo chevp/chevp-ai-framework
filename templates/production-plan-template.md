@@ -4,6 +4,17 @@
 > Mode: Production
 
 ```markdown
+---
+id: PRD-NNN
+type: PRD
+status: draft            # draft | proposed | approved
+proposed-by: ai          # ai | human | pair
+decided-by: —            # human (required before implementation begins)
+approved-by: —           # human identifier
+approved-at: —           # YYYY-MM-DD
+implements: EXP-NNN      # the G2-approved EXP plan
+---
+
 # PRD-NNN: <Production-Plan Title>
 
 ## Reference
@@ -42,3 +53,7 @@ Which steps from the G2 plan will be implemented in this production cycle?
 ## Abbreviation
 
 For trivial changes (< 10 lines), a one-line Production-Plan is sufficient: `Implements EXP-NNN`. Human must still approve before implementation begins.
+
+## Provenance
+
+Frontmatter governed by [architecture-governance](../guidelines/architecture-governance.md). Production code writes are blocked by [hooks/provenance-check.py](../hooks/provenance-check.py) unless this plan is `status: approved` with `approved-by` filled (via `/approve PRD-NNN`).
