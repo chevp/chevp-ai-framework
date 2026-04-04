@@ -1,6 +1,16 @@
-# AI-Collaboration Guidelines
+---
+name: AI-Collaboration
+description: How human and AI collaborate effectively within the chevp-ai-framework lifecycle
+type: guideline
+---
 
-> How human and AI collaborate effectively.
+# Guideline: AI-Collaboration
+
+**Rule:** AI is a tool that detects, analyzes, suggests, implements, and validates — but never decides scope, architecture direction, "done" status, or whether code gets committed/pushed.
+
+**Why:** Without a clear actor model the human loses control over the process, AI hallucinates decisions it is not authorized to make, and responsibility for the codebase becomes diffuse.
+
+**How to apply:** The AI announces its detected mode and reasoning at the start of each response, proposes gate transitions only when all criteria are met, asks questions instead of assuming, presents alternatives with trade-offs, and stops when uncertain. The human holds scope, architecture direction, completion judgment, and commit/push authority.
 
 ## Core Understanding
 

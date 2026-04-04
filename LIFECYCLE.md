@@ -260,6 +260,7 @@ This framework defines the core process. The following aspects are **intentional
 | Extension Point | File | Purpose |
 |----------------|------|---------|
 | Architecture Invariants | `context/guidelines/architecture-invariants.md` | Layer rules, forbidden patterns, dependency direction |
+| Plan Granularity | `guidelines/plan-granularity.md` | Plan types, size limits, dependencies, duplicate prevention |
 | Review Criteria | `context/guidelines/review-criteria.md` | What the human reviewer checks at each gate |
 | Testing Strategy | `context/guidelines/testing-strategy.md` | When tests are required, what kind, coverage expectations |
 | Dependency Management | `context/guidelines/dependency-management.md` | Update policy, security patches, breaking change handling |
