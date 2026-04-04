@@ -49,3 +49,20 @@ CLAUDE.md works because:
 3. It lives in the repo and is versioned
 4. Every AI agent (including parallel ones) reads the same rules
 5. Process changes are git commits (reviewable)
+
+## Alternative: Claude Code Plugin
+
+For Claude Code users, the framework is also available as a **plugin** that adds an executable layer on top of the markdown files:
+
+- **Slash commands** (`/context`, `/explore`, `/produce`, `/gate-check`, `/new-adr`) make mode transitions explicit instead of relying on intent inference.
+- **Subagents** (`gate-validator`, `architecture-reviewer`) validate gates and enforce architectural invariants as isolated specialists.
+- **Skills** (`create-ctx-plan`, `create-exp-plan`, `create-adr`) trigger template-driven artifact creation.
+- **Hooks** enforce gates mechanically: a `PreToolUse` hook on `Write`/`Edit` asks for confirmation when production code is written without an approved EXP plan; a `UserPromptSubmit` hook injects the lifecycle reminder every turn.
+
+**When to use the plugin**: when you want **mechanical** gate enforcement rather than AI-discipline-based enforcement, or when the team prefers explicit slash commands over intent inference.
+
+**When to stick with `@url` CLAUDE.md**: when working in environments without Claude Code plugin support, or when you want the lightest possible integration.
+
+Both paths use the same lifecycle, templates, and deliverables. They differ only in how the process is *executed*.
+
+See the top-level [README.md — Plugin Layer](../README.md#plugin-layer-claude-code-optional) for installation.

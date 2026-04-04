@@ -4,12 +4,19 @@
 > See [plan-granularity](../guidelines/plan-granularity.md) for sizing rules, type selection, and dependency management.
 
 ```markdown
-# <TYPE>-NNN: <Plan Title>
+---
+id: <TYPE>-NNN
+type: <CTX|EXP|PRD>
+status: draft            # draft | proposed | approved | superseded
+proposed-by: ai          # ai | human | pair
+decided-by: —            # human (required when status advances past proposed)
+approved-by: —           # human identifier
+approved-at: —           # YYYY-MM-DD
+depends-on: —
+blocks: —
+---
 
-## Type: <CTX|EXP|PRD>
-## Status: draft
-## Depends-on: —
-## Blocks: —
+# <TYPE>-NNN: <Plan Title>
 
 ## Goal
 What should be achieved? (2–3 sentences, concrete and measurable)
@@ -47,6 +54,10 @@ Why is this needed? What existing systems are affected?
 ## Minimum Substance
 
 A plan must contain all five sections above (Goal, Scope, Steps, Affected Files, Acceptance Criteria) to pass G2. Plans missing any element are notes, not plans. See [plan-granularity](../guidelines/plan-granularity.md).
+
+## Provenance
+
+The frontmatter provenance block (`proposed-by`, `decided-by`, `approved-by`, `approved-at`) is governed by [architecture-governance](../guidelines/architecture-governance.md). AI may only set `proposed-by`. A human sets the decision fields via `/approve <plan-id>`. A plan must be `status: approved` with `approved-by` filled before its gate is considered passed.
 
 ## Naming Convention
 
