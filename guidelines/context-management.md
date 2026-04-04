@@ -1,6 +1,16 @@
-# Context Management
+---
+name: Context Management
+description: AI without context invents things — context is mandatory before any change
+type: guideline
+---
 
-> AI without context invents things. Context is mandatory.
+# Guideline: Context Management
+
+**Rule:** The AI must read the required context (CLAUDE.md, plans, ADRs, affected code) before modifying anything, and must keep context artifacts up to date when things change.
+
+**Why:** AI without context invents APIs, reinvents existing patterns, and contradicts prior decisions. The context hierarchy exists to ground the AI in the project's current reality.
+
+**How to apply:** For every task, read at minimum the project's CLAUDE.md. Add plans/specs for feature work, ADRs and architecture docs for architecture changes, existing code for code changes, and a preview of current state for visual/physical output. Never skip context to save time. Respect artifact ownership in multi-agent setups.
 
 ## Context Hierarchy
 

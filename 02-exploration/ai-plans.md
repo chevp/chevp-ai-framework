@@ -14,8 +14,8 @@
 
 ## Artifact Types
 
-### Plan (EXP-NNN-*.md)
-For concrete implementation tasks with defined steps. See [plan-template](../templates/plan-template.md).
+### Plan (CTX/EXP/PRD-NNN-*.md)
+For concrete implementation tasks with defined steps. See [plan-template](../templates/plan-template.md) and [plan-granularity](../guidelines/plan-granularity.md) for type selection, size limits, and dependency management.
 
 ### Spec
 For detailed feature specifications. See [spec-template](../templates/spec-template.md).
