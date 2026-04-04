@@ -37,3 +37,4 @@ The format is defined canonically by [chevp-workflow/guidelines/README.md](https
 | [ai-collaboration.md](ai-collaboration.md) | AI is a tool — detects, suggests, implements. The human decides scope, architecture, "done", and commits |
 | [context-management.md](context-management.md) | Read required context before any change; keep context artifacts up to date |
 | [plan-granularity.md](plan-granularity.md) | Plans must match their type, size range, and minimum-substance requirements |
+| [architecture-governance.md](architecture-governance.md) | Every governed artifact records who proposed and who decided it; `/approve` is the only path to human-signed decisions |
