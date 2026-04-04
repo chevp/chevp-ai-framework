@@ -1,0 +1,33 @@
+{
+  "name": "chevp-ai-framework",
+  "version": "0.1.0",
+  "description": "Process-driven AI collaboration lifecycle: Context -> Exploration -> Production with enforced quality gates (G1/G2/G3).",
+  "author": {
+    "name": "chevp"
+  },
+  "homepage": "https://github.com/chevp/chevp-ai-framework",
+  "keywords": ["lifecycle", "ai-collaboration", "process", "gates", "sdlc"],
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/mode-context.py\""
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/hooks/gate-check.py\""
+          }
+        ]
+      }
+    ]
+  }
+}
