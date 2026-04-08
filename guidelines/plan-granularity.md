@@ -126,6 +126,8 @@ Before creating a new plan:
 
 ## Naming Convention
 
+### Flat Numbering (default)
+
 ```
 <TYPE>-<NNN>-<description>.md
 ```
@@ -134,6 +136,20 @@ Before creating a new plan:
 - **NNN**: Three-digit sequential number
 - **description**: Lowercase, hyphen-separated
 - Completed plans: `finished/<TYPE>-<NNN>-<description>.md`
+
+### §-Numbering (for large projects)
+
+For projects with many plans that benefit from thematic organization, use hierarchical §-numbering with chapters instead. See [paragraph-numbering](paragraph-numbering.md) for the full convention.
+
+```
+§<number>_<slug-with-hyphens>.<type>.md
+```
+
+- **number**: Dot-separated hierarchy (`1.2.3`), max 4 levels
+- **type**: `ctx`, `exp`, `prd`, or `task`
+- Plans live in status folders: `active/`, `finished/`, `archived/`, `deprecated/`
+
+Projects choose one scheme and use it consistently.
 
 ---
 
@@ -191,3 +207,4 @@ Why is this needed? What existing systems are affected?
 | Dependency fields | Makes plan ordering explicit |
 | Duplicate prevention | Avoids redundant or conflicting plans |
 | Split by concern | Keeps plans focused and independently reviewable |
+| §-numbering (optional) | Groups plans by domain for large projects — see [paragraph-numbering](paragraph-numbering.md) |

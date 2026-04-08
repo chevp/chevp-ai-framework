@@ -1,7 +1,12 @@
 # Plan Template
 
-> For concrete implementation tasks. Location: `context/plans/<TYPE>-NNN-<description>.md`
+> For concrete implementation tasks.
 > See [plan-granularity](../guidelines/plan-granularity.md) for sizing rules, type selection, and dependency management.
+> See [paragraph-numbering](../guidelines/paragraph-numbering.md) for §-numbering as an alternative to flat IDs.
+
+## Flat Numbering (TYPE-NNN)
+
+Location: `context/plans/<TYPE>-NNN-<description>.md`
 
 ```markdown
 ---
@@ -61,6 +66,72 @@ The frontmatter provenance block (`proposed-by`, `decided-by`, `approved-by`, `a
 
 ## Naming Convention
 
+### Flat Numbering
+
 - Format: `<TYPE>-<NNN>-<description>.md` (TYPE: CTX, EXP, or PRD)
 - Open plans: `context/plans/<TYPE>-NNN-<description>.md`
 - Completed: `context/plans/finished/<TYPE>-NNN-<description>.md`
+
+---
+
+## §-Numbering (Paragraph System)
+
+Location: `context/plans/active/§<number>_<slug>.<type>.md`
+
+For projects with many plans that benefit from thematic organization, use hierarchical §-numbering instead of flat IDs. See [paragraph-numbering](../guidelines/paragraph-numbering.md) for the full convention.
+
+```markdown
+---
+paragraph: §<number>
+slug: <slug-with-hyphens>
+type: <ctx|exp|prd|task>
+status: active           # active | finished | archived | deprecated
+proposed-by: ai          # ai | human | pair
+decided-by: —            # human (required when status advances past proposed)
+approved-by: —           # human identifier
+approved-at: —           # YYYY-MM-DD
+---
+
+# §<number> <Plan Title>
+
+## Goal
+What should be achieved? (2–3 sentences, concrete and measurable)
+
+## Context
+Why is this needed? What existing systems are affected?
+
+## Scope
+
+### IN Scope
+- What is included
+
+### NOT in Scope
+- What is explicitly excluded
+
+## Steps
+1. Step 1
+2. Step 2
+3. ...
+
+## Affected Files
+- `path/to/file.ext` — What will be changed
+
+## Risks
+| Risk | Mitigation |
+|------|------------|
+| ... | ... |
+
+## Acceptance Criteria
+- [ ] Criterion 1
+- [ ] Criterion 2
+```
+
+### §-Numbering Naming Convention
+
+- Format: `§<number>_<slug-with-hyphens>.<type>.md`
+- Active plans: `context/plans/active/`
+- Finished: `context/plans/finished/`
+- Archived: `context/plans/archived/`
+- Deprecated: `context/plans/deprecated/`
+
+Projects choose one scheme (flat or §) and use it consistently. See [paragraph-numbering](../guidelines/paragraph-numbering.md).

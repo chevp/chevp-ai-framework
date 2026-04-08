@@ -38,3 +38,4 @@ The format is defined canonically by [chevp-workflow/guidelines/README.md](https
 | [context-management.md](context-management.md) | Read required context before any change; keep context artifacts up to date |
 | [plan-granularity.md](plan-granularity.md) | Plans must match their type, size range, and minimum-substance requirements |
 | [architecture-governance.md](architecture-governance.md) | Every governed artifact records who proposed and who decided it; `/approve` is the only path to human-signed decisions |
+| [paragraph-numbering.md](paragraph-numbering.md) | Hierarchical §-numbering for plans — stable, tree-structured IDs organized by thematic chapters |
