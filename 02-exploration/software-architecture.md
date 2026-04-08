@@ -33,6 +33,16 @@
 - Skip trade-off analysis
 - Re-decide fundamental questions already settled in Context ADRs
 
+## Cross-Platform (when `platform-targets.md` exists)
+
+When evaluating design alternatives, the AI **must** consider all declared platforms:
+
+- Does the proposed approach work on all targets, or only on desktop?
+- Does it introduce a platform-specific dependency? If so, does a PAL interface exist or need to be created?
+- Are there mobile-specific trade-offs (memory, GPU capabilities, lifecycle) that affect the design?
+
+A feature plan that only describes the desktop path is a G2 violation.
+
 ## Checklist
 
 - [ ] Architecture document from Context has been referenced
@@ -40,3 +50,4 @@
 - [ ] Trade-offs are documented
 - [ ] ADR is written (if applicable)
 - [ ] Decision is consistent with existing architecture and ADRs
+- [ ] **If cross-platform:** design works on all declared targets, PAL interfaces identified for platform-specific parts

@@ -72,6 +72,17 @@ The framework defines the mechanism — the invariants themselves are project-sp
 - Forbidden patterns (e.g., "no God objects", "no Service Locator")
 - Module boundary rules (e.g., "module A must not depend on module B")
 
+## Cross-Platform (when `platform-targets.md` exists)
+
+When the project declares multiple platform targets, the Architecture document **must** additionally cover:
+
+- **Platform Abstraction Layer (PAL)**: where it lives, what it abstracts, which interfaces exist
+- **Asset format strategy**: which formats per platform (textures, shaders, models)
+- **Build matrix**: how each target is built (CMake + NDK, Gradle, Capacitor, etc.)
+- **Platform-specific constraints**: memory budgets, API level minimums, bundle size limits
+
+The AI must produce an ADR for the PAL design if none exists. This is a fundamental decision.
+
 ## Checklist
 
 - [ ] Architecture document exists and is current (drift detection passed)
@@ -80,3 +91,4 @@ The framework defines the mechanism — the invariants themselves are project-sp
 - [ ] Patterns and conventions are identified
 - [ ] Dependencies are mapped
 - [ ] Relevant existing ADRs have been reviewed
+- [ ] **If cross-platform:** PAL boundary documented, asset format strategy defined, build matrix covers all targets

@@ -38,3 +38,4 @@ The format is defined canonically by [chevp-workflow/guidelines/README.md](https
 | [context-management.md](context-management.md) | Read required context before any change; keep context artifacts up to date |
 | [plan-granularity.md](plan-granularity.md) | Plans must match their type, size range, and minimum-substance requirements |
 | [architecture-governance.md](architecture-governance.md) | Every governed artifact records who proposed and who decided it; `/approve` is the only path to human-signed decisions |
+| [cross-platform.md](cross-platform.md) | If a project targets desktop + mobile, platform parity is enforced from commit #1 — no retrofit |

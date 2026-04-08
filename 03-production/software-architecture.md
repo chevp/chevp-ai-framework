@@ -67,6 +67,17 @@ results.sort(byDate, DESC);
 - **Implement an architectural decision that has no corresponding ADR** — if the implementation requires a decision not covered by an existing ADR, the AI must stop and propose a fallback to Exploration to create the ADR first
 - **Reference plans, ADRs, or external artifacts in inline code comments**
 
+## Cross-Platform (when `platform-targets.md` exists)
+
+During implementation, the AI **must** enforce platform parity:
+
+- No platform-specific imports in `core/` code (only PAL interfaces)
+- No `#ifdef PLATFORM` scattered through business logic — platform branching belongs in PAL implementations
+- Asset pipeline must output all declared formats
+- Build must pass on all declared targets before G3
+
+If a platform-specific workaround is unavoidable in core code, it requires an ADR justifying the exception.
+
 ## Checklist
 
 - [ ] Architecture drift detection passed
@@ -74,3 +85,4 @@ results.sort(byDate, DESC);
 - [ ] No over-engineering
 - [ ] No scope expansion beyond the plan
 - [ ] No new patterns introduced without justification
+- [ ] **If cross-platform:** no platform-specific code outside PAL, build passes on all targets, assets produced for all formats

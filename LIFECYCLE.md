@@ -156,9 +156,9 @@ No manual session state block, prompt headers, or mode declarations are required
 
 | Transition | Gate | Key Criteria |
 |------------|------|--------------|
-| Context → Exploration | **G1** | Context-Plan confirmed, System Spec exists, Architecture documented, fundamental ADRs written, existing artifacts catalogued, scope confirmed by human, mode transition approved |
-| Exploration → Production | **G2** | Feature plan/spec approved, prototype visually confirmed (where applicable), acceptance criteria defined, human approved |
-| Production → Done | **G3** | Production-Plan approved before implementation, all acceptance criteria fulfilled, build passes, no regressions, documentation updated, human approved |
+| Context → Exploration | **G1** | Context-Plan confirmed, System Spec exists, Architecture documented, fundamental ADRs written, existing artifacts catalogued, scope confirmed by human, mode transition approved. **If cross-platform:** platform targets declared, PAL boundary identified, asset format strategy documented |
+| Exploration → Production | **G2** | Feature plan/spec approved, prototype visually confirmed (where applicable), acceptance criteria defined, human approved. **If cross-platform:** plan covers all declared targets, no single-platform design |
+| Production → Done | **G3** | Production-Plan approved before implementation, all acceptance criteria fulfilled, build passes, no regressions, documentation updated, human approved. **If cross-platform:** build passes on all declared targets, no platform-specific code outside PAL, asset pipeline outputs all required formats |
 
 **Gates are blockers.** No forward movement until every criterion is satisfied. The human must explicitly approve each gate transition.
 
@@ -266,5 +266,30 @@ This framework defines the core process. The following aspects are **intentional
 | Dependency Management | `context/guidelines/dependency-management.md` | Update policy, security patches, breaking change handling |
 | Rollback / Hotfix Process | `context/guidelines/rollback-process.md` | How to revert, hotfix paths, incident handling |
 | Risk Classification | `context/guidelines/risk-classification.md` | Severity levels, how risk affects process depth |
+| Platform Targets | `context/guidelines/platform-targets.md` | Declared target platforms, PAL structure, asset format strategy, build matrix |
 
 **Rule**: If an extension point file exists, the AI **must** read and enforce it. If it does not exist, the core process applies without the extension.
+
+### Platform Targets Extension
+
+When `context/guidelines/platform-targets.md` exists, the project is cross-platform. The AI **must** enforce the [cross-platform guideline](guidelines/cross-platform.md) at every lifecycle step. The file declares:
+
+```yaml
+targets:
+  - desktop-win
+  - desktop-linux
+  - android-arm64
+
+renderer: vulkan
+min_api:
+  android: 26        # Android 8.0+
+  vulkan: "1.1"
+
+size_budget:
+  apk: 150MB
+  asset_pack: 512MB
+
+pal_root: src/pal/   # where platform abstractions live
+```
+
+If this file does not exist, the cross-platform guideline does not apply — the project is single-platform.
