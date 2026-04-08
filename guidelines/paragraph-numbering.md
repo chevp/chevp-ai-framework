@@ -30,7 +30,7 @@ Like sections in a legal code, each plan gets a **stable, hierarchical number** 
 
 | Rule | Detail |
 |------|--------|
-| **Tree-structured** | New children are appended at the end — no insertions in the middle |
+| **Tree-structured** | New children are appended at the end. IDs do not need to be sequential (gaps are allowed), but must never be reused. No letter suffixes (e.g., `§6.3.1a`) — use the next free number instead |
 | **Maximum 4 levels** | `§1.2.3.4` is the deepest allowed; if deeper is needed, split into a parallel chapter |
 | **No leading zeros** | `§1.2.3`, not `§01.02.03` |
 | **Numbers are never reused** | Deleted or deprecated plans retain their number as `DEPRECATED_*` so old references do not break |
@@ -191,8 +191,8 @@ A project must not mix schemes. The plan type (CTX/EXP/PRD) is always expressed 
 
 1. Identify the chapter the plan belongs to (or create a new chapter if needed)
 2. Find the highest existing number in that chapter
-3. Append the next integer: if `§1.2.5` exists, the next plan is `§1.2.6`
-4. Never insert between existing numbers — always append
+3. Use any unused number higher than existing ones — gaps are allowed (e.g., `§1.2.5` → `§1.2.7` is fine)
+4. Never use letter suffixes (`§1.2.5a`) — always use a new numeric ID
 5. Register the new plan in `PLAN_REGISTRY.md` and `plans/INDEX.md`
 
 ---
