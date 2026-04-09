@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-MAX_LINES = 400  # Compact runtime file with efficiency rules + AI modes + prompt structure + governance extensions
+MAX_LINES = 700  # Compact runtime file with efficiency rules + AI modes + prompt structure + governance extensions + §1.1 thinking & learning layer
 
 
 # ---------------------------------------------------------------------------
@@ -117,6 +117,10 @@ SRC = {
     "prod_ce": read_file("03-production/context-engineering.md"),
     "guide_collab": read_file("guidelines/ai-collaboration.md"),
     "guide_ctx": read_file("guidelines/context-management.md"),
+    "guide_governance": read_file("guidelines/architecture-governance.md"),
+    "guide_uncertainty": read_file("guidelines/uncertainty-reduction.md"),
+    "guide_granularity": read_file("guidelines/plan-granularity.md"),
+    "challenger": read_file("02-exploration/challenger.md"),
     "integration": read_file("integration/claude-md-integration.md"),
 }
 
@@ -130,7 +134,8 @@ def build_header() -> str:
 # chevp-ai-framework
 
 > PROCESS: Context (G1) → Exploration (G2) → Production (G3). Sequential. Gates are blockers.
-> RULE: No code without spec. No delivery without validation. AI owns the process — infers mode, enforces gates, blocks violations. Human approves transitions.
+> RULE: No code without spec. No delivery without validation. AI owns the process — infers mode, enforces gates, blocks violations. Human approves transitions on **evidence** (`hypothesis` / `result` / `reasoning`), not rubber-stamp.
+> LOOP: Every Exploration produces an `insights.md`. Every plan has `Kill Criteria`. Every plan is critiqued by an internal **Challenger** before G2. Out-of-scope items become `PROP-NNN` proposals — they never disappear.
 > Source: https://github.com/chevp/chevp-ai-framework — auto-generated, do not edit."""
 
 
@@ -247,11 +252,22 @@ def build_step_exploration() -> str:
 
 Plan concrete features, prototype where applicable. System architecture is from Context — this step is feature-level.
 
+Exploration runs in **two sub-modes**, in this order:
+
+| Sub-mode | Goal | Fidelity | Output |
+|----------|------|----------|--------|
+| **Exploration-A — Problem Exploration** | *Understand* the problem in motion | Low (sketches, throwaway scripts, paper, single-screen demos) | A confirmed framing of the problem — and a *retired* hypothesis or two |
+| **Exploration-B — Solution Exploration** | *Decide* between concrete solutions | High enough to compare (≥2 candidates side-by-side) | A chosen approach with documented trade-offs |
+
+A plan declares its sub-mode via the frontmatter field `exploration-mode: A | B`. Skipping A and going straight to B is allowed only when [hypotheses.md](../templates/hypotheses-template.md) already records the problem framing as `confirmed`.
+
 ### Deliverables
 
-1. **Feature Plan/Spec** — written for features/complex changes, verbal for trivial (<10 lines)
+1. **Feature Plan/Spec** with `exploration-mode: A | B` — written for features/complex changes, verbal for trivial (<10 lines)
 2. **ADR** — only for new decisions (fundamental ADRs belong in Context)
-3. **UX Prototype** — mandatory for visual output
+3. **UX Prototype** — A: low-fidelity (Problem); B: ≥2 comparable candidates (Solution)
+4. **Challenger output** — top-3 failure modes, ≥2 alternatives, strongest counter-argument (mandatory before G2)
+5. **`insights.md`** — Learning Loop artifact recording which hypotheses were confirmed/killed (mandatory before G2)
 
 ### Spec Required?
 
@@ -340,6 +356,129 @@ When a code change has a non-obvious reason, add a brief inline comment explaini
 BLOCKER — all criteria required. **Single-pass check**: verify each criterion once. Do not re-evaluate unless the human flags an issue."""
 
 
+def build_uncertainty_layer() -> str:
+    return """\
+## Uncertainty Reduction (the operating principle)
+
+The framework's purpose is **not to ship code** — it is to reach the moment when shipping is the *least uncertain remaining option*. Every step must measurably reduce uncertainty before the team is allowed to advance.
+
+### Per-step contract
+
+| Step | Must reduce | Recorded in |
+|------|------------|-------------|
+| **Context** | Uncertainty about *what* the problem is and *who* has it | Problem Statement, Hypotheses, Risks (uncertainty triplet), `evidence:` block in CTX plan |
+| **Exploration-A** | Uncertainty about *whether the problem framing is right* | Updated Hypotheses (`confirmed`/`killed`), `insights.md` |
+| **Exploration-B** | Uncertainty about *which solution is best* | Side-by-side prototype comparison, ADR, `insights.md`, Challenger output |
+| **Production** | Uncertainty about *whether the chosen solution actually ships* | Validation results, updated `insights.md`, regression checks |
+
+### Evidence Block — operational form of every gate transition
+
+Every governed plan carries this in its frontmatter:
+
+```yaml
+evidence:
+  hypothesis: <what we believed before this gate>
+  result:     <what we observed>
+  reasoning:  <why that justifies the transition>
+```
+
+Three rules: `hypothesis` must be falsifiable (not a goal restatement); `result` must be observable (not "team agreed"); `reasoning` must bridge result → action (proceed / fall back / kill). Empty or boilerplate evidence is a **gate failure** — Gatekeeper subagents refuse `pass` and `/approve` refuses to advance status. See [guidelines/uncertainty-reduction.md](guidelines/uncertainty-reduction.md).
+
+### Kill Criteria — uncertainty's exit door
+
+Every plan **must** include a `## Kill Criteria` section answering: *what evidence would tell us this plan should not advance?* A plan without kill criteria is a note, not a plan. Bad: "if it does not work". Good: "if benchmark X exceeds 200ms after Step 3"; "if user testing in Exploration-A reveals nobody uses the feature".
+
+### Learning Loop — every Exploration produces an `insights.md`
+
+The lifecycle is a **loop, not a pipeline**. Every Exploration phase MUST produce an `insights.md` before G2 can pass. The file records which hypotheses were confirmed/killed/inconclusive, what surprised the team, what is now believed, what is still unknown, and the consequence for the plan (proceed / adjust / kill / fall back to Context). An empty insights file is a G2 blocker."""
+
+
+def build_challenger_role() -> str:
+    return """\
+## Challenger Role (mandatory before G2)
+
+Without an internal sceptic, the AI proposes and the human approves — the only friction is the human's vigilance. The Challenger role moves friction *into* the AI, where it is cheap.
+
+Before requesting G2 approval, the AI MUST produce a Challenger block in (or alongside) the EXP plan with **exactly three** sections:
+
+1. **Top-3 ways this approach could fail** — concrete failure modes specific to *this* plan, *this* code, *this* user. Each names what breaks (an observable), the cheapest signal, and what we would do.
+2. **Two alternative approaches** — at least two genuinely different alternatives that were considered and rejected, each with sketch + rejection reason + condition under which we would re-open them.
+3. **Strongest counter-argument** — one paragraph stating the case *against* the chosen approach, in the first person, as charitably as possible. Strawman = automatic fail.
+
+### Anti-pattern: generic Challenger output
+
+Generic objections like "schedule slip", "scope creep", "we could use a different library" apply to every plan and carry no information. Gatekeeper-G2 flags these as `failure-modes: generic` and issues an automatic `block`. Regenerate with concrete content.
+
+See [02-exploration/challenger.md](02-exploration/challenger.md) for examples of good vs. bad Challenger output."""
+
+
+def build_gatekeeper_layer() -> str:
+    return """\
+## Gatekeeper Subagents + Plan Proposal Loop
+
+Gate enforcement is delegated to **three specialised, read-only subagents**:
+
+| Agent | Validates | Spawns proposals from |
+|-------|-----------|----------------------|
+| `gatekeeper-g1` | Context → Exploration | NOT-in-Scope items in CTX plan |
+| `gatekeeper-g2` | Exploration → Production | NOT-in-Scope items + Challenger-identified failure modes in EXP plan |
+| `gatekeeper-g3` | Production → Done | Follow-up items surfaced during Production (TODOs, deferred refactors, new bugs) |
+
+Each Gatekeeper produces **three pflicht-outputs**:
+
+1. **Verdict**: `pass` | `block` | `conditional-pass`
+2. **Findings**: concrete satisfied/missing/generic items (each pointing at a file/line)
+3. **Spawned Plan Proposals** (`PROP-NNN`): for each out-of-scope item or failure mode, a structured stub for human triage
+
+Gatekeepers are **read-only**. They do not write or modify plans — they propose. Approval stays with the human.
+
+### Plan Proposal Loop — out-of-scope items never disappear
+
+Items in a plan's NOT-in-Scope section, plus Challenger-identified failure modes, become `PROP-NNN` Plan Proposals in `context/plans/proposals/`. The human triages each one:
+
+| Command | Effect |
+|---------|--------|
+| `/promote PROP-NNN` | Convert to a real CTX/EXP/PRD plan (AI generates the stub from the proposal) |
+| `/defer PROP-NNN` | Keep in proposals folder, revisit at next G1 |
+| `/reject PROP-NNN <reason>` | Move to `proposals/rejected/` with reason recorded |
+| `/gate-override <plan-id> <reason>` | Override a Gatekeeper `block` verdict (logged in plan frontmatter and `governance-log.md`) |
+
+**Bounds (anti-spam):**
+- **Max 5 proposals per gate-check** — excess goes into a single Sammel-Notiz paragraph in the verdict report
+- **90-day auto-defer** — proposals still `pending-human-review` after 90 days are automatically moved to `deferred` at next G1 review
+- **Human-only promotion** — AI may propose but never promote; promotion is always a human decision
+
+### `conditional-pass` — the cheap way through
+
+A Gatekeeper may issue `conditional-pass` when all gate criteria are met **AND** all out-of-scope items are filed as proposals. This means: tightly-scoped plans no longer cost the team anything — the things you cut survive as proposals instead of being lost or causing scope bloat.
+
+See [agents/gatekeeper-g1.md](agents/gatekeeper-g1.md), [agents/gatekeeper-g2.md](agents/gatekeeper-g2.md), [agents/gatekeeper-g3.md](agents/gatekeeper-g3.md), [templates/plan-proposal-template.md](templates/plan-proposal-template.md)."""
+
+
+def build_governance_layer() -> str:
+    return """\
+## Decision Governance + Provenance
+
+Every governed artifact (ADR, CTX, EXP, PRD, spec) carries a provenance frontmatter block:
+
+```yaml
+proposed-by: ai          # ai | human | pair
+decided-by: —            # human (required when status advances past proposed)
+approved-by: —           # human identifier
+approved-at: —           # YYYY-MM-DD
+```
+
+**AI MUST NOT write `decided-by`, `approved-by`, or `approved-at`.** Only the human, via `/approve <artifact-id>`, may set decision fields. This is the only path from `proposed` to `approved`. Every gate crossing and ADR acceptance is appended to `governance-log.md` (one line per event, append-only).
+
+### Approval requires Evidence
+
+Provenance answers *who decided*; the `evidence:` block answers *on what basis*. Both are required — either alone is governance failure. A `status: approved` artifact with empty/boilerplate `evidence:` is a violation. The `/approve` command refuses to advance status if the evidence block is unfilled.
+
+This is the operational meaning of "approval ≠ rubber-stamp": a human who clicks `/approve` is asserting *I read the evidence and find it sufficient*, not *I trust the AI*.
+
+See [guidelines/architecture-governance.md](guidelines/architecture-governance.md)."""
+
+
 def build_ai_behavior() -> str:
     # Compact table format — faster to parse, less redundancy with step sections.
     return """\
@@ -360,12 +499,21 @@ def build_ai_behavior() -> str:
 | Follow existing patterns and conventions | Always |
 | Produce Context-Plan (CTX) as first activity | Context |
 | Produce/verify System Spec, Architecture, ADRs, Context Inventory | Context |
+| Produce the **uncertainty triplet** — Problem Statement, Hypotheses (≥2), Risks (≥3) | Context |
 | State understanding and surface ambiguities | Context |
 | Wait for explicit scope confirmation | Context |
 | Create feature plan/spec before any code | Exploration |
+| Declare `exploration-mode: A` (Problem) or `B` (Solution) in the EXP frontmatter | Exploration |
 | Define acceptance criteria | Exploration |
+| Define **Kill Criteria** (when do we abandon?) | Exploration |
 | Create and iterate prototype for visual output until confirmed | Exploration |
+| Produce **Challenger output** before requesting G2 (top-3 failure modes, ≥2 alternatives, counter-argument) | Exploration |
+| Produce **`insights.md`** before requesting G2 (which hypotheses confirmed/killed, what surprised us, consequence) | Exploration |
+| Fill the `evidence:` frontmatter block with non-empty, non-generic `hypothesis` / `result` / `reasoning` before requesting any gate | Always |
+| Invoke the matching Gatekeeper subagent (`gatekeeper-g1/g2/g3`) before proposing any forward transition | Always |
+| Spawn `PROP-NNN` Plan Proposals for out-of-scope items and challenger-identified failure modes (max 5 per gate-check) | Always |
 | Produce Production-Plan (PRD) and get human approval before any code | Production |
+| Update `insights.md` with implementation surprises before requesting G3 | Production |
 | Verify G1 + G2 deliverables before starting | Production |
 | Implement step-by-step per plan, build-verify after each step | Production |
 | Propose fallback to Exploration when plan is incomplete, approach is unviable, or scope changes | Production |
@@ -394,7 +542,14 @@ def build_ai_behavior() -> str:
 - Introduce new patterns without ADR
 - Re-analyze artifacts that haven't changed since last verification
 - Re-justify decisions already approved at a prior gate
-- Reference plans, ADRs, or external artifacts in inline code comments"""
+- Reference plans, ADRs, or external artifacts in inline code comments
+- Write `decided-by`, `approved-by`, or `approved-at` fields — those are human-only
+- Approve a gate with an empty or boilerplate `evidence:` block
+- Approve a plan that has no `Kill Criteria` section
+- Submit generic Challenger output ("schedule slip", "scope creep", "use a different framework") — auto-block
+- Promote, defer, or reject `PROP-NNN` proposals on the human's behalf
+- Skip `insights.md` at the end of an Exploration phase
+- Spawn more than 5 `PROP-NNN` proposals per single gate-check (excess goes into a Sammel-Notiz paragraph)"""
 
 
 def build_abbreviations() -> str:
@@ -448,6 +603,10 @@ def build() -> str:
         build_step_context(),
         build_step_exploration(),
         build_step_production(),
+        build_uncertainty_layer(),
+        build_challenger_role(),
+        build_gatekeeper_layer(),
+        build_governance_layer(),
         build_ai_behavior(),
         build_abbreviations(),
         build_context_hierarchy(),
