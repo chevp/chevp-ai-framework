@@ -22,6 +22,7 @@ Each step produces defined artifacts. No step is skipped. The AI enforces the pr
 | **DevOps**               | —                                | —                                      | [devops](03-production/devops.md)        |
 | **Software-Architecture**| [arch](01-context/software-architecture.md) | [arch](02-exploration/software-architecture.md) | [arch](03-production/software-architecture.md) |
 | **Context-Engineering**  | [ctx](01-context/context-engineering.md) | [ctx](02-exploration/context-engineering.md) | [ctx](03-production/context-engineering.md) |
+| **Challenger**           | (optional, when risks are thin)  | [challenger](02-exploration/challenger.md) **mandatory before G2** | (only on scope-change requests) |
 
 ---
 
@@ -35,6 +36,7 @@ Each step produces defined artifacts. No step is skipped. The AI enforces the pr
 | **DevOps** | Build verification, commit workflow, CI/CD, delivery pipeline |
 | **Software-Architecture** | Architecture analysis, ADRs, pattern enforcement, design decisions |
 | **Context-Engineering** | CLAUDE.md, context hierarchy, what AI must read, context freshness |
+| **Challenger** | Internal sceptic — produces top-3 failure modes, ≥2 alternatives, strongest counter-argument before G2 |
 
 ---
 
@@ -156,11 +158,24 @@ No manual session state block, prompt headers, or mode declarations are required
 
 | Transition | Gate | Key Criteria |
 |------------|------|--------------|
-| Context → Exploration | **G1** | Context-Plan confirmed, System Spec exists, Architecture documented, fundamental ADRs written, existing artifacts catalogued, scope confirmed by human, mode transition approved. **If cross-platform:** platform targets declared, PAL boundary identified, asset format strategy documented |
-| Exploration → Production | **G2** | Feature plan/spec approved, prototype visually confirmed (where applicable), acceptance criteria defined, human approved. **If cross-platform:** plan covers all declared targets, no single-platform design |
-| Production → Done | **G3** | Production-Plan approved before implementation, all acceptance criteria fulfilled, build passes, no regressions, documentation updated, human approved. **If cross-platform:** build passes on all declared targets, no platform-specific code outside PAL, asset pipeline outputs all required formats |
+| Context → Exploration | **G1** | Context-Plan confirmed, **uncertainty triplet** (Problem Statement, Hypotheses, Risks) drafted, System Spec exists, Architecture documented, fundamental ADRs written, existing artifacts catalogued, scope confirmed by human, mode transition approved, **evidence block filled**, **Gatekeeper-G1 verdict recorded**. **If cross-platform:** platform targets declared, PAL boundary identified, asset format strategy documented |
+| Exploration → Production | **G2** | Feature plan/spec approved with `exploration-mode: A\|B`, prototype visually confirmed (where applicable), acceptance criteria defined, **Kill Criteria defined**, **`insights.md` exists**, **Challenger output present**, **evidence block filled**, **Gatekeeper-G2 verdict recorded**, human approved. **If cross-platform:** plan covers all declared targets, no single-platform design |
+| Production → Done | **G3** | Production-Plan approved before implementation, all acceptance criteria fulfilled, build passes, no regressions, documentation updated, **`insights.md` updated with implementation surprises**, **Gatekeeper-G3 verdict recorded**, human approved. **If cross-platform:** build passes on all declared targets, no platform-specific code outside PAL, asset pipeline outputs all required formats |
 
 **Gates are blockers.** No forward movement until every criterion is satisfied. The human must explicitly approve each gate transition.
+
+### Evidence-Based Gates
+
+Approval is no longer a single rubber-stamp. Every gate transition records three explicit fields in the plan's frontmatter `evidence:` block:
+
+```yaml
+evidence:
+  hypothesis: "We believed X would work because Y"
+  result: "Prototype confirmed/refuted X via Z"
+  reasoning: "Therefore we are/are not proceeding to the next step"
+```
+
+A blank or boilerplate evidence block is a gate failure — see [guidelines/uncertainty-reduction.md](guidelines/uncertainty-reduction.md). The gatekeeper subagents (`gatekeeper-g1/g2/g3`) refuse to issue a `pass` verdict if the evidence block is empty or generic.
 
 Details in each step's [README.md](01-context/README.md).
 

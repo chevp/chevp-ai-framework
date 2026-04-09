@@ -99,7 +99,7 @@ Rules:
 
 ## Minimum Substance
 
-A plan must contain at least these five elements to pass G2:
+A plan must contain at least these six elements to pass G2:
 
 | Element | Requirement |
 |---------|-------------|
@@ -107,9 +107,25 @@ A plan must contain at least these five elements to pass G2:
 | **Scope** | Both IN scope and NOT in scope, with cross-references to related plans where boundaries overlap |
 | **Steps** | At least 3 implementation-ready steps |
 | **Affected Files** | At least 1 concrete file path |
+| **Kill Criteria** | At least 1 condition under which the plan is abandoned |
 | **Acceptance Criteria** | At least 2 verifiable criteria |
 
+Plus: a non-empty `evidence:` block in the frontmatter (`hypothesis` / `result` / `reasoning`).
+
 Plans missing any of these elements are notes, not plans. They must either be expanded to meet the minimum or treated as verbal micro-plans.
+
+### Out-of-Scope Items become Proposals — they do not vanish
+
+Items listed in **NOT in Scope** are not waste — they are a signal that the plan touched something worth a separate plan. The Gatekeeper agents (`gatekeeper-g1/g2/g3`) read each out-of-scope item and propose a **Plan Proposal** (`PROP-NNN`) for it. The proposal goes into `context/plans/proposals/` for human review (`/promote`, `/defer`, `/reject`).
+
+This means: the cost of writing a tightly-scoped plan is now zero — the things you cut survive as proposals instead of being lost.
+
+### Why Kill Criteria are mandatory
+
+A plan without explicit kill criteria has no exit ramp. Teams keep working on it past the point where evidence has refuted the hypothesis, because nobody remembers what would have constituted "stop". The kill criteria section converts the plan from a one-way commitment into a falsifiable claim.
+
+Bad kill criteria: "if it does not work" — too vague.
+Good kill criteria: "if benchmark X exceeds 200ms after Step 3", "if user testing in Exploration-A reveals nobody uses the feature", "if dependency Y has not landed by date Z".
 
 ---
 

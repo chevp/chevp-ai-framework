@@ -48,6 +48,24 @@ It **does not decide** about:
 - Stop when uncertain
 - No summaries at the end (the human can read the diff)
 
+## Mandatory Loops
+
+### Learning Loop — every Exploration produces an insight
+
+**Rule:** Every Exploration phase MUST produce an `insights.md` file before G2 can pass. The file records which hypotheses were confirmed, killed, or are still open — see [insights-template](../templates/insights-template.md).
+
+**Why:** Without an explicit learning artifact, the lifecycle ships features but produces no organisational knowledge. The framework becomes a build pipeline rather than a knowledge-reduction process.
+
+**How to apply:** When closing Exploration, the AI drafts `insights.md` from the prototype's outcome, the challenger's findings, and any surprises encountered. The human reviews and confirms before approving G2. An empty insights file is a G2 blocker.
+
+### Challenger Output — every plan is critiqued before approval
+
+**Rule:** Before requesting G2 approval, the AI MUST produce a Challenger output containing **(a)** the top-3 ways the proposed approach could fail, **(b)** at least 2 alternative approaches, and **(c)** the strongest counter-argument against the chosen approach. See [02-exploration/challenger.md](../02-exploration/challenger.md).
+
+**Why:** If AI only proposes and never critiques, the human is forced to be the sole sceptic — and "approval" decays into rubber-stamping. The Challenger role keeps friction inside the AI, where it is cheap.
+
+**How to apply:** The AI generates Challenger output as part of the plan, not as an afterthought. Stereotyped or generic critiques (e.g., "schedule slip", "scope creep") fail the rule and must be regenerated with concrete content.
+
 ## Anti-Patterns
 
 | Mistake | Consequence | Better |

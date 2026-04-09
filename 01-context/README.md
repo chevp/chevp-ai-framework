@@ -24,11 +24,16 @@ Always. No exceptions. Even trivial changes require reading CLAUDE.md and confir
 | # | Deliverable | Description |
 |---|-------------|-------------|
 | 1 | **Context-Plan (CTX)** | Lightweight plan: what to read/verify, open questions, draft scope boundaries |
-| 2 | **System Spec** | What the system is, what it does, who it serves, which components it has |
-| 3 | **Software Architecture** | High-level architecture: layers, modules, communication paths, technology stack |
-| 4 | **ADRs** | Architecture Decision Records for all fundamental design decisions |
-| 5 | **Context Inventory** | Catalogue of existing artifacts: code, docs, schemas, conventions, dependencies |
-| 6 | **Scope Confirmation** | Only after 1-5: confirm scope with the human |
+| 2 | **Problem Statement** | Who has the problem? What does not work today? Why does it matter? Why now? — see [problem-statement-template](../templates/problem-statement-template.md) |
+| 3 | **Hypotheses** | What we *think* could be true and what could solve the problem; each hypothesis carries a cheapest test and a kill criterion — see [hypotheses-template](../templates/hypotheses-template.md) |
+| 4 | **Risks** | Where we might be wrong, top-3 expensive failure modes, counter-evidence we may be ignoring — see [risks-template](../templates/risks-template.md) |
+| 5 | **System Spec** | What the system is, what it does, who it serves, which components it has |
+| 6 | **Software Architecture** | High-level architecture: layers, modules, communication paths, technology stack |
+| 7 | **ADRs** | Architecture Decision Records for all fundamental design decisions |
+| 8 | **Context Inventory** | Catalogue of existing artifacts: code, docs, schemas, conventions, dependencies |
+| 9 | **Scope Confirmation** | Only after 1–8: confirm scope with the human |
+
+The three new artifacts (**Problem Statement**, **Hypotheses**, **Risks**) form the **uncertainty triplet**. Together they make Context the place where uncertainty is explicitly catalogued — not assumed away. See [guidelines/uncertainty-reduction.md](../guidelines/uncertainty-reduction.md).
 
 For small changes (< 10 lines), deliverables 1-3 may already exist. In that case, **read and verify** them — do not skip them.
 
@@ -48,6 +53,9 @@ For small changes (< 10 lines), deliverables 1-3 may already exist. In that case
 ## Outputs
 
 - Context-Plan (confirmed by human)
+- **Problem Statement** (uncertainty triplet)
+- **Hypotheses** (uncertainty triplet)
+- **Risks** (uncertainty triplet)
 - System Spec (written document or verified existing)
 - Software Architecture document (written or verified existing)
 - ADRs for fundamental decisions (written or verified existing)
@@ -66,6 +74,9 @@ For small changes (< 10 lines), deliverables 1-3 may already exist. In that case
 ## Quality Gate G1: Context Complete
 
 - [ ] Context-Plan exists and is confirmed by human
+- [ ] **Problem Statement** exists, all five questions answered concretely
+- [ ] **Hypotheses** exist (≥2 hypothesised solutions, each with cheapest test + kill criterion)
+- [ ] **Risks** exist (≥3 risks rated, top-3 expensive failure modes called out)
 - [ ] System Spec exists (what the system is, who it serves, which components)
 - [ ] Software Architecture is documented (layers, modules, communication)
 - [ ] ADRs exist for fundamental decisions (why this language, protocol, structure)
@@ -75,6 +86,6 @@ For small changes (< 10 lines), deliverables 1-3 may already exist. In that case
 - [ ] Existing patterns are understood
 - [ ] Dependencies are known
 - [ ] All open questions are resolved with the human
-- [ ] **Human has explicitly confirmed scope**
+- [ ] **Human has explicitly confirmed scope** *(evidence-based: hypothesis / result / reasoning recorded — see [guidelines/uncertainty-reduction.md](../guidelines/uncertainty-reduction.md))*
 
 **BLOCKER: Do NOT proceed to [Exploration](../02-exploration/) until every checkbox is satisfied.**

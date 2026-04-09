@@ -21,28 +21,28 @@
   </tr>
   <tr>
     <td><strong><a href="01-context/">Context</a></strong></td>
-    <td>Understand the system and problem, produce foundational artifacts</td>
-    <td>System Spec, Architecture, ADRs, Context Inventory, Scope Confirmation</td>
+    <td>Understand the system and problem, catalogue uncertainty</td>
+    <td>Problem Statement, Hypotheses, Risks (uncertainty triplet), System Spec, Architecture, ADRs, Context Inventory, Scope Confirmation</td>
   </tr>
   <tr>
-    <td><strong><a href="02-exploration/">Exploration</a></strong></td>
-    <td>Plan features, prototype, validate the approach</td>
-    <td>Feature Plan/Spec, UX Prototype (where applicable)</td>
+    <td><strong><a href="02-exploration/">Exploration (A → B)</a></strong></td>
+    <td><strong>A:</strong> Understand the problem in motion · <strong>B:</strong> Decide between concrete solutions</td>
+    <td>Feature Plan/Spec with <code>exploration-mode</code>, UX Prototype, Challenger output, <code>insights.md</code></td>
   </tr>
   <tr>
     <td><strong><a href="03-production/">Production</a></strong></td>
-    <td>Build, verify, ship</td>
-    <td>Production code, validation result, updated documentation</td>
+    <td>Build, verify, ship — and update insights with reality</td>
+    <td>Production code, validation result, updated documentation, updated <code>insights.md</code></td>
   </tr>
 </table>
 
-Quality gates **G1**, **G2**, **G3** enforce human approval at every transition. Gates are **blockers** — all criteria must be satisfied before forward movement. See [LIFECYCLE.md](LIFECYCLE.md) for the full matrix.
+Quality gates **G1**, **G2**, **G3** enforce **evidence-based** human approval at every transition. Each gate is checked by a dedicated **Gatekeeper subagent** (`gatekeeper-g1/g2/g3`) that returns a verdict (`pass | conditional-pass | block`), findings, and **Spawned Plan Proposals** (`PROP-NNN`) for any out-of-scope items it found. Out-of-scope items never disappear — they become triageable backlog. See [LIFECYCLE.md](LIFECYCLE.md) for the full matrix and [guidelines/uncertainty-reduction.md](guidelines/uncertainty-reduction.md) for the operating principle.
 
 ---
 
 ## Roles
 
-Six cross-cutting roles operate within each step:
+Seven cross-cutting roles operate within each step:
 
 | Role | Scope |
 |:-----|:------|
@@ -52,6 +52,7 @@ Six cross-cutting roles operate within each step:
 | **DevOps** | Build verification, commit workflow, CI/CD |
 | **Software-Architecture** | ADRs, pattern enforcement, design decisions |
 | **Context-Engineering** | CLAUDE.md, context hierarchy, what AI must read |
+| **Challenger** | Internal sceptic — top-3 failure modes, ≥2 alternatives, strongest counter-argument before G2 |
 
 ---
 
@@ -103,10 +104,10 @@ The markdown files above are the **source of truth**. On top of them, a thin Cla
 
 | Layer | Files | Purpose |
 |-------|-------|---------|
-| Slash Commands | [commands/](commands/) | `/context`, `/explore`, `/produce`, `/gate-check`, `/new-adr` — explicit mode transitions |
-| Subagents | [agents/](agents/) | `gate-validator` (validates G1/G2/G3), `architecture-reviewer` (enforces invariants/ADRs) |
+| Slash Commands | [commands/](commands/) | `/context`, `/explore`, `/produce`, `/gate-check`, `/new-adr`, `/approve`, `/promote`, `/reject`, `/gate-override` |
+| Subagents | [agents/](agents/) | `gatekeeper-g1` / `gatekeeper-g2` / `gatekeeper-g3` (specialised gate validators with proposal-spawning), `architecture-reviewer` (enforces invariants/ADRs) |
 | Skills | [skills/](skills/) | Template-driven artifact creation (`create-ctx-plan`, `create-exp-plan`, `create-adr`) |
-| Hooks | [hooks/](hooks/) | `mode-context.py` injects lifecycle reminder every turn; `gate-check.py` blocks code writes without an approved EXP plan |
+| Hooks | [hooks/](hooks/) | `mode-context.py` injects lifecycle reminder every turn; `gate-check.py` blocks code writes without an approved EXP plan; `provenance-check.py` enforces non-empty `evidence:` blocks |
 
 The plugin makes Gate-Enforcement **mechanical** (via hooks) rather than relying solely on AI discipline. Without the plugin, the framework still works — Claude reads the markdown files via `@url` or project references.
 

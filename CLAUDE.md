@@ -11,6 +11,8 @@ The AI continuously detects intent, maintains the current mode, enforces all gat
 
 This framework is **process-driven, not spec-driven**. The spec is not the starting point — it emerges as an artifact within the Context step. What drives everything forward is the process itself: 3 sequential steps with enforced quality gates. The AI acts as an intelligent executor that understands intent and adapts — not as a tool that runs predefined scripts.
 
+**Uncertainty before code.** The framework's purpose is not to ship code — it is to reach the moment when shipping code is the *least uncertain remaining option*. Every step must measurably reduce uncertainty (recorded in the plan's `evidence:` block), every Exploration must produce an `insights.md` (the Learning Loop), every plan must define `Kill Criteria` (the exit ramp), and every plan is critiqued by an internal **Challenger** before its gate. See [guidelines/uncertainty-reduction.md](guidelines/uncertainty-reduction.md).
+
 ## Core Rules
 
 1. **Steps are sequential** — No step may be skipped
@@ -20,8 +22,13 @@ This framework is **process-driven, not spec-driven**. The spec is not the start
 5. **Ownership stays with the human** — AI delivers suggestions, developers bear responsibility
 6. **Gates are blockers** — All criteria must be satisfied before forward transition
 7. **Decisions are signed** — Every governed artifact records who proposed and who decided it; AI never writes human decision fields (see [architecture-governance](guidelines/architecture-governance.md))
+8. **Approval requires evidence** — Every gate transition records `hypothesis` / `result` / `reasoning` in the plan's `evidence:` block; rubber-stamp approval is forbidden (see [uncertainty-reduction](guidelines/uncertainty-reduction.md))
+9. **Every Exploration produces learning** — `insights.md` is mandatory before G2; the lifecycle is a loop, not a pipeline
+10. **Every plan can be killed** — `Kill Criteria` is a mandatory section; plans without exit ramps accumulate sunken cost
+11. **AI critiques itself** — The **Challenger** role produces top-3 failure modes, ≥2 alternatives, and the strongest counter-argument before every G2 (see [02-exploration/challenger.md](02-exploration/challenger.md))
+12. **Out-of-scope items become proposals, never disappear** — Gatekeeper subagents (G1/G2/G3) read each plan's NOT-in-Scope and Challenger output and spawn `PROP-NNN` proposals for human triage (see [templates/plan-proposal-template.md](templates/plan-proposal-template.md))
 
-## Lifecycle: 3 Steps × 6 Roles × 3 Modes
+## Lifecycle: 3 Steps × 7 Roles × 3 Modes
 
 ```
 1. Context → 2. Exploration → 3. Production
@@ -49,20 +56,22 @@ Details: [LIFECYCLE.md — AI Modes](LIFECYCLE.md#ai-modes)
 
 | Step | Deliverables |
 |------|-------------|
-| **Context** | Context-Plan (CTX), System Spec, Software Architecture, ADRs (fundamental), Context Inventory, Scope Confirmation |
-| **Exploration** | Feature Plan/Spec (EXP), ADRs (new decisions), UX Prototype (where applicable) |
-| **Production** | Production-Plan (PRD), Production Code, Validation Result, Updated Documentation |
+| **Context** | Context-Plan (CTX), **Problem Statement**, **Hypotheses**, **Risks**, System Spec, Software Architecture, ADRs (fundamental), Context Inventory, Scope Confirmation |
+| **Exploration** | Feature Plan/Spec (EXP) with `exploration-mode: A\|B`, ADRs (new decisions), UX Prototype (where applicable), **Challenger output**, **`insights.md`** |
+| **Production** | Production-Plan (PRD), Production Code, Validation Result, Updated Documentation, **`insights.md` updated with implementation surprises** |
+
+Plus, on every gate: filled `evidence:` block (`hypothesis` / `result` / `reasoning`) and recorded **Gatekeeper verdict** from `gatekeeper-g1/g2/g3`.
 
 ### Quality Gates
 
 | Gate | Transition | Key Rule |
 |------|-----------|----------|
-| **G1** | Context → Exploration | Context-Plan (CTX) confirmed, System Spec + Architecture + ADRs + Context Inventory exist, scope confirmed |
-| **G2** | Exploration → Production | Feature plan/spec approved, prototype confirmed (where applicable) |
-| **G3** | Production → Done | Production-Plan (PRD) approved, all acceptance criteria fulfilled, build passes, human approved |
+| **G1** | Context → Exploration | CTX confirmed, **uncertainty triplet** (Problem Statement / Hypotheses / Risks) drafted, System Spec + Architecture + ADRs + Context Inventory exist, scope confirmed, `evidence:` filled, `gatekeeper-g1` verdict recorded |
+| **G2** | Exploration → Production | Feature plan/spec approved with `exploration-mode`, prototype confirmed, **Kill Criteria + `insights.md` + Challenger output** present, `evidence:` filled, `gatekeeper-g2` verdict recorded |
+| **G3** | Production → Done | PRD approved, all acceptance criteria fulfilled, build passes, `insights.md` updated with implementation surprises, `evidence:` filled, `gatekeeper-g3` verdict recorded, human approved |
 
-Within each step, 6 cross-cutting roles operate:
-**SDLC** · **AI-Plans** · **UX-Tooling** · **DevOps** · **Software-Architecture** · **Context-Engineering**
+Within each step, **7 cross-cutting roles** operate:
+**SDLC** · **AI-Plans** · **UX-Tooling** · **DevOps** · **Software-Architecture** · **Context-Engineering** · **Challenger**
 
 Full matrix: [LIFECYCLE.md](LIFECYCLE.md)
 
@@ -84,9 +93,9 @@ An executable layer that sits on top of the markdown files. The markdown is sour
 | Folder | Content |
 |--------|---------|
 | [.claude-plugin/](.claude-plugin/) | Plugin manifest (hooks registered here) |
-| [commands/](commands/) | Slash commands: `/context`, `/explore`, `/produce`, `/gate-check`, `/new-adr`, `/approve` |
-| [agents/](agents/) | Subagents: `gate-validator` (validates G1/G2/G3), `architecture-reviewer` |
+| [commands/](commands/) | Slash commands: `/context`, `/explore`, `/produce`, `/gate-check`, `/new-adr`, `/approve`, `/promote`, `/reject`, `/gate-override` |
+| [agents/](agents/) | Subagents: `gatekeeper-g1` / `gatekeeper-g2` / `gatekeeper-g3` (specialised gate validators with proposal-spawning), `gate-validator` (legacy dispatcher), `architecture-reviewer` |
 | [skills/](skills/) | Skills: `create-ctx-plan`, `create-exp-plan`, `create-adr` |
-| [hooks/](hooks/) | Python hooks: `mode-context.py` (per-turn reminder), `gate-check.py` (blocks code writes without approved EXP plan), `provenance-check.py` (enforces human-only decision fields) |
+| [hooks/](hooks/) | Python hooks: `mode-context.py` (per-turn reminder), `gate-check.py` (blocks code writes without approved EXP plan), `provenance-check.py` (enforces human-only decision fields and non-empty `evidence:` blocks) |
 
 The plugin is **additive** — without it, the framework still works via `@url` loading and AI discipline. With it, gate enforcement becomes mechanical (hooks) and mode transitions become explicit (slash commands).

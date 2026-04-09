@@ -32,6 +32,21 @@ chevp-ai-framework/CLAUDE.md     ← Framework rules (generic)
 
 The project can **tighten** framework rules but not **loosen** them.
 
+## Domain Extension: Patterns over Rules
+
+A domain extension is more than a folder of rules and templates. The most valuable thing a domain layer can carry is its **failure history** — the typical users, the typical misassumptions, and the recurring problems that every project in the domain rediscovers.
+
+Capture this in a `context/domain-patterns.md` file based on [domain-patterns-template](../templates/domain-patterns-template.md). The file:
+
+- Names the **personas** (who works in the domain, what mental model they use)
+- Lists **typical misassumptions** (mistakes even experienced practitioners make)
+- Catalogues **recurring problem patterns** (problems that show up regardless of feature set)
+- Defines **vocabulary** that disambiguates domain-specific words
+
+The Context phase reads it. The Challenger reads it when generating top-3 failure modes. New team members read it before their first plan. Without this artifact, every project re-discovers the same domain pitfalls — and the AI cannot help, because it only sees the current code.
+
+> **Rule of thumb:** if the domain has burned the team more than once, write a pattern. If it has only burned them once, write a risk in the next plan instead.
+
 ## How It Works
 
 The `@url` directive in CLAUDE.md tells Claude to fetch the framework reference at conversation start. The URL points to a single auto-generated file (`dist/chevp-ai-framework.md`) that is built from all framework source files by `scripts/build_dist.py` and published via GitHub Pages on every push to `main`.

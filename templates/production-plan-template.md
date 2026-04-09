@@ -13,6 +13,10 @@ decided-by: —            # human (required before implementation begins)
 approved-by: —           # human identifier
 approved-at: —           # YYYY-MM-DD
 implements: EXP-NNN      # the G2-approved EXP plan
+evidence:
+  hypothesis: —          # what the EXP plan claimed would work
+  result: —              # filled at G3 from validation/insights
+  reasoning: —           # filled at G3 — why we ship or roll back
 ---
 
 # PRD-NNN: <Production-Plan Title>
@@ -43,6 +47,10 @@ Which steps from the G2 plan will be implemented in this production cycle?
 ## Constraints
 - No scope expansion beyond the approved G2 plan
 - Implementation order as listed above
+
+## Kill Criteria
+- Under what conditions do we abort production and fall back to Exploration?
+- e.g., "If validation reveals the EXP hypothesis is refuted, stop and reopen Exploration. Do not patch the plan in-flight."
 ```
 
 ## Naming Convention

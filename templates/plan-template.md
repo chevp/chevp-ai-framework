@@ -19,6 +19,11 @@ approved-by: —           # human identifier
 approved-at: —           # YYYY-MM-DD
 depends-on: —
 blocks: —
+exploration-mode: —      # A | B (only for EXP plans; A = problem, B = solution)
+evidence:
+  hypothesis: —          # what we believed before this gate
+  result: —              # what we observed
+  reasoning: —           # why that justifies the transition
 ---
 
 # <TYPE>-NNN: <Plan Title>
@@ -51,6 +56,11 @@ Why is this needed? What existing systems are affected?
 |------|------------|
 | ... | ... |
 
+## Kill Criteria
+- When is this idea dead?
+- What evidence (cost overrun, refuted hypothesis, blocking dependency) makes us NOT proceed to Production?
+- A plan without kill criteria is a note, not a plan.
+
 ## Acceptance Criteria
 - [ ] Criterion 1
 - [ ] Criterion 2
@@ -58,7 +68,7 @@ Why is this needed? What existing systems are affected?
 
 ## Minimum Substance
 
-A plan must contain all five sections above (Goal, Scope, Steps, Affected Files, Acceptance Criteria) to pass G2. Plans missing any element are notes, not plans. See [plan-granularity](../guidelines/plan-granularity.md).
+A plan must contain all six sections above (Goal, Scope, Steps, Affected Files, **Kill Criteria**, Acceptance Criteria) **and** a non-empty `evidence:` block before requesting its gate. Plans missing any element are notes, not plans. See [plan-granularity](../guidelines/plan-granularity.md) and [uncertainty-reduction](../guidelines/uncertainty-reduction.md).
 
 ## Provenance
 
@@ -90,6 +100,11 @@ proposed-by: ai          # ai | human | pair
 decided-by: —            # human (required when status advances past proposed)
 approved-by: —           # human identifier
 approved-at: —           # YYYY-MM-DD
+exploration-mode: —      # A | B (only for exp plans; A = problem, B = solution)
+evidence:
+  hypothesis: —
+  result: —
+  reasoning: —
 ---
 
 # §<number> <Plan Title>
@@ -120,6 +135,10 @@ Why is this needed? What existing systems are affected?
 | Risk | Mitigation |
 |------|------------|
 | ... | ... |
+
+## Kill Criteria
+- When is this idea dead?
+- What evidence makes us NOT proceed?
 
 ## Acceptance Criteria
 - [ ] Criterion 1

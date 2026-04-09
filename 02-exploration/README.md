@@ -2,6 +2,15 @@
 
 > Think first, see first — then build.
 
+Exploration runs in **two sub-modes**, in this order:
+
+| Sub-mode | Goal | Fidelity | Output |
+|----------|------|----------|--------|
+| **Exploration-A — Problem Exploration** | *Understand* the problem in motion | Low (sketches, throwaway scripts, paper, single-screen demos) | A confirmed framing of the problem — and a *retired* hypothesis or two |
+| **Exploration-B — Solution Exploration** | *Decide* between concrete solutions | High enough to compare (≥2 candidates side-by-side) | A chosen approach with documented trade-offs |
+
+A plan declares which sub-mode it is in via the frontmatter field `exploration-mode: A | B`. Skipping A and going straight to B is allowed only when the [hypotheses](../templates/hypotheses-template.md) artifact already records the problem framing as `confirmed`.
+
 ## Goal
 
 Plan concrete features, prototype them where applicable, and validate the approach before writing production code. System-level architecture is already established in Context — this step focuses on **feature-level** planning.
@@ -19,11 +28,14 @@ After Context is complete (G1 passed). Always for features, architecture changes
 
 ## Mandatory Deliverables
 
-| # | Deliverable | When Required |
-|---|-------------|---------------|
-| 1 | **Feature Plan/Spec** | Always (written for features/complex changes, verbal for trivial) |
-| 2 | **ADR** | Only for new decisions arising during exploration |
-| 3 | **UX Prototype** | Mandatory for visual/physical output |
+| # | Deliverable | When Required | Sub-mode |
+|---|-------------|---------------|----------|
+| 1 | **Feature Plan/Spec** | Always (written for features/complex changes, verbal for trivial) | A and B |
+| 2 | **ADR** | Only for new decisions arising during exploration | usually B |
+| 3 | **UX Prototype (low-fidelity)** | Whenever the problem framing is uncertain | A |
+| 4 | **UX Prototype (comparable)** | Mandatory for visual/physical output, ≥2 candidates side-by-side | B |
+| 5 | **Challenger Output** | Always before G2 — see [challenger.md](challenger.md) | B |
+| 6 | **`insights.md`** | Always at the end of Exploration — records what was learned | A and B |
 
 ## Activities
 
@@ -63,13 +75,18 @@ After Context is complete (G1 passed). Always for features, architecture changes
 
 ## Quality Gate G2: Exploration Complete
 
-- [ ] Feature plan/spec exists (as file or confirmed in chat)
+- [ ] Feature plan/spec exists with `exploration-mode: A | B` declared
 - [ ] Steps are concrete enough for direct implementation
 - [ ] Scope and non-scope are clearly defined
+- [ ] **Kill Criteria** are defined (when do we abandon?)
 - [ ] Risks and alternatives are documented
 - [ ] Acceptance criteria are defined
 - [ ] Prototype exists and is visually confirmed (where applicable)
 - [ ] Insights from prototype have been fed back into spec (if needed)
-- [ ] **Human has approved the plan/spec**
+- [ ] **`insights.md`** exists and is non-empty — at least one hypothesis confirmed/killed
+- [ ] **Challenger output** present: Top-3 failure modes, ≥2 alternatives, strongest counter-argument
+- [ ] **Evidence block** filled in plan frontmatter (`hypothesis` / `result` / `reasoning`)
+- [ ] **Gatekeeper-G2 verdict** recorded (`pass` or `conditional-pass` with proposals filed)
+- [ ] **Human has approved the plan/spec** (evidence-based, not rubber-stamp)
 
 **BLOCKER: Do NOT proceed to [Production](../03-production/) until every checkbox is satisfied.**
