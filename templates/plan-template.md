@@ -24,9 +24,6 @@ evidence:
   hypothesis: —          # what we believed before this gate
   result: —              # what we observed
   reasoning: —           # why that justifies the transition
-effort: —                # optional, 1-5 (portfolio heatmap)
-value: —                 # optional, 1-5 (portfolio heatmap)
-risk: —                  # optional, 1-5 (portfolio heatmap)
 ---
 
 # <TYPE>-NNN: <Plan Title>
@@ -113,9 +110,6 @@ evidence:
   hypothesis: —
   result: —
   reasoning: —
-effort: —                # optional, 1-5 (portfolio heatmap)
-value: —                 # optional, 1-5 (portfolio heatmap)
-risk: —                  # optional, 1-5 (portfolio heatmap)
 ---
 
 # §<number> <Plan Title>
