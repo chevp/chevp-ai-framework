@@ -104,7 +104,7 @@ A plan must contain at least these six elements to pass G2:
 | Element | Requirement |
 |---------|-------------|
 | **Goal** | Concrete, measurable outcome (2–3 sentences, not an essay) |
-| **Scope** | Both IN scope and NOT in scope, with cross-references to related plans where boundaries overlap |
+| **Scope** | IN, NOT-in, and REMOVED/Obsoleted subsections. `REMOVED` may be `—` only for purely additive changes; for PRD migrations/refactors/cleanups it must list concrete deletions with justification. |
 | **Steps** | At least 3 implementation-ready steps |
 | **Affected Files** | At least 1 concrete file path |
 | **Kill Criteria** | At least 1 condition under which the plan is abandoned |
@@ -126,6 +126,10 @@ A plan without explicit kill criteria has no exit ramp. Teams keep working on it
 
 Bad kill criteria: "if it does not work" — too vague.
 Good kill criteria: "if benchmark X exceeds 200ms after Step 3", "if user testing in Exploration-A reveals nobody uses the feature", "if dependency Y has not landed by date Z".
+
+### Pruning Rule (Migrations & Refactors)
+
+For PRD plans of type *migration*, *refactor*, or *cleanup*, an empty `REMOVED / Obsoleted` section is a G2 blocker. The default assumption is: if the data model or a component changes, something upstream or downstream becomes dead weight. The plan must either name what is deleted *or* justify why every existing dependency is still load-bearing after the change.
 
 ---
 
@@ -193,6 +197,11 @@ Why is this needed? What existing systems are affected?
 ### NOT in Scope
 - What is explicitly excluded
 - Cross-reference to other plans where boundaries overlap: "See EXP-063 for Skia rendering"
+
+### REMOVED / Obsoleted
+- What this change makes obsolete and deletes (files, modules, fields, flags, dependencies)
+- Use `—` only for purely additive changes
+- For each entry: why it is safe to remove
 
 ## Steps
 1. Step 1

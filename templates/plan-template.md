@@ -24,6 +24,9 @@ evidence:
   hypothesis: —          # what we believed before this gate
   result: —              # what we observed
   reasoning: —           # why that justifies the transition
+effort: —                # optional, 1-5 (portfolio heatmap)
+value: —                 # optional, 1-5 (portfolio heatmap)
+risk: —                  # optional, 1-5 (portfolio heatmap)
 ---
 
 # <TYPE>-NNN: <Plan Title>
@@ -42,6 +45,11 @@ Why is this needed? What existing systems are affected?
 ### NOT in Scope
 - What is explicitly excluded
 - Cross-reference to other plans where boundaries overlap: "See EXP-063 for ..."
+
+### REMOVED / Obsoleted
+- What this change makes obsolete and therefore **deletes** (files, modules, fields, flags, dependencies)
+- If nothing is removed, state "—" explicitly. Empty is not allowed.
+- For each entry: *why* it is safe to remove (no remaining callers, replaced by X, unused since Y)
 
 ## Steps
 1. Step 1
@@ -68,7 +76,7 @@ Why is this needed? What existing systems are affected?
 
 ## Minimum Substance
 
-A plan must contain all six sections above (Goal, Scope, Steps, Affected Files, **Kill Criteria**, Acceptance Criteria) **and** a non-empty `evidence:` block before requesting its gate. Plans missing any element are notes, not plans. See [plan-granularity](../guidelines/plan-granularity.md) and [uncertainty-reduction](../guidelines/uncertainty-reduction.md).
+A plan must contain all six sections above (Goal, Scope, Steps, Affected Files, **Kill Criteria**, Acceptance Criteria) **and** a non-empty `evidence:` block before requesting its gate. The Scope section must have all three subsections filled — `REMOVED / Obsoleted` may be `—` only when the change is purely additive. Plans missing any element are notes, not plans. See [plan-granularity](../guidelines/plan-granularity.md) and [uncertainty-reduction](../guidelines/uncertainty-reduction.md).
 
 ## Provenance
 
@@ -105,6 +113,9 @@ evidence:
   hypothesis: —
   result: —
   reasoning: —
+effort: —                # optional, 1-5 (portfolio heatmap)
+value: —                 # optional, 1-5 (portfolio heatmap)
+risk: —                  # optional, 1-5 (portfolio heatmap)
 ---
 
 # §<number> <Plan Title>
@@ -122,6 +133,11 @@ Why is this needed? What existing systems are affected?
 
 ### NOT in Scope
 - What is explicitly excluded
+
+### REMOVED / Obsoleted
+- What this change makes obsolete and therefore **deletes** (files, modules, fields, flags, dependencies)
+- If nothing is removed, state "—" explicitly. Empty is not allowed.
+- For each entry: *why* it is safe to remove (no remaining callers, replaced by X, unused since Y)
 
 ## Steps
 1. Step 1
