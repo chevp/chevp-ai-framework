@@ -1,0 +1,22 @@
+{
+  "repo": "owner/repo",
+  "repo_url_prefix": "https://github.com/owner/repo",
+  "plan_dirs": [
+    "context/plans"
+  ],
+  "phase_include": ["backlog", "active"],
+  "title_format": "{{id}} — {{title}}",
+  "labels": {
+    "type_prefix": "type:",
+    "phase_from_frontmatter": true,
+    "phase_frontmatter_field": "status",
+    "phase_prefix": "phase:",
+    "area_from_paragraph": true,
+    "area_prefix": "area:",
+    "area_names": {
+      "1": "design-system",
+      "2": "backend"
+    }
+  },
+  "extra_labels": ["plan"]
+}
