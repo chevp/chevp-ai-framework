@@ -34,6 +34,13 @@ What should be achieved? (2–3 sentences, concrete and measurable)
 ## Context
 Why is this needed? What existing systems are affected?
 
+## Vision Alignment
+- **Outcome this serves** — which product-level outcome / north-star does this advance? (one line)
+- **Builds on / contradicts** — prior plans or ADRs this extends, or that it contradicts
+- **Problem evidence** — *measured* (tickets, usage, explicit user ask) or *hypothetical*?
+
+If nothing applies (pure refactor, internal tooling), state `—` with a one-line reason.
+
 ## Scope
 
 ### IN Scope
@@ -73,7 +80,7 @@ Why is this needed? What existing systems are affected?
 
 ## Minimum Substance
 
-A plan must contain all six sections above (Goal, Scope, Steps, Affected Files, **Kill Criteria**, Acceptance Criteria) **and** a non-empty `evidence:` block before requesting its gate. The Scope section must have all three subsections filled — `REMOVED / Obsoleted` may be `—` only when the change is purely additive. Plans missing any element are notes, not plans. See [plan-granularity](../guidelines/plan-granularity.md) and [uncertainty-reduction](../guidelines/uncertainty-reduction.md).
+A plan must contain all seven sections above (Goal, **Vision Alignment**, Scope, Steps, Affected Files, **Kill Criteria**, Acceptance Criteria) **and** a non-empty `evidence:` block before requesting its gate. `Vision Alignment` may be `—` with a stated reason when the plan is a pure refactor or internal tooling. The Scope section must have all three subsections filled — `REMOVED / Obsoleted` may be `—` only when the change is purely additive. Plans missing any element are notes, not plans. See [plan-granularity](../guidelines/plan-granularity.md) and [uncertainty-reduction](../guidelines/uncertainty-reduction.md).
 
 ## Provenance
 
@@ -119,6 +126,13 @@ What should be achieved? (2–3 sentences, concrete and measurable)
 
 ## Context
 Why is this needed? What existing systems are affected?
+
+## Vision Alignment
+- **Outcome this serves** — which product-level outcome / north-star does this advance? (one line)
+- **Builds on / contradicts** — prior plans or ADRs this extends, or that it contradicts
+- **Problem evidence** — *measured* (tickets, usage, explicit user ask) or *hypothetical*?
+
+If nothing applies (pure refactor, internal tooling), state `—` with a one-line reason.
 
 ## Scope
 

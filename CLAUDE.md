@@ -25,7 +25,7 @@ This framework is **process-driven, not spec-driven**. The spec is not the start
 8. **Approval requires evidence** — Every gate transition records `hypothesis` / `result` / `reasoning` in the plan's `evidence:` block; rubber-stamp approval is forbidden (see [uncertainty-reduction](guidelines/uncertainty-reduction.md))
 9. **Every Exploration produces learning** — `insights.md` is mandatory before G2; the lifecycle is a loop, not a pipeline
 10. **Every plan can be killed** — `Kill Criteria` is a mandatory section; plans without exit ramps accumulate sunken cost
-11. **AI critiques itself** — The **Challenger** role produces top-3 failure modes, ≥2 alternatives, and the strongest counter-argument before every G2 (see [02-exploration/challenger.md](02-exploration/challenger.md))
+11. **AI critiques itself** — The **Challenger** role produces top-3 failure modes, ≥2 alternatives, the strongest counter-argument, and a product-coherence check before every G2 (see [02-exploration/challenger.md](02-exploration/challenger.md))
 12. **Out-of-scope items become proposals, never disappear** — Gatekeeper subagents (G1/G2/G3) read each plan's NOT-in-Scope and Challenger output and spawn `PROP-NNN` proposals for human triage (see [templates/plan-proposal-template.md](templates/plan-proposal-template.md))
 
 ## Lifecycle: 3 Steps × 7 Roles × 3 Modes

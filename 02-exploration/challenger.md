@@ -8,7 +8,7 @@ Without an internal sceptic, the AI proposes and the human approves — and the 
 
 ## Mandatory Output
 
-Before requesting G2 approval, the AI MUST produce a Challenger block in the EXP plan (or alongside it). The block contains exactly three sections:
+Before requesting G2 approval, the AI MUST produce a Challenger block in the EXP plan (or alongside it). The block contains exactly four sections:
 
 ### 1. Top-3 ways this approach could fail
 
@@ -33,6 +33,16 @@ A list with one alternative is incomplete. A list where every alternative is "do
 One paragraph stating, in the *first person* and as charitably as possible, the case **against** the chosen approach. The Challenger pretends to be the sharpest reviewer the team has and writes the objection it would make.
 
 If this paragraph reads like a strawman, it has failed.
+
+### 4. Product-coherence check
+
+One paragraph answering three questions:
+
+- **Vision fit** — Does the plan's `## Vision Alignment` hold up under this proposal, or does building drift the product away from it?
+- **Decision continuity** — Does this build on or silently contradict prior approved plans and ADRs?
+- **Problem validation** — Is the user problem *measured* (tickets, usage, explicit ask) or *hypothetical*?
+
+If the plan's `## Vision Alignment` is `—`, confirm the stated reason is plausible; otherwise critique the alignment claim directly. If the plan has no `## Vision Alignment` section at all, say so — the absence itself is a finding for G2. A paragraph that answers all three with "fine, aligned, measured" and no specifics is theatre — regenerate.
 
 ## Where the output lives
 

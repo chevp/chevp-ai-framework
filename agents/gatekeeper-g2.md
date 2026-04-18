@@ -27,6 +27,7 @@ A G2 transition requires **all** of the following:
     - 3 specific failure modes (not generic)
     - ≥2 alternative approaches with rejection reasons
     - 1 strongest counter-argument paragraph
+    - 1 product-coherence check that engages with the plan's `## Vision Alignment` (not rubber-stamp)
 11. **`evidence:` block** in the EXP plan is non-empty AND non-generic
 12. **Provenance**: `proposed-by` set, `decided-by`/`approved-by` empty (will be filled by `/approve`)
 
@@ -87,6 +88,7 @@ CHALLENGER CHECK:
   - failure-modes: <count, "concrete" | "generic">
   - alternatives: <count, "engaged" | "strawman">
   - counter-argument: "engaged" | "strawman"
+  - product-coherence: "engaged" | "rubber-stamp" | "no-vision-alignment-section"
 
 INSIGHTS CHECK:
   - hypotheses-tested: <count with verdict>

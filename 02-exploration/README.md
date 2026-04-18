@@ -84,7 +84,7 @@ After Context is complete (G1 passed). Always for features, architecture changes
 - [ ] Prototype exists and is visually confirmed (where applicable)
 - [ ] Insights from prototype have been fed back into spec (if needed)
 - [ ] **`insights.md`** exists and is non-empty — at least one hypothesis confirmed/killed
-- [ ] **Challenger output** present: Top-3 failure modes, ≥2 alternatives, strongest counter-argument
+- [ ] **Challenger output** present: Top-3 failure modes, ≥2 alternatives, strongest counter-argument, product-coherence check
 - [ ] **Evidence block** filled in plan frontmatter (`hypothesis` / `result` / `reasoning`)
 - [ ] **Gatekeeper-G2 verdict** recorded (`pass` or `conditional-pass` with proposals filed)
 - [ ] **Human has approved the plan/spec** (evidence-based, not rubber-stamp)
