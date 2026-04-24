@@ -12,12 +12,12 @@ It is the primary control mechanism for AI behavior in a project.
 The most important block in every project CLAUDE.md — place it at the top, before any project-specific content:
 
 ```markdown
-## STOP — Before Any Change
+## Before Writing Code
 
-DO NOT create, edit, or delete any file before:
-1. The chevp-ai-framework has been loaded:
+Reads, greps and explanations are always free. Before you **create, edit or delete** any file:
+1. Load the framework:
    @url https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
-2. The AI has determined the current lifecycle step (Context / Exploration / Production) and announced it
+2. Announce the inferred lifecycle step (Context / Exploration / Production)
 ```
 
 ## Hierarchy

@@ -135,6 +135,49 @@ No manual session state block, prompt headers, or mode declarations are required
 
 ---
 
+## Interaction Protocol
+
+The AI interacts with the human via **two UI primitives only**. Free-form prose for decision points is forbidden — every choice is a click, every artifact is a draft you accept or edit.
+
+| Primitive | Use for | Tool |
+|-----------|---------|------|
+| **Clickable Question** | All discrete decisions (the 6 per step listed below) | `AskUserQuestion` — 2-4 labeled options + automatic "Other" text field |
+| **Draft-Confirm** | All free-form artifacts (Problem Statement, Hypotheses, ADR body, plan text, scope edits) | Generate markdown draft → `AskUserQuestion` with options: `accept` / `edit inline` / `regenerate` / `other` |
+
+**Self-check rule:** If the AI catches itself writing "Shall we…", "Do you want…", "Which would you prefer…", or any other open question that has a finite answer set, it MUST convert the sentence into an `AskUserQuestion` call before sending the response.
+
+### The 6 Decisions per Step
+
+Each step has exactly **6 discrete decisions** that the human owns. The AI never decides these silently — each is presented as a Clickable Question.
+
+**Context (toward G1)**
+1. Confirm the **Problem Statement** (accept / edit / regenerate)
+2. Confirm the **Hypotheses** (accept / edit / regenerate)
+3. Confirm the **Risks** (accept / edit / regenerate)
+4. Approve the **System Spec & Architecture** snapshot (accept / edit / regenerate)
+5. Confirm **scope** — what is in / out / uncertain
+6. **Pass G1** → Exploration (approve / reject / revise)
+
+**Exploration (toward G2)**
+1. Choose **`exploration-mode`** — A (plan-first) or B (prototype-first)
+2. Approve the **Feature Plan/Spec** (accept / edit / regenerate)
+3. Pick among **Challenger alternatives** (≥2 options + counter-argument)
+4. Confirm the **prototype validation** result (works / partial / fails → kill)
+5. Confirm **Kill Criteria** and **`insights.md`** are recorded
+6. **Pass G2** → Production (approve / reject / revise)
+
+**Production (toward G3)**
+1. Approve **start of PRD execution** against the approved plan
+2. Approve any **scope change** or **fallback to Exploration** when triggered
+3. Approve **commits / PR** at boundary points (not every file)
+4. Confirm **acceptance criteria** fulfilled (each criterion: pass / fail)
+5. Confirm **`insights.md`** updated with implementation surprises
+6. **Pass G3** → Done (approve / reject / revise)
+
+Out-of-scope items raised at any decision point become `PROP-NNN` proposals (Rule #12) — they never disappear into prose.
+
+---
+
 ## Mandatory Deliverables per Step
 
 | Deliverable | Context | Exploration | Production |

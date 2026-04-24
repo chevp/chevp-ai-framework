@@ -1,7 +1,7 @@
 # Modular Composition Approach
 
 <p align="center">
-  <img src="images/matrix-multiplication.png" alt="Modular Framework Composition" width="680" />
+  <img src="../images/matrix-multiplication.png" alt="Modular Framework Composition" width="680" />
 </p>
 
 ## Why Separate Domains and a Shared Core?
@@ -15,7 +15,7 @@ The **chevp-ai-framework** serves as the **stable base layer**. It defines the f
 ## Domain Matrices
 
 <p align="center">
-  <img src="images/core-matrix.png" alt="Modular Framework Matrix Multiplication" width="680" />
+  <img src="../images/core-matrix.png" alt="Modular Framework Matrix Multiplication" width="680" />
 </p>
 
 Specific domain frameworks — for example targeting games, UI, or enterprise-specific knowledge — act as **additional layers** that are composed with the base to produce contextually enriched results.

@@ -27,6 +27,7 @@ This framework is **process-driven, not spec-driven**. The spec is not the start
 10. **Every plan can be killed** — `Kill Criteria` is a mandatory section; plans without exit ramps accumulate sunken cost
 11. **AI critiques itself** — The **Challenger** role produces top-3 failure modes, ≥2 alternatives, the strongest counter-argument, and a product-coherence check before every G2 (see [02-exploration/challenger.md](02-exploration/challenger.md))
 12. **Out-of-scope items become proposals, never disappear** — Gatekeeper subagents (G1/G2/G3) read each plan's NOT-in-Scope and Challenger output and spawn `PROP-NNN` proposals for human triage (see [templates/plan-proposal-template.md](templates/plan-proposal-template.md))
+13. **Decisions are clickable, not typed** — Every discrete decision (gate transition, scope in/out, option A vs B, ADR choice, approve/reject/revise) MUST be presented via `AskUserQuestion` with 2-4 labeled options + "Other" text field. Free-form prose ("Shall we proceed?") is forbidden for decision points — see [LIFECYCLE.md — Interaction Protocol](LIFECYCLE.md#interaction-protocol).
 
 ## Lifecycle: 3 Steps × 7 Roles × 3 Modes
 
@@ -69,6 +70,17 @@ Plus, on every gate: filled `evidence:` block (`hypothesis` / `result` / `reason
 | **G1** | Context → Exploration | CTX confirmed, **uncertainty triplet** (Problem Statement / Hypotheses / Risks) drafted, System Spec + Architecture + ADRs + Context Inventory exist, scope confirmed, `evidence:` filled, `gatekeeper-g1` verdict recorded |
 | **G2** | Exploration → Production | Feature plan/spec approved with `exploration-mode`, prototype confirmed, **Kill Criteria + `insights.md` + Challenger output** present, `evidence:` filled, `gatekeeper-g2` verdict recorded |
 | **G3** | Production → Done | PRD approved, all acceptance criteria fulfilled, build passes, `insights.md` updated with implementation surprises, `evidence:` filled, `gatekeeper-g3` verdict recorded, human approved |
+
+### Interaction Protocol (Claude Code)
+
+The AI interacts with the human via **two UI primitives only**:
+
+| Primitive | Use for | Tool |
+|-----------|---------|------|
+| **Clickable Question** | All discrete decisions (6 per step, see LIFECYCLE.md) | `AskUserQuestion` — 2-4 options + Other |
+| **Draft-Confirm** | All free-form artifacts (Problem Statement, Hypotheses, ADR body, plan text) | Generate markdown draft → `AskUserQuestion`: `accept` / `edit inline` / `regenerate` / `other` |
+
+**Rule:** The AI does not ask open questions in prose. Every decision is a click. Every artifact is a draft you accept or edit. If the AI catches itself writing "Shall we...", "Do you want...", "Which would you prefer...", it MUST convert the sentence into an `AskUserQuestion` call before sending.
 
 Within each step, **7 cross-cutting roles** operate:
 **SDLC** · **AI-Plans** · **UX-Tooling** · **DevOps** · **Software-Architecture** · **Context-Engineering** · **Challenger**

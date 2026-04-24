@@ -5,12 +5,12 @@
 ```markdown
 # CLAUDE.md — <Project Name>
 
-## STOP — Before Any Change
+## Before Writing Code
 
-DO NOT create, edit, or delete any file before:
-1. The chevp-ai-framework has been loaded:
+Reads, greps and explanations are always free. Before you **create, edit or delete** any file:
+1. Load the framework:
    @url https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md
-2. The AI has determined the current lifecycle step (Context / Exploration / Production) and announced it
+2. Announce the inferred lifecycle step (Context / Exploration / Production)
 
 > Note: The 3-step lifecycle applies per task, not per project. Every change starts at Context.
 

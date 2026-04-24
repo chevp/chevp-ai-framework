@@ -27,7 +27,7 @@ User feedback: the current site is conceptually solid but too generic and hard t
 - [x] [docs/index.html](../../docs/index.html) — current single landing page (377 lines, Tailwind CDN, Arctic theme, Glassmorphism)
 - [x] [docs/presentation.html](../../docs/presentation.html) — slide deck (out of scope for this CTX)
 - [x] [.github/workflows/build-dist.yml](../../.github/workflows/build-dist.yml) — Pages deployment (copies `docs/*.html` + `docs/images/` + `dist/chevp-ai-framework.md` to `_site/`)
-- [ ] [MODULAR-MATRIX-APPROACH.md](../../MODULAR-MATRIX-APPROACH.md) — possibly relevant for the "Components" section
+- [ ] [guidelines/modular-composition.md](../../guidelines/modular-composition.md) — possibly relevant for the "Components" section
 - [ ] [integration/](../../integration/) — source for a future integration page
 - [ ] Sibling project sites (e.g. `chevp-workflow`, `nuna-ai-framework`) — check for style and link conventions
 
