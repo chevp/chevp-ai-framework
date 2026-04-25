@@ -146,6 +146,23 @@ The AI interacts with the human via **two UI primitives only**. Free-form prose 
 
 **Self-check rule:** If the AI catches itself writing "Shall we…", "Do you want…", "Which would you prefer…", or any other open question that has a finite answer set, it MUST convert the sentence into an `AskUserQuestion` call before sending the response.
 
+### Ad-hoc Decision Forks
+
+The 6 Decisions per Step (below) are the **planned** decision points. But forks also surface mid-work — when the AI hits a place where two or more architecturally plausible options exist and the human (not the AI) should make the call. These ad-hoc forks follow the same Clickable-Question primitive.
+
+**Trigger.** Surface a fork structurally — not as prose — whenever **all three** hold:
+1. Two or more options are architecturally plausible (not just a clear best + obvious losers).
+2. The choice is owned by the human (taste, scope, product fit, irreversible commitment) — not a pure implementation detail the AI can decide silently.
+3. The decision affects subsequent work (changes the plan, the artifact, or the next gate's evidence).
+
+**Format.** 2–4 mutually-exclusive options. Each option carries a one-sentence trade-off. One option is marked as the AI's **recommended default** with a one-line reason. Always include the automatic "Other" text field.
+
+**Tooling.** Use `AskUserQuestion` (Claude Code) or the equivalent structured picker in the host environment. Plain prose with a numbered list is only an acceptable fallback when no structured tool is available.
+
+**Negative rule — propose-and-confirm, not open-ended ask.** When the AI has a clear preference from context (only one option is actually viable, or the others would violate an ADR / gate / Kill Criterion), do **not** fabricate a multi-option fork. Instead present a single proposal with two options: `accept` and `discuss alternatives`. Manufacturing fake choices to look collaborative is forbidden — it wastes the human's attention budget that the framework is trying to protect.
+
+**Boundary with the planned 6.** Ad-hoc forks supplement, never replace, the 6 per-step decisions. If an ad-hoc fork turns out to be one of the 6 in disguise (e.g. a scope question), record it in the appropriate slot rather than treating it as bonus interaction.
+
 ### The 6 Decisions per Step
 
 Each step has exactly **6 discrete decisions** that the human owns. The AI never decides these silently — each is presented as a Clickable Question.
