@@ -32,6 +32,10 @@ jobs:
           cp dist/chevp-ai-framework.md _site/chevp-ai-framework.md
           cp docs/index.html _site/index.html
           cp docs/presentation.html _site/presentation.html
+          cp docs/robots.txt _site/robots.txt
+          cp docs/sitemap.xml _site/sitemap.xml
+          cp docs/llms.txt _site/llms.txt
+          cp docs/google*.html _site/ 2>/dev/null || true
           cp -r docs/images _site/images 2>/dev/null || true
 
       - name: Upload Pages artifact

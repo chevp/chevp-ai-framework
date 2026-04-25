@@ -108,8 +108,8 @@ The Markdown files in this repo are the **source of truth**. On top of them, a t
 
 | Layer | Path | Purpose |
 |:------|:-----|:--------|
-| Slash commands | [commands/](commands/) | `/context`, `/explore`, `/produce`, `/gate-check`, `/new-adr`, `/approve`, `/promote`, `/reject`, `/gate-override` |
-| Subagents | [agents/](agents/) | `gatekeeper-g1/g2/g3` (gate validators with proposal-spawning), `architecture-reviewer` |
+| Slash commands | [commands/](commands/) | `/context`, `/explore`, `/produce`, `/gate-check`, `/new-adr`, `/approve`, `/promote`, `/reject`, `/gate-override`, `/governance-audit` |
+| Subagents | [agents/](agents/) | `gatekeeper-g1/g2/g3` (gate validators with proposal-spawning), `architecture-reviewer` (per-change), `governance-auditor` (repo-wide drift detection) |
 | Skills | [skills/](skills/) | Template-driven artifact creation: `create-ctx-plan`, `create-exp-plan`, `create-adr` |
 | Hooks | [hooks/](hooks/) | `mode-context.py` (per-turn lifecycle reminder), `gate-check.py` (blocks code writes without approved plan), `provenance-check.py` (enforces non-empty evidence blocks) |
 

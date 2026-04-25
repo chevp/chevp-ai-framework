@@ -1,0 +1,66 @@
+# chevp-ai-framework
+
+> A 3-step process framework for AI-assisted software development. The human writes naturally; the AI owns the process. The AI writes the code, the human stays in control through enforced quality gates.
+
+The framework is **process-driven, not spec-driven**. The spec is not the starting point — it emerges as an artifact within the Context step. What drives everything forward is the process itself: 3 sequential steps with enforced quality gates. Every step must measurably reduce uncertainty before code is shipped.
+
+## Lifecycle
+
+Three sequential steps, gated by three approvals:
+
+```
+1. Context  ──G1──▶  2. Exploration  ──G2──▶  3. Production  ──G3──▶  Done
+```
+
+- **Context** — Understand the system, gather context, produce foundational artifacts (Problem Statement, Hypotheses, Risks, System Spec, Architecture, ADRs, Context Inventory).
+- **Exploration** — Plan features, prototype, validate the approach (Feature Plan, Kill Criteria, Challenger output, `insights.md`).
+- **Production** — Implement the approved plan, verify, ship (PRD, code, validation, updated docs).
+
+The AI operates in exactly one **mode** at a time (Context / Exploration / Production) and infers it from user intent — no manual mode declarations.
+
+## Core rules
+
+1. Steps are sequential — no step may be skipped
+2. AI enforces, human decides
+3. Context before code
+4. Prototype before production
+5. Ownership stays with the human
+6. Gates are blockers
+7. Decisions are signed (human-only decision fields)
+8. Approval requires evidence (`hypothesis` / `result` / `reasoning`)
+9. Every Exploration produces learning (`insights.md`)
+10. Every plan can be killed (mandatory `Kill Criteria`)
+11. AI critiques itself via the **Challenger** role before each G2
+12. Out-of-scope items become `PROP-NNN` proposals, never disappear
+13. Decisions are clickable (`AskUserQuestion`), not free-form prose
+
+## Roles
+
+Seven cross-cutting roles: SDLC · AI-Plans · UX-Tooling · DevOps · Software-Architecture · Context-Engineering · Challenger.
+
+## Docs
+
+- [Homepage](https://chevp.github.io/chevp-ai-framework/): Overview and pitch
+- [Single-file framework bundle](https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md): Full framework as one Markdown file (CLAUDE.md + LIFECYCLE.md + steps + guidelines + templates) — best entry point for LLMs
+- [Slide deck](https://chevp.github.io/chevp-ai-framework/presentation.html): Visual walkthrough of the lifecycle
+
+## Repository
+
+- [Source on GitHub](https://github.com/chevp/chevp-ai-framework): Authoritative content, all step folders, templates, ADRs, plugin layer
+- [CLAUDE.md](https://github.com/chevp/chevp-ai-framework/blob/main/CLAUDE.md): Top-level rules loaded by Claude Code
+- [LIFECYCLE.md](https://github.com/chevp/chevp-ai-framework/blob/main/LIFECYCLE.md): Full step / role / mode matrix and the 6 decisions per step
+- [01-context/](https://github.com/chevp/chevp-ai-framework/tree/main/01-context): Step 1 — context gathering
+- [02-exploration/](https://github.com/chevp/chevp-ai-framework/tree/main/02-exploration): Step 2 — planning, prototyping, Challenger role
+- [03-production/](https://github.com/chevp/chevp-ai-framework/tree/main/03-production): Step 3 — implementation and verification
+- [templates/](https://github.com/chevp/chevp-ai-framework/tree/main/templates): Plan, ADR, prototype and proposal templates
+- [guidelines/](https://github.com/chevp/chevp-ai-framework/tree/main/guidelines): Cross-cutting quality rules (uncertainty reduction, architecture governance, …)
+
+## Plugin layer (optional)
+
+A Claude Code plugin turns the markdown into callable surface area:
+
+- Slash commands: `/context`, `/explore`, `/produce`, `/gate-check`, `/new-adr`, `/approve`, `/promote`, `/reject`, `/gate-override`
+- Subagents: `gatekeeper-g1` / `gatekeeper-g2` / `gatekeeper-g3`, `architecture-reviewer`
+- Hooks: `mode-context.py`, `gate-check.py`, `provenance-check.py`
+
+The plugin is additive — without it, the framework still works via `@url` loading and AI discipline. With it, gate enforcement becomes mechanical.
