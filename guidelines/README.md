@@ -40,3 +40,4 @@ The format is defined canonically by [chevp-workflow/guidelines/README.md](https
 | [architecture-governance.md](architecture-governance.md) | Every governed artifact records who proposed and who decided it; `/approve` is the only path to human-signed decisions |
 | [cross-platform.md](cross-platform.md) | If a project targets desktop + mobile, platform parity is enforced from commit #1 — no retrofit |
 | [paragraph-numbering.md](paragraph-numbering.md) | Hierarchical §-numbering for plans — stable, tree-structured IDs organized by thematic chapters |
+| [knowledge-routing.md](knowledge-routing.md) | Project- and reference-knowledge must land in a governance-eligible artifact (ADR, Context Inventory, plan, `insights.md` pointer) — never in free-form memory |
