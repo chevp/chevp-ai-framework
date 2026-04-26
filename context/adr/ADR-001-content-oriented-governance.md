@@ -98,10 +98,11 @@ Triggert den Auditor on-demand und appended das Ergebnis (Finding-Liste, kein Ve
 
 Der Mensch entscheidet Folgemassnahmen via `/approve`, `/reject`, oder ADR-Supersession — das Verfahren bleibt unverändert.
 
-### 4. Erweiterung `guidelines/architecture-governance.md`
+### 4. Erweiterung `guidelines/architecture-governance.md` *(deferred — siehe Amendment 2026-04-26)*
 
-Neue Sektion **"Content Governance"** unterhalb der Provenance-Sektion:
-> Approval ist eine Behauptung an einem Zeitpunkt. Content-Governance prüft, ob die Behauptung über Zeit hält. ADRs ohne Code-Bindung haben kein Drift-Signal — das ist erlaubt, aber dokumentiert.
+~~Neue Sektion **"Content Governance"** unterhalb der Provenance-Sektion.~~
+
+Auf Wunsch des Approvers (2026-04-26) wird die Doku-Sektion zurückgestellt. Begründung: Template, Agent und Slash-Command (Bausteine 1–3) sind selbstdokumentierend und referenzieren einander; eine zusätzliche Erklär-Sektion in `architecture-governance.md` ist nicht erforderlich, um die Layer funktional zu betreiben. Sie kann nachträglich hinzugefügt werden, wenn Audit-Erfahrungen sie rechtfertigen, oder via Supersession-ADR formal aus der Decision entfernt werden. Bis dahin gilt diese Decision-Klausel als **deferred, not implemented**.
 
 ## Alternatives
 
@@ -186,3 +187,11 @@ Das stärkste Argument gegen diesen ADR ist, dass wir ein Problem lösen, das wi
 **Decision continuity**: Baut auf [guidelines/architecture-governance.md](../../guidelines/architecture-governance.md) auf, ergänzt [agents/architecture-reviewer.md](../../agents/architecture-reviewer.md), widerspricht keiner akzeptierten Entscheidung. Der ADR-Template-Hinweis "During drift detection: AI must flag it for review" macht Drift-Detection schon abstrakt zur AI-Pflicht; dieser ADR konkretisiert diese Klausel. Kontinuierlich.
 
 **Problem validation**: Hypothetisch. Es gibt keinen gemessenen Drift-Vorfall, keine Support-Tickets, keine empirisch belegte Lücke. Die stärkste Begründung ist *strukturell* (Provenance ohne Substanz-Check ist verfahrensorientiert) — diese Beobachtung ist plausibel, aber theoretisch. Konsequenz für G2 (falls dieser ADR später in einer EXP umgesetzt wird): die EXP MUSS in `Hypotheses` festhalten, dass Content-Drift erwartet wird, und in `Kill Criteria` definieren, ab wann Ausbleiben von Findings den Auditor retiret.
+
+## Amendments
+
+| Date | Amendment | Proposed-by | Decided-by |
+|------|-----------|-------------|------------|
+| 2026-04-26 | §Decision-4 (Erweiterung `guidelines/architecture-governance.md`) auf **deferred** gesetzt. Bausteine 1–3 (Template, Agent, Slash-Command) bleiben implementiert; die Doku-Sektion in `architecture-governance.md` wird zurückgestellt, weil die anderen Artefakte selbstdokumentierend sind. Kann später ohne Supersession nachgezogen werden. | ai (scribe) | chevp |
+
+Amendments dokumentieren Änderungen an einer bereits `accepted` ADR, ohne sie zu superseden. Sinnvoll, wenn die Decision in der Substanz steht, aber ein Detail (Reichweite, Reihenfolge, Optionalität) sich nach Approval ändert. Strukturelle Änderungen (anderer Mechanismus, anderes Prinzip) erfordern weiterhin eine Supersession-ADR.

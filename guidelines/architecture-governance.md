@@ -100,59 +100,6 @@ Treat governance as queryable state:
 
 If these queries return something surprising, the governance invariant has been broken.
 
-## Content Governance
-
-Provenance answers *who decided*. Evidence answers *on what basis at the gate*. **Content Governance** answers *does the decision still hold in the code*. Specified by [ADR-001](../context/adr/ADR-001-content-oriented-governance.md).
-
-> Approval ist eine Behauptung an einem Zeitpunkt. Content-Governance prüft, ob die Behauptung über Zeit hält. ADRs ohne Code-Bindung haben kein Drift-Signal — das ist erlaubt, aber dokumentiert.
-
-The framework's first three governance layers (frontmatter, evidence, log) are *Verfahren*. Content Governance adds a *Substanz* layer:
-
-| Mechanism | What it catches | When it runs |
-|-----------|-----------------|--------------|
-| `architecture-invariants.md` | Machine-checkable assertions bound to accepted ADRs | Authored alongside ADRs, validated at audit time |
-| [agents/governance-auditor](../agents/governance-auditor.md) | ADR↔code drift, undocumented patterns, obsolete ADRs | On demand via `/governance-audit`; periodically per project policy |
-| `/governance-audit` slash command | Runs the auditor and appends `AUDIT` event to log | Manually triggered |
-
-### How an invariant binds to an ADR
-
-Each non-starter invariant carries a `binding-adr: ADR-NNN` field. This couples the invariant to a decision that has passed a gate, so:
-
-- The invariant has documented provenance (the ADR explains *why*)
-- If the bound ADR is `superseded` or `deprecated`, the invariant is a candidate for retirement
-- The auditor can detect orphan invariants (no `binding-adr`) and orphan ADRs (no invariant binds an imperative claim from the ADR text)
-
-See [templates/architecture-invariants-template.md](../templates/architecture-invariants-template.md) for the schema.
-
-### Locator discipline
-
-The most likely failure mode of this layer is false-positive flood (per ADR-001 §Challenger Failure 2). The template enforces:
-
-- Locator `type` is enumerated (`ast-import` | `grep` | `config-query`) — no free-text dialects
-- `scope.include` is required — empty scope is a configuration error
-- `loose: true` (full-text grep) is opt-in, not default
-
-Under-disciplined locators trigger the kill criterion: after three audit runs with >70% false positives or no actionable findings, the auditor is retired and the template kept as documentation-only.
-
-### Audit events in `governance-log.md`
-
-Audits append a dedicated event type:
-
-```
-2026-04-25  AUDIT  —  proposed:ai  decided:—  "3 BLOCK / 7 CONCERN findings, 1 obsolete ADR candidate"
-```
-
-The `decided:—` placeholder is intentional. An audit is not a decision; it is a measurement. Decisions follow via `/approve`, `/reject`, or supersession on individual findings.
-
-### Content Governance queries
-
-Extending the queryable-state list above:
-
-- *"What `accepted` ADRs have no code binding?"* → grep `accepted` ADRs, cross-reference against `binding-adr:` fields in invariants
-- *"What invariants reference a `superseded` or `deprecated` ADR?"* → audit-time orphan check
-- *"When did we last audit?"* → tail `governance-log.md` filtered by `AUDIT`
-- *"What patterns recur ≥3 times without ADR coverage?"* → governance-auditor's "Undocumented Patterns" output
-
 ## Anti-patterns
 
 | Anti-pattern | Why it breaks governance |
@@ -164,6 +111,3 @@ Extending the queryable-state list above:
 | Squash-merging commits that drop `Decided-By:` trailers | Git-level audit trail is destroyed |
 | Approving a plan with empty `evidence:` block | Approval becomes rubber-stamp; the governance/evidence pair collapses |
 | Filling `evidence:` with the plan's Goal verbatim | Evidence theater; gatekeeper must reject |
-| Invariant without `binding-adr` (outside starter pack) | Decision provenance for the rule is missing |
-| Default `loose: true` on locators | False-positive flood; auditor signal degrades fast and the layer self-retires |
-| Letting an ADR remain `accepted` after the bound symbol/library is removed | Governance state diverges from code reality |
