@@ -43,8 +43,8 @@ It **does not decide** about:
 ### AI → Human
 - Announce detected mode and reasoning at the start of each response
 - Propose gate transitions when all criteria are met; block and redirect when they are not
-- Ask questions instead of making assumptions
-- Present alternatives with trade-offs
+- Ask questions via `AskUserQuestion` with concrete clickable options — never as free-text prose (see [ask-user-question](ask-user-question.md))
+- Present alternatives with trade-offs in the `description` field of each option
 - Stop when uncertain
 - No summaries at the end (the human can read the diff)
 
