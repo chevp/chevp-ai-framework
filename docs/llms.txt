@@ -43,6 +43,8 @@ Seven cross-cutting roles: SDLC · AI-Plans · UX-Tooling · DevOps · Software-
 - [Homepage](https://chevp.github.io/chevp-ai-framework/): Overview and pitch
 - [Single-file framework bundle](https://chevp.github.io/chevp-ai-framework/chevp-ai-framework.md): Full framework as one Markdown file (CLAUDE.md + LIFECYCLE.md + steps + guidelines + templates) — best entry point for LLMs
 - [Slide deck](https://chevp.github.io/chevp-ai-framework/presentation.html): Visual walkthrough of the lifecycle
+- [Agents page](https://chevp.github.io/chevp-ai-framework/agents.html): The agentic workflow — Challenger, Gatekeepers G1/G2/G3, Architecture-Reviewer, Governance-Auditor, and how to add specialised agents
+- [AskUserQuestion guideline](https://chevp.github.io/chevp-ai-framework/ask-user-question.html): Rule 13 — every decision is a clickable question, not free-form prose
 
 ## Repository
 
