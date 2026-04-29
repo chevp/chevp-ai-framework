@@ -176,21 +176,18 @@
   <!-- Header -->
   <header class="h-16 glass border-b border-slate-700/50 flex items-center justify-between px-6 diagonal-stripes sticky top-0 z-50">
     <div class="flex items-center gap-4">
-      <span class="material-symbols-outlined text-arctic-400 text-3xl">psychology</span>
-      <h1 class="text-xl font-bold gradient-text">chevp-ai-framework</h1>
+      <a href="index.html" class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-arctic-400 text-3xl">psychology</span>
+        <h1 class="text-xl font-bold gradient-text">chevp-ai-framework</h1>
+      </a>
     </div>
     <div class="flex items-center gap-4">
-      <a href="#example" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Example</a>
-      <a href="#audience" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">For Whom</a>
-      <a href="#how" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">How it Works</a>
-      <a href="#quickstart" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Quick Start</a>
-      <a href="#faq" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">FAQ</a>
-      <a href="agents.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm flex items-center gap-1">
-        <span class="material-symbols-outlined text-base">groups</span> Agents
-      </a>
-      <a href="presentation.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm flex items-center gap-1">
-        <span class="material-symbols-outlined text-base">slideshow</span> Slides
-      </a>
+      <a href="lifecycle.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Lifecycle</a>
+      <a href="gates.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Gates</a>
+      <a href="guidelines.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Guidelines</a>
+      <a href="commands.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Commands</a>
+      <a href="agents.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Agents</a>
+      <a href="templates.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Templates</a>
       <a href="https://github.com/chevp/chevp-ai-framework" target="_blank" class="text-slate-400 hover:text-slate-200 transition-colors">
         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
       </a>
@@ -385,50 +382,73 @@
     </div>
   </section>
 
-  <!-- Guidelines spotlight -->
-  <section class="max-w-4xl mx-auto px-6 py-12">
-    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Guidelines</h2>
-    <p class="text-slate-500 text-center text-sm mb-8">Cross-cutting quality rules that shape every interaction</p>
+  <!-- Deep dive -->
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Deep dive</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">Browse the framework topic by topic</p>
 
-    <a href="ask-user-question.html" class="block max-w-3xl mx-auto card glass rounded-xl p-6 group">
-      <div class="relative z-10 flex items-start gap-5">
-        <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-arctic-500/10 border border-arctic-500/30 flex items-center justify-center">
-          <span class="material-symbols-outlined text-arctic-400 text-2xl">quiz</span>
-        </div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2 mb-1">
-            <span class="text-[10px] font-semibold text-arctic-400 uppercase tracking-wider">Rule 13</span>
-            <span class="text-slate-600">&middot;</span>
-            <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Guideline</span>
-          </div>
-          <h3 class="font-semibold text-slate-100 mb-2">AskUserQuestion &mdash; how the AI asks the human</h3>
-          <p class="text-slate-400 text-sm">Every decision is a clickable question with concrete options &mdash; not a wall of prose ending in <code class="text-arctic-400 text-xs">?</code>. Read the rule, anatomy, and worked examples.</p>
-        </div>
-        <div class="flex-shrink-0 self-center text-slate-500 group-hover:text-arctic-400 transition-colors">
-          <span class="material-symbols-outlined">arrow_forward</span>
-        </div>
-      </div>
-    </a>
-
-    <a href="agents.html" class="block max-w-3xl mx-auto card glass rounded-xl p-6 group mt-5">
-      <div class="relative z-10 flex items-start gap-5">
-        <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-arctic-500/10 border border-arctic-500/30 flex items-center justify-center">
-          <span class="material-symbols-outlined text-arctic-400 text-2xl">groups</span>
-        </div>
-        <div class="flex-1">
-          <div class="flex items-center gap-2 mb-1">
-            <span class="text-[10px] font-semibold text-arctic-400 uppercase tracking-wider">Architecture</span>
-            <span class="text-slate-600">&middot;</span>
-            <span class="text-[10px] font-semibold text-slate-500 uppercase tracking-wider">Agentic Workflow</span>
-          </div>
-          <h3 class="font-semibold text-slate-100 mb-2">Agents &mdash; many small reviewers, one orchestrator</h3>
-          <p class="text-slate-400 text-sm">Challenger, Gatekeepers G1/G2/G3, Architecture-Reviewer, Governance-Auditor &mdash; each owns one slice of the lifecycle. See where each runs and how to add your own.</p>
-        </div>
-        <div class="flex-shrink-0 self-center text-slate-500 group-hover:text-arctic-400 transition-colors">
-          <span class="material-symbols-outlined">arrow_forward</span>
-        </div>
-      </div>
-    </a>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <a href="lifecycle.html" class="card glass rounded-xl p-5 block"><div class="relative z-10">
+        <span class="material-symbols-outlined text-arctic-400 mb-2 block">timeline</span>
+        <h3 class="font-semibold text-slate-100 text-sm mb-1">Lifecycle</h3>
+        <p class="text-slate-500 text-xs">3 steps &times; 7 roles &times; 3 modes. The 6 decisions per step.</p>
+      </div></a>
+      <a href="gates.html" class="card glass rounded-xl p-5 block"><div class="relative z-10">
+        <span class="material-symbols-outlined text-arctic-400 mb-2 block">verified</span>
+        <h3 class="font-semibold text-slate-100 text-sm mb-1">Quality Gates</h3>
+        <p class="text-slate-500 text-xs">G1 / G2 / G3 evidence-based gates. Approval requires evidence.</p>
+      </div></a>
+      <a href="uncertainty-reduction.html" class="card glass rounded-xl p-5 block"><div class="relative z-10">
+        <span class="material-symbols-outlined text-arctic-400 mb-2 block">trending_down</span>
+        <h3 class="font-semibold text-slate-100 text-sm mb-1">Uncertainty Reduction</h3>
+        <p class="text-slate-500 text-xs">Core principle &mdash; every step measurably reduces uncertainty.</p>
+      </div></a>
+      <a href="challenger.html" class="card glass rounded-xl p-5 block"><div class="relative z-10">
+        <span class="material-symbols-outlined text-arctic-400 mb-2 block">person_alert</span>
+        <h3 class="font-semibold text-slate-100 text-sm mb-1">Challenger</h3>
+        <p class="text-slate-500 text-xs">Internal sceptic. Top-3 failures, &ge;2 alternatives, counter-argument.</p>
+      </div></a>
+      <a href="agents.html" class="card glass rounded-xl p-5 block"><div class="relative z-10">
+        <span class="material-symbols-outlined text-arctic-400 mb-2 block">groups</span>
+        <h3 class="font-semibold text-slate-100 text-sm mb-1">Agents</h3>
+        <p class="text-slate-500 text-xs">Gatekeepers, Architecture-Reviewer, Governance-Auditor.</p>
+      </div></a>
+      <a href="ask-user-question.html" class="card glass rounded-xl p-5 block"><div class="relative z-10">
+        <span class="material-symbols-outlined text-arctic-400 mb-2 block">quiz</span>
+        <h3 class="font-semibold text-slate-100 text-sm mb-1">AskUserQuestion</h3>
+        <p class="text-slate-500 text-xs">Every decision is a click. Free-text questions are forbidden.</p>
+      </div></a>
+      <a href="commands.html" class="card glass rounded-xl p-5 block"><div class="relative z-10">
+        <span class="material-symbols-outlined text-arctic-400 mb-2 block">terminal</span>
+        <h3 class="font-semibold text-slate-100 text-sm mb-1">Commands</h3>
+        <p class="text-slate-500 text-xs">/context /explore /produce /gate-check /approve /promote &hellip;</p>
+      </div></a>
+      <a href="skills.html" class="card glass rounded-xl p-5 block"><div class="relative z-10">
+        <span class="material-symbols-outlined text-arctic-400 mb-2 block">extension</span>
+        <h3 class="font-semibold text-slate-100 text-sm mb-1">Skills</h3>
+        <p class="text-slate-500 text-xs">create-adr, create-ctx-plan, create-exp-plan, sync-plan-issues.</p>
+      </div></a>
+      <a href="hooks.html" class="card glass rounded-xl p-5 block"><div class="relative z-10">
+        <span class="material-symbols-outlined text-arctic-400 mb-2 block">webhook</span>
+        <h3 class="font-semibold text-slate-100 text-sm mb-1">Hooks</h3>
+        <p class="text-slate-500 text-xs">Mode reminder, gate enforcement, provenance check.</p>
+      </div></a>
+      <a href="templates.html" class="card glass rounded-xl p-5 block"><div class="relative z-10">
+        <span class="material-symbols-outlined text-arctic-400 mb-2 block">description</span>
+        <h3 class="font-semibold text-slate-100 text-sm mb-1">Templates</h3>
+        <p class="text-slate-500 text-xs">16 ready-to-use templates &mdash; ADR, plans, problem statement&hellip;</p>
+      </div></a>
+      <a href="guidelines.html" class="card glass rounded-xl p-5 block"><div class="relative z-10">
+        <span class="material-symbols-outlined text-arctic-400 mb-2 block">gavel</span>
+        <h3 class="font-semibold text-slate-100 text-sm mb-1">Guidelines</h3>
+        <p class="text-slate-500 text-xs">10 cross-cutting rules &mdash; uncertainty, governance, knowledge routing &hellip;</p>
+      </div></a>
+      <a href="integration.html" class="card glass rounded-xl p-5 block"><div class="relative z-10">
+        <span class="material-symbols-outlined text-arctic-400 mb-2 block">hub</span>
+        <h3 class="font-semibold text-slate-100 text-sm mb-1">Integration</h3>
+        <p class="text-slate-500 text-xs">Kanban, Scrum, SAFe, monorepos, Power Sessions.</p>
+      </div></a>
+    </div>
   </section>
 
   <!-- Quick Start -->

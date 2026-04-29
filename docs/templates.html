@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Templates &mdash; chevp-ai-framework</title>
+  <meta name="description" content="The 16 templates of chevp-ai-framework: ADR, plans, problem statement, hypotheses, risks, insights, kill criteria, prototype, and more.">
+  <link rel="canonical" href="https://chevp.github.io/chevp-ai-framework/templates.html">
+  <link rel="icon" type="image/png" href="https://chevp.github.io/chevp-ai-framework/images/chevp-ai-framework.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config = { theme: { extend: { colors: { arctic: { 50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e' } } } } }</script>
+  <style>
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    code, pre, .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .diagonal-stripes { background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 20px); }
+    .grid-bg { background-image: linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px); background-size: 20px 20px; }
+    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+    .gradient-text { background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .card { transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .card::before { content:''; position:absolute; top:0;left:0;right:0;bottom:0; background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(37,99,235,0.1)); opacity:0; transition: opacity 0.3s ease; }
+    .card:hover::before { opacity:1; }
+    .card:hover { transform: translateY(-2px); border-color: rgba(59,130,246,0.5); box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .step-tag { font-size:10px; font-weight:600; padding:2px 8px; border-radius:999px; letter-spacing:0.04em; text-transform:uppercase; }
+    .step-ctx { background:rgba(56,189,248,0.12); color:#7dd3fc; border:1px solid rgba(56,189,248,0.3); }
+    .step-exp { background:rgba(168,85,247,0.12); color:#c4b5fd; border:1px solid rgba(168,85,247,0.3); }
+    .step-prd { background:rgba(34,197,94,0.12); color:#86efac; border:1px solid rgba(34,197,94,0.3); }
+    .step-all { background:rgba(245,158,11,0.12); color:#fcd34d; border:1px solid rgba(245,158,11,0.3); }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen grid-bg">
+
+  <header class="h-16 glass border-b border-slate-700/50 flex items-center justify-between px-6 diagonal-stripes sticky top-0 z-50">
+    <div class="flex items-center gap-4">
+      <a href="index.html" class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-arctic-400 text-3xl">psychology</span>
+        <h1 class="text-xl font-bold gradient-text">chevp-ai-framework</h1>
+      </a>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="lifecycle.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Lifecycle</a>
+      <a href="gates.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Gates</a>
+      <a href="guidelines.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Guidelines</a>
+      <a href="commands.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Commands</a>
+      <a href="agents.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Agents</a>
+      <a href="templates.html" class="text-arctic-400 hover:text-arctic-300 transition-colors text-sm">Templates</a>
+      <a href="https://github.com/chevp/chevp-ai-framework" target="_blank" class="text-slate-400 hover:text-slate-200 transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <section class="max-w-5xl mx-auto px-6 pt-20 pb-12 text-center">
+    <div class="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full glass text-xs text-slate-400">
+      <span class="material-symbols-outlined text-arctic-400 text-sm">description</span>
+      Templates
+    </div>
+    <h2 class="text-4xl md:text-5xl font-bold mb-4">
+      <span class="gradient-text">Templates</span>
+    </h2>
+    <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-3">
+      Sixteen ready-to-use templates &mdash; the canonical shape of every artifact the framework produces.
+    </p>
+    <p class="text-slate-600 text-sm">Use them directly or via skills like <a href="skills.html" class="text-arctic-400 hover:text-arctic-300">create-adr</a>, <a href="skills.html" class="text-arctic-400 hover:text-arctic-300">create-ctx-plan</a>, <a href="skills.html" class="text-arctic-400 hover:text-arctic-300">create-exp-plan</a>.</p>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Plans &amp; Specs</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/context-plan-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><div class="flex items-center justify-between mb-2"><h3 class="font-semibold text-slate-100">Context-Plan (CTX)</h3><span class="step-tag step-ctx">Context</span></div><p class="text-slate-500 text-xs">What to read/verify, open questions, draft scope boundaries.</p></div></a>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/plan-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><div class="flex items-center justify-between mb-2"><h3 class="font-semibold text-slate-100">Feature Plan (EXP)</h3><span class="step-tag step-exp">Exploration</span></div><p class="text-slate-500 text-xs">Steps, affected files, risks, alternatives, acceptance criteria, Kill Criteria, Challenger.</p></div></a>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/spec-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><div class="flex items-center justify-between mb-2"><h3 class="font-semibold text-slate-100">Feature Spec</h3><span class="step-tag step-exp">Exploration</span></div><p class="text-slate-500 text-xs">Detailed feature specification &mdash; what the feature does, who uses it, how it integrates.</p></div></a>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/production-plan-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><div class="flex items-center justify-between mb-2"><h3 class="font-semibold text-slate-100">Production-Plan (PRD)</h3><span class="step-tag step-prd">Production</span></div><p class="text-slate-500 text-xs">Implementation plan referencing the approved EXP. Approved before any code is written.</p></div></a>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/plan-proposal-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><div class="flex items-center justify-between mb-2"><h3 class="font-semibold text-slate-100">Plan Proposal (PROP-NNN)</h3><span class="step-tag step-all">Any gate</span></div><p class="text-slate-500 text-xs">Out-of-scope items captured at gates. Triaged via <code class="text-arctic-400">/promote</code>, <code class="text-arctic-400">/defer</code>, <code class="text-arctic-400">/reject</code>.</p></div></a>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/plan-registry-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><div class="flex items-center justify-between mb-2"><h3 class="font-semibold text-slate-100">Plan Registry</h3><span class="step-tag step-all">Index</span></div><p class="text-slate-500 text-xs">Index of all plans in the project &mdash; status, dependencies, current step.</p></div></a>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">The Uncertainty Triplet</h2>
+    <p class="text-slate-500 text-center text-sm mb-6">Mandatory before G1</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/problem-statement-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><h3 class="font-semibold text-slate-100 mb-2">Problem Statement</h3><p class="text-slate-500 text-xs">Who has the problem? What fails? Why now?</p></div></a>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/hypotheses-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><h3 class="font-semibold text-slate-100 mb-2">Hypotheses</h3><p class="text-slate-500 text-xs">&ge;2 testable hypotheses + cheapest test + kill criterion.</p></div></a>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/risks-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><h3 class="font-semibold text-slate-100 mb-2">Risks</h3><p class="text-slate-500 text-xs">&ge;3 risks rated, top-3 expensive failure modes.</p></div></a>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Architecture &amp; Decisions</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/adr-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><h3 class="font-semibold text-slate-100 mb-2">ADR &mdash; Architecture Decision Record</h3><p class="text-slate-500 text-xs">Title, Status, Context, Decision, Alternatives, Consequences. Created via <a href="commands.html" class="text-arctic-400">/new-adr</a>.</p></div></a>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/architecture-invariants-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><h3 class="font-semibold text-slate-100 mb-2">Architecture Invariants</h3><p class="text-slate-500 text-xs">Layer rules, forbidden patterns, dependency direction. Project-level extension.</p></div></a>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/domain-patterns-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><h3 class="font-semibold text-slate-100 mb-2">Domain Patterns</h3><p class="text-slate-500 text-xs">Domain-specific patterns and constraints &mdash; for game, UI, data domains.</p></div></a>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/chapter-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><h3 class="font-semibold text-slate-100 mb-2">Chapter (&sect;-numbering)</h3><p class="text-slate-500 text-xs">Top-level thematic area for plans &mdash; goal, scope, guiding questions. See <a href="paragraph-numbering.html" class="text-arctic-400">paragraph-numbering</a>.</p></div></a>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Learning &amp; Prototyping</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/insights-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><h3 class="font-semibold text-slate-100 mb-2">insights.md</h3><p class="text-slate-500 text-xs">Required at end of Exploration. Records confirmed/killed hypotheses + production surprises. Pointers, not free-form prose.</p></div></a>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/ux-prototype-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><h3 class="font-semibold text-slate-100 mb-2">UX Prototype</h3><p class="text-slate-500 text-xs">Visual reference file. Single-screen demo, sketch, or HTML mock. Required for visual/physical features.</p></div></a>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/templates/claude-md-template.md" target="_blank" class="card glass rounded-xl p-5 block"><div class="relative z-10"><h3 class="font-semibold text-slate-100 mb-2">CLAUDE.md</h3><p class="text-slate-500 text-xs">Project-level briefing for every AI agent &mdash; what the project is, file system overview, decisions made.</p></div></a>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto text-center">
+      <span class="material-symbols-outlined text-arctic-400 text-3xl mb-2">menu_book</span>
+      <h3 class="font-semibold text-slate-100 mb-2">Browse all templates</h3>
+      <a href="https://github.com/chevp/chevp-ai-framework/tree/main/templates" target="_blank" class="inline-flex items-center gap-2 text-arctic-400 hover:text-arctic-300 text-sm transition-colors">
+        <code>templates/</code>
+        <span class="material-symbols-outlined text-base">open_in_new</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="glass border-t border-slate-700/50 py-8 px-6 text-center text-xs diagonal-stripes">
+    <nav class="flex items-center justify-center gap-4">
+      <span class="text-slate-500">&copy; 2025 Patrice Chevillat</span>
+      <a href="https://chevp.github.io/site-policy/terms.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Terms</a>
+      <a href="https://chevp.github.io/site-policy/privacy.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Privacy</a>
+      <a href="https://chevp.github.io/site-policy/impressum.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Impressum</a>
+      <a href="https://chevp.github.io/site-policy/contact.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Contact</a>
+    </nav>
+  </footer>
+
+</body>
+</html>

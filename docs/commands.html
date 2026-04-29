@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slash Commands &mdash; chevp-ai-framework</title>
+  <meta name="description" content="The 10 slash commands of chevp-ai-framework: /context, /explore, /produce, /gate-check, /new-adr, /approve, /promote, /reject, /gate-override, /governance-audit.">
+  <link rel="canonical" href="https://chevp.github.io/chevp-ai-framework/commands.html">
+  <link rel="icon" type="image/png" href="https://chevp.github.io/chevp-ai-framework/images/chevp-ai-framework.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { arctic: { 50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e' } } } } }
+  </script>
+  <style>
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    code, pre, .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .diagonal-stripes { background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 20px); }
+    .grid-bg { background-image: linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px); background-size: 20px 20px; }
+    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+    .gradient-text { background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .card { transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .card::before { content:''; position:absolute; top:0;left:0;right:0;bottom:0; background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(37,99,235,0.1)); opacity:0; transition: opacity 0.3s ease; }
+    .card:hover::before { opacity:1; }
+    .card:hover { transform: translateY(-2px); border-color: rgba(59,130,246,0.5); box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .cmd { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: #38bdf8; }
+    .cat-pill { display:inline-block; font-size: 10px; font-weight:600; padding:2px 8px; border-radius:999px; letter-spacing:0.04em; text-transform:uppercase; }
+    .cat-mode { background:rgba(56,189,248,0.12); color:#7dd3fc; border:1px solid rgba(56,189,248,0.3); }
+    .cat-gate { background:rgba(168,85,247,0.12); color:#c4b5fd; border:1px solid rgba(168,85,247,0.3); }
+    .cat-create { background:rgba(34,197,94,0.12); color:#86efac; border:1px solid rgba(34,197,94,0.3); }
+    .cat-prop { background:rgba(245,158,11,0.12); color:#fcd34d; border:1px solid rgba(245,158,11,0.3); }
+    .cat-audit { background:rgba(239,68,68,0.12); color:#fca5a5; border:1px solid rgba(239,68,68,0.3); }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen grid-bg">
+
+  <header class="h-16 glass border-b border-slate-700/50 flex items-center justify-between px-6 diagonal-stripes sticky top-0 z-50">
+    <div class="flex items-center gap-4">
+      <a href="index.html" class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-arctic-400 text-3xl">psychology</span>
+        <h1 class="text-xl font-bold gradient-text">chevp-ai-framework</h1>
+      </a>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="lifecycle.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Lifecycle</a>
+      <a href="gates.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Gates</a>
+      <a href="guidelines.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Guidelines</a>
+      <a href="commands.html" class="text-arctic-400 hover:text-arctic-300 transition-colors text-sm">Commands</a>
+      <a href="agents.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Agents</a>
+      <a href="templates.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Templates</a>
+      <a href="https://github.com/chevp/chevp-ai-framework" target="_blank" class="text-slate-400 hover:text-slate-200 transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <section class="max-w-5xl mx-auto px-6 pt-20 pb-12 text-center">
+    <div class="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full glass text-xs text-slate-400">
+      <span class="material-symbols-outlined text-arctic-400 text-sm">terminal</span>
+      Plugin Layer &middot; Slash Commands
+    </div>
+    <h2 class="text-4xl md:text-5xl font-bold mb-4">
+      <span class="gradient-text">Slash Commands</span>
+    </h2>
+    <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-3">
+      Ten commands that turn the lifecycle into callable surface area in Claude Code.
+    </p>
+    <p class="text-slate-600 text-sm">The markdown is source-of-truth; commands give you explicit handles.</p>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Mode Switch</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">Enter one of the three lifecycle modes</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="card glass rounded-xl p-5"><div class="relative z-10">
+        <div class="cat-pill cat-mode mb-3">Mode</div>
+        <div class="cmd text-lg mb-2">/context</div>
+        <p class="text-slate-400 text-sm">Enter Context mode &mdash; read, verify, ask. No code changes allowed. Produces CTX plan, System Spec, Architecture, ADRs.</p>
+      </div></div>
+      <div class="card glass rounded-xl p-5"><div class="relative z-10">
+        <div class="cat-pill cat-mode mb-3">Mode</div>
+        <div class="cmd text-lg mb-2">/explore</div>
+        <p class="text-slate-400 text-sm">Enter Exploration mode &mdash; plan, design, prototype. Requires G1. No production code. Creates EXP plan/spec, ADRs, prototypes.</p>
+      </div></div>
+      <div class="card glass rounded-xl p-5"><div class="relative z-10">
+        <div class="cat-pill cat-mode mb-3">Mode</div>
+        <div class="cmd text-lg mb-2">/produce</div>
+        <p class="text-slate-400 text-sm">Enter Production mode &mdash; implement the approved plan. Requires G2. No new plans, no scope changes.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Gate &amp; Approval</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">Validate gates and record human decisions</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="card glass rounded-xl p-5"><div class="relative z-10">
+        <div class="cat-pill cat-gate mb-3">Gate</div>
+        <div class="cmd text-lg mb-2">/gate-check G1|G2|G3</div>
+        <p class="text-slate-400 text-sm">Validate a quality gate. Delegates to the matching <a href="agents.html" class="text-arctic-400 hover:text-arctic-300">gatekeeper subagent</a>. Returns <code class="text-arctic-400 text-xs">pass</code> / <code class="text-arctic-400 text-xs">conditional-pass</code> / <code class="text-arctic-400 text-xs">block</code>. Read-only.</p>
+      </div></div>
+      <div class="card glass rounded-xl p-5"><div class="relative z-10">
+        <div class="cat-pill cat-gate mb-3">Approval</div>
+        <div class="cmd text-lg mb-2">/approve &lt;artifact-id&gt;</div>
+        <p class="text-slate-400 text-sm">Record a <strong>human</strong> approval/acceptance for an artifact (ADR/CTX/EXP/PRD). Sets <code class="text-arctic-400 text-xs">decided-by</code>/<code class="text-arctic-400 text-xs">approved-by</code>/<code class="text-arctic-400 text-xs">approved-at</code> and appends to <code class="text-arctic-400 text-xs">governance-log.md</code>.</p>
+      </div></div>
+      <div class="card glass rounded-xl p-5"><div class="relative z-10">
+        <div class="cat-pill cat-gate mb-3">Override</div>
+        <div class="cmd text-lg mb-2">/gate-override &lt;plan-id&gt; &lt;reason&gt;</div>
+        <p class="text-slate-400 text-sm">Override a Gatekeeper "block" verdict. Documents the override in plan frontmatter and governance log. Reason mandatory. Override does NOT approve &mdash; run <code class="text-arctic-400 text-xs">/approve</code> separately.</p>
+      </div></div>
+      <div class="card glass rounded-xl p-5"><div class="relative z-10">
+        <div class="cat-pill cat-create mb-3">Create</div>
+        <div class="cmd text-lg mb-2">/new-adr &lt;title&gt;</div>
+        <p class="text-slate-400 text-sm">Create a new Architecture Decision Record from the template. Determines next ADR number, fills Context/Decision/Consequences. Status: <code class="text-arctic-400 text-xs">Proposed</code> until human approves.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Plan Proposals</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">Triage out-of-scope items captured as <code class="text-arctic-400 text-xs">PROP-NNN</code></p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="card glass rounded-xl p-5"><div class="relative z-10">
+        <div class="cat-pill cat-prop mb-3">Promote</div>
+        <div class="cmd text-lg mb-2">/promote &lt;PROP-id&gt; [chapter]</div>
+        <p class="text-slate-400 text-sm">Promote a Plan Proposal to a real CTX/EXP/PRD plan in its suggested chapter. Pre-fills Goal and Kill Criteria from the proposal. Moves the proposal to <code class="text-arctic-400 text-xs">promoted/</code>.</p>
+      </div></div>
+      <div class="card glass rounded-xl p-5"><div class="relative z-10">
+        <div class="cat-pill cat-prop mb-3">Reject</div>
+        <div class="cmd text-lg mb-2">/reject &lt;PROP-id&gt; &lt;reason&gt;</div>
+        <p class="text-slate-400 text-sm">Reject a Plan Proposal with an explicit reason. Reason mandatory &mdash; rejected proposals stay queryable. Moves to <code class="text-arctic-400 text-xs">proposals/rejected/</code>.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Governance Audit</h2>
+    <div class="grid grid-cols-1 gap-5 max-w-2xl mx-auto">
+      <div class="card glass rounded-xl p-5"><div class="relative z-10">
+        <div class="cat-pill cat-audit mb-3">Audit</div>
+        <div class="cmd text-lg mb-2">/governance-audit [note]</div>
+        <p class="text-slate-400 text-sm">Run a content-level governance audit on the whole repo &mdash; ADR drift, undocumented patterns, obsolete ADRs. Delegates to the <a href="agents.html" class="text-arctic-400 hover:text-arctic-300">governance-auditor</a> subagent. Read-only with respect to code.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">All 10 Commands</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">Quick reference</p>
+
+    <div class="glass rounded-xl p-0 max-w-3xl mx-auto overflow-hidden">
+      <table class="w-full text-sm">
+        <thead><tr class="border-b border-slate-700/50 bg-slate-900/30">
+          <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Command</th>
+          <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Purpose</th>
+        </tr></thead>
+        <tbody class="text-slate-400 text-xs">
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/context</span></td><td class="px-5 py-3">Enter Context mode</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/explore</span></td><td class="px-5 py-3">Enter Exploration mode (requires G1)</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/produce</span></td><td class="px-5 py-3">Enter Production mode (requires G2)</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/gate-check G1|G2|G3</span></td><td class="px-5 py-3">Validate a quality gate via the matching gatekeeper</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/new-adr &lt;title&gt;</span></td><td class="px-5 py-3">Create new Architecture Decision Record</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/approve &lt;id&gt; [note]</span></td><td class="px-5 py-3">Record human approval, append to governance-log</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/promote &lt;PROP-id&gt;</span></td><td class="px-5 py-3">Promote a Plan Proposal to a real plan</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/reject &lt;PROP-id&gt; &lt;reason&gt;</span></td><td class="px-5 py-3">Reject a Plan Proposal with reason</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/gate-override &lt;plan&gt; &lt;reason&gt;</span></td><td class="px-5 py-3">Override a Gatekeeper block verdict</td></tr>
+          <tr><td class="px-5 py-3"><span class="cmd">/governance-audit [note]</span></td><td class="px-5 py-3">Run content-level governance audit</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto text-center">
+      <span class="material-symbols-outlined text-arctic-400 text-3xl mb-2">menu_book</span>
+      <h3 class="font-semibold text-slate-100 mb-2">Read the source</h3>
+      <a href="https://github.com/chevp/chevp-ai-framework/tree/main/commands" target="_blank" class="inline-flex items-center gap-2 text-arctic-400 hover:text-arctic-300 text-sm transition-colors">
+        <code>commands/</code>
+        <span class="material-symbols-outlined text-base">open_in_new</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="glass border-t border-slate-700/50 py-8 px-6 text-center text-xs diagonal-stripes">
+    <nav class="flex items-center justify-center gap-4">
+      <span class="text-slate-500">&copy; 2025 Patrice Chevillat</span>
+      <a href="https://chevp.github.io/site-policy/terms.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Terms</a>
+      <a href="https://chevp.github.io/site-policy/privacy.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Privacy</a>
+      <a href="https://chevp.github.io/site-policy/impressum.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Impressum</a>
+      <a href="https://chevp.github.io/site-policy/contact.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Contact</a>
+    </nav>
+  </footer>
+
+</body>
+</html>

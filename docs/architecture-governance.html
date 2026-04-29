@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Governance &mdash; chevp-ai-framework</title>
+  <meta name="description" content="Every governed artifact records who proposed and who decided it. Provenance turns the human/AI boundary from a convention into a queryable fact.">
+  <link rel="canonical" href="https://chevp.github.io/chevp-ai-framework/architecture-governance.html">
+  <link rel="icon" type="image/png" href="https://chevp.github.io/chevp-ai-framework/images/chevp-ai-framework.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{arctic:{300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7'}}}}}</script>
+  <style>
+    *{font-family:'Inter',-apple-system,sans-serif} code,pre{font-family:'JetBrains Mono',monospace}
+    .diagonal-stripes{background-image:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(255,255,255,0.02) 10px,rgba(255,255,255,0.02) 20px)}
+    .grid-bg{background-image:linear-gradient(rgba(59,130,246,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.05) 1px,transparent 1px);background-size:20px 20px}
+    .glass{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1)}
+    .gradient-text{background:linear-gradient(135deg,#60a5fa,#3b82f6,#2563eb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .card{transition:all .3s ease;position:relative;overflow:hidden}
+    .card:hover{transform:translateY(-2px);border-color:rgba(59,130,246,0.5);box-shadow:0 4px 12px rgba(59,130,246,0.3)}
+    .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24}
+    .rwh{display:grid;grid-template-columns:90px 1fr;gap:12px 18px}
+    .rwh-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#38bdf8;padding-top:2px}
+    .rwh-text{color:#cbd5e1;font-size:14px;line-height:1.6}
+    .code-block{background:rgba(15,23,42,0.7);border:1px solid rgba(148,163,184,0.15);border-radius:8px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7;color:#cbd5e1;overflow-x:auto}
+    .yaml-key{color:#60a5fa} .yaml-string{color:#86efac}
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen grid-bg">
+  <header class="h-16 glass border-b border-slate-700/50 flex items-center justify-between px-6 diagonal-stripes sticky top-0 z-50">
+    <div class="flex items-center gap-4">
+      <a href="index.html" class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-arctic-400 text-3xl">psychology</span>
+        <h1 class="text-xl font-bold gradient-text">chevp-ai-framework</h1>
+      </a>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="lifecycle.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Lifecycle</a>
+      <a href="gates.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Gates</a>
+      <a href="guidelines.html" class="text-arctic-400 hover:text-arctic-300 transition-colors text-sm">Guidelines</a>
+      <a href="commands.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Commands</a>
+      <a href="agents.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Agents</a>
+      <a href="templates.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Templates</a>
+      <a href="https://github.com/chevp/chevp-ai-framework" target="_blank" class="text-slate-400 hover:text-slate-200 transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <section class="max-w-4xl mx-auto px-6 pt-20 pb-12 text-center">
+    <div class="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full glass text-xs text-slate-400"><span class="material-symbols-outlined text-arctic-400 text-sm">verified_user</span>Guideline</div>
+    <h2 class="text-4xl md:text-5xl font-bold mb-4"><span class="gradient-text">Architecture Governance</span></h2>
+    <p class="text-slate-400 text-lg max-w-2xl mx-auto">Every governed artifact records who proposed and who decided it. The human/AI boundary becomes a queryable fact.</p>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto rwh">
+      <div class="rwh-label">Rule</div><div class="rwh-text">Every governed artifact (ADR, CTX/EXP/PRD plan, spec) carries a provenance block stating who <strong>proposed</strong> it, who <strong>decided</strong> it, and when. AI may only set <code class="text-arctic-400">proposed-by</code>; only a human may set <code class="text-arctic-400">decided-by</code> / <code class="text-arctic-400">approved-by</code> / <code class="text-arctic-400">approved-at</code>.</div>
+      <div class="rwh-label">Why</div><div class="rwh-text">Without an explicit record of who decided what, ownership is implicit and unauditable &mdash; "the AI did it" and "the human approved it" become indistinguishable.</div>
+      <div class="rwh-label">How</div><div class="rwh-text">When AI creates or modifies a governed artifact, it fills <code class="text-arctic-400">proposed-by: ai</code> and leaves the decision fields blank. A human approves via <a href="commands.html" class="text-arctic-400">/approve</a> &mdash; the only path from <code class="text-arctic-400">proposed</code> to <code class="text-arctic-400">approved</code>. Every gate crossing is appended to <code class="text-arctic-400">governance-log.md</code>.</div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Approval Requires Evidence</h2>
+    <p class="text-slate-500 text-center text-sm mb-6">Provenance answers <em>who decided</em>. Evidence answers <em>on what basis</em>. Both required.</p>
+
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto">
+      <div class="code-block">
+<span class="yaml-key">evidence:</span>
+  <span class="yaml-key">hypothesis:</span> <span class="yaml-string">&lt;what we believed before this gate&gt;</span>
+  <span class="yaml-key">result:</span>     <span class="yaml-string">&lt;what we observed&gt;</span>
+  <span class="yaml-key">reasoning:</span>  <span class="yaml-string">&lt;why that justifies the transition&gt;</span>
+      </div>
+      <p class="text-slate-400 text-sm mt-4">A <code class="text-arctic-400">status: approved</code> artifact whose evidence block is empty, contains only <code class="text-arctic-400">&mdash;</code>, or repeats the plan's Goal verbatim is a governance violation. See <a href="uncertainty-reduction.html" class="text-arctic-400 hover:text-arctic-300">uncertainty-reduction</a>.</p>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Provenance Schema</h2>
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto">
+      <div class="code-block">
+<span class="yaml-key">id:</span>          <span class="yaml-string">&lt;ID&gt;            # ADR-0007, EXP-012, CTX-003</span>
+<span class="yaml-key">type:</span>        <span class="yaml-string">&lt;ADR|CTX|EXP|PRD|SPEC&gt;</span>
+<span class="yaml-key">status:</span>      <span class="yaml-string">draft           # draft | proposed | approved | accepted | superseded</span>
+<span class="yaml-key">proposed-by:</span> <span class="yaml-string">ai              # ai | human | pair</span>
+<span class="yaml-key">decided-by:</span>  <span class="yaml-string">&mdash;               # human (required when status advances past proposed)</span>
+<span class="yaml-key">approved-by:</span> <span class="yaml-string">&mdash;               # human identifier</span>
+<span class="yaml-key">approved-at:</span> <span class="yaml-string">&mdash;               # ISO date YYYY-MM-DD</span>
+<span class="yaml-key">supersedes:</span>  <span class="yaml-string">&mdash;               # optional, prior artifact id</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">The Governance Log</h2>
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto">
+      <p class="text-slate-300 text-sm mb-4">A single append-only file <code class="text-arctic-400">governance-log.md</code> records every gate crossing and ADR acceptance:</p>
+      <div class="code-block">
+2026-04-04  G1   CTX-003   proposed:ai    approved:lunral   "context inventory complete"
+2026-04-04  ADR  ADR-0007  proposed:ai    accepted:lunral   "use Postgres for primary storage"
+2026-04-05  G2   EXP-012   proposed:ai    approved:lunral   "prototype validated"
+2026-04-05  G3   PRD-008   proposed:pair  approved:lunral   "ships, all AC met"
+      </div>
+      <p class="text-slate-500 text-xs mt-4">One line per event. Never rewrite past lines. This is the authoritative audit trail.</p>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Anti-Patterns</h2>
+    <div class="glass rounded-xl p-0 max-w-3xl mx-auto overflow-hidden">
+      <table class="w-full text-sm">
+        <thead><tr class="border-b border-slate-700/50 bg-slate-900/30"><th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Anti-pattern</th><th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Why it breaks governance</th></tr></thead>
+        <tbody class="text-slate-400 text-xs">
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">AI edits <code class="text-arctic-400">approved-by</code></td><td class="px-5 py-3">Human ownership becomes fiction</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Skipping governance-log on gate crossing</td><td class="px-5 py-3">Audit trail has holes</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Marking artifact <code class="text-arctic-400">accepted</code> without <code class="text-arctic-400">/approve</code></td><td class="px-5 py-3">Decision fields drift out of sync with reality</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Reusing an old artifact id for a new decision</td><td class="px-5 py-3">Supersession chain breaks</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Approving plan with empty evidence block</td><td class="px-5 py-3">Approval becomes rubber-stamp</td></tr>
+          <tr><td class="px-5 py-3 text-slate-200">Filling evidence with the plan's Goal verbatim</td><td class="px-5 py-3">Evidence theatre &mdash; gatekeeper rejects</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto text-center">
+      <span class="material-symbols-outlined text-arctic-400 text-3xl mb-2">menu_book</span>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/guidelines/architecture-governance.md" target="_blank" class="inline-flex items-center gap-2 text-arctic-400 hover:text-arctic-300 text-sm transition-colors"><code>guidelines/architecture-governance.md</code><span class="material-symbols-outlined text-base">open_in_new</span></a>
+    </div>
+  </section>
+
+  <footer class="glass border-t border-slate-700/50 py-8 px-6 text-center text-xs diagonal-stripes">
+    <nav class="flex items-center justify-center gap-4">
+      <span class="text-slate-500">&copy; 2025 Patrice Chevillat</span>
+      <a href="https://chevp.github.io/site-policy/terms.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300">Terms</a>
+      <a href="https://chevp.github.io/site-policy/privacy.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300">Privacy</a>
+      <a href="https://chevp.github.io/site-policy/impressum.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300">Impressum</a>
+      <a href="https://chevp.github.io/site-policy/contact.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300">Contact</a>
+    </nav>
+  </footer>
+</body>
+</html>

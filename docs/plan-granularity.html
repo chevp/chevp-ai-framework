@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan Granularity &mdash; chevp-ai-framework</title>
+  <meta name="description" content="Plans match their type, size range, and minimum-substance requirements. Thin plans are not actionable; bloated plans are not reviewable.">
+  <link rel="canonical" href="https://chevp.github.io/chevp-ai-framework/plan-granularity.html">
+  <link rel="icon" type="image/png" href="https://chevp.github.io/chevp-ai-framework/images/chevp-ai-framework.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>tailwind.config={theme:{extend:{colors:{arctic:{300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7'}}}}}</script>
+  <style>
+    *{font-family:'Inter',sans-serif} code,pre{font-family:'JetBrains Mono',monospace}
+    .diagonal-stripes{background-image:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(255,255,255,0.02) 10px,rgba(255,255,255,0.02) 20px)}
+    .grid-bg{background-image:linear-gradient(rgba(59,130,246,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.05) 1px,transparent 1px);background-size:20px 20px}
+    .glass{background:rgba(255,255,255,0.05);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1)}
+    .gradient-text{background:linear-gradient(135deg,#60a5fa,#3b82f6,#2563eb);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .material-symbols-outlined{font-variation-settings:'FILL' 0,'wght' 300,'GRAD' 0,'opsz' 24}
+    .rwh{display:grid;grid-template-columns:90px 1fr;gap:12px 18px} .rwh-label{font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#38bdf8;padding-top:2px} .rwh-text{color:#cbd5e1;font-size:14px;line-height:1.6}
+    .code-block{background:rgba(15,23,42,0.7);border:1px solid rgba(148,163,184,0.15);border-radius:8px;padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:12px;line-height:1.7;color:#cbd5e1;overflow-x:auto;white-space:pre}
+    .type-pill{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;padding:2px 8px;border-radius:6px;background:rgba(56,189,248,0.12);color:#7dd3fc;border:1px solid rgba(56,189,248,0.3)}
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen grid-bg">
+  <header class="h-16 glass border-b border-slate-700/50 flex items-center justify-between px-6 diagonal-stripes sticky top-0 z-50">
+    <div class="flex items-center gap-4">
+      <a href="index.html" class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-arctic-400 text-3xl">psychology</span>
+        <h1 class="text-xl font-bold gradient-text">chevp-ai-framework</h1>
+      </a>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="lifecycle.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Lifecycle</a>
+      <a href="gates.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Gates</a>
+      <a href="guidelines.html" class="text-arctic-400 hover:text-arctic-300 transition-colors text-sm">Guidelines</a>
+      <a href="commands.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Commands</a>
+      <a href="agents.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Agents</a>
+      <a href="templates.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Templates</a>
+      <a href="https://github.com/chevp/chevp-ai-framework" target="_blank" class="text-slate-400 hover:text-slate-200 transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <section class="max-w-4xl mx-auto px-6 pt-20 pb-12 text-center">
+    <div class="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full glass text-xs text-slate-400"><span class="material-symbols-outlined text-arctic-400 text-sm">straighten</span>Guideline</div>
+    <h2 class="text-4xl md:text-5xl font-bold mb-4"><span class="gradient-text">Plan Granularity</span></h2>
+    <p class="text-slate-400 text-lg max-w-2xl mx-auto">Thin plans are not actionable. Bloated plans are not reviewable.</p>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto rwh">
+      <div class="rwh-label">Rule</div><div class="rwh-text">Every plan has a type (CTX, EXP, PRD) that sets its phase and size range, a structured header, and at least five substance elements (Goal, Scope, Steps, Affected Files, Acceptance Criteria). Plans outside those bounds must be corrected before approval.</div>
+      <div class="rwh-label">Why</div><div class="rwh-text">Without explicit type and size discipline, plans either under-specify the work or cover too many concerns at once, causing G2 approvals that the team cannot actually honor.</div>
+      <div class="rwh-label">How</div><div class="rwh-text">Pick the plan type from the scenario table. Keep within size range. Split by concern when over the maximum, expand when below the minimum. Fill all five substance elements before requesting G2.</div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Plan Types</h2>
+    <div class="glass rounded-xl p-0 max-w-3xl mx-auto overflow-hidden">
+      <table class="w-full text-sm">
+        <thead><tr class="border-b border-slate-700/50 bg-slate-900/30"><th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Type</th><th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Phase</th><th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Purpose</th><th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Size Range</th></tr></thead>
+        <tbody class="text-slate-400 text-xs">
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="type-pill">CTX</span></td><td class="px-5 py-3 text-slate-200">Context</td><td class="px-5 py-3">Architecture understanding, data models, concept docs</td><td class="px-5 py-3">150&ndash;500 lines</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="type-pill">EXP</span></td><td class="px-5 py-3 text-slate-200">Exploration</td><td class="px-5 py-3">Feature specs, prototyping, new systems</td><td class="px-5 py-3">150&ndash;500 lines</td></tr>
+          <tr><td class="px-5 py-3"><span class="type-pill">PRD</span></td><td class="px-5 py-3 text-slate-200">Production</td><td class="px-5 py-3">Bugfixes, refactoring, cleanup, migrations</td><td class="px-5 py-3">100&ndash;400 lines</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Type Selection</h2>
+    <div class="glass rounded-xl p-0 max-w-3xl mx-auto overflow-hidden">
+      <table class="w-full text-sm">
+        <thead><tr class="border-b border-slate-700/50 bg-slate-900/30"><th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Scenario</th><th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Type</th></tr></thead>
+        <tbody class="text-slate-400 text-xs">
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">New feature: plan and specify</td><td class="px-5 py-3"><span class="type-pill">EXP</span></td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Architecture documentation, concept clarification</td><td class="px-5 py-3"><span class="type-pill">CTX</span></td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Architecture decision with ADR</td><td class="px-5 py-3"><span class="type-pill">CTX</span> + ADR</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Bugfix &gt;10 lines</td><td class="px-5 py-3"><span class="type-pill">PRD</span></td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Refactoring / cleanup / migration</td><td class="px-5 py-3"><span class="type-pill">PRD</span></td></tr>
+          <tr><td class="px-5 py-3 text-slate-200">Trivial change (&lt;10 lines)</td><td class="px-5 py-3 text-slate-500">No plan &mdash; verbal confirmation</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Size Limits</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="glass rounded-xl p-5">
+        <h3 class="font-semibold text-slate-100 mb-2"><span class="material-symbols-outlined text-amber-400 align-middle text-base mr-1">arrow_drop_down</span>Below minimum</h3>
+        <p class="text-slate-500 text-sm">Plan is too thin &mdash; expand with design rationale, affected files, concrete steps, and acceptance criteria. If it cannot be expanded meaningfully, treat as a micro-plan (verbal).</p>
+      </div>
+      <div class="glass rounded-xl p-5">
+        <h3 class="font-semibold text-slate-100 mb-2"><span class="material-symbols-outlined text-rose-400 align-middle text-base mr-1">arrow_drop_up</span>Above maximum</h3>
+        <p class="text-slate-500 text-sm">Plan covers too much &mdash; split into 2&ndash;3 focused plans by <em>concern</em>, not by arbitrary size. Each split plan must be self-contained.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Plan Header</h2>
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto">
+      <p class="text-slate-300 text-sm mb-3">Every plan must include a structured header after the H1 title:</p>
+      <div class="code-block"># EXP-042: Feature Title
+
+## Type: EXP
+## Status: draft
+## Depends-on: CTX-037, EXP-041
+## Blocks: PRD-050</div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto text-center">
+      <span class="material-symbols-outlined text-arctic-400 text-3xl mb-2">menu_book</span>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/guidelines/plan-granularity.md" target="_blank" class="inline-flex items-center gap-2 text-arctic-400 hover:text-arctic-300 text-sm"><code>guidelines/plan-granularity.md</code><span class="material-symbols-outlined text-base">open_in_new</span></a>
+    </div>
+  </section>
+
+  <footer class="glass border-t border-slate-700/50 py-8 px-6 text-center text-xs diagonal-stripes">
+    <nav class="flex items-center justify-center gap-4">
+      <span class="text-slate-500">&copy; 2025 Patrice Chevillat</span>
+      <a href="https://chevp.github.io/site-policy/terms.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300">Terms</a>
+      <a href="https://chevp.github.io/site-policy/privacy.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300">Privacy</a>
+      <a href="https://chevp.github.io/site-policy/impressum.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300">Impressum</a>
+      <a href="https://chevp.github.io/site-policy/contact.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300">Contact</a>
+    </nav>
+  </footer>
+</body>
+</html>

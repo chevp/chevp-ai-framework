@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Challenger &mdash; chevp-ai-framework</title>
+  <meta name="description" content="The Challenger role: an internal sceptic that critiques every plan before G2.">
+  <link rel="canonical" href="https://chevp.github.io/chevp-ai-framework/challenger.html">
+  <link rel="icon" type="image/png" href="https://chevp.github.io/chevp-ai-framework/images/chevp-ai-framework.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: { arctic: { 50:'#f0f9ff',100:'#e0f2fe',200:'#bae6fd',300:'#7dd3fc',400:'#38bdf8',500:'#0ea5e9',600:'#0284c7',700:'#0369a1',800:'#075985',900:'#0c4a6e' } } } } }
+  </script>
+  <style>
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    code, pre, .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .diagonal-stripes { background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.02) 10px, rgba(255,255,255,0.02) 20px); }
+    .grid-bg { background-image: linear-gradient(rgba(59,130,246,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.05) 1px, transparent 1px); background-size: 20px 20px; }
+    .glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
+    .gradient-text { background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .card { transition: all 0.3s ease; position: relative; overflow: hidden; }
+    .card::before { content:''; position:absolute; top:0;left:0;right:0;bottom:0; background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(37,99,235,0.1)); opacity:0; transition: opacity 0.3s ease; }
+    .card:hover::before { opacity:1; }
+    .card:hover { transform: translateY(-2px); border-color: rgba(59,130,246,0.5); box-shadow: 0 4px 12px rgba(59,130,246,0.3); }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+    .pill { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:500; padding:2px 10px; border-radius:999px; letter-spacing:0.02em; }
+    .pill-good { background:rgba(34,197,94,0.12); color:#4ade80; border:1px solid rgba(34,197,94,0.25); }
+    .pill-bad { background:rgba(239,68,68,0.12); color:#f87171; border:1px solid rgba(239,68,68,0.25); }
+    .quote { background: rgba(15,23,42,0.6); border-left: 3px solid #38bdf8; padding: 14px 18px; border-radius: 6px; color: #cbd5e1; font-size: 13px; line-height: 1.6; }
+    .quote-bad { border-left-color: #f87171; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen grid-bg">
+
+  <header class="h-16 glass border-b border-slate-700/50 flex items-center justify-between px-6 diagonal-stripes sticky top-0 z-50">
+    <div class="flex items-center gap-4">
+      <a href="index.html" class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-arctic-400 text-3xl">psychology</span>
+        <h1 class="text-xl font-bold gradient-text">chevp-ai-framework</h1>
+      </a>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="lifecycle.html" class="text-arctic-400 hover:text-arctic-300 transition-colors text-sm">Lifecycle</a>
+      <a href="gates.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Gates</a>
+      <a href="guidelines.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Guidelines</a>
+      <a href="commands.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Commands</a>
+      <a href="agents.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Agents</a>
+      <a href="templates.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Templates</a>
+      <a href="https://github.com/chevp/chevp-ai-framework" target="_blank" class="text-slate-400 hover:text-slate-200 transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <section class="max-w-4xl mx-auto px-6 pt-20 pb-12 text-center">
+    <div class="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full glass text-xs text-slate-400">
+      <span class="material-symbols-outlined text-arctic-400 text-sm">person_alert</span>
+      Cross-cutting role &middot; Mandatory before G2
+    </div>
+    <h2 class="text-4xl md:text-5xl font-bold mb-4">
+      <span class="gradient-text">Challenger</span>
+    </h2>
+    <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-3">
+      Without an internal sceptic, the AI proposes and the human approves &mdash;
+      and the only friction in the system is the human's vigilance.
+    </p>
+    <p class="text-slate-600 text-sm">The Challenger moves friction <em>into</em> the AI, where it is cheap.</p>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Mandatory Output</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">Before requesting G2, the AI must produce four sections</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="card glass rounded-xl p-5">
+        <div class="relative z-10">
+          <div class="text-arctic-400 font-mono text-xs mb-2">1.</div>
+          <h3 class="font-semibold text-slate-100 mb-2">Top-3 ways this could fail</h3>
+          <p class="text-slate-500 text-xs">Concrete failure modes &mdash; not generic ("schedule slip"). Each names: <strong class="text-slate-300">what breaks</strong>, <strong class="text-slate-300">cheapest signal</strong>, <strong class="text-slate-300">what we would do</strong>.</p>
+        </div>
+      </div>
+      <div class="card glass rounded-xl p-5">
+        <div class="relative z-10">
+          <div class="text-arctic-400 font-mono text-xs mb-2">2.</div>
+          <h3 class="font-semibold text-slate-100 mb-2">Two alternative approaches</h3>
+          <p class="text-slate-500 text-xs">&ge;2 genuinely different alternatives. For each: 3&ndash;5-line sketch, why we rejected it, the condition under which we'd re-open it.</p>
+        </div>
+      </div>
+      <div class="card glass rounded-xl p-5">
+        <div class="relative z-10">
+          <div class="text-arctic-400 font-mono text-xs mb-2">3.</div>
+          <h3 class="font-semibold text-slate-100 mb-2">Strongest counter-argument</h3>
+          <p class="text-slate-500 text-xs">A first-person paragraph stating, as charitably as possible, the case <em>against</em> the chosen approach. If it reads like a strawman, it has failed.</p>
+        </div>
+      </div>
+      <div class="card glass rounded-xl p-5">
+        <div class="relative z-10">
+          <div class="text-arctic-400 font-mono text-xs mb-2">4.</div>
+          <h3 class="font-semibold text-slate-100 mb-2">Product-coherence check</h3>
+          <p class="text-slate-500 text-xs">One paragraph: <strong class="text-slate-300">vision fit</strong>, <strong class="text-slate-300">decision continuity</strong> with prior ADRs, and is the user problem <em>measured</em> or <em>hypothetical</em>?</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Examples</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">Concrete vs. theatre</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+      <div class="space-y-3">
+        <div class="flex items-center gap-2"><span class="pill pill-good"><span class="material-symbols-outlined text-sm">check</span> Good</span><span class="text-slate-500 text-xs">Engaged with the specific plan</span></div>
+        <div class="quote">
+          <p class="font-semibold text-slate-200 mb-2">Failure 1 &mdash; Scene graph traversal becomes O(n&sup2;) on undo</p>
+          <p>The proposed undo strategy clones the parent chain on every node delete. With 5k nodes (already in our test scene) this is observable as a 200ms hitch. <strong>Cheapest signal:</strong> a single perf trace on the existing 5k-node sample. <strong>Mitigation:</strong> structural sharing of the parent chain via persistent data structure.</p>
+          <p class="font-semibold text-slate-200 mt-3 mb-2">Counter-argument</p>
+          <p>The strongest case against this plan is that nobody has ever asked us for undo on the scene graph &mdash; it is a hypothesis about user pain, not a measurement. We are spending a sprint on a feature whose absence has produced exactly one support ticket in 18 months.</p>
+        </div>
+      </div>
+      <div class="space-y-3">
+        <div class="flex items-center gap-2"><span class="pill pill-bad"><span class="material-symbols-outlined text-sm">close</span> Bad</span><span class="text-slate-500 text-xs">Auto-fail &mdash; regenerate</span></div>
+        <div class="quote quote-bad">
+          <p class="font-semibold text-slate-200 mb-2">Failure 1 &mdash; Schedule slip</p>
+          <p>Sometimes development takes longer than expected.</p>
+          <p class="font-semibold text-slate-200 mt-3 mb-2">Alternative A &mdash; Use a different library</p>
+          <p>We could use library X instead, but we already chose ours.</p>
+          <p class="font-semibold text-slate-200 mt-3 mb-2">Counter-argument</p>
+          <p>Some people might think this is too complicated.</p>
+        </div>
+        <p class="text-slate-500 text-xs italic">All three sections are generic and could apply to any plan. The Challenger has not engaged with the specific proposal.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Activation</h2>
+    <div class="glass rounded-xl p-0 max-w-3xl mx-auto overflow-hidden">
+      <table class="w-full text-sm">
+        <thead><tr class="border-b border-slate-700/50 bg-slate-900/30">
+          <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Phase</th>
+          <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">When the Challenger runs</th>
+          <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Trigger</th>
+        </tr></thead>
+        <tbody class="text-slate-400 text-xs">
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Exploration</td><td class="px-5 py-3 text-arctic-400">Mandatory before G2</td><td class="px-5 py-3">Plan transitions <code class="text-arctic-400">draft</code> &rarr; <code class="text-arctic-400">proposed</code></td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Production</td><td class="px-5 py-3">Conditional</td><td class="px-5 py-3">Human asks to expand scope mid-implementation</td></tr>
+          <tr><td class="px-5 py-3 text-slate-200">Context</td><td class="px-5 py-3">Optional</td><td class="px-5 py-3">Risks-template suspiciously thin (&lt;3 risks, all rated low)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">What the Challenger is NOT</h2>
+    <div class="glass rounded-xl p-0 max-w-3xl mx-auto overflow-hidden">
+      <table class="w-full text-sm">
+        <thead><tr class="border-b border-slate-700/50 bg-slate-900/30">
+          <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Not</th>
+          <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Reason</th>
+        </tr></thead>
+        <tbody class="text-slate-400 text-xs">
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">A veto</td><td class="px-5 py-3">Verdicts belong to the Gatekeeper agents, not the Challenger</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">A code reviewer</td><td class="px-5 py-3">Code review happens at G3, against acceptance criteria</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">A devil's-advocate ritual</td><td class="px-5 py-3">Generic objections are an automatic failure of the role</td></tr>
+          <tr><td class="px-5 py-3 text-slate-200">The human's voice</td><td class="px-5 py-3">Humans review the output; they do not write it</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto text-center">
+      <span class="material-symbols-outlined text-arctic-400 text-3xl mb-2">menu_book</span>
+      <h3 class="font-semibold text-slate-100 mb-2">Read the source</h3>
+      <a href="https://github.com/chevp/chevp-ai-framework/blob/main/02-exploration/challenger.md" target="_blank" class="inline-flex items-center gap-2 text-arctic-400 hover:text-arctic-300 text-sm transition-colors">
+        <code>02-exploration/challenger.md</code>
+        <span class="material-symbols-outlined text-base">open_in_new</span>
+      </a>
+    </div>
+  </section>
+
+  <footer class="glass border-t border-slate-700/50 py-8 px-6 text-center text-xs diagonal-stripes">
+    <nav class="flex items-center justify-center gap-4">
+      <span class="text-slate-500">&copy; 2025 Patrice Chevillat</span>
+      <a href="https://chevp.github.io/site-policy/terms.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Terms</a>
+      <a href="https://chevp.github.io/site-policy/privacy.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Privacy</a>
+      <a href="https://chevp.github.io/site-policy/impressum.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Impressum</a>
+      <a href="https://chevp.github.io/site-policy/contact.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Contact</a>
+    </nav>
+  </footer>
+
+</body>
+</html>
