@@ -107,7 +107,7 @@ An executable layer that sits on top of the markdown files. The markdown is sour
 | [.claude-plugin/](.claude-plugin/) | Plugin manifest (hooks registered here) |
 | [commands/](commands/) | Slash commands: `/context`, `/explore`, `/produce`, `/gate-check`, `/new-adr`, `/approve`, `/promote`, `/reject`, `/gate-override`, `/governance-audit` |
 | [agents/](agents/) | Subagents: `gatekeeper-g1` / `gatekeeper-g2` / `gatekeeper-g3` (specialised gate validators with proposal-spawning), `gate-validator` (legacy dispatcher), `architecture-reviewer` (per-change content review), `governance-auditor` (repo-wide content drift detection, ADR-001) |
-| [skills/](skills/) | Skills: `create-ctx-plan`, `create-exp-plan`, `create-adr` |
+| [skills/](skills/) | Skills: `create-ctx-plan`, `create-exp-plan`, `create-prd-plan`, `create-adr`, `create-proposal`, `write-insights`, `run-challenger`, `sync-plan-issues` |
 | [hooks/](hooks/) | Python hooks: `mode-context.py` (per-turn reminder), `gate-check.py` (blocks code writes without approved EXP plan), `provenance-check.py` (enforces human-only decision fields and non-empty `evidence:` blocks) |
 
 The plugin is **additive** — without it, the framework still works via `@url` loading and AI discipline. With it, gate enforcement becomes mechanical (hooks) and mode transitions become explicit (slash commands).
