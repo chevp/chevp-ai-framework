@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic Workflow &mdash; chevp-ai-framework</title>
+
+  <meta name="description" content="How chevp-ai-framework uses many specialized agents — Challenger, Gatekeepers, Architecture-Reviewer, Governance-Auditor — to spread review friction across the lifecycle instead of bottlenecking on the human.">
+  <meta name="author" content="chevp">
+  <meta name="theme-color" content="#0b1120">
+  <link rel="canonical" href="https://chevp.github.io/chevp-ai-framework/agents.html">
+  <link rel="icon" type="image/png" href="https://chevp.github.io/chevp-ai-framework/images/chevp-ai-framework.png">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="chevp-ai-framework">
+  <meta property="og:title" content="Agentic Workflow &mdash; chevp-ai-framework">
+  <meta property="og:description" content="One main AI orchestrator + many specialized agents. Each one reviews a narrow slice of the work and produces a verdict. Friction moves into the AI, where it is cheap.">
+  <meta property="og:url" content="https://chevp.github.io/chevp-ai-framework/agents.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            arctic: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
+    code, pre, .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+    .diagonal-stripes {
+      background-image: repeating-linear-gradient(
+        45deg, transparent, transparent 10px,
+        rgba(255, 255, 255, 0.02) 10px, rgba(255, 255, 255, 0.02) 20px
+      );
+    }
+
+    .grid-bg {
+      background-image:
+        linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #2563eb 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hover-glow { transition: all 0.3s ease; }
+    .hover-glow:hover {
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .card {
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(37, 99, 235, 0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .card:hover::before { opacity: 1; }
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); }
+    ::-webkit-scrollbar-thumb { background: rgba(59, 130, 246, 0.3); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.5); }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.02em;
+    }
+    .pill-blue   { background: rgba(56, 189, 248, 0.12); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .pill-violet { background: rgba(167, 139, 250, 0.12); color: #c4b5fd; border: 1px solid rgba(167, 139, 250, 0.3); }
+    .pill-amber  { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .pill-green  { background: rgba(34, 197, 94, 0.12); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.25); }
+    .pill-rose   { background: rgba(239, 68, 68, 0.12); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.25); }
+    .pill-slate  { background: rgba(148, 163, 184, 0.12); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.3); }
+
+    .agent-card {
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.18);
+      border-radius: 14px;
+      transition: all 0.25s ease;
+    }
+    .agent-card:hover {
+      border-color: rgba(59, 130, 246, 0.5);
+      background: rgba(30, 41, 59, 0.65);
+      transform: translateY(-2px);
+    }
+
+    .lane {
+      background: rgba(15, 23, 42, 0.55);
+      border: 1px solid rgba(148, 163, 184, 0.15);
+      border-radius: 10px;
+      padding: 10px 14px;
+    }
+
+    .gate-marker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 36px;
+      height: 28px;
+      border-radius: 8px;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #7dd3fc;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 0 8px;
+    }
+
+    .step-marker {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(99, 102, 241, 0.12);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      color: #a5b4fc;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen grid-bg">
+
+  <!-- Header -->
+  <header class="h-16 glass border-b border-slate-700/50 flex items-center justify-between px-6 diagonal-stripes sticky top-0 z-50">
+    <div class="flex items-center gap-4">
+      <a href="index.html" class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-arctic-400 text-3xl">psychology</span>
+        <h1 class="text-xl font-bold gradient-text">chevp-ai-framework</h1>
+      </a>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="index.html#lifecycle" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Lifecycle</a>
+      <a href="index.html#roles" class="text-slate-400 hover:text-slate-200 transition-colors text-sm">Roles</a>
+      <a href="ask-user-question.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm flex items-center gap-1">
+        <span class="material-symbols-outlined text-base">quiz</span> AskUserQuestion
+      </a>
+      <a href="agents.html" class="text-arctic-400 hover:text-arctic-300 transition-colors text-sm flex items-center gap-1">
+        <span class="material-symbols-outlined text-base">groups</span> Agents
+      </a>
+      <a href="presentation.html" class="text-slate-400 hover:text-slate-200 transition-colors text-sm flex items-center gap-1">
+        <span class="material-symbols-outlined text-base">slideshow</span> Presentation
+      </a>
+      <a href="https://github.com/chevp/chevp-ai-framework" target="_blank" class="text-slate-400 hover:text-slate-200 transition-colors">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="max-w-4xl mx-auto px-6 pt-20 pb-12 text-center">
+    <div class="inline-flex items-center gap-2 mb-6 px-3 py-1 rounded-full glass text-xs text-slate-400">
+      <span class="material-symbols-outlined text-arctic-400 text-sm">groups</span>
+      Agentic Workflow &middot; Architecture
+    </div>
+    <h2 class="text-4xl md:text-5xl font-bold mb-4">
+      <span class="gradient-text">Agents</span>
+    </h2>
+    <p class="text-slate-400 text-lg max-w-2xl mx-auto mb-3">
+      One main AI orchestrates &mdash; many small, narrow agents review.<br>
+      Each agent owns a slice of the lifecycle and produces a verdict.
+    </p>
+    <p class="text-slate-600 text-sm">Friction is moved <em>into</em> the AI, where it is cheap, instead of bottlenecking on the human.</p>
+  </section>
+
+  <!-- What is an agentic workflow -->
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">What is an agentic workflow?</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">Not one model doing everything &mdash; many small, focused models doing narrow jobs</p>
+
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto">
+      <p class="text-slate-300 text-sm leading-relaxed">
+        A <strong class="text-slate-100">single LLM session</strong> that proposes, plans, prototypes, codes,
+        reviews, audits, and ships is doing too much at once. The same context window holds the proposal
+        <em>and</em> the rebuttal &mdash; so the rebuttal is never very strong.
+      </p>
+      <p class="text-slate-400 text-sm leading-relaxed mt-4">
+        An <strong class="text-slate-100">agentic workflow</strong> splits that single session into an
+        <strong class="text-arctic-300">orchestrator</strong> (the main AI you talk to) and many
+        <strong class="text-arctic-300">specialised agents</strong> (sub-sessions with their own prompt, tools,
+        and read-only/read-write boundaries). Each specialised agent reviews a narrow slice with fresh eyes
+        and returns a structured verdict. The orchestrator integrates the verdicts and reports back to the human.
+      </p>
+      <div class="mt-5 pt-5 border-t border-slate-700/40 text-slate-500 text-xs">
+        chevp-ai-framework ships <strong class="text-slate-300">one cross-cutting role</strong> (Challenger) and
+        <strong class="text-slate-300">six concrete agents</strong>. The pattern is open &mdash; you can register more
+        for security, performance, accessibility, or any other slice your project cares about.
+      </div>
+    </div>
+  </section>
+
+  <!-- The pattern -->
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">The Pattern</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">Orchestrator delegates &middot; agents review &middot; verdicts return</p>
+
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto">
+
+      <!-- Human -->
+      <div class="flex justify-center mb-3">
+        <div class="lane flex items-center gap-2 px-4 py-2">
+          <span class="material-symbols-outlined text-slate-300 text-base">person</span>
+          <span class="text-slate-200 text-sm font-medium">Human (you)</span>
+        </div>
+      </div>
+      <div class="flex justify-center mb-3"><span class="text-slate-600 text-lg leading-none">&darr;</span></div>
+
+      <!-- Orchestrator -->
+      <div class="flex justify-center mb-3">
+        <div class="lane flex items-center gap-3 px-5 py-3" style="background: rgba(56, 189, 248, 0.10); border-color: rgba(56, 189, 248, 0.4);">
+          <span class="material-symbols-outlined text-arctic-300">smart_toy</span>
+          <div>
+            <div class="text-arctic-200 text-sm font-semibold">Orchestrator AI</div>
+            <div class="text-arctic-300/70 text-[11px]">you talk to this one</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-center mb-3"><span class="text-slate-600 text-lg leading-none">&darr;</span></div>
+
+      <!-- Specialised agents row -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+        <div class="lane text-center">
+          <span class="material-symbols-outlined text-violet-300 text-base block mb-1">balance</span>
+          <div class="text-slate-200 font-medium">Challenger</div>
+          <div class="text-slate-500 text-[10px]">sceptic</div>
+        </div>
+        <div class="lane text-center">
+          <span class="gate-marker mb-1" style="min-width:auto;height:22px;font-size:10px;padding:0 8px;">G1&middot;G2&middot;G3</span>
+          <div class="text-slate-200 font-medium mt-1">Gatekeepers</div>
+          <div class="text-slate-500 text-[10px]">transition verdicts</div>
+        </div>
+        <div class="lane text-center">
+          <span class="material-symbols-outlined text-amber-300 text-base block mb-1">architecture</span>
+          <div class="text-slate-200 font-medium">arch-reviewer</div>
+          <div class="text-slate-500 text-[10px]">per-change</div>
+        </div>
+        <div class="lane text-center">
+          <span class="material-symbols-outlined text-green-300 text-base block mb-1">policy</span>
+          <div class="text-slate-200 font-medium">gov-auditor</div>
+          <div class="text-slate-500 text-[10px]">repo-wide drift</div>
+        </div>
+      </div>
+
+      <div class="text-center text-slate-500 text-[11px] mt-3">&hellip; plus any specialist you register: security, perf, a11y, deps &hellip;</div>
+
+      <p class="text-slate-500 text-xs mt-6 leading-relaxed">
+        Each agent is a separate sub-session: it cannot see the orchestrator's history, only what is passed in.
+        That isolation is the point &mdash; a fresh perspective doesn't rationalise away the orchestrator's mistakes.
+        Agents are <strong class="text-slate-300">read-only</strong> by default; only the orchestrator (with human approval) writes code.
+      </p>
+    </div>
+  </section>
+
+  <!-- Why many small agents -->
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Why many small agents?</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">Three failure modes that one big AI cannot escape</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div class="card glass rounded-xl p-5">
+        <div class="relative z-10">
+          <span class="material-symbols-outlined text-arctic-400 text-2xl mb-2 block">psychology_alt</span>
+          <h3 class="font-semibold text-slate-100 text-sm mb-1">Confirmation bias</h3>
+          <p class="text-slate-500 text-xs">A model that just wrote a plan is the worst reviewer of that plan. The Challenger lives in a separate sub-session, so it does not auto-defer.</p>
+        </div>
+      </div>
+      <div class="card glass rounded-xl p-5">
+        <div class="relative z-10">
+          <span class="material-symbols-outlined text-arctic-400 text-2xl mb-2 block">filter_alt</span>
+          <h3 class="font-semibold text-slate-100 text-sm mb-1">Diluted attention</h3>
+          <p class="text-slate-500 text-xs">A long context with code, plans, and ADRs cannot be deeply checked end-to-end. A narrow agent reads only what it needs &mdash; ten lines, with intent.</p>
+        </div>
+      </div>
+      <div class="card glass rounded-xl p-5">
+        <div class="relative z-10">
+          <span class="material-symbols-outlined text-arctic-400 text-2xl mb-2 block">verified</span>
+          <h3 class="font-semibold text-slate-100 text-sm mb-1">Auditable verdicts</h3>
+          <p class="text-slate-500 text-xs">Every agent emits a structured report (<code class="text-arctic-400 text-xs">pass</code>/<code class="text-arctic-400 text-xs">block</code> + findings). Verdicts can be diffed, logged, and replayed &mdash; unlike free-form chat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The Roster -->
+  <section class="max-w-5xl mx-auto px-6 py-16">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">The Roster</h2>
+    <p class="text-slate-500 text-center text-sm mb-10">Six concrete agents + one cross-cutting role &mdash; each with a single, focused job</p>
+
+    <!-- Challenger -->
+    <article class="agent-card p-6 mb-5">
+      <div class="flex flex-wrap items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-violet-500/10 border border-violet-500/30 flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-violet-300">balance</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-semibold text-slate-100">Challenger</h3>
+            <span class="pill pill-violet">Cross-cutting Role</span>
+            <span class="pill pill-slate">Active in Exploration &middot; Production</span>
+          </div>
+          <p class="text-slate-400 text-sm mb-3">
+            The internal sceptic. Before any G2 transition, the AI must produce three concrete failure modes for its own plan,
+            two genuinely-considered alternatives, the strongest counter-argument against the chosen approach, and a
+            product-coherence check. <em>Generic</em> output ("schedule slip", "scope creep") is an automatic regenerate.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Output</div>
+              <div class="text-slate-300">4 sections inside the EXP plan: failures, alternatives, counter-argument, product-coherence</div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Triggers</div>
+              <div class="text-slate-300">EXP plan transitions <code class="text-arctic-400">draft &rarr; proposed</code>; mid-Production scope changes</div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Source</div>
+              <div class="text-slate-300"><a href="https://github.com/chevp/chevp-ai-framework/blob/main/02-exploration/challenger.md" target="_blank" class="text-arctic-400 hover:text-arctic-300 transition-colors">02-exploration/challenger.md</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Gatekeeper G1 -->
+    <article class="agent-card p-6 mb-5">
+      <div class="flex flex-wrap items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-arctic-500/10 border border-arctic-500/30 flex items-center justify-center flex-shrink-0">
+          <span class="gate-marker">G1</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-semibold text-slate-100">gatekeeper-g1</h3>
+            <span class="pill pill-blue">Subagent</span>
+            <span class="pill pill-slate">Read-only</span>
+            <span class="pill pill-amber">Tools: Read &middot; Glob &middot; Grep</span>
+          </div>
+          <p class="text-slate-400 text-sm mb-3">
+            Validates the <strong class="text-slate-200">Context &rarr; Exploration</strong> transition. Confirms the
+            CTX-Plan, the <em>uncertainty triplet</em> (problem-statement, hypotheses, risks), the System Spec, the
+            Software Architecture doc, fundamental ADRs, the context inventory and scope confirmation. Spawns up to
+            five <code class="text-arctic-400 text-xs">PROP-NNN</code> Plan-Proposals for out-of-scope items so nothing
+            silently disappears.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Verdict</div>
+              <div class="text-slate-300"><code class="text-arctic-400">pass</code> / <code class="text-arctic-400">conditional-pass</code> / <code class="text-arctic-400">block</code></div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Triggers</div>
+              <div class="text-slate-300">Before any move from Context to Exploration; <code class="text-arctic-400">/gate-check G1</code></div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Source</div>
+              <div class="text-slate-300"><a href="https://github.com/chevp/chevp-ai-framework/blob/main/agents/gatekeeper-g1.md" target="_blank" class="text-arctic-400 hover:text-arctic-300 transition-colors">agents/gatekeeper-g1.md</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Gatekeeper G2 -->
+    <article class="agent-card p-6 mb-5">
+      <div class="flex flex-wrap items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-arctic-500/10 border border-arctic-500/30 flex items-center justify-center flex-shrink-0">
+          <span class="gate-marker">G2</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-semibold text-slate-100">gatekeeper-g2</h3>
+            <span class="pill pill-blue">Subagent</span>
+            <span class="pill pill-slate">Read-only</span>
+            <span class="pill pill-amber">Tools: Read &middot; Glob &middot; Grep</span>
+          </div>
+          <p class="text-slate-400 text-sm mb-3">
+            Validates the <strong class="text-slate-200">Exploration &rarr; Production</strong> transition. Checks the
+            EXP plan declares <code class="text-arctic-400 text-xs">exploration-mode: A|B</code>, that Kill Criteria,
+            Acceptance Criteria, Risks and a UX-Prototype exist, that <code class="text-arctic-400 text-xs">insights.md</code>
+            records what was learned, and &mdash; critically &mdash; that the <strong class="text-slate-200">Challenger output</strong>
+            is concrete and not theatre. Generic Challenger blocks are an automatic <code class="text-arctic-400 text-xs">block</code>.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Verdict</div>
+              <div class="text-slate-300"><code class="text-arctic-400">pass</code> / <code class="text-arctic-400">conditional-pass</code> / <code class="text-arctic-400">block</code></div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Triggers</div>
+              <div class="text-slate-300">Before any move from Exploration to Production; <code class="text-arctic-400">/gate-check G2</code></div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Source</div>
+              <div class="text-slate-300"><a href="https://github.com/chevp/chevp-ai-framework/blob/main/agents/gatekeeper-g2.md" target="_blank" class="text-arctic-400 hover:text-arctic-300 transition-colors">agents/gatekeeper-g2.md</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Gatekeeper G3 -->
+    <article class="agent-card p-6 mb-5">
+      <div class="flex flex-wrap items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-arctic-500/10 border border-arctic-500/30 flex items-center justify-center flex-shrink-0">
+          <span class="gate-marker">G3</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-semibold text-slate-100">gatekeeper-g3</h3>
+            <span class="pill pill-blue">Subagent</span>
+            <span class="pill pill-slate">Read-only (+ Bash for build)</span>
+            <span class="pill pill-amber">Tools: Read &middot; Glob &middot; Grep &middot; Bash</span>
+          </div>
+          <p class="text-slate-400 text-sm mb-3">
+            Validates the <strong class="text-slate-200">Production &rarr; Done</strong> transition. Verifies every
+            acceptance criterion against actual code &amp; tests, runs the build, checks the
+            <code class="text-arctic-400 text-xs">insights.md</code> was updated with implementation surprises (not
+            just copied from G2), inspects <code class="text-arctic-400 text-xs">governance-log.md</code> for the
+            human-approval line, and detects code changed outside the approved PRD scope.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Verdict</div>
+              <div class="text-slate-300"><code class="text-arctic-400">pass</code> / <code class="text-arctic-400">conditional-pass</code> / <code class="text-arctic-400">block</code></div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Triggers</div>
+              <div class="text-slate-300">Before declaring a Production task done; <code class="text-arctic-400">/gate-check G3</code></div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Source</div>
+              <div class="text-slate-300"><a href="https://github.com/chevp/chevp-ai-framework/blob/main/agents/gatekeeper-g3.md" target="_blank" class="text-arctic-400 hover:text-arctic-300 transition-colors">agents/gatekeeper-g3.md</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Architecture Reviewer -->
+    <article class="agent-card p-6 mb-5">
+      <div class="flex flex-wrap items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-amber-300">architecture</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-semibold text-slate-100">architecture-reviewer</h3>
+            <span class="pill pill-amber">Subagent</span>
+            <span class="pill pill-slate">Read-only</span>
+            <span class="pill pill-amber">Tools: Read &middot; Glob &middot; Grep</span>
+          </div>
+          <p class="text-slate-400 text-sm mb-3">
+            Reviews <strong class="text-slate-200">individual changes</strong> &mdash; a plan, a code diff, a new ADR &mdash;
+            against the project's documented architecture invariants and accepted ADRs. Flags forbidden layer crossings,
+            wrong dependency directions, and patterns that conflict with prior decisions. Returns severities
+            <code class="text-arctic-400 text-xs">info / warn / block</code>.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Output</div>
+              <div class="text-slate-300"><code class="text-arctic-400">REVIEW &middot; VERDICT &middot; FINDINGS</code> with severity per finding</div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Triggers</div>
+              <div class="text-slate-300">New pattern proposed, layer boundary crossed, ADR drafted</div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Source</div>
+              <div class="text-slate-300"><a href="https://github.com/chevp/chevp-ai-framework/blob/main/agents/architecture-reviewer.md" target="_blank" class="text-arctic-400 hover:text-arctic-300 transition-colors">agents/architecture-reviewer.md</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Governance Auditor -->
+    <article class="agent-card p-6 mb-5">
+      <div class="flex flex-wrap items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-green-500/10 border border-green-500/30 flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-green-300">policy</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-semibold text-slate-100">governance-auditor</h3>
+            <span class="pill pill-green">Subagent</span>
+            <span class="pill pill-slate">Read-only</span>
+            <span class="pill pill-amber">Tools: Read &middot; Glob &middot; Grep</span>
+          </div>
+          <p class="text-slate-400 text-sm mb-3">
+            Audits the <strong class="text-slate-200">whole repository</strong> for content-level drift against accepted
+            ADRs and architecture invariants. Detects: ADRs whose constraints are violated by current code, recurring
+            patterns that have no binding ADR, and accepted ADRs whose subject no longer exists in the codebase.
+            Where the architecture-reviewer is per-change, the auditor is repo-wide.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Severity</div>
+              <div class="text-slate-300"><code class="text-arctic-400">BLOCK</code> / <code class="text-arctic-400">CONCERN</code> / <code class="text-arctic-400">INFO</code></div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Triggers</div>
+              <div class="text-slate-300"><code class="text-arctic-400">/governance-audit</code>; per release; after any ADR is accepted/superseded</div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Source</div>
+              <div class="text-slate-300"><a href="https://github.com/chevp/chevp-ai-framework/blob/main/agents/governance-auditor.md" target="_blank" class="text-arctic-400 hover:text-arctic-300 transition-colors">agents/governance-auditor.md</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Gate Validator (legacy) -->
+    <article class="agent-card p-6 mb-5 opacity-80">
+      <div class="flex flex-wrap items-start gap-4">
+        <div class="w-12 h-12 rounded-xl bg-slate-500/10 border border-slate-500/30 flex items-center justify-center flex-shrink-0">
+          <span class="material-symbols-outlined text-slate-400">history</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <h3 class="font-semibold text-slate-100">gate-validator</h3>
+            <span class="pill pill-slate">Legacy &middot; Dispatcher</span>
+            <span class="pill pill-rose">Superseded</span>
+          </div>
+          <p class="text-slate-400 text-sm mb-3">
+            Backward-compatibility dispatcher. Older
+            <code class="text-arctic-400 text-xs">/gate-check</code> invocations still route through here; it forwards
+            to the matching <code class="text-arctic-400 text-xs">gatekeeper-g1/g2/g3</code> and returns its output unchanged.
+            New code should call the specialised gatekeepers directly.
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Status</div>
+              <div class="text-slate-300">Retained for compatibility; do not extend</div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Replaced by</div>
+              <div class="text-slate-300">gatekeeper-g1, gatekeeper-g2, gatekeeper-g3</div>
+            </div>
+            <div class="lane">
+              <div class="text-slate-500 mb-1">Source</div>
+              <div class="text-slate-300"><a href="https://github.com/chevp/chevp-ai-framework/blob/main/agents/gate-validator.md" target="_blank" class="text-arctic-400 hover:text-arctic-300 transition-colors">agents/gate-validator.md</a></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <!-- Where they activate -->
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Where each agent activates</h2>
+    <p class="text-slate-500 text-center text-sm mb-10">Mapped onto the 3-step lifecycle</p>
+
+    <div class="glass rounded-xl p-6">
+
+      <!-- Lifecycle bar -->
+      <div class="flex flex-wrap items-center justify-center gap-2 mb-8 text-xs">
+        <span class="step-marker">Context</span>
+        <span class="gate-marker">G1</span>
+        <span class="step-marker">Exploration</span>
+        <span class="gate-marker">G2</span>
+        <span class="step-marker">Production</span>
+        <span class="gate-marker">G3</span>
+        <span class="step-marker" style="background: rgba(34, 197, 94, 0.12); border-color: rgba(34, 197, 94, 0.3); color: #4ade80;">Done</span>
+      </div>
+
+      <!-- Activation lanes -->
+      <div class="space-y-3 text-xs">
+
+        <div class="flex items-center gap-3">
+          <div class="w-44 flex-shrink-0 text-slate-300 font-medium flex items-center gap-2">
+            <span class="material-symbols-outlined text-violet-300 text-base">balance</span>
+            Challenger
+          </div>
+          <div class="flex-1 grid grid-cols-7 gap-1">
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane bg-violet-500/15 border-violet-500/30 text-violet-200 text-center">&#x2713; mandatory</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane bg-violet-500/10 border-violet-500/20 text-violet-300/80 text-center">on scope-change</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="w-44 flex-shrink-0 text-slate-300 font-medium flex items-center gap-2">
+            <span class="gate-marker" style="min-width:auto;height:22px;font-size:10px;padding:0 6px;">G1</span>
+            gatekeeper-g1
+          </div>
+          <div class="flex-1 grid grid-cols-7 gap-1">
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane bg-arctic-500/15 border-arctic-500/30 text-arctic-200 text-center">&#x2713; verdict</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="w-44 flex-shrink-0 text-slate-300 font-medium flex items-center gap-2">
+            <span class="gate-marker" style="min-width:auto;height:22px;font-size:10px;padding:0 6px;">G2</span>
+            gatekeeper-g2
+          </div>
+          <div class="flex-1 grid grid-cols-7 gap-1">
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane bg-arctic-500/15 border-arctic-500/30 text-arctic-200 text-center">&#x2713; verdict</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="w-44 flex-shrink-0 text-slate-300 font-medium flex items-center gap-2">
+            <span class="gate-marker" style="min-width:auto;height:22px;font-size:10px;padding:0 6px;">G3</span>
+            gatekeeper-g3
+          </div>
+          <div class="flex-1 grid grid-cols-7 gap-1">
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane bg-arctic-500/15 border-arctic-500/30 text-arctic-200 text-center">&#x2713; verdict</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="w-44 flex-shrink-0 text-slate-300 font-medium flex items-center gap-2">
+            <span class="material-symbols-outlined text-amber-300 text-base">architecture</span>
+            architecture-reviewer
+          </div>
+          <div class="flex-1 grid grid-cols-7 gap-1">
+            <div class="lane bg-amber-500/10 border-amber-500/20 text-amber-200/70 text-center">on ADR</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane bg-amber-500/15 border-amber-500/30 text-amber-200 text-center">on plan</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane bg-amber-500/15 border-amber-500/30 text-amber-200 text-center">on diff</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="w-44 flex-shrink-0 text-slate-300 font-medium flex items-center gap-2">
+            <span class="material-symbols-outlined text-green-300 text-base">policy</span>
+            governance-auditor
+          </div>
+          <div class="flex-1 grid grid-cols-7 gap-1">
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane text-slate-600 text-center">&middot;</div>
+            <div class="lane bg-green-500/15 border-green-500/30 text-green-200 text-center">&#x2713; periodic</div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="text-slate-500 text-xs mt-6 leading-relaxed text-center">
+        The Gatekeepers gate <em>transitions</em>; the Challenger gates <em>thinking</em>; the Architecture-Reviewer gates <em>changes</em>; the Governance-Auditor gates <em>drift</em>.
+      </p>
+    </div>
+  </section>
+
+  <!-- The output contract -->
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">The output contract</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">Every agent answers in the same skeleton &mdash; so verdicts are diffable</p>
+
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto">
+      <pre class="text-xs leading-relaxed overflow-x-auto"><code class="text-slate-300">GATEKEEPER: G2
+PLAN: EXP-014-auth-refactor
+VERDICT: <span class="text-amber-300">conditional-pass</span>
+
+FINDINGS:
+  - <span class="text-green-400">satisfied</span>  exploration-mode declared:    context/plans/EXP-014.md:3
+  - <span class="text-green-400">satisfied</span>  Kill Criteria present:         §"Kill Criteria" non-empty
+  - <span class="text-rose-400">missing</span>    Challenger product-coherence:  no engagement with §Vision Alignment
+
+EVIDENCE-BLOCK CHECK:
+  - hypothesis: "session-token storage rewrite reduces compliance surface"
+  - result:     "prototype confirmed on 2026-04-22"
+  - reasoning:  "ship behind feature flag, dual-read 7d"
+
+CHALLENGER CHECK:
+  - failure-modes:    3, concrete
+  - alternatives:     2, engaged
+  - counter-argument: engaged
+  - product-coherence: <span class="text-rose-400">rubber-stamp</span>
+
+SPAWNED PLAN PROPOSALS (max 5):
+  - PROP-027: long-running session migration plan (suggested-type: prd)
+
+NEXT ACTION: regenerate Challenger §4 (product-coherence) before requesting /approve EXP-014</code></pre>
+      <p class="text-slate-500 text-xs mt-5 leading-relaxed">
+        Verdicts can be committed to the repo, replayed, and diffed across runs &mdash; unlike free-form chat output.
+        That property is what turns review into <em>governance</em>.
+      </p>
+    </div>
+  </section>
+
+  <!-- Extensibility -->
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Many more agents are possible</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">The six shipped agents are an opinionated baseline &mdash; not a closed set</p>
+
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto">
+      <p class="text-slate-300 text-sm leading-relaxed mb-5">
+        The framework's <code class="text-arctic-400 text-xs">agents/</code> folder is an extension point. Anything that
+        can be expressed as <em>"a narrow read-only review with a structured verdict"</em> can become an agent.
+        Your project will likely want a few of these:
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+        <div class="lane">
+          <div class="text-slate-200 font-medium mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-rose-300 text-base">security</span>security-reviewer</div>
+          <div class="text-slate-500">Reviews diffs against OWASP top-10, secrets, auth invariants.</div>
+        </div>
+        <div class="lane">
+          <div class="text-slate-200 font-medium mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-amber-300 text-base">speed</span>perf-auditor</div>
+          <div class="text-slate-500">Flags O(n&sup2;) hot paths, missing indexes, N+1 queries.</div>
+        </div>
+        <div class="lane">
+          <div class="text-slate-200 font-medium mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-violet-300 text-base">accessibility_new</span>accessibility-checker</div>
+          <div class="text-slate-500">Reviews UI diffs for ARIA, contrast, keyboard nav, screen-reader paths.</div>
+        </div>
+        <div class="lane">
+          <div class="text-slate-200 font-medium mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-green-300 text-base">menu_book</span>doc-checker</div>
+          <div class="text-slate-500">Verifies that public APIs touched by a PR are reflected in docs/CLAUDE.md.</div>
+        </div>
+        <div class="lane">
+          <div class="text-slate-200 font-medium mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-arctic-300 text-base">inventory_2</span>dependency-watcher</div>
+          <div class="text-slate-500">Flags new dependencies, license conflicts, unmaintained packages.</div>
+        </div>
+        <div class="lane">
+          <div class="text-slate-200 font-medium mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-slate-300 text-base">science</span>test-coverage-reviewer</div>
+          <div class="text-slate-500">Confirms acceptance criteria from the PRD have at least one mapped test.</div>
+        </div>
+        <div class="lane">
+          <div class="text-slate-200 font-medium mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-rose-300 text-base">translate</span>i18n-reviewer</div>
+          <div class="text-slate-500">Catches hardcoded strings in user-facing components.</div>
+        </div>
+        <div class="lane">
+          <div class="text-slate-200 font-medium mb-1 flex items-center gap-2"><span class="material-symbols-outlined text-amber-300 text-base">database</span>schema-migrator</div>
+          <div class="text-slate-500">Verifies migrations are reversible and handle long-running tables safely.</div>
+        </div>
+      </div>
+      <div class="mt-6 pt-5 border-t border-slate-700/40 text-slate-500 text-xs leading-relaxed">
+        <span class="material-symbols-outlined text-arctic-400 text-base align-middle mr-1">tips_and_updates</span>
+        A new agent is just a markdown file in <code class="text-arctic-400">agents/</code> with a frontmatter
+        block (<code class="text-arctic-400 text-xs">name</code>, <code class="text-arctic-400 text-xs">description</code>,
+        <code class="text-arctic-400 text-xs">tools</code>) and an output contract. The orchestrator picks them up automatically.
+      </div>
+    </div>
+  </section>
+
+  <!-- Design rules -->
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Design rules for new agents</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">Why the existing six are reliable &mdash; and how to keep yours that way</p>
+
+    <div class="glass rounded-xl p-0 max-w-3xl mx-auto overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="border-b border-slate-700/50 bg-slate-900/30">
+            <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Rule</th>
+            <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Why</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-slate-700/30">
+            <td class="px-5 py-4 text-slate-300 align-top">One agent = one job</td>
+            <td class="px-5 py-4 text-slate-500 text-xs align-top">An agent that reviews "everything" returns nothing useful. Narrow scope makes verdicts strong.</td>
+          </tr>
+          <tr class="border-b border-slate-700/30">
+            <td class="px-5 py-4 text-slate-300 align-top">Read-only by default</td>
+            <td class="px-5 py-4 text-slate-500 text-xs align-top">Verdicts must be advisory. Only the orchestrator (with human approval) writes code or decisions.</td>
+          </tr>
+          <tr class="border-b border-slate-700/30">
+            <td class="px-5 py-4 text-slate-300 align-top">Structured output, not prose</td>
+            <td class="px-5 py-4 text-slate-500 text-xs align-top">Verdicts must be diffable. Free-form &ldquo;looks good&rdquo; is forbidden &mdash; cite a path or a line.</td>
+          </tr>
+          <tr class="border-b border-slate-700/30">
+            <td class="px-5 py-4 text-slate-300 align-top">Generic findings auto-fail</td>
+            <td class="px-5 py-4 text-slate-500 text-xs align-top">"Schedule slip", "scope creep" &mdash; if it could apply to any plan, it has not engaged with this one.</td>
+          </tr>
+          <tr class="border-b border-slate-700/30">
+            <td class="px-5 py-4 text-slate-300 align-top">Out-of-scope &rarr; proposal, never silence</td>
+            <td class="px-5 py-4 text-slate-500 text-xs align-top">An agent that finds a tangent files a <code class="text-arctic-400 text-xs">PROP-NNN</code>; it does not expand its own scope. (Rule 12)</td>
+          </tr>
+          <tr>
+            <td class="px-5 py-4 text-slate-300 align-top">Cap output to 5 proposals</td>
+            <td class="px-5 py-4 text-slate-500 text-xs align-top">Prevents proposal-spam. Excess is rolled into one Sammel-Notiz paragraph.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Source / read more -->
+  <section class="max-w-4xl mx-auto px-6 py-12">
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto text-center">
+      <span class="material-symbols-outlined text-arctic-400 text-3xl mb-2">menu_book</span>
+      <h3 class="font-semibold text-slate-100 mb-2">Read the source files</h3>
+      <p class="text-slate-500 text-sm mb-4">All agent definitions live next to the rest of the framework, as plain markdown.</p>
+      <a href="https://github.com/chevp/chevp-ai-framework/tree/main/agents"
+         target="_blank"
+         class="inline-flex items-center gap-2 text-arctic-400 hover:text-arctic-300 text-sm transition-colors">
+        <code>agents/</code>
+        <span class="material-symbols-outlined text-base">open_in_new</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="glass border-t border-slate-700/50 py-8 px-6 text-center text-xs diagonal-stripes">
+    <nav class="flex items-center justify-center gap-4">
+      <span class="text-slate-500">&copy; 2025 Patrice Chevillat</span>
+      <a href="https://chevp.github.io/site-policy/terms.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Terms</a>
+      <a href="https://chevp.github.io/site-policy/privacy.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Privacy</a>
+      <a href="https://chevp.github.io/site-policy/impressum.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Impressum</a>
+      <a href="https://chevp.github.io/site-policy/contact.html" target="_blank" rel="noopener" class="text-slate-500 hover:text-slate-300 transition-colors">Contact</a>
+    </nav>
+  </footer>
+
+</body>
+</html>
