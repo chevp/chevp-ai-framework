@@ -129,18 +129,16 @@
 <span class="new">│       ├── docs/</span>                      <span class="comment"># Markdown content in the new schema</span>
 <span class="new">│       │   ├── intro.md</span>
 <span class="new">│       │   ├── plans/</span>
-<span class="new">│       │   │   ├── active/</span>
-<span class="new">│       │   │   │   └── fw-01-lab-bootstrap/</span>
-<span class="new">│       │   │   │       ├── _category_.json</span>
-<span class="new">│       │   │   │       ├── context.md</span>
-<span class="new">│       │   │   │       ├── exploration.md</span>
-<span class="new">│       │   │   │       ├── insights.md</span>
-<span class="new">│       │   │   │       └── production.md</span>
-<span class="new">│       │   │   ├── proposals/</span>
-<span class="new">│       │   │   └── finished/</span>
-<span class="new">│       │   ├── decisions/</span>             <span class="comment"># ADRs (Lab-side)</span>
+<span class="new">│       │   │   ├── index.mdx</span>          <span class="comment"># filtered by frontmatter `status`</span>
+<span class="new">│       │   │   └── p-1-lab-bootstrap/</span>  <span class="comment"># flat — no active/ folder!</span>
+<span class="new">│       │   │       ├── _category_.json</span>
+<span class="new">│       │   │       ├── context.md</span>
+<span class="new">│       │   │       ├── exploration.md</span>
+<span class="new">│       │   │       ├── insights.md</span>
+<span class="new">│       │   │       └── production.md</span>
+<span class="new">│       │   ├── decisions/</span>             <span class="comment"># d-N-slug.md ADRs</span>
 <span class="new">│       │   └── specs/</span>
-<span class="new">│       └── src/</span>
+<span class="new">│       └── src/components/</span>           <span class="comment"># PlanList.tsx etc.</span>
 │
 <span class="dir">├── docs/</span>                             <span class="comment"># gh-pages root (existing HTML stays)</span>
 │   ├── index.html                    <span class="comment"># existing</span>
@@ -188,8 +186,8 @@
             <td class="px-5 py-3"><span class="badge badge-experimental">NEW</span> Docusaurus root</td>
           </tr>
           <tr>
-            <td class="px-5 py-3 mono text-arctic-300">/chevp-ai-framework/flow/plans/active/fw-01-.../exploration</td>
-            <td class="px-5 py-3 mono">context/lab/docs/plans/active/fw-01-.../exploration.md</td>
+            <td class="px-5 py-3 mono text-arctic-300">/chevp-ai-framework/flow/plans/p-1-lab-bootstrap/exploration</td>
+            <td class="px-5 py-3 mono">context/lab/docs/plans/p-1-lab-bootstrap/exploration.md</td>
             <td class="px-5 py-3"><span class="badge badge-experimental">NEW</span> Plan page</td>
           </tr>
         </tbody>
@@ -199,24 +197,25 @@
 
   <section class="max-w-5xl mx-auto px-6 py-12">
     <h2 class="text-2xl font-bold text-center mb-2 gradient-text">The new ID scheme</h2>
-    <p class="text-slate-500 text-center text-sm mb-8">Flat, categorised, ASCII-only &mdash; one ID per topic, stable across all phases</p>
+    <p class="text-slate-500 text-center text-sm mb-8">Two flat global counters &mdash; no categories, no padding, never reused</p>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
       <div class="glass rounded-xl p-5">
-        <div class="text-rose-400 font-mono text-xs mb-2 uppercase tracking-wider">Old (in <code>context/</code>)</div>
+        <div class="text-rose-400 font-mono text-xs mb-2 uppercase tracking-wider">Old (in <code>context/plans/</code>)</div>
         <div class="space-y-2 text-xs">
           <div><code class="text-slate-300">&sect;1.1_thinking-learning-upgrade.exp.md</code></div>
           <div><code class="text-slate-300">EXP-001-architecture.md</code></div>
         </div>
-        <p class="text-slate-500 text-xs mt-3 italic">Special chars in URLs, ID changes when phase advances.</p>
+        <p class="text-slate-500 text-xs mt-3 italic">Special chars in URLs, ID changes when phase advances, status baked into the file name.</p>
       </div>
       <div class="glass rounded-xl p-5 border-arctic-500/30">
         <div class="text-arctic-400 font-mono text-xs mb-2 uppercase tracking-wider">New (in <code>context/lab/</code>)</div>
         <div class="space-y-2 text-xs">
-          <div><span class="badge badge-id">FW-01</span> <code class="text-slate-300">/plans/active/fw-01-thinking-learning-upgrade/exploration</code></div>
-          <div><span class="badge badge-id">TOOL-01</span> <code class="text-slate-300">/plans/active/tool-01-async-cli/context</code></div>
+          <div><span class="badge badge-id">P-1</span> <code class="text-slate-300">/plans/p-1-lab-bootstrap/exploration</code></div>
+          <div><span class="badge badge-id">P-32</span> <code class="text-slate-300">/plans/p-32-something/context</code></div>
+          <div><span class="badge badge-id">D-3</span> <code class="text-slate-300">/decisions/d-3-async-cli</code></div>
         </div>
-        <p class="text-slate-500 text-xs mt-3 italic">Stable ID, phase as page suffix, clean URL.</p>
+        <p class="text-slate-500 text-xs mt-3 italic">Stable ID, phase as page suffix, status as frontmatter property.</p>
       </div>
     </div>
 
@@ -224,41 +223,62 @@
       <table class="w-full text-sm">
         <thead>
           <tr class="border-b border-slate-700/50 bg-slate-900/30">
-            <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Cat</th>
-            <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Meaning</th>
-            <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Example plans</th>
+            <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Prefix</th>
+            <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Used for</th>
+            <th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Examples</th>
           </tr>
         </thead>
         <tbody class="text-slate-400 text-xs">
           <tr class="border-b border-slate-700/30">
-            <td class="px-5 py-3"><span class="badge badge-id">FW</span></td>
-            <td class="px-5 py-3 text-slate-200">Framework / Process / Governance</td>
-            <td class="px-5 py-3">thinking-learning-upgrade, selective-rollback</td>
-          </tr>
-          <tr class="border-b border-slate-700/30">
-            <td class="px-5 py-3"><span class="badge badge-id">TOOL</span></td>
-            <td class="px-5 py-3 text-slate-200">chevp-flow CLI &amp; Tooling</td>
-            <td class="px-5 py-3">async-file-cli, claude-subprocess-auth</td>
-          </tr>
-          <tr class="border-b border-slate-700/30">
-            <td class="px-5 py-3"><span class="badge badge-id">INT</span></td>
-            <td class="px-5 py-3 text-slate-200">Integrations &amp; Consumer Rollout</td>
-            <td class="px-5 py-3">plugin-rollout, monorepo-setup</td>
-          </tr>
-          <tr class="border-b border-slate-700/30">
-            <td class="px-5 py-3"><span class="badge badge-id">DOC</span></td>
-            <td class="px-5 py-3 text-slate-200">Guidelines, Templates, Docs</td>
-            <td class="px-5 py-3">paragraph-numbering, architecture-governance</td>
+            <td class="px-5 py-3"><span class="badge badge-id">P-&lt;N&gt;</span></td>
+            <td class="px-5 py-3 text-slate-200">Plans</td>
+            <td class="px-5 py-3"><code>P-1</code>, <code>P-2</code>, <code>P-32</code></td>
           </tr>
           <tr>
-            <td class="px-5 py-3"><span class="badge badge-id">ARCH</span></td>
-            <td class="px-5 py-3 text-slate-200">Cross-cutting Architecture (ADR clusters)</td>
-            <td class="px-5 py-3">distribution-adr, module-split-core-cli</td>
+            <td class="px-5 py-3"><span class="badge badge-id">D-&lt;N&gt;</span></td>
+            <td class="px-5 py-3 text-slate-200">Decisions / ADRs</td>
+            <td class="px-5 py-3"><code>D-1</code>, <code>D-3</code>, <code>D-123</code></td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="text-slate-500 text-xs text-center mt-4 italic">The category list is fixed. Adding a new one requires an ADR.</p>
+    <p class="text-slate-500 text-xs text-center mt-4 italic">No categories. No zero-padding. No reuse. Topic, area, and team belong in tags or in the slug, not in the ID.</p>
+  </section>
+
+  <section class="max-w-5xl mx-auto px-6 py-12">
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">Status is frontmatter, not a folder</h2>
+    <p class="text-slate-500 text-center text-sm mb-8">A plan never moves between folders &mdash; only its <code>status</code> field changes</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto">
+      <div class="glass rounded-xl p-5">
+        <div class="text-rose-400 font-mono text-xs mb-2 uppercase tracking-wider">Don't</div>
+<pre class="tree">plans/
+├── active/
+│   └── p-1-lab-bootstrap/
+└── finished/
+    └── p-2-something/</pre>
+        <p class="text-slate-500 text-xs mt-3 italic">Renaming a folder breaks every URL, every cross-link, and every bookmark.</p>
+      </div>
+      <div class="glass rounded-xl p-5 border-arctic-500/30">
+        <div class="text-arctic-400 font-mono text-xs mb-2 uppercase tracking-wider">Do</div>
+<pre class="tree">plans/
+├── index.mdx          <span class="comment"># filtered live</span>
+├── p-1-lab-bootstrap/ <span class="comment"># status: active</span>
+└── p-2-something/     <span class="comment"># status: finished</span></pre>
+        <p class="text-slate-500 text-xs mt-3 italic">Status changes are a one-line frontmatter edit. Path stays stable forever.</p>
+      </div>
+    </div>
+
+    <div class="glass rounded-xl p-6 max-w-3xl mx-auto mt-6">
+      <p class="text-slate-300 text-sm mb-3">The <code class="text-arctic-300">/plans/</code> index page reads <code class="text-arctic-300">status</code> from every plan's frontmatter at build time and renders one filtered table per status group:</p>
+<pre class="tree">---
+plan_id: P-1
+status: active        <span class="comment"># &larr; the only thing that changes when a plan finishes</span>
+phase: ctx
+created: 2026-05-02
+---</pre>
+      <p class="text-slate-500 text-xs mt-3 italic">Implemented as a small React component in <code>context/lab/src/components/PlanList.tsx</code> that consumes <code>usePluginData('docusaurus-plugin-content-docs')</code>.</p>
+    </div>
   </section>
 
   <section class="max-w-5xl mx-auto px-6 py-12">
@@ -266,8 +286,8 @@
     <p class="text-slate-500 text-center text-sm mb-8">Each plan gets its own Docusaurus sidebar group</p>
 
     <div class="glass rounded-xl p-6 max-w-3xl mx-auto">
-<pre class="tree">context/lab/docs/plans/active/<span class="new">fw-01-lab-bootstrap/</span>
-├── _category_.json    <span class="comment"># label: "FW-01 Lab Bootstrap"</span>
+<pre class="tree">context/lab/docs/plans/<span class="new">p-1-lab-bootstrap/</span>
+├── _category_.json    <span class="comment"># label: "P-1 Lab Bootstrap"</span>
 ├── context.md         <span class="comment"># sidebar_position: 1</span>
 ├── exploration.md     <span class="comment"># sidebar_position: 2</span>
 ├── insights.md        <span class="comment"># sidebar_position: 3</span>
@@ -277,13 +297,14 @@
         Each phase file carries this frontmatter:
       </p>
 <pre class="tree mt-2">---
-id: fw-01-exploration
+id: p-1-exploration
 title: Exploration
 sidebar_position: 2
-plan_id: FW-01
-plan_slug: thinking-learning-upgrade
+plan_id: P-1
+plan_slug: lab-bootstrap
 phase: exp           <span class="comment"># ctx | exp | prd | insights</span>
-status: active
+status: active       <span class="comment"># active | finished | archived | deprecated</span>
+created: 2026-05-02
 ---</pre>
     </div>
   </section>
@@ -298,8 +319,8 @@ status: active
         <div class="flex-1">
           <h3 class="font-semibold text-slate-100 text-sm mb-2">Author or update a plan</h3>
           <p class="text-slate-400 text-xs mb-2">Create a plan folder with the new ID scheme. Each phase is its own markdown file.</p>
-<pre class="shell"><span class="prompt">$</span> mkdir -p context/lab/docs/plans/active/fw-02-some-topic
-<span class="prompt">$</span> $EDITOR context/lab/docs/plans/active/fw-02-some-topic/context.md</pre>
+<pre class="shell"><span class="prompt">$</span> mkdir -p context/lab/docs/plans/p-2-some-topic
+<span class="prompt">$</span> $EDITOR context/lab/docs/plans/p-2-some-topic/context.md</pre>
         </div>
       </div>
 
@@ -329,7 +350,7 @@ status: active
           <h3 class="font-semibold text-slate-100 text-sm mb-2">Commit &amp; push</h3>
           <p class="text-slate-400 text-xs mb-2">Both source and build are versioned together &mdash; reviewers can diff content and rendered output.</p>
 <pre class="shell"><span class="prompt">$</span> git add context/lab/ docs/flow/
-<span class="prompt">$</span> git commit -m "lab: add fw-02 context"
+<span class="prompt">$</span> git commit -m "lab: add p-2 context"
 <span class="prompt">$</span> git push            <span class="comment"># gh-pages serves automatically</span></pre>
         </div>
       </div>
