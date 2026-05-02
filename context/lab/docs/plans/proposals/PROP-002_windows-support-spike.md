@@ -1,9 +1,12 @@
 ---
-id: PROP-002
+id: prop-002
+title: "PROP-002: Windows support spike"
+sidebar_position: 2
+proposal_id: PROP-002
 type: proposal
 proposed-by: ai
 source-gate: G1
-source-plan: CTX-002
+source-plan: P-3
 suggested-type: exp
 status: deferred
 date: 2026-04-24
@@ -13,7 +16,7 @@ date: 2026-04-24
 
 ## Trigger
 
-CTX-002 §"Risks we accept knowingly" states "v1 is mac/linux only. Reason: solo dogfooding context." SPEC §"Out of Scope" similarly excludes Windows. Go cross-compilation makes Windows support cheap *in principle*, but the `claude -p` subprocess invocation, file-path handling (forward vs. back-slashes), TTY detection (per SQ1), and Docker SDK behaviour on Windows are all untested.
+P-3 §"Risks we accept knowingly" states "v1 is mac/linux only. Reason: solo dogfooding context." SPEC §"Out of Scope" similarly excludes Windows. Go cross-compilation makes Windows support cheap *in principle*, but the `claude -p` subprocess invocation, file-path handling (forward vs. back-slashes), TTY detection (per SQ1), and Docker SDK behaviour on Windows are all untested.
 
 ## Suggested Goal
 

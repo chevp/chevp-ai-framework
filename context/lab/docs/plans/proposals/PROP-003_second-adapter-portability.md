@@ -1,9 +1,12 @@
 ---
-id: PROP-003
+id: prop-003
+title: "PROP-003: Second adapter portability"
+sidebar_position: 3
+proposal_id: PROP-003
 type: proposal
 proposed-by: ai
 source-gate: G1
-source-plan: CTX-002
+source-plan: P-3
 suggested-type: ctx
 status: deferred
 date: 2026-04-24
@@ -13,7 +16,7 @@ date: 2026-04-24
 
 ## Trigger
 
-CTX-002 §"Likely NOT in scope" excludes "Web UI / dashboard", "Team collaboration / multi-user state", "IDE/editor plugins". ADR-006 declares the Adapter-Contract spec as a chevp-ai-framework artifact (Confirmation Needed #6) so multiple adapters can conform. But until a *second* concrete adapter exists, the contract is unverified — chevp-flow alone cannot prove portability, only assert it.
+P-3 §"Likely NOT in scope" excludes "Web UI / dashboard", "Team collaboration / multi-user state", "IDE/editor plugins". ADR-006 declares the Adapter-Contract spec as a chevp-ai-framework artifact (Confirmation Needed #6) so multiple adapters can conform. But until a *second* concrete adapter exists, the contract is unverified — chevp-flow alone cannot prove portability, only assert it.
 
 ## Suggested Goal
 

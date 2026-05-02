@@ -1,9 +1,12 @@
 ---
-id: PROP-001
+id: prop-001
+title: "PROP-001: Multi-provider LLM"
+sidebar_position: 1
+proposal_id: PROP-001
 type: proposal
 proposed-by: ai
 source-gate: G1
-source-plan: CTX-002
+source-plan: P-3
 suggested-type: ctx
 status: deferred
 date: 2026-04-24
@@ -13,7 +16,7 @@ date: 2026-04-24
 
 ## Trigger
 
-CTX-002 §"Likely NOT in scope" explicitly excludes "Multi-provider LLM support (OpenAI, etc.) — Claude only in v1". ADR-002 defers Pfad 3 (`anthropic-sdk-go`) to v2 and acknowledges R8 (CTX-002 R8): the Go SDK is younger and more boilerplate-heavy than TS/Python equivalents. Without multi-provider support, the framework's "tool-independence" claim remains under-tested.
+P-3 §"Likely NOT in scope" explicitly excludes "Multi-provider LLM support (OpenAI, etc.) — Claude only in v1". ADR-002 defers Pfad 3 (`anthropic-sdk-go`) to v2 and acknowledges R8 (P-3 R8): the Go SDK is younger and more boilerplate-heavy than TS/Python equivalents. Without multi-provider support, the framework's "tool-independence" claim remains under-tested.
 
 ## Suggested Goal
 
@@ -33,4 +36,4 @@ Medium — a clean `Runtime` interface in `internal/runtime/` plus a parallel `i
 
 ## Notes
 
-The framework's tool-independence claim was the original Why-now in CTX-002. Until at least one non-Claude-Code adapter exists (whether Pfad 3 in chevp-flow itself or a separate adapter like chevp-cursor), that claim is unproven. PROP-003 explores the alternate route (separate adapter); this proposal explores the in-place route.
+The framework's tool-independence claim was the original Why-now in P-3. Until at least one non-Claude-Code adapter exists (whether Pfad 3 in chevp-flow itself or a separate adapter like chevp-cursor), that claim is unproven. PROP-003 explores the alternate route (separate adapter); this proposal explores the in-place route.

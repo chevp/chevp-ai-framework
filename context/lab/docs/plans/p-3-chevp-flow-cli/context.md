@@ -1,19 +1,24 @@
 ---
-id: CTX-002
-type: CTX
-status: approved
+id: p-3-context
+title: Context
+sidebar_position: 1
+plan_id: P-3
+plan_slug: chevp-flow-cli
+phase: ctx
+status: active
+created: 2026-04-24
+legacy_id: CTX-002
 proposed-by: ai
 decided-by: chevp
 approved-by: chevp
 approved-at: 2026-04-25
-date: 2026-04-24
 evidence:
   hypothesis: A standalone CLI wrapping `claude -p` (Pfad 2) can mechanize the lifecycle (Context → Exploration → Production with G1/G2/G3) outside the Claude-Code-interactive flow, validating the framework's portability claim by being its first concrete adapter. Initial tech-stack lean was Python.
   result: Through Q1-Q7 + SQ1-SQ5 resolution and a mid-Context tech-stack pivot from Python to Go + Charm, the design converged on a tightly bounded shape — five v1 commands (init/status/approve/gate-check/new-adr), explicit per-step command paths, Pfad-2 subprocess for Max-subscription compatibility, and embed.FS-vendored subagent prompts. The 'process-driven, not spec-driven' tension was preserved by structurally requiring dialogue rounds in `chevp context init` rather than one-shot generation (R7 mitigation). Six fundamental ADRs (001-006) memorialise the design decisions; one parallel chevp-ai-framework work item (Adapter-Contract document) is queued.
   reasoning: Scope is safe to confirm at G1 because (a) the command surface is bounded by Q5; (b) all human-only frontmatter fields are denied to the CLI by porting `provenance-check.py` semantics into `internal/state/provenance.go`; (c) Kill Criterion ('gate-approvals become routine') is named and observable; (d) the top-3 risks (R1 schema-drift, R2 subagent-context-loss, R3 provenance-bruch) all have concrete spike-or-mitigation paths assigned for Exploration; (e) the Adapter-Contract dependency is acknowledged as parallel framework work.
 ---
 
-# CTX-002: chevp-flow — CLI adapter for the chevp-ai-framework lifecycle
+# P-3 — Context: chevp-flow — CLI adapter for the chevp-ai-framework lifecycle
 
 ## Task
 
@@ -53,16 +58,16 @@ The framework has stabilized to v1 (CTX-001 finished, plugin layer in production
 
 ## Artifacts to Read/Verify
 
-- [x] [CLAUDE.md](../../CLAUDE.md) — core principle, 13 rules, lifecycle summary
-- [x] [LIFECYCLE.md](../../LIFECYCLE.md) — 3 × 7 × 3 matrix, gates G1/G2/G3
-- [x] [agents/](../../agents/) — `gatekeeper-g1/g2/g3` contracts; verdict format, blocking conditions, max-5 PROP rule extracted
-- [x] [hooks/](../../hooks/) — `mode-context.py`, `gate-check.py`, `provenance-check.py`; field denylist (`decided-by`, `approved-by`, `approved-at`, `status: approved|accepted`) extracted; production-write block heuristic extracted
-- [x] [skills/](../../skills/) — `create-ctx-plan`, `create-exp-plan`, `create-adr`, `sync-plan-issues`; invocation patterns extracted
-- [x] [commands/](../../commands/) — all 9 slash commands (approve, context, explore, gate-check, gate-override, new-adr, produce, promote, reject); side effects + frontmatter mutations extracted
-- [x] [templates/](../../templates/) — artifacts the CLI instantiates from
-- [x] [guidelines/architecture-governance.md](../../guidelines/architecture-governance.md) — Rule #7 enforcement: AI may set `proposed-by: ai|pair`, never `human`; never sets `decided-by`/`approved-by`/`approved-at` or `status: approved|accepted`
-- [x] [guidelines/uncertainty-reduction.md](../../guidelines/uncertainty-reduction.md) — `evidence:` block: hypothesis (falsifiable), result (observable), reasoning (bridge → action); generic content = automatic G1/G2/G3 block
-- [x] [.claude-plugin/plugin.json](../../.claude-plugin/plugin.json) — manifest registers `mode-context.py` (UserPromptSubmit), `gate-check.py` + `provenance-check.py` (PreToolUse on Write/Edit)
+- [x] [CLAUDE.md](../../../../../CLAUDE.md) — core principle, 13 rules, lifecycle summary
+- [x] [LIFECYCLE.md](../../../../../LIFECYCLE.md) — 3 × 7 × 3 matrix, gates G1/G2/G3
+- [x] [agents/](../../../../../agents/) — `gatekeeper-g1/g2/g3` contracts; verdict format, blocking conditions, max-5 PROP rule extracted
+- [x] [hooks/](../../../../../hooks/) — `mode-context.py`, `gate-check.py`, `provenance-check.py`; field denylist (`decided-by`, `approved-by`, `approved-at`, `status: approved|accepted`) extracted; production-write block heuristic extracted
+- [x] [skills/](../../../../../skills/) — `create-ctx-plan`, `create-exp-plan`, `create-adr`, `sync-plan-issues`; invocation patterns extracted
+- [x] [commands/](../../../../../commands/) — all 9 slash commands (approve, context, explore, gate-check, gate-override, new-adr, produce, promote, reject); side effects + frontmatter mutations extracted
+- [x] [templates/](../../../../../templates/) — artifacts the CLI instantiates from
+- [x] [guidelines/architecture-governance.md](../../../../../guidelines/architecture-governance.md) — Rule #7 enforcement: AI may set `proposed-by: ai|pair`, never `human`; never sets `decided-by`/`approved-by`/`approved-at` or `status: approved|accepted`
+- [x] [guidelines/uncertainty-reduction.md](../../../../../guidelines/uncertainty-reduction.md) — `evidence:` block: hypothesis (falsifiable), result (observable), reasoning (bridge → action); generic content = automatic G1/G2/G3 block
+- [x] [.claude-plugin/plugin.json](../../../../../.claude-plugin/plugin.json) — manifest registers `mode-context.py` (UserPromptSubmit), `gate-check.py` + `provenance-check.py` (PreToolUse on Write/Edit)
 - [ ] [chevp.github.io/chevp-workflow/](https://chevp.github.io/chevp-workflow/index.md) — workspace-mode contract (relevant when wiring submodule; deferred until Production-step submodule integration)
 
 ## Problem Statement (embedded — Uncertainty Triplet, G1 prerequisite)
@@ -206,12 +211,12 @@ Once confirmed, the next deliverables move to Exploration (CTX → EXP transitio
 
 - **EXP-NNN-chevp-flow-architecture** — module layout (command-layer / runtime-layer / state-layer / gate-layer / docker-layer), data flow, error model
 - **Fundamental ADRs** drafted ✅ (six in `context/specs/chevp-flow/adr/`):
-  - [ADR-001](../specs/chevp-flow/adr/ADR-001-async-file-based-cli.md) — Async file-based CLI architecture
-  - [ADR-002](../specs/chevp-flow/adr/ADR-002-claude-subprocess-auth.md) — Pfad 2 (`claude -p` subprocess) as auth strategy
-  - [ADR-003](../specs/chevp-flow/adr/ADR-003-go-charm-tech-stack.md) — Go 1.22+ with Charm Stack (Cobra/Bubble Tea/Huh/Glamour)
-  - [ADR-004](../specs/chevp-flow/adr/ADR-004-apache-2-license.md) — Apache-2.0 license
-  - [ADR-005](../specs/chevp-flow/adr/ADR-005-vendored-prompts-embed-fs.md) — Subagent-prompt vendoring via Go `embed.FS`
-  - [ADR-006](../specs/chevp-flow/adr/ADR-006-adapter-contract-location.md) — Adapter-Contract spec lives in chevp-ai-framework
+  - [ADR-001](../../../../../context/specs/chevp-flow/adr/ADR-001-async-file-based-cli.md) — Async file-based CLI architecture
+  - [ADR-002](../../../../../context/specs/chevp-flow/adr/ADR-002-claude-subprocess-auth.md) — Pfad 2 (`claude -p` subprocess) as auth strategy
+  - [ADR-003](../../../../../context/specs/chevp-flow/adr/ADR-003-go-charm-tech-stack.md) — Go 1.22+ with Charm Stack (Cobra/Bubble Tea/Huh/Glamour)
+  - [ADR-004](../../../../../context/specs/chevp-flow/adr/ADR-004-apache-2-license.md) — Apache-2.0 license
+  - [ADR-005](../../../../../context/specs/chevp-flow/adr/ADR-005-vendored-prompts-embed-fs.md) — Subagent-prompt vendoring via Go `embed.FS`
+  - [ADR-006](../../../../../context/specs/chevp-flow/adr/ADR-006-adapter-contract-location.md) — Adapter-Contract spec lives in chevp-ai-framework
 - **Deferred to Exploration**: Distribution-strategy ADR (Homebrew + goreleaser concrete config), Module-internal-API ADR (if reuse pressure emerges)
 - **UX prototype** for the four core commands' CLI output (Glamour markdown + Bubble Tea status views)
 - **Challenger output** — top-3 failure modes, ≥2 alternative architectures (e.g., Python+Typer, TS+Bun rejected with reasons), strongest counter-argument, product-coherence check

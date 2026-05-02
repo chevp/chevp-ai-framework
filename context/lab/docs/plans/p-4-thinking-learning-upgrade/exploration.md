@@ -1,21 +1,26 @@
 ---
-paragraph: §1.1
-slug: thinking-learning-upgrade
-type: exp
+id: p-4-exploration
+title: Exploration
+sidebar_position: 1
+plan_id: P-4
+plan_slug: thinking-learning-upgrade
+phase: exp
 status: active
-proposed-by: ai
-decided-by: —
-approved-by: —
-approved-at: —
+created: 2026-04-09
+legacy_id: §1.1
 exploration-mode: B
+proposed-by: ai
+decided-by: "—"
+approved-by: "—"
+approved-at: "—"
 evidence:
   hypothesis: "The framework is build-centric — it ships features but does not measurably reduce uncertainty before shipping. A Thinking & Learning layer can be added without breaking the 3-step lifecycle."
   result: "Self-hosting pilot — Steps 1–11 implemented in this commit. The new uncertainty triplet, insights template, evidence block, Kill Criteria, Challenger role, and Gatekeeper subagents all coexist with the existing CTX/EXP/PRD lifecycle. No existing artifact had to be deleted."
-  reasoning: "Coexistence demonstrated. Remaining unknown: whether the additional ceremony retires more bad plans than it adds friction. That can only be measured by application — therefore this plan exits Exploration with the chosen approach validated, and the next loop is the Production-side rollout to consumer repos (§1.2)."
+  reasoning: "Coexistence demonstrated. Remaining unknown: whether the additional ceremony retires more bad plans than it adds friction. That can only be measured by application — therefore this plan exits Exploration with the chosen approach validated, and the next loop is the Production-side rollout to consumer repos (P-5)."
 gatekeeper-override: []
 ---
 
-# §1.1 Framework-Upgrade — vom Execution- zum Thinking & Learning Framework
+# P-4 Framework-Upgrade — vom Execution- zum Thinking & Learning Framework
 
 ## Goal
 Das `chevp-ai-framework` von einem reinen Execution-Framework zu einem Thinking-+-Learning-Framework weiterentwickeln, indem Unsicherheit, Lernschleifen, evidenzbasierte Entscheidungen und eine Challenger-Rolle der AI strukturell verankert werden — ohne die bestehende 3-Step-Lifecycle zu brechen.
@@ -35,7 +40,7 @@ Kern-Transformation:
 > von „AI-unterstützt bauen mit Kontrolle"
 > zu „systematisch Unsicherheit reduzieren, bevor gebaut wird"
 
-Dieser Plan ist der erste Eintrag in [§1 Framework Evolution](../chapters/§1_framework-evolution.chapter.md) und wendet das §-Numbering-System gemäß [paragraph-numbering](../../../guidelines/paragraph-numbering.md) an.
+Dieser Plan ist die erste strukturelle Framework-Änderung im neuen flachen P-/D- Schema (vormals §1.1 im §1 Framework-Evolution-Kapitel).
 
 ## Scope
 
@@ -49,12 +54,12 @@ Dieser Plan ist der erste Eintrag in [§1 Framework Evolution](../chapters/§1_f
 - Erweiterung von `domain-extension`-Konzept um **Problem Patterns** (typische Nutzer, typische Fehlannahmen, typische Probleme)
 - Drei dedizierte **Gatekeeper-Subagents** (G1/G2/G3) mit Verdict + Findings + Spawned-Proposals
 - **Plan-Proposal-Loop**: Out-of-Scope-Items werden zu `PROP-NNN` Vorschlägen
-- Anpassung [LIFECYCLE.md](../../../LIFECYCLE.md), [CLAUDE.md](../../../CLAUDE.md), Templates und betroffene Guidelines
+- Anpassung [LIFECYCLE.md](../../../../../LIFECYCLE.md), [CLAUDE.md](../../../../../CLAUDE.md), Templates und betroffene Guidelines
 - Ein neues Guideline-Dokument: `guidelines/uncertainty-reduction.md`
 
 ### NOT in Scope
 - Bruch der 3-Step-Lifecycle (Context → Exploration → Production bleibt)
-- Änderung des Plugin-Layers (`hooks/`, `commands/`) — separater Folge-Plan §1.2
+- Änderung des Plugin-Layers (`hooks/`, `commands/`) — separater Folge-Plan P-5
 - Änderung von `chevp-workflow` (Workspace-Layer) — separater Folge-Plan in jenem Repo
 - Migration bestehender Pläne in anderen Repos auf das neue Format
 - Spec/Code-Generierung für konkrete Projekte
@@ -76,7 +81,7 @@ Dieser Plan ist der erste Eintrag in [§1 Framework Evolution](../chapters/§1_f
    - **Exploration-B — Solution Exploration** (Vergleichbar, Ziel: Entscheidung)
 2. `templates/ux-prototype-template.md` markieren für A oder B
 3. `templates/plan-template.md` (EXP) Frontmatter-Feld `exploration-mode: A|B` einführen
-4. [LIFECYCLE.md](../../../LIFECYCLE.md) Mode-Tabelle erweitern
+4. [LIFECYCLE.md](../../../../../LIFECYCLE.md) Mode-Tabelle erweitern
 
 ### Step 3 — Learning Loop verankern
 1. Neues Pflicht-Artefakt: `insights.md` pro abgeschlossener Exploration
@@ -88,7 +93,7 @@ Dieser Plan ist der erste Eintrag in [§1 Framework Evolution](../chapters/§1_f
 4. Regel in `guidelines/ai-collaboration.md`: „Jede Exploration MUSS ein Learning erzeugen"
 
 ### Step 4 — Evidence-Based Gates
-1. Gate-Definitionen in [LIFECYCLE.md](../../../LIFECYCLE.md) umformulieren:
+1. Gate-Definitionen in [LIFECYCLE.md](../../../../../LIFECYCLE.md) umformulieren:
    - Statt „approved" → drei Pflichtfelder: **Hypothese / Ergebnis / Begründung**
 2. `templates/plan-template.md` Frontmatter erweitern um:
    ```
@@ -101,7 +106,7 @@ Dieser Plan ist der erste Eintrag in [§1 Framework Evolution](../chapters/§1_f
 4. `guidelines/architecture-governance.md` ergänzen: Approval ohne Evidence ist ungültig
 
 ### Step 5 — AI-Rolle „Challenger"
-1. Neue Rolle in [LIFECYCLE.md](../../../LIFECYCLE.md) ergänzen (jetzt 7 Rollen statt 6)
+1. Neue Rolle in [LIFECYCLE.md](../../../../../LIFECYCLE.md) ergänzen (jetzt 7 Rollen statt 6)
 2. Neues Dokument `02-exploration/challenger.md`
 3. Pflicht-Output pro Plan vor G2-Übergang:
    - **Top 3 ways this approach could fail**
@@ -131,7 +136,7 @@ Dieser Plan ist der erste Eintrag in [§1 Framework Evolution](../chapters/§1_f
 ### Step 8 — Neue Guideline: Uncertainty Reduction
 1. `guidelines/uncertainty-reduction.md` anlegen mit Memory-Style-Format
 2. Kernregel: „Jeder Schritt muss messbar Unsicherheit reduzieren"
-3. Verlinken aus [CLAUDE.md](../../../CLAUDE.md), [LIFECYCLE.md](../../../LIFECYCLE.md), `01-context/README.md`
+3. Verlinken aus [CLAUDE.md](../../../../../CLAUDE.md), [LIFECYCLE.md](../../../../../LIFECYCLE.md), `01-context/README.md`
 
 ### Step 9 — Gatekeeper-Agenten pro Gate (G1/G2/G3)
 1. Drei dedizierte Subagents anlegen unter `agents/`:
@@ -144,7 +149,7 @@ Dieser Plan ist der erste Eintrag in [§1 Framework Evolution](../chapters/§1_f
    - **Spawned Plan Proposals**: für jedes erkannte Out-of-Scope-Item ein Plan-Stub-Vorschlag (siehe Step 10)
 3. Gatekeeper sind **read-only** — sie schreiben keine Pläne, sie schlagen sie vor. Approval bleibt beim Menschen.
 4. Slash-Command `/gate-check <G1|G2|G3>` ruft den passenden Gatekeeper auf
-5. Eintrag in [LIFECYCLE.md](../../../LIFECYCLE.md): Gate-Übergang ohne Gatekeeper-Verdict ist ungültig
+5. Eintrag in [LIFECYCLE.md](../../../../../LIFECYCLE.md): Gate-Übergang ohne Gatekeeper-Verdict ist ungültig
 6. Bestehender `agents/gate-validator` (falls vorhanden) wird durch die drei spezialisierten Agenten ersetzt oder als Dispatcher umgebaut
 
 ### Step 10 — Out-of-Scope → Plan-Vorschläge (Proposal-Loop)
@@ -155,9 +160,8 @@ Dieser Plan ist der erste Eintrag in [§1 Framework Evolution](../chapters/§1_f
    id: PROP-NNN
    proposed-by: ai
    source-gate: <G1|G2|G3>
-   source-plan: <§-Nummer des Plans, der das Out-of-Scope-Item enthielt>
+   source-plan: <Plan-ID, der das Out-of-Scope-Item enthielt>
    suggested-type: <ctx|exp|prd>
-   suggested-chapter: <§x oder §x.y>
    status: pending-human-review
    ---
    ## Trigger
@@ -172,10 +176,10 @@ Dieser Plan ist der erste Eintrag in [§1 Framework Evolution](../chapters/§1_f
    ## Suggested Kill Criterion
    Wann wäre dieser Vorschlag obsolet?
    ```
-3. Speicherort: `context/plans/proposals/PROP-NNN_<slug>.md`
+3. Speicherort: `context/lab/docs/plans/proposals/PROP-NNN_<slug>.md`
 4. Lifecycle eines Proposals:
    - `pending-human-review` → Mensch entscheidet:
-     - **promote** → wird zu echtem `§x.y` Plan im passenden Kapitel (AI generiert Stub aus Proposal)
+     - **promote** → wird zu echtem Plan (`P-N`) (AI generiert Stub aus Proposal)
      - **defer** → bleibt im Proposal-Ordner als Backlog
      - **reject** → wird in `proposals/rejected/` archiviert mit Begründung
 5. Slash-Command `/promote PROP-NNN` und `/reject PROP-NNN <reason>`
@@ -183,21 +187,21 @@ Dieser Plan ist der erste Eintrag in [§1 Framework Evolution](../chapters/§1_f
 7. Regel in `guidelines/plan-granularity.md`: „Out-of-Scope-Items eines Plans verschwinden nicht — sie werden zu Proposals"
 
 ### Step 11 — README- & CLAUDE.md-Sync
-1. [CLAUDE.md](../../../CLAUDE.md) Core Principle ergänzen um „Uncertainty before Code"
-2. [README.md](../../../README.md) Lifecycle-Diagramm erweitern (Exploration A/B, Insights-Loop, Gatekeeper, Proposal-Loop)
-3. `context/PLAN_REGISTRY.md` anlegen und §1.1 darin registrieren
+1. [CLAUDE.md](../../../../../CLAUDE.md) Core Principle ergänzen um „Uncertainty before Code"
+2. [README.md](../../../../../README.md) Lifecycle-Diagramm erweitern (Exploration A/B, Insights-Loop, Gatekeeper, Proposal-Loop)
+3. Plan-Index im Lab (`/plans/`) reflektiert das neue Schema
 4. Versionssprung dokumentieren
 
 ## Affected Files
-- [CLAUDE.md](../../../CLAUDE.md) — Core Principle, Mode-Tabelle erweitern
-- [LIFECYCLE.md](../../../LIFECYCLE.md) — Gates, Rollen (6→7), Sub-Modi
-- [README.md](../../../README.md) — Diagramm + Beschreibung
-- [01-context/README.md](../../../01-context/README.md) — drei Pflicht-Artefakte
-- [02-exploration/README.md](../../../02-exploration/README.md) — A/B-Split
+- [CLAUDE.md](../../../../../CLAUDE.md) — Core Principle, Mode-Tabelle erweitern
+- [LIFECYCLE.md](../../../../../LIFECYCLE.md) — Gates, Rollen (6→7), Sub-Modi
+- [README.md](../../../../../README.md) — Diagramm + Beschreibung
+- [01-context/README.md](../../../../../01-context/README.md) — drei Pflicht-Artefakte
+- [02-exploration/README.md](../../../../../02-exploration/README.md) — A/B-Split
 - `02-exploration/challenger.md` — neu
-- [templates/plan-template.md](../../../templates/plan-template.md) — Evidence + Kill-Criteria + exploration-mode
-- [templates/context-plan-template.md](../../../templates/context-plan-template.md) — Verweis auf Problem/Hypothesen/Risiken
-- [templates/production-plan-template.md](../../../templates/production-plan-template.md) — Kill-Criteria
+- [templates/plan-template.md](../../../../../templates/plan-template.md) — Evidence + Kill-Criteria + exploration-mode
+- [templates/context-plan-template.md](../../../../../templates/context-plan-template.md) — Verweis auf Problem/Hypothesen/Risiken
+- [templates/production-plan-template.md](../../../../../templates/production-plan-template.md) — Kill-Criteria
 - `templates/problem-statement-template.md` — neu
 - `templates/hypotheses-template.md` — neu
 - `templates/risks-template.md` — neu
@@ -205,23 +209,22 @@ Dieser Plan ist der erste Eintrag in [§1 Framework Evolution](../chapters/§1_f
 - `templates/domain-patterns-template.md` — neu
 - `templates/plan-proposal-template.md` — neu
 - `guidelines/uncertainty-reduction.md` — neu
-- [guidelines/ai-collaboration.md](../../../guidelines/ai-collaboration.md) — Challenger + Learning-Pflicht
-- [guidelines/architecture-governance.md](../../../guidelines/architecture-governance.md) — Evidence-Pflicht
-- [guidelines/plan-granularity.md](../../../guidelines/plan-granularity.md) — Kill-Criteria-Pflicht
+- [guidelines/ai-collaboration.md](../../../../../guidelines/ai-collaboration.md) — Challenger + Learning-Pflicht
+- [guidelines/architecture-governance.md](../../../../../guidelines/architecture-governance.md) — Evidence-Pflicht
+- [guidelines/plan-granularity.md](../../../../../guidelines/plan-granularity.md) — Kill-Criteria-Pflicht
 - `agents/gatekeeper-g1.md` — neu
 - `agents/gatekeeper-g2.md` — neu
 - `agents/gatekeeper-g3.md` — neu
-- `context/plans/proposals/` — neuer Ordner
-- `context/PLAN_REGISTRY.md` — neu
-- [commands/](../../../commands/) — `/gate-check`, `/promote`, `/reject`, `/gate-override` ergänzen
-- [integration/](../../../integration/) — Domain-Patterns-Beispiel
+- `context/lab/docs/plans/proposals/` — neuer Ordner
+- [commands/](../../../../../commands/) — `/gate-check`, `/promote`, `/reject`, `/gate-override` ergänzen
+- [integration/](../../../../../integration/) — Domain-Patterns-Beispiel
 
 ## Risks
 | Risk | Mitigation |
 |------|------------|
 | Erhöhte Ceremony schreckt Nutzer ab | Templates kurz halten; alle neuen Felder mit Beispielen + „minimal viable"-Hinweis |
 | Kollision mit `chevp-workflow` Workspace-Layer | Vor Step 1 Sync-Check mit `misc/chevp-workflow`; ggf. Folgeplan dort |
-| Plugin (`hooks/`, `commands/`) nicht synchron mit neuen Gate-Regeln | Hooks-Update als expliziter Folgeplan §1.2 |
+| Plugin (`hooks/`, `commands/`) nicht synchron mit neuen Gate-Regeln | Hooks-Update als expliziter Folgeplan P-5 |
 | Bestehende Pläne in Consumer-Repos brechen | Migration optional; alte Plan-Form bleibt valide; Versionsmarker in Frontmatter |
 | „Challenger" wird zur Pflichtübung statt echter Kritik | Beispiele für gute vs. schlechte Challenger-Outputs in `02-exploration/challenger.md` |
 | Zu viele Pflicht-Artefakte → Framework wird unhandlich | Skalierungsregel: für Trivialaufgaben (`small`-Plan) sind Problem/Hypothesen/Risiken zusammenfassbar in einem Absatz |
@@ -243,17 +246,17 @@ Dieser Plan ist der erste Eintrag in [§1 Framework Evolution](../chapters/§1_f
 
 **Alternative A — Single mega-guideline (`uncertainty-reduction.md`), no template changes.**
 Sketch: instead of touching templates, gates, agents, and LIFECYCLE, write one canonical guideline document and rely on AI discipline to enforce it.
-Why rejected: AI discipline has been shown (in this very project, prior to §1.1) to drift without mechanical anchors. The point of the framework is to make rules *queryable* and *blockable*, not aspirational.
+Why rejected: AI discipline has been shown (in this very project, prior to P-4) to drift without mechanical anchors. The point of the framework is to make rules *queryable* and *blockable*, not aspirational.
 Re-open if: a future version adds a hook layer that mechanically enforces the guideline at write-time, making the per-template fields redundant.
 
 **Alternative B — Defer everything to a separate `chevp-thinking-framework` repo.**
 Sketch: leave `chevp-ai-framework` as the execution framework it already is, build a parallel repo focused on uncertainty/learning, and let projects opt in to either or both.
 Why rejected: two frameworks for the same lifecycle is two sources of truth. Consumer repos already struggle with the workspace/per-repo split; adding a third dimension would multiply the cognitive cost. The Thinking layer must live *inside* the existing lifecycle to be honoured.
-Re-open if: §1.2 (consumer rollout) reveals that the new ceremony is incompatible with consumer-repo discipline levels.
+Re-open if: P-5 (consumer rollout) reveals that the new ceremony is incompatible with consumer-repo discipline levels.
 
 ### Strongest counter-argument
 
-The strongest case against §1.1 is that it solves a problem the framework's *users* never reported. The 7 weaknesses identified in the external review are real on a thinking-tool axis, but no consumer of `chevp-ai-framework` has ever complained that "approval was rubber-stamp" or "Exploration is build-centric". The motivation came from one good critique, not from observed pain. There is a non-trivial chance that we are about to add 11 steps of structural change to fix a problem nobody has felt — and that the cost will land on every consumer repo while the benefit accrues only to a future hypothetical project that practises Thinking & Learning. If §1.2 (the consumer rollout) reveals that nobody actually fills the new fields, this whole plan is sunk cost.
+The strongest case against P-4 is that it solves a problem the framework's *users* never reported. The 7 weaknesses identified in the external review are real on a thinking-tool axis, but no consumer of `chevp-ai-framework` has ever complained that "approval was rubber-stamp" or "Exploration is build-centric". The motivation came from one good critique, not from observed pain. There is a non-trivial chance that we are about to add 11 steps of structural change to fix a problem nobody has felt — and that the cost will land on every consumer repo while the benefit accrues only to a future hypothetical project that practises Thinking & Learning. If P-5 (the consumer rollout) reveals that nobody actually fills the new fields, this whole plan is sunk cost.
 
 ## Kill Criteria
 - Wenn nach Step 1–3 in einem Pilot-Repo (`misc/chevp-ai-framework` selbst) der Aufwand pro Plan um >3× steigt ohne erkennbaren Erkenntnisgewinn → Rollback und Re-Design
@@ -261,18 +264,17 @@ The strongest case against §1.1 is that it solves a problem the framework's *us
 - Wenn Challenger-Output sich als reines Pflicht-Theater erweist (gemessen: stereotype Antworten in 3 aufeinanderfolgenden Plänen) → Rolle streichen, anders lösen
 
 ## Acceptance Criteria
-- [ ] [LIFECYCLE.md](../../../LIFECYCLE.md) enthält Exploration-A/B, 7 Rollen, Evidence-basierte Gates
+- [ ] [LIFECYCLE.md](../../../../../LIFECYCLE.md) enthält Exploration-A/B, 7 Rollen, Evidence-basierte Gates
 - [ ] Drei neue Context-Templates (Problem/Hypothesen/Risiken) existieren und sind in `01-context/` verlinkt
 - [ ] `templates/insights-template.md` existiert; G2 prüft `insights.md`
 - [ ] `templates/plan-template.md` enthält `evidence:`-Block + Kill-Criteria-Sektion
 - [ ] `02-exploration/challenger.md` existiert mit Pflicht-Outputs (Top-3-Failures, 2 Alternativen, Counter-Argument)
 - [ ] `guidelines/uncertainty-reduction.md` existiert im Memory-Style-Format
 - [ ] Domain-Patterns-Template existiert mit mindestens einem Beispiel im `integration/`-Folder
-- [ ] [CLAUDE.md](../../../CLAUDE.md) und [README.md](../../../README.md) reflektieren neue Lifecycle ohne Brüche zu bestehenden Repos
+- [ ] [CLAUDE.md](../../../../../CLAUDE.md) und [README.md](../../../../../README.md) reflektieren neue Lifecycle ohne Brüche zu bestehenden Repos
 - [ ] Drei Gatekeeper-Agenten (`gatekeeper-g1/g2/g3`) existieren mit Verdict + Findings + Spawned Proposals als Pflicht-Output
-- [ ] `templates/plan-proposal-template.md` + `context/plans/proposals/`-Struktur existieren
+- [ ] `templates/plan-proposal-template.md` + `context/lab/docs/plans/proposals/`-Struktur existieren
 - [ ] Slash-Commands `/gate-check`, `/promote`, `/reject`, `/gate-override` registriert
-- [ ] `context/PLAN_REGISTRY.md` existiert und enthält §1.1
-- [ ] Pilot-Gate-Check auf §1.1 selbst durchgeführt — mindestens ein PROP-NNN aus Out-of-Scope-Items dieses Plans erzeugt
-- [ ] Pilot-Anwendung des neuen Frameworks auf sich selbst — `insights.md` zu §1.1 vorhanden
-- [ ] Folge-Plan §1.2 für Plugin-Layer-Sync angelegt
+- [ ] Pilot-Gate-Check auf P-4 selbst durchgeführt — mindestens ein PROP-NNN aus Out-of-Scope-Items dieses Plans erzeugt
+- [ ] Pilot-Anwendung des neuen Frameworks auf sich selbst — `insights.md` zu P-4 vorhanden
+- [ ] Folge-Plan P-5 für Plugin-Layer-Sync angelegt

@@ -1,9 +1,12 @@
 ---
-id: PROP-004
+id: prop-004
+title: "PROP-004: Distribution-strategy ADR"
+sidebar_position: 4
+proposal_id: PROP-004
 type: proposal
 proposed-by: ai
 source-gate: G1
-source-plan: CTX-002
+source-plan: P-3
 suggested-type: exp
 status: deferred
 date: 2026-04-24
@@ -13,7 +16,7 @@ date: 2026-04-24
 
 ## Trigger
 
-CTX-002 §"Next steps after G1" lists Distribution as a deferred ADR: "Distribution — Homebrew + GitHub Releases + go install + git submodule". ADR-004 (license) is in scope at G1, but the *concrete* distribution mechanics (Homebrew tap layout, goreleaser matrix, code-signing for macOS notarization, checksums, SBOM) are not. SPEC §"Non-functional" mentions `goreleaser` but does not pin its config.
+P-3 §"Next steps after G1" lists Distribution as a deferred ADR: "Distribution — Homebrew + GitHub Releases + go install + git submodule". ADR-004 (license) is in scope at G1, but the *concrete* distribution mechanics (Homebrew tap layout, goreleaser matrix, code-signing for macOS notarization, checksums, SBOM) are not. SPEC §"Non-functional" mentions `goreleaser` but does not pin its config.
 
 ## Suggested Goal
 
@@ -33,4 +36,4 @@ Small — one ADR plus a working `.goreleaser.yml`. Most decisions are straightf
 
 ## Notes
 
-Already declared as deferred-to-Exploration in CTX-002. This proposal exists to ensure it doesn't get lost in the EXP-step queue and to set kill-criterion explicitly.
+Already declared as deferred-to-Exploration in P-3. This proposal exists to ensure it doesn't get lost in the EXP-step queue and to set kill-criterion explicitly.

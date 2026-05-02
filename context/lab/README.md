@@ -13,17 +13,35 @@ context/lab/
 ├── docusaurus.config.js
 ├── sidebars.js
 ├── package.json
-├── src/css/custom.css
-└── docs/                     ← all markdown content
+├── src/
+│   ├── components/PlanList.tsx     ← filters plans by frontmatter `status`
+│   └── css/custom.css
+└── docs/                           ← all markdown content
     ├── intro.md
-    ├── plans/active/<id>-<slug>/{context,exploration,insights,production}.md
-    ├── decisions/            ← ADRs
-    ├── lifecycle/            ← framework concepts
+    ├── plans/
+    │   ├── _category_.json
+    │   ├── index.mdx               ← filtered list driven by status frontmatter
+    │   └── p-<N>-<slug>/{context,exploration,insights,production}.md
+    ├── decisions/d-<N>-<slug>.md   ← ADRs
+    ├── lifecycle/                  ← framework concepts
     ├── gates/
     ├── guidelines/
     ├── agents/
     └── commands/
 ```
+
+The folder structure under `plans/` is **flat** — no `active/` or `finished/` subfolder. `status` is a frontmatter property; the `/plans/` index page filters live.
+
+## ID scheme
+
+Two flat global counters:
+
+| Prefix | Used for | Examples |
+|--------|----------|----------|
+| `P-<N>` | Plans | `P-1`, `P-32` |
+| `D-<N>` | Decisions / ADRs | `D-1`, `D-123` |
+
+No categories. No padding. No reuse, even after a plan is killed.
 
 ## Setup
 
@@ -62,18 +80,20 @@ npm run serve
 
 Use the `lab-curator` subagent (see [`agents/lab-curator.md`](../../agents/lab-curator.md)) to:
 
-- scaffold a new plan in the right category
+- scaffold a new plan (`P-<N>`) or decision (`D-<N>`) with the next free number
 - promote a plan from one phase to the next
+- change a plan's `status` (frontmatter edit only — never a folder rename)
 - validate frontmatter and sidebar order
 - run a build and report broken links
 
-The agent is the only safe path to modify `context/lab/` — it enforces the ID scheme and frontmatter rules.
+The agent is the only safe path to modify `context/lab/` — it enforces the ID scheme, the frontmatter rules, and the **no-folder-rename** invariant for status.
 
 ## Hard boundaries
 
 - `context/lab/` is the only source for Lab content.
 - `docs/flow/` is the only output target.
 - `context/plans/`, `context/adr/`, `context/specs/` and `docs/*.html` are **off-limits** for the Lab. They live in the legacy §-numbering scheme and stay untouched until the experiment is validated.
+- Status changes never rename or move a folder — only the `status` frontmatter field is edited.
 
 ## Kill criteria
 
@@ -82,6 +102,6 @@ The Lab is deleted (and the static HTML pages remain the canonical doc site) if 
 - authoring a plan in the Lab takes longer than the markdown-only flow;
 - the build output bloats the repo by &gt; 50 MB;
 - search/navigation in the Lab is not measurably better than `grep` over `context/plans/`;
-- the category taxonomy needs more than two extensions in the trial period.
+- the `status` frontmatter filter proves harder to use than just naming subfolders `active/` / `finished/` after all.
 
-Tracked in `context/lab/docs/plans/active/fw-01-lab-bootstrap/`.
+Tracked in `context/lab/docs/plans/p-1-lab-bootstrap/`.

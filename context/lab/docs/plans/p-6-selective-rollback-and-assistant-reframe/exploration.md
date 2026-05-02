@@ -1,29 +1,34 @@
 ---
-paragraph: §1.3
-slug: selective-rollback-and-assistant-reframe
-type: exp
-status: draft
-proposed-by: ai
-decided-by: —
-approved-by: —
-approved-at: —
+id: p-6-exploration
+title: Exploration
+sidebar_position: 1
+plan_id: P-6
+plan_slug: selective-rollback-and-assistant-reframe
+phase: exp
+status: active
+created: 2026-04-18
+legacy_id: §1.3
 exploration-mode: B
-supersedes-mandates-of: §1.1
+supersedes-mandates-of: P-4
+proposed-by: ai
+decided-by: "—"
+approved-by: "—"
+approved-at: "—"
 evidence:
-  hypothesis: "§1.1 hat die richtigen Konzepte eingeführt (Uncertainty-Triplet, insights.md, Challenger, Kill-Criteria, evidence:-Block, Gatekeeper-Subagents), aber als universelle Pflicht überzieht es im Alltag. Ein selektiver Rollback der Pflicht-Mechanik bei gleichzeitiger Beibehaltung der Konzepte als verfügbare Bausteine senkt Reibung, ohne die Substanz zu verlieren. Die KI wird zugleich von „Owner" zu „Assistent" re-positioniert."
-  result: —
-  reasoning: —
+  hypothesis: 'P-4 hat die richtigen Konzepte eingeführt (Uncertainty-Triplet, insights.md, Challenger, Kill-Criteria, evidence:-Block, Gatekeeper-Subagents), aber als universelle Pflicht überzieht es im Alltag. Ein selektiver Rollback der Pflicht-Mechanik bei gleichzeitiger Beibehaltung der Konzepte als verfügbare Bausteine senkt Reibung, ohne die Substanz zu verlieren. Die KI wird zugleich von „Owner" zu „Assistent" re-positioniert.'
+  result: "—"
+  reasoning: "—"
 gatekeeper-override: []
 ---
 
-# §1.3 Selektiver Rollback + Assistant-Reframe
+# P-6 Selektiver Rollback + Assistant-Reframe
 
 ## Goal
-Die in §1.1 eingeführten Konzepte (Uncertainty-Triplet, `insights.md`, Challenger, Kill-Criteria, `evidence:`-Block, Gatekeeper-Subagents, Exploration-Sub-Modi) **als verfügbare Bausteine erhalten**, aber ihre **universelle Pflicht zurücknehmen**. Konzepte werden risikoadaptiv (`change-class`) verbindlich, sonst empfohlen oder optional. Parallel wird die KI-Rolle von „Prozess-Owner / Blocker" zu „Prozess-Assistent / Vorschlagsgeber" re-positioniert; Mensch und Hooks bleiben die einzigen Enforcement-Instanzen. **Was nicht stimmt — falsche Pflicht-Sprache, autoritäre Formulierungen, hartkodierte §1.1-Enforcement, der §1.1-Plan selbst — wird gelöscht, nicht konserviert.**
+Die in P-4 eingeführten Konzepte (Uncertainty-Triplet, `insights.md`, Challenger, Kill-Criteria, `evidence:`-Block, Gatekeeper-Subagents, Exploration-Sub-Modi) **als verfügbare Bausteine erhalten**, aber ihre **universelle Pflicht zurücknehmen**. Konzepte werden risikoadaptiv (`change-class`) verbindlich, sonst empfohlen oder optional. Parallel wird die KI-Rolle von „Prozess-Owner / Blocker" zu „Prozess-Assistent / Vorschlagsgeber" re-positioniert; Mensch und Hooks bleiben die einzigen Enforcement-Instanzen. **Was nicht stimmt — falsche Pflicht-Sprache, autoritäre Formulierungen, hartkodierte P-4-Enforcement, der P-4-Plan selbst — wird gelöscht, nicht konserviert.**
 
 ## Context
 
-§1.1 hat das Framework von einem reinen Execution-Modell zu einem Thinking-+-Learning-Modell umgebaut. Die Konzepte sind richtig — die **universelle Pflicht** ist es nicht. Self-Hosting und Außenwahrnehmung haben fünf Reibungspunkte sichtbar gemacht, die das Framework im Alltag bremsen:
+P-4 hat das Framework von einem reinen Execution-Modell zu einem Thinking-+-Learning-Modell umgebaut. Die Konzepte sind richtig — die **universelle Pflicht** ist es nicht. Self-Hosting und Außenwahrnehmung haben fünf Reibungspunkte sichtbar gemacht, die das Framework im Alltag bremsen:
 
 1. **AI-Rolle zu autoritativ formuliert** — `CLAUDE.md` Core Rule 2 sagt zwar „AI enforces, human decides", aber Sprache wie „AI **blocks** violations" und „Gates are blockers" suggerieren eine Kontrollinstanz. In der Praxis ist die KI Vorschlagsgeber; Hooks sind die einzige mechanische Durchsetzung.
 2. **Strikt lineares Phasenmodell** — G1→G2→G3 erzwingt einen vollen Phasenwechsel selbst für kleine Erkenntnisschleifen während Production. Realistische Arbeit oszilliert; Mini-Loops sollten ohne formellen Rückfall erlaubt sein.
@@ -38,38 +43,38 @@ Die in §1.1 eingeführten Konzepte (Uncertainty-Triplet, `insights.md`, Challen
 - **G2 → Entscheidung** — welche Hypothese gewinnt, mit welcher Begründung und welchem Kill-Kriterium? (heute: Exploration → Production)
 - **G3 → Execution** — Umsetzung der getroffenen Entscheidung, inkl. Lernrückfluss. (heute: Production → Done)
 
-Diese Lesart ist der Grund, warum die §1.1-Konzepte (Uncertainty-Triplet, `insights.md`, Challenger, Kill-Criteria) konzeptionell stimmen: sie sind die natürlichen Werkzeuge eines Reasoning-Systems, nicht Bürokratie. Falsch war nur, sie als universelle Pflicht statt als situativ aktivierte Reasoning-Bausteine zu verkaufen. §1.3 expliziert diese Lesart und re-labelt die Gates entsprechend, damit Außenstehende und KI sofort sehen, *wozu* ein Gate dient — nicht nur, *was* es blockiert.
+Diese Lesart ist der Grund, warum die P-4-Konzepte (Uncertainty-Triplet, `insights.md`, Challenger, Kill-Criteria) konzeptionell stimmen: sie sind die natürlichen Werkzeuge eines Reasoning-Systems, nicht Bürokratie. Falsch war nur, sie als universelle Pflicht statt als situativ aktivierte Reasoning-Bausteine zu verkaufen. P-6 expliziert diese Lesart und re-labelt die Gates entsprechend, damit Außenstehende und KI sofort sehen, *wozu* ein Gate dient — nicht nur, *was* es blockiert.
 
-**Entscheidung des Menschen (2026-04-09):** §1.1 wird in seiner *Pflicht-Form* zurückgenommen. Die Konzepte bleiben als Bausteine im Repo verfügbar, aber sie sind nicht mehr universell verbindlich. Was an §1.1 nicht stimmt, wird **gelöscht** — keine Konservierung aus Glaubwürdigkeitsangst, keine `superseded`-Marker als Sentimentalität. §1.1 wandert in `archived/`, wenn überhaupt, oder fliegt raus. Der konzeptionelle Kern lebt in Templates und Guidelines weiter, dort wo er praktisch gebraucht wird.
+**Entscheidung des Menschen (2026-04-09):** P-4 wird in seiner *Pflicht-Form* zurückgenommen. Die Konzepte bleiben als Bausteine im Repo verfügbar, aber sie sind nicht mehr universell verbindlich. Was an P-4 nicht stimmt, wird **gelöscht** — keine Konservierung aus Glaubwürdigkeitsangst, keine `superseded`-Marker als Sentimentalität. P-4 wandert nach `status: archived` (oder fliegt raus). Der konzeptionelle Kern lebt in Templates und Guidelines weiter, dort wo er praktisch gebraucht wird.
 
-Dieser Plan ist Teil von [§1 Framework Evolution](../chapters/§1_framework-evolution.chapter.md) und korrigiert §1.1. §1.2 (Plugin-Rollout) bleibt unberührt, soweit es nicht auf §1.1-Pflichten angewiesen ist.
+Dieser Plan korrigiert P-4. P-5 (Plugin-Rollout) bleibt unberührt, soweit es nicht auf P-4-Pflichten angewiesen ist.
 
 ## Scope
 
 ### IN Scope
-- **Selektiver Rollback der §1.1-Pflichten** — `insights.md`, Challenger-Output, vollständiger `evidence:`-Block, Uncertainty-Triplet, Exploration-Sub-Modi A/B sind nicht länger universell verpflichtend. Sie bleiben als **dokumentierte Bausteine** in Templates und Guidelines erhalten und werden risikoadaptiv aktiviert.
-- **§1.1-Plan nach `archived/` verschieben** — der Plan-Eintrag selbst wird archiviert (oder gelöscht, falls er nichts enthält, was nicht ohnehin in den Templates lebt). Kein „historischer Marker" um des Markierens willen.
+- **Selektiver Rollback der P-4-Pflichten** — `insights.md`, Challenger-Output, vollständiger `evidence:`-Block, Uncertainty-Triplet, Exploration-Sub-Modi A/B sind nicht länger universell verpflichtend. Sie bleiben als **dokumentierte Bausteine** in Templates und Guidelines erhalten und werden risikoadaptiv aktiviert.
+- **P-4-Plan-Status auf `archived`** — der Plan-Eintrag selbst wird via Frontmatter archiviert (oder gelöscht, falls er nichts enthält, was nicht ohnehin in den Templates lebt). Kein „historischer Marker" um des Markierens willen.
 - **Falsche Sätze ersatzlos löschen** — autoritäre Formulierungen wie „AI blocks", „Gates are blockers", „rubber-stamp approval is forbidden", „every plan can be killed" als universelle Pflicht: weg. Keine Umformulierung in Watered-Down-Variante, sondern ersatzloser Schnitt, wo nichts Neues an die Stelle muss.
 - **`change-class`-Klassifikation** (`trivial` / `standard` / `risky` / `irreversible`) als neues Frontmatter-Feld für Pläne. Definition + Heuristik in `guidelines/uncertainty-reduction.md`.
-- **Risiko-adaptive Artefakt-Matrix** — Tabelle Änderungstyp × Artefakt mit MUST/SHOULD/MAY. Bei `trivial` ist nichts aus §1.1 verpflichtend; bei `irreversible` ist alles verpflichtend. Die §1.1-Pflichten überleben damit als Sonderfall, nicht als Default.
+- **Risiko-adaptive Artefakt-Matrix** — Tabelle Änderungstyp × Artefakt mit MUST/SHOULD/MAY. Bei `trivial` ist nichts aus P-4 verpflichtend; bei `irreversible` ist alles verpflichtend. Die P-4-Pflichten überleben damit als Sonderfall, nicht als Default.
 - **Re-Framing der KI-Rolle** in `CLAUDE.md`, `LIFECYCLE.md`, `README.md`: KI als *Prozess-Assistent*, Mensch als finaler Gatekeeper. Sprache „AI blocks" → „AI flags + recommends; hooks enforce mechanically; human decides".
 - **Sub-Loop-Konzept** in `LIFECYCLE.md`: explizite Erlaubnis für Mini-Exploration-Loops innerhalb Production, ohne G3→G2 zurückzufallen. Bedingung: keine Scope-Erweiterung, kein neues Risiko.
-- **MUST/SHOULD/MAY-Markierung** in allen Core Rules (`CLAUDE.md`), Gate-Definitionen und Guidelines. RFC-2119-Stil, einmalig im Glossar definiert. §1.1-Pflichten werden in MAY/SHOULD herabgestuft (außer für `risky`/`irreversible`).
+- **MUST/SHOULD/MAY-Markierung** in allen Core Rules (`CLAUDE.md`), Gate-Definitionen und Guidelines. RFC-2119-Stil, einmalig im Glossar definiert. P-4-Pflichten werden in MAY/SHOULD herabgestuft (außer für `risky`/`irreversible`).
 - **Lightweight-Plan-Template** — minimal-EXP (Goal + Scope + Kill Criteria) ohne Pflicht zu `evidence:`/`insights.md`/Challenger bei `change-class: trivial|standard`. Neues Template: `templates/plan-lightweight-template.md`.
 - **README-Re-Strukturierung** — erste Überschrift „A cognitive working model for AI-assisted development". Plugin-Layer als optionale Sektion klar abgegrenzt.
 - **Hooks lockern** (`hooks/gate-check.py`, `hooks/provenance-check.py`): Pflicht-Set wird aus `change-class` abgeleitet statt hartkodiert.
-- **§1.1-Ableitungen anpassen** — `02-exploration/challenger.md`, `agents/gatekeeper-g*.md`, `templates/insights-template.md` werden auf den optionalen Status umgeschrieben.
+- **P-4-Ableitungen anpassen** — `02-exploration/challenger.md`, `agents/gatekeeper-g*.md`, `templates/insights-template.md` werden auf den optionalen Status umgeschrieben.
 - **Semantisches Gate-Re-Labeling** — Gates werden in `CLAUDE.md`, `LIFECYCLE.md`, `README.md` zusätzlich zu ihrer Phasen-Bedeutung mit ihrer Reasoning-Bedeutung beschriftet: **G0 Grounding · G1 Hypothesenraum · G2 Entscheidung · G3 Execution**. Numerierung bleibt rückwärtskompatibel; das Re-Labeling ist additiv und macht sichtbar, dass jedes Gate eine Erkenntnisstation ist, nicht nur ein Phasenwechsel.
-- **Self-Hosting-Test** — §1.3 selbst läuft im neuen adaptiven Modus mit `change-class: standard` durch G2.
+- **Self-Hosting-Test** — P-6 selbst läuft im neuen adaptiven Modus mit `change-class: standard` durch G2.
 
 ### NOT in Scope
-- **Löschung der §1.1-Konzepte als Bausteine** — Templates (`insights-template.md`, `hypotheses-template.md`, `risks-template.md`, `problem-statement-template.md`), Challenger-Doku, Gatekeeper-Subagents, `guidelines/uncertainty-reduction.md` bleiben im Repo. Sie verlieren nur den Pflicht-Status.
-- **Vollständiger Rollback auf den Stand vor §1.1** — kein `git revert ff0c23d`. Die Konzepte sind wertvoll, nur die Universalität war falsch.
+- **Löschung der P-4-Konzepte als Bausteine** — Templates (`insights-template.md`, `hypotheses-template.md`, `risks-template.md`, `problem-statement-template.md`), Challenger-Doku, Gatekeeper-Subagents, `guidelines/uncertainty-reduction.md` bleiben im Repo. Sie verlieren nur den Pflicht-Status.
+- **Vollständiger Rollback auf den Stand vor P-4** — kein `git revert ff0c23d`. Die Konzepte sind wertvoll, nur die Universalität war falsch.
 - Abschaffung der 3-Step-Lifecycle (Context → Exploration → Production bleibt).
 - Änderungen an `chevp-workflow` (separater Folge-Plan in jenem Repo).
 - Migration bestehender Pläne in Consumer-Repos (opt-in pro Repo).
-- Neue Slash-Commands oder Subagents (Plugin-Oberfläche bleibt §1.2-konform).
-- Rückbau von §1.2 (Plugin-Rollout).
+- Neue Slash-Commands oder Subagents (Plugin-Oberfläche bleibt P-5-konform).
+- Rückbau von P-5 (Plugin-Rollout).
 
 ## Open Questions
 
@@ -82,25 +87,24 @@ Dieser Plan ist Teil von [§1 Framework Evolution](../chapters/§1_framework-evo
 
 1. **Diagnose** — Pain-Points pro Reibungspunkt mit konkreten Datei-/Zeilen-Belegen sammeln (`CLAUDE.md`, `LIFECYCLE.md`, `README.md`, `guidelines/uncertainty-reduction.md`, `hooks/*.py`).
 2. **Klassifikations-Modell entwerfen** — `change-class`-Definition (trivial/standard/risky/irreversible) inkl. Entscheidungs-Heuristik. Output: Abschnitt in `guidelines/uncertainty-reduction.md`.
-3. **Artefakt-Matrix erstellen** — Tabelle Änderungstyp × Pflicht-Artefakt mit MUST/SHOULD/MAY. Diese Matrix ist die zentrale Stelle, an der die §1.1-Pflichten zu Optionen werden.
-4. **§1.1-Plan archivieren oder löschen** — `context/plans/active/§1.1_*.exp.md` und zugehörige `insights.md` nach `context/plans/archived/` verschieben. Wenn der Inhalt vollständig in Templates/Guidelines lebt, ersatzlos löschen.
+3. **Artefakt-Matrix erstellen** — Tabelle Änderungstyp × Pflicht-Artefakt mit MUST/SHOULD/MAY. Diese Matrix ist die zentrale Stelle, an der die P-4-Pflichten zu Optionen werden.
+4. **P-4-Plan archivieren oder löschen** — `status: archived` setzen. Wenn der Inhalt vollständig in Templates/Guidelines lebt, ersatzlos löschen.
 5. **Falsche Sätze in `CLAUDE.md`/`LIFECYCLE.md`/`README.md` löschen** — autoritäre Pflicht-Sprache (Core Rules 6/8/9/10, „blocks", „forbidden", „mandatory") ersatzlos schneiden. Nichts „weicher umformulieren" — nur das stehen lassen, was wirklich stimmt.
 6. **Sprach-Re-Framing der verbliebenen Stellen** — KI als Assistent, Hooks als einzige mechanische Enforcement-Schicht. Kurze, präzise Formulierungen statt Pflicht-Litanei.
 7. **MUST/SHOULD/MAY-Annotation** — die wenigen verbliebenen Regeln markieren; Glossar-Eintrag in `guidelines/README.md`.
 8. **Sub-Loop-Konzept dokumentieren** — kurzer Abschnitt in `LIFECYCLE.md` „Iteration within Production".
 9. **Lightweight-Plan-Template** — `templates/plan-lightweight-template.md` schreiben + Verweis aus `plan-template.md` und `plan-granularity.md`.
-10. **Hooks anpassen** — `gate-check.py` und `provenance-check.py` lesen `change-class` und applizieren entsprechendes Pflicht-Set; hartkodierte §1.1-Checks raus.
-11. **§1.1-Ableitungen entrümpeln** — `02-exploration/challenger.md` (Pflicht nur ab `risky`), `agents/gatekeeper-g*.md` (Lightweight-Pfad), `templates/insights-template.md` (optional). Was an Pflicht-Sprache übrig ist: löschen.
+10. **Hooks anpassen** — `gate-check.py` und `provenance-check.py` lesen `change-class` und applizieren entsprechendes Pflicht-Set; hartkodierte P-4-Checks raus.
+11. **P-4-Ableitungen entrümpeln** — `02-exploration/challenger.md` (Pflicht nur ab `risky`), `agents/gatekeeper-g*.md` (Lightweight-Pfad), `templates/insights-template.md` (optional). Was an Pflicht-Sprache übrig ist: löschen.
 12. **Build-Dist** — `scripts/build_dist.py` erneut laufen lassen, gebündelte Referenz aktualisieren.
 
 ## Affected Files
 
-- `context/plans/active/§1.1_thinking-learning-upgrade.exp.md` — nach `archived/` verschieben oder löschen.
-- `context/plans/active/§1.1_thinking-learning-upgrade.insights.md` — mit nach `archived/` oder löschen.
+- P-4 Plan-Dateien — `status: archived` setzen oder löschen.
 - `CLAUDE.md` — Core Principle entschärfen; Core Rules 6/8/9/10/11 prüfen und falsche Pflicht-Sätze ersatzlos löschen; AI-Modes-Tabelle: Sprache von „enforce/block" zu „flag/recommend"; MUST/SHOULD/MAY-Annotation der verbliebenen Regeln.
 - `LIFECYCLE.md` — neue Sektion „Iteration within Production"; Klarstellung mechanische vs. kognitive Enforcement; Artefakt-Pflicht-Spalte zeigt MUST/SHOULD/MAY pro `change-class`.
 - `README.md` — neuer Untertitel + Reihenfolge: Denkmodell zuerst, Plugin als optionale Erweiterung.
-- `guidelines/uncertainty-reduction.md` — Artefakt-Matrix, `change-class`-Definition, Beziehung zu §1.1 dokumentiert.
+- `guidelines/uncertainty-reduction.md` — Artefakt-Matrix, `change-class`-Definition, Beziehung zu P-4 dokumentiert.
 - `guidelines/README.md` — RFC-2119-Glossar (MUST/SHOULD/MAY).
 - `guidelines/plan-granularity.md` — Verweis auf Lightweight-Template.
 - `templates/plan-lightweight-template.md` — neu, minimal.
@@ -108,21 +112,20 @@ Dieser Plan ist Teil von [§1 Framework Evolution](../chapters/§1_framework-evo
 - `templates/insights-template.md` — Hinweis: Pflicht nur ab `change-class: risky`.
 - `02-exploration/challenger.md` — Klarstellung: Challenger ist Pflicht ab `change-class: risky`, optional darunter.
 - `agents/gatekeeper-g1.md`, `gatekeeper-g2.md`, `gatekeeper-g3.md` — Lightweight-Pfad + Hochstufungs-Recht.
-- `hooks/gate-check.py`, `hooks/provenance-check.py` — `change-class`-Logik statt hartkodierter §1.1-Pflichten.
-- `context/plans/active/§1.3_*.exp.md` — dieser Plan selbst.
-- `context/plans/active/§1.3_*.insights.md` — Lernschleife (freiwillig auch im Standard-Modus).
-- `context/plans/chapters/§1_framework-evolution.chapter.md` — Verweis auf §1.3 als Korrektur von §1.1.
+- `hooks/gate-check.py`, `hooks/provenance-check.py` — `change-class`-Logik statt hartkodierter P-4-Pflichten.
+- P-6-Plan selbst (dieses Dokument).
+- P-6 `insights.md` — Lernschleife (freiwillig auch im Standard-Modus).
 - `dist/chevp-ai-framework.md` — neu gebündelt.
 
 ## Risks
 
 | Risk | Mitigation |
 |------|------------|
-| Lightweight-Modus wird zur Default-Ausweichroute, §1.1-Konzepte werden in der Praxis nie aktiviert | `change-class: trivial` nur für reversible Änderungen ohne Schnittstellen-Touch |
+| Lightweight-Modus wird zur Default-Ausweichroute, P-4-Konzepte werden in der Praxis nie aktiviert | `change-class: trivial` nur für reversible Änderungen ohne Schnittstellen-Touch |
 | Sub-Loops in Production unterlaufen die Gate-Disziplin | Sub-Loops dürfen Scope nicht erweitern; bei Scope-Touch Rückfall auf Exploration |
 | Hook-Logik für `change-class` wird inkonsistent zur Doku | Single-Source-of-Truth: Klassifikation in `guidelines/uncertainty-reduction.md` definiert, Hooks parsen sie |
 | Löschungen übersehen widersprüchliche Stellen | Grep-Pass über alle Core Rules nach `block`, `forbidden`, `mandatory`, `MUST` |
-| Externe Consumer-Repos brechen, weil sie striktes §1.1-Verhalten erwarten | Default-`change-class` für Consumer-Repos bleibt `standard`; opt-in pro Repo via CLAUDE.md-Flag |
+| Externe Consumer-Repos brechen, weil sie striktes P-4-Verhalten erwarten | Default-`change-class` für Consumer-Repos bleibt `standard`; opt-in pro Repo via CLAUDE.md-Flag |
 
 ## Kill Criteria
 
@@ -137,5 +140,5 @@ Dieser Plan ist Teil von [§1 Framework Evolution](../chapters/§1_framework-evo
 - [ ] `LIFECYCLE.md` enthält Sektion „Iteration within Production".
 - [ ] `README.md` positioniert das Framework zuerst als kognitives Modell, dann als optionale Plugin-Schicht.
 - [ ] `hooks/gate-check.py` akzeptiert Lightweight-Plans mit `change-class: trivial` ohne `insights.md`-Pflicht.
-- [ ] §1.1-Plan ist nach `archived/` verschoben oder gelöscht.
+- [ ] P-4-Plan ist auf `status: archived` gesetzt oder gelöscht.
 - [ ] `dist/chevp-ai-framework.md` ist neu gebaut.

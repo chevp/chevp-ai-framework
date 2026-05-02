@@ -1,15 +1,20 @@
 ---
-id: CTX-001
-type: CTX
-status: draft
+id: p-2-context
+title: Context
+sidebar_position: 1
+plan_id: P-2
+plan_slug: site-positioning-and-split
+phase: ctx
+status: active
+created: 2026-04-10
+legacy_id: CTX-001
 proposed-by: ai
-decided-by: —
-approved-by: —
-approved-at: —
-date: 2026-04-10
+decided-by: "—"
+approved-by: "—"
+approved-at: "—"
 ---
 
-# CTX-001: Reposition & split the GitHub Pages site for clarity and AI-retrievability
+# P-2 — Context: Reposition & split the GitHub Pages site for clarity and AI-retrievability
 
 ## Task
 
@@ -21,14 +26,14 @@ User feedback: the current site is conceptually solid but too generic and hard t
 
 ## Artifacts to Read/Verify
 
-- [x] [CLAUDE.md](../../CLAUDE.md) — core principle, rules, lifecycle summary
-- [x] [LIFECYCLE.md](../../LIFECYCLE.md) — full 3×6×3 matrix, gates G1/G2/G3
-- [x] [README.md](../../README.md) — longer-form intro
-- [x] [docs/index.html](../../docs/index.html) — current single landing page (377 lines, Tailwind CDN, Arctic theme, Glassmorphism)
-- [x] [docs/presentation.html](../../docs/presentation.html) — slide deck (out of scope for this CTX)
-- [x] [.github/workflows/build-dist.yml](../../.github/workflows/build-dist.yml) — Pages deployment (copies `docs/*.html` + `docs/images/` + `dist/chevp-ai-framework.md` to `_site/`)
-- [ ] [guidelines/modular-composition.md](../../guidelines/modular-composition.md) — possibly relevant for the "Components" section
-- [ ] [integration/](../../integration/) — source for a future integration page
+- [x] [CLAUDE.md](../../../../../CLAUDE.md) — core principle, rules, lifecycle summary
+- [x] [LIFECYCLE.md](../../../../../LIFECYCLE.md) — full 3×6×3 matrix, gates G1/G2/G3
+- [x] [README.md](../../../../../README.md) — longer-form intro
+- [x] [docs/index.html](../../../../../docs/index.html) — current single landing page (377 lines, Tailwind CDN, Arctic theme, Glassmorphism)
+- [x] [docs/presentation.html](../../../../../docs/presentation.html) — slide deck (out of scope for this CTX)
+- [x] [.github/workflows/build-dist.yml](../../../../../.github/workflows/build-dist.yml) — Pages deployment (copies `docs/*.html` + `docs/images/` + `dist/chevp-ai-framework.md` to `_site/`)
+- [ ] [guidelines/modular-composition.md](../../../../../guidelines/modular-composition.md) — possibly relevant for the "Components" section
+- [ ] [integration/](../../../../../integration/) — source for a future integration page
 - [ ] Sibling project sites (e.g. `chevp-workflow`, `nuna-ai-framework`) — check for style and link conventions
 
 ## Current state (facts)
@@ -111,7 +116,7 @@ Don't build all ~15 pages at once. Ship a **minimum viable split** first, valida
 **Likely in scope**
 - Rewriting `docs/index.html` into a lean landing
 - Creating new `.html` pages under `docs/` for Phase 1
-- Updating [.github/workflows/build-dist.yml](../../.github/workflows/build-dist.yml) to include the new pages (single glob or explicit `cp` lines)
+- Updating [.github/workflows/build-dist.yml](../../../../../.github/workflows/build-dist.yml) to include the new pages (single glob or explicit `cp` lines)
 - Adding cross-navigation (header links, "Related" footers)
 - Adding a shared CSS/JS snippet if trivially extractable — **optional**, only if it doesn't explode scope
 

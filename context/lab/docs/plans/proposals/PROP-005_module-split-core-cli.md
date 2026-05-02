@@ -1,9 +1,12 @@
 ---
-id: PROP-005
+id: prop-005
+title: "PROP-005: Module split core/cli"
+sidebar_position: 5
+proposal_id: PROP-005
 type: proposal
 proposed-by: ai
 source-gate: G1
-source-plan: CTX-002
+source-plan: P-3
 suggested-type: exp
 status: deferred
 date: 2026-04-24
@@ -13,7 +16,7 @@ date: 2026-04-24
 
 ## Trigger
 
-CTX-002 Q7 resolved as "Single package for v1; split deferred until reuse pressure emerges." This proposal exists to make the deferral explicit and to set the trigger condition under which the split becomes worth doing.
+P-3 Q7 resolved as "Single package for v1; split deferred until reuse pressure emerges." This proposal exists to make the deferral explicit and to set the trigger condition under which the split becomes worth doing.
 
 ## Suggested Goal
 

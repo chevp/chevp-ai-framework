@@ -1,2 +1,14 @@
 dist/
 .claude/
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.pyc
+__pycache__/
+env/
+venv/

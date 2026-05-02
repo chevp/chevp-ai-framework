@@ -22,6 +22,13 @@ const config = {
 
   trailingSlash: true,
 
+  // .md files use CommonMark (autolinks like <https://…> are valid).
+  // .mdx files keep full MDX (JSX, imports). Without this, Docusaurus 3
+  // treats every .md as MDX and chokes on plain CommonMark autolinks.
+  markdown: {
+    format: 'detect',
+  },
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],

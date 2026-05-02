@@ -7,40 +7,43 @@ slug: /
 
 # chevp-ai-framework — Lab
 
-The **Lab** is an experimental Docusaurus subsite for the chevp-ai-framework. It runs alongside the existing static HTML pages at <https://chevp.github.io/chevp-ai-framework/> and lives at the `/flow/` subpath.
+The **Lab** is the **canonical source-of-truth for plans and decisions** in the chevp-ai-framework. It is a Docusaurus subsite that lives at the `/flow/` subpath of [chevp.github.io/chevp-ai-framework](https://chevp.github.io/chevp-ai-framework/), alongside the existing static framework HTML pages.
 
-This is **not** a replacement for the canonical documentation yet. It is an experiment to find out whether a generated, navigable site beats the current hand-written HTML pages and the markdown-only `context/plans/` flow.
+Plans and decisions are authored here, in a flat global ID scheme (`P-<N>`, `D-<N>`), with one folder per plan and `status` as mutable frontmatter. The legacy `context/plans/` folder with `§`-numbering has been migrated and removed.
 
-## Why a Lab?
+## Why the Lab
 
-Three problems in the legacy setup motivated the experiment:
+Three problems in the legacy `context/plans/` setup motivated the move:
 
 1. **`§`-numbering breaks URLs.** Special characters get encoded into `%C2%A7` and are awkward to type, share, or grep.
 2. **Plan IDs change between phases.** A plan filed under `EXP-001` becomes hard to trace once it advances to production.
-3. **Nothing structures the navigation.** A folder of markdown files works for one author but not for readers who want to discover related plans.
+3. **Status encoded as a folder name.** Renaming `active/` → `finished/` breaks every URL and every cross-reference.
 
 The Lab fixes all three by combining:
 
-- a flat, categorised ID scheme — `FW-01`, `TOOL-01`, `INT-03`, …
+- a flat global ID scheme — `P-1`, `P-2`, `P-32`, … and `D-1`, `D-2`, …
 - one folder per plan with phase files inside (`context.md`, `exploration.md`, `insights.md`, `production.md`)
+- `status` as **frontmatter only** — never a folder name; filtered live via the `/plans/` index
 - Docusaurus for sidebar, search, and stable URLs
 
 ## Where to start
 
-- **[Plans](/plans/)** — current and historical work items in the new ID scheme.
-- **[Decisions](/decisions/)** — ADRs scoped to the Lab itself.
-- **[Pilot plan: FW-01 Lab Bootstrap](/plans/active/fw-01-lab-bootstrap/context/)** — the meta-plan that sets up this very site.
+- **[Plans](/plans/)** — current and historical work items, filtered by `status` from frontmatter.
+- **Decisions** — `D-<N>` ADRs (under `decisions/`).
+- **[Pilot plan: P-1 Lab Bootstrap](/plans/p-1-lab-bootstrap/context/)** — the meta-plan that established this site and ID scheme.
+
+## ID scheme at a glance
+
+| Prefix | Used for | Examples |
+|--------|----------|----------|
+| `P-<N>` | Plans | `P-1`, `P-32` |
+| `D-<N>` | Decisions / ADRs | `D-1`, `D-123` |
+| `PROP-<NNN>` | Proposals (lightweight backlog entries spawned by Gatekeepers) | `PROP-001` |
+
+Plans and decisions use no categories, no padding, no reuse. Status (`active` / `finished` / `archived` / `deprecated`) is mutable frontmatter — never part of the path. Proposals live under `plans/proposals/` and follow their own promote/defer/reject lifecycle (see [proposals](/plans/proposals/PROP-001_multi-provider-llm)).
 
 ## How this is built
 
 - Source: `context/lab/` in the [repository](https://github.com/chevp/chevp-ai-framework/tree/main/context/lab).
 - Build target: `docs/flow/` (committed, served by GitHub Pages).
 - Authoring agent: [`lab-curator`](https://github.com/chevp/chevp-ai-framework/blob/main/agents/lab-curator.md).
-
-## Hard boundary
-
-The Lab does **not** touch the legacy `context/plans/`, `context/adr/`, or any of the static HTML pages in `docs/`. Both worlds coexist until the experiment is validated or killed.
-
-If the experiment succeeds, a follow-up plan will migrate the legacy `context/plans/` into the Lab schema and retire the §-numbering. If it fails, the Lab is deleted and the legacy world remains canonical.
-
-The kill criteria are listed in the [pilot plan](/plans/active/fw-01-lab-bootstrap/context/).

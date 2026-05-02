@@ -364,10 +364,10 @@ created: 2026-05-02
     <div class="glass rounded-xl p-6 max-w-3xl mx-auto">
       <p class="text-slate-300 text-sm mb-4">Defined in <code class="text-arctic-300">agents/lab-curator.md</code>. You invoke it whenever you want to:</p>
       <ul class="text-slate-400 text-sm space-y-2 mb-4">
-        <li class="flex gap-2"><span class="text-arctic-400">&bull;</span> Create a new plan in the Lab &mdash; the agent picks the next free ID in the right category, scaffolds the folder, fills frontmatter.</li>
+        <li class="flex gap-2"><span class="text-arctic-400">&bull;</span> Create a new plan or decision &mdash; the agent picks the next free <code>P-&lt;N&gt;</code> or <code>D-&lt;N&gt;</code>, scaffolds the folder, fills frontmatter.</li>
         <li class="flex gap-2"><span class="text-arctic-400">&bull;</span> Promote a plan from one phase to the next &mdash; e.g. <code>exploration.md</code> exists, agent creates <code>production.md</code> with linked frontmatter.</li>
+        <li class="flex gap-2"><span class="text-arctic-400">&bull;</span> Change a plan's status &mdash; one frontmatter edit across all phase files; folder stays put.</li>
         <li class="flex gap-2"><span class="text-arctic-400">&bull;</span> Build &amp; preview &mdash; agent runs <code>npm run build</code>, reports broken links, missing sidebar entries.</li>
-        <li class="flex gap-2"><span class="text-arctic-400">&bull;</span> Sync index &mdash; updates a <code>context/lab/docs/registry.md</code> table from frontmatter.</li>
       </ul>
       <p class="text-slate-500 text-xs italic">The agent never touches the rest of <code class="text-arctic-300">context/</code> or <code class="text-arctic-300">docs/*.html</code>. Its blast radius is <code class="text-arctic-300">context/lab/</code> and <code class="text-arctic-300">docs/flow/</code> only.</p>
     </div>
@@ -378,8 +378,8 @@ created: 2026-05-02
           <span class="material-symbols-outlined text-arctic-400 text-2xl mb-2 block">auto_awesome</span>
           <h3 class="font-semibold text-slate-100 mb-2 text-sm">Example invocation</h3>
 <pre class="shell">"<span class="comment">use lab-curator to scaffold</span>
-<span class="comment">a new FW plan for the</span>
-<span class="comment">id-scheme migration</span>"</pre>
+<span class="comment">a new plan for the</span>
+<span class="comment">filter-by-status feature</span>"</pre>
         </div>
       </div>
       <div class="card glass rounded-xl p-5">
@@ -387,10 +387,10 @@ created: 2026-05-02
           <span class="material-symbols-outlined text-arctic-400 text-2xl mb-2 block">verified</span>
           <h3 class="font-semibold text-slate-100 mb-2 text-sm">Guarantees</h3>
           <ul class="text-slate-400 text-xs space-y-1">
-            <li>&bull; ID is unique within its category</li>
+            <li>&bull; ID is the next free <code>P-&lt;N&gt;</code> or <code>D-&lt;N&gt;</code></li>
             <li>&bull; Slug is ASCII-lowercase</li>
             <li>&bull; Frontmatter validates against schema</li>
-            <li>&bull; Sidebar order is deterministic</li>
+            <li>&bull; Status changes never rename a folder</li>
           </ul>
         </div>
       </div>
@@ -407,7 +407,7 @@ created: 2026-05-02
         <li class="flex gap-2"><span class="text-rose-400">&bull;</span> Authoring a plan in the Lab takes more time than the markdown-only flow in the rest of <code class="text-arctic-300">context/</code>.</li>
         <li class="flex gap-2"><span class="text-rose-400">&bull;</span> The build output bloats the repo by &gt; 50 MB.</li>
         <li class="flex gap-2"><span class="text-rose-400">&bull;</span> Search and navigation in the Lab are not measurably better than <code class="text-arctic-300">grep</code> in <code class="text-arctic-300">context/plans/</code>.</li>
-        <li class="flex gap-2"><span class="text-rose-400">&bull;</span> The category taxonomy needs more than two extensions in the trial period.</li>
+        <li class="flex gap-2"><span class="text-rose-400">&bull;</span> The frontmatter <code class="text-arctic-300">status</code> filter proves harder to use than just naming subfolders <code class="text-arctic-300">active/</code> / <code class="text-arctic-300">finished/</code> after all.</li>
       </ul>
       <p class="text-slate-500 text-xs italic mt-4">If the experiment succeeds, a follow-up plan migrates the existing <code class="text-arctic-300">context/plans/</code> into the Lab schema and retires the old <code class="text-arctic-300">&sect;</code>-numbering.</p>
     </div>

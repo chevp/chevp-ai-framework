@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impressum — Patrice Chevillat</title>
+  <meta name="description" content="Impressum gemäss Schweizer Recht für chevp.github.io." />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="canonical" href="https://chevp.github.io/site-policy/impressum.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --paper: #fbfaf6;
+      --paper-edge: #efece2;
+      --ink: #1f1d1a;
+      --ink-soft: #4a4640;
+      --ink-faint: #8a847b;
+      --rule: #d9d3c4;
+      --accent: #7a3b2e;
+      --accent-soft: #b9866b;
+      --tag-bg: #f1ede0;
+      --tag-ink: #5b4a32;
+      --code-bg: #f4f1e6;
+      --code-ink: #3a342a;
+      --card-bg: #f7f4ea;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s; }
+    a:hover { border-bottom-color: var(--accent); }
+
+    code, .mono { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-size: 0.85em; }
+    code { background: var(--code-bg); color: var(--code-ink); padding: 1px 5px; border-radius: 2px; }
+
+    .frame { max-width: 760px; margin: 0 auto; padding: 64px 32px 96px; }
+
+    /* Top bar */
+    .topbar {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: .04em;
+      text-transform: uppercase; color: var(--ink-faint);
+      padding-bottom: 18px; border-bottom: 1px solid var(--rule); margin-bottom: 56px;
+    }
+    .topbar a { color: var(--ink-soft); }
+    .topbar nav a + a { margin-left: 22px; }
+    .topbar .crumb a { border-bottom: 1px solid transparent; }
+    .topbar .crumb a:hover { border-bottom-color: var(--ink-soft); }
+
+    /* Title block */
+    .title-block { text-align: center; margin-bottom: 56px; }
+    .title-block .id-line {
+      font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 22px;
+    }
+    .title-block .id-line .pipe { color: var(--rule); margin: 0 10px; }
+    .title-block h1 {
+      font-family: 'EB Garamond', serif; font-weight: 500;
+      font-size: 56px; line-height: 1.05; letter-spacing: -0.01em;
+      margin: 0 0 10px;
+    }
+    .title-block .subtitle {
+      font-family: 'EB Garamond', serif; font-style: italic;
+      font-size: 22px; color: var(--ink-soft); margin: 0 0 24px;
+      max-width: 540px; margin-left: auto; margin-right: auto;
+    }
+    .byline {
+      font-family: 'Inter', sans-serif; font-size: 13px; color: var(--ink-faint);
+      letter-spacing: .04em;
+    }
+    .byline strong { color: var(--ink-soft); font-weight: 600; }
+    .byline .dot { margin: 0 8px; color: var(--rule); }
+    .ornament {
+      margin: 28px auto 0; width: 60px; height: 1px; background: var(--rule);
+      position: relative;
+    }
+    .ornament::before {
+      content: '§'; position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--paper); padding: 0 10px; color: var(--accent-soft); font-size: 18px;
+    }
+
+    /* Prototype notice — styled like the paper abstract */
+    .notice {
+      background: transparent; border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule); padding: 22px 0;
+      margin: 0 0 56px;
+    }
+    .notice .label {
+      font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: .24em;
+      text-transform: uppercase; color: var(--accent-soft); margin-bottom: 10px;
+      display: flex; align-items: baseline; gap: 14px;
+    }
+    .notice .label .tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .08em;
+      background: var(--tag-bg); color: var(--accent); padding: 2px 8px;
+      border-radius: 2px; text-transform: none;
+    }
+    .notice p {
+      font-size: 17px; color: var(--ink-soft); margin: 0;
+      text-align: justify; hyphens: auto;
+    }
+    .notice p strong { color: var(--ink); font-weight: 600; }
+
+    /* Body sections */
+    section { margin-bottom: 36px; }
+    section:last-of-type { margin-bottom: 0; }
+
+    h2 {
+      font-family: 'EB Garamond', serif; font-weight: 600;
+      font-size: 24px; line-height: 1.25;
+      margin: 0 0 14px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--rule);
+    }
+    h2 .num {
+      color: var(--accent-soft); font-weight: 500; margin-right: 10px;
+      font-feature-settings: "lnum" 1;
+    }
+
+    p { margin: 0 0 14px; color: var(--ink); }
+    p strong { color: var(--ink); font-weight: 600; }
+
+    /* Address card — same warm box pattern as the paper's figures */
+    .card {
+      background: var(--card-bg); border: 1px solid var(--rule); border-radius: 2px;
+      padding: 18px 22px; margin: 12px 0 0;
+    }
+    .card .addr-line {
+      margin: 0; font-size: 18px; color: var(--ink);
+      font-family: 'EB Garamond', serif;
+    }
+    .card .addr-line + .addr-line { margin-top: 2px; }
+    .card .addr-line strong { font-weight: 600; }
+
+    /* Footer */
+    .colophon {
+      margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--rule);
+      font-family: 'Inter', sans-serif; font-size: 12px; color: var(--ink-faint);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .colophon em { font-family: 'EB Garamond', serif; font-style: italic; }
+    .colophon a { color: var(--ink-soft); }
+    .colophon a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+    @media (max-width: 640px) {
+      .frame { padding: 40px 22px 72px; }
+      .title-block h1 { font-size: 38px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="frame">
+
+    <div class="topbar">
+      <span class="crumb"><a href="https://chevp.github.io/site-policy/">← Site Policy</a></span>
+      <nav>
+        <a href="https://chevp.github.io/">home</a>
+        <a href="https://chevp.github.io/site-policy/contact.html">kontakt</a>
+        <a href="https://github.com/chevp">github</a>
+      </nav>
+    </div>
+
+    <header class="title-block">
+      <div class="id-line">
+        Anbieterkennzeichnung <span class="pipe">·</span> Schweizer Recht
+      </div>
+      <h1>Impressum</h1>
+      <p class="subtitle">Patrice Chevillat — Software Development</p>
+      <div class="byline">
+        <a href="https://chevp.github.io/">chevp.github.io</a>
+        <span class="dot">·</span> Sprache: Deutsch
+      </div>
+      <div class="ornament"></div>
+    </header>
+
+    <aside class="notice">
+      <div class="label">
+        <span>Hinweis zur Vorlage</span>
+        <span class="tag">PROTOTYPE</span>
+      </div>
+      <p>
+        Dies ist ein <strong>UX-Design-Prototyp</strong> im Stil der <em>Papers</em>-Reihe.
+        Der Inhalt ist wortgleich aus <code>sites/site-policy/impressum.html</code> übernommen
+        und die produktive Quelle bleibt
+        <a href="https://chevp.github.io/site-policy/impressum.html">chevp.github.io/site-policy/impressum.html</a>.
+        Der Prototyp evaluiert ausschliesslich die Gestaltung — nicht die rechtliche
+        Vollständigkeit oder Aktualität.
+      </p>
+    </aside>
+
+    <section>
+      <h2><span class="num">§ 1</span>Angaben gemäss Schweizer Recht</h2>
+      <div class="card">
+        <p class="addr-line"><strong>Patrice Chevillat</strong></p>
+        <p class="addr-line">Software Development</p>
+        <p class="addr-line">Switzerland</p>
+      </div>
+    </section>
+
+    <section>
+      <h2><span class="num">§ 2</span>Kontakt</h2>
+      <p>
+        Für Anfragen nutzen Sie bitte unsere
+        <a href="https://chevp.github.io/site-policy/contact.html">Kontaktseite</a>.
+      </p>
+    </section>
+
+    <section>
+      <h2><span class="num">§ 3</span>Verantwortlich für den Inhalt</h2>
+      <p>Patrice Chevillat</p>
+    </section>
+
+    <section>
+      <h2><span class="num">§ 4</span>Haftungsausschluss</h2>
+      <p>
+        Der Autor übernimmt keine Gewähr für die Richtigkeit, Genauigkeit, Aktualität,
+        Zuverlässigkeit und Vollständigkeit der Informationen.
+      </p>
+      <p>
+        Haftungsansprüche gegen den Autor wegen Schäden materieller oder immaterieller Art,
+        welche aus dem Zugriff oder der Nutzung bzw. Nichtnutzung der veröffentlichten
+        Informationen entstanden sind, werden ausgeschlossen.
+      </p>
+    </section>
+
+    <section>
+      <h2><span class="num">§ 5</span>Haftung für Links</h2>
+      <p>
+        Verweise und Links auf Webseiten Dritter liegen ausserhalb unseres
+        Verantwortungsbereichs. Jegliche Verantwortung für solche Webseiten wird abgelehnt.
+        Der Zugriff und die Nutzung solcher Webseiten erfolgt auf eigene Gefahr des Nutzers.
+      </p>
+    </section>
+
+    <section>
+      <h2><span class="num">§ 6</span>Urheberrechte</h2>
+      <p>
+        Die Urheber- und alle anderen Rechte an Inhalten, Bildern, Fotos oder anderen Dateien
+        auf dieser Website gehören ausschliesslich Patrice Chevillat oder den speziell
+        genannten Rechtsinhabern.
+      </p>
+      <p>
+        Für die Reproduktion jeglicher Elemente ist die schriftliche Zustimmung des
+        Urheberrechtsträgers im Voraus einzuholen.
+      </p>
+    </section>
+
+    <footer class="colophon">
+      <span>Set in <em>EB Garamond</em>. &copy; <span id="year">2026</span> Patrice Chevillat. Alle Rechte vorbehalten.</span>
+      <span><a href="https://chevp.github.io/site-policy/impressum.html">site-policy/impressum.html</a></span>
+    </footer>
+
+  </main>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
