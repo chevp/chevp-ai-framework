@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Papers — chevp</title>
+  <meta name="description" content="A collection of short, abstract-style notes on tooling, process, and AI-assisted software development. Each paper proposes one idea." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #fbfaf6;
+      --paper-edge: #efece2;
+      --ink: #1f1d1a;
+      --ink-soft: #4a4640;
+      --ink-faint: #8a847b;
+      --rule: #d9d3c4;
+      --accent: #7a3b2e;
+      --accent-soft: #b9866b;
+      --tag-bg: #f1ede0;
+      --tag-ink: #5b4a32;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'EB Garamond', 'Iowan Old Style', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color .15s; }
+    a:hover { border-bottom-color: var(--accent); }
+
+    .frame { max-width: 760px; margin: 0 auto; padding: 64px 32px 96px; }
+
+    /* Top bar */
+    .topbar {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-family: 'Inter', sans-serif; font-size: 13px; letter-spacing: .04em;
+      text-transform: uppercase; color: var(--ink-faint);
+      padding-bottom: 18px; border-bottom: 1px solid var(--rule); margin-bottom: 56px;
+    }
+    .topbar a { color: var(--ink-soft); }
+    .topbar nav a + a { margin-left: 22px; }
+
+    /* Masthead */
+    .masthead { text-align: center; margin-bottom: 64px; }
+    .masthead .kicker {
+      font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--ink-faint); margin-bottom: 20px;
+    }
+    .masthead h1 {
+      font-family: 'EB Garamond', serif; font-weight: 500;
+      font-size: 64px; line-height: 1.05; margin: 0 0 18px;
+      letter-spacing: -0.01em;
+    }
+    .masthead h1 em { color: var(--accent); font-style: italic; }
+    .masthead .lede {
+      font-style: italic; color: var(--ink-soft); font-size: 21px; max-width: 560px;
+      margin: 0 auto;
+    }
+    .masthead .ornament {
+      margin: 32px auto 0; width: 60px; height: 1px; background: var(--rule);
+      position: relative;
+    }
+    .masthead .ornament::before {
+      content: '§'; position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--paper); padding: 0 10px; color: var(--accent-soft); font-size: 18px;
+    }
+
+    /* About */
+    .about {
+      font-size: 18px; color: var(--ink-soft); margin: 0 0 64px;
+      column-count: 2; column-gap: 36px; column-rule: 1px solid var(--rule);
+      text-align: justify; hyphens: auto;
+    }
+    .about p { margin-top: 0; }
+
+    /* Section heading */
+    .section-head {
+      font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--ink-faint); margin: 0 0 18px;
+      padding-bottom: 10px; border-bottom: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: baseline;
+    }
+    .section-head .count { color: var(--accent-soft); }
+
+    /* Paper list */
+    .paper-list { list-style: none; margin: 0; padding: 0; }
+    .paper-entry {
+      display: grid; grid-template-columns: 90px 1fr; gap: 28px;
+      padding: 26px 0; border-bottom: 1px solid var(--rule);
+      align-items: start;
+    }
+    .paper-entry:last-child { border-bottom: none; }
+
+    .paper-id {
+      font-family: 'JetBrains Mono', monospace; font-size: 12px;
+      color: var(--ink-faint); padding-top: 6px; letter-spacing: .04em;
+    }
+    .paper-id .num { display: block; color: var(--accent); font-size: 22px;
+      font-weight: 500; font-family: 'EB Garamond', serif; letter-spacing: 0; }
+
+    .paper-title {
+      font-family: 'EB Garamond', serif; font-weight: 600;
+      font-size: 24px; line-height: 1.2; margin: 0 0 8px;
+    }
+    .paper-title a { color: var(--ink); border-bottom: none; }
+    .paper-title a:hover { color: var(--accent); }
+
+    .paper-meta {
+      font-family: 'Inter', sans-serif; font-size: 12px; color: var(--ink-faint);
+      margin-bottom: 12px; letter-spacing: .02em;
+    }
+    .paper-meta .dot { margin: 0 8px; color: var(--rule); }
+
+    .paper-abstract {
+      color: var(--ink-soft); font-size: 17px; margin: 0 0 14px;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-family: 'Inter', sans-serif; font-size: 10.5px; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--tag-ink);
+      background: var(--tag-bg); padding: 3px 9px; border-radius: 2px;
+    }
+
+    .status {
+      display: inline-block; font-family: 'Inter', sans-serif; font-size: 10px;
+      letter-spacing: .12em; text-transform: uppercase; padding: 2px 8px;
+      border: 1px solid var(--accent-soft); color: var(--accent); border-radius: 2px;
+      margin-left: 10px; vertical-align: 3px;
+    }
+    .status.draft { color: var(--ink-faint); border-color: var(--rule); }
+    .status.note { color: var(--accent-soft); border-color: var(--accent-soft); }
+
+    /* Footer */
+    .colophon {
+      margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--rule);
+      font-family: 'Inter', sans-serif; font-size: 12px; color: var(--ink-faint);
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .colophon em { font-family: 'EB Garamond', serif; font-style: italic; }
+
+    @media (max-width: 640px) {
+      .frame { padding: 40px 22px 72px; }
+      .masthead h1 { font-size: 44px; }
+      .about { column-count: 1; }
+      .paper-entry { grid-template-columns: 1fr; gap: 8px; }
+      .paper-id { padding-top: 0; }
+      .paper-id .num { display: inline; font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="frame">
+
+    <div class="topbar">
+      <a href="../../docs/index.html">chevp-ai-framework</a>
+      <nav>
+        <a href="../../docs/lab.html">Lab</a>
+        <a href="#">Papers</a>
+        <a href="https://github.com/chevp">GitHub</a>
+      </nav>
+    </div>
+
+    <header class="masthead">
+      <div class="kicker">A working notebook</div>
+      <h1>Papers <em>on</em> tools,<br />process &amp; thinking</h1>
+      <p class="lede">Short, abstract-style notes on the tools I build and the workflow I use to build them.
+        One idea per paper.</p>
+      <div class="ornament"></div>
+    </header>
+
+    <section class="about">
+      <p>This page collects short, paper-style notes — not finished essays, not product launches. Each one proposes a single idea, sketches its motivation, and shows the smallest concrete artefact that would make the idea real.</p>
+      <p>Some ideas mature into <a href="../../docs/lab.html">Lab</a> experiments or land in the framework. Most stay here as drafts: an abstract, a thought, a half-built proof. The point is not to ship — the point is to <em>think out loud</em>, in public, in a form that can be cited and refuted.</p>
+    </section>
+
+    <h2 class="section-head"><span>Volume I — 2026</span><span class="count">3 papers · 1 note</span></h2>
+
+    <ol class="paper-list">
+
+      <li class="paper-entry">
+        <div class="paper-id">
+          <span class="num">001</span>
+          PPR-001
+        </div>
+        <div>
+          <h3 class="paper-title">
+            <a href="paper-001-context-as-wiki.html">Context-Files as a Wiki: Flat IDs and Folder-per-Plan in a Docusaurus Subsite</a>
+            <span class="status">Draft</span>
+          </h3>
+          <div class="paper-meta">
+            chevp <span class="dot">·</span> 2026-05-02 <span class="dot">·</span> 6 min read
+          </div>
+          <p class="paper-abstract">
+            Plans and ADRs in <em>chevp-ai-framework</em> currently live as loose markdown files keyed by §-numbers.
+            This paper proposes lifting them into a Docusaurus subsite using flat IDs (<code>FW-01</code>, <code>ADR-007</code>) and a folder-per-plan layout, so a single plan keeps a stable identity across Context, Exploration, and Production phases — and gains a sidebar, search, and citable URLs without disturbing the existing static site.
+          </p>
+          <div class="tags">
+            <span class="tag">Tooling</span>
+            <span class="tag">Docs</span>
+            <span class="tag">IA</span>
+            <span class="tag">Docusaurus</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="paper-entry">
+        <div class="paper-id">
+          <span class="num">002</span>
+          PPR-002
+        </div>
+        <div>
+          <h3 class="paper-title">
+            <a href="#">The Challenger Role: Building Adversarial Self-Critique into a Single-Author Workflow</a>
+            <span class="status draft">Outline</span>
+          </h3>
+          <div class="paper-meta">
+            chevp <span class="dot">·</span> planned <span class="dot">·</span> 4 min read
+          </div>
+          <p class="paper-abstract">
+            A single-author project has no peer review by default. The framework's <em>Challenger</em> role manufactures one: before every G2, the AI must produce three failure modes, two alternatives, the strongest counter-argument, and a product-coherence check. This paper argues that the cost of a forced critique is small — and that the alternative is sunken cost dressed up as conviction.
+          </p>
+          <div class="tags">
+            <span class="tag">Process</span>
+            <span class="tag">AI Collaboration</span>
+            <span class="tag">Quality</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="paper-entry">
+        <div class="paper-id">
+          <span class="num">003</span>
+          PPR-003
+        </div>
+        <div>
+          <h3 class="paper-title">
+            <a href="#">Decisions are Clickable, not Typed: A UI Constraint for Human–AI Workflows</a>
+            <span class="status draft">Outline</span>
+          </h3>
+          <div class="paper-meta">
+            chevp <span class="dot">·</span> planned <span class="dot">·</span> 3 min read
+          </div>
+          <p class="paper-abstract">
+            Free-form prose (<em>"shall we proceed?"</em>) is the wrong UI for a forking decision. This paper proposes a single rule: every discrete choice in an AI-driven workflow must be presented as a clickable question with 2–4 labelled options plus a free-text fallback. We sketch the contract, the failure modes it eliminates, and where it does not apply.
+          </p>
+          <div class="tags">
+            <span class="tag">UX</span>
+            <span class="tag">AI Collaboration</span>
+            <span class="tag">HCI</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="paper-entry">
+        <div class="paper-id">
+          <span class="num">N&middot;1</span>
+          NOTE
+        </div>
+        <div>
+          <h3 class="paper-title">
+            <a href="#">On the difference between a Lab and a Paper</a>
+            <span class="status note">Note</span>
+          </h3>
+          <div class="paper-meta">
+            chevp <span class="dot">·</span> 2026-05-02 <span class="dot">·</span> 1 min read
+          </div>
+          <p class="paper-abstract">
+            A short note: the <em>Lab</em> is where ideas are made executable; <em>Papers</em> are where ideas are made citable. They live next to each other on purpose. An idea may exist as a paper without ever becoming a lab experiment, and vice versa.
+          </p>
+          <div class="tags">
+            <span class="tag">Meta</span>
+          </div>
+        </div>
+      </li>
+
+    </ol>
+
+    <footer class="colophon">
+      <span>Set in <em>EB Garamond</em>. Hand-written in <em>chevp-ai-framework</em>.</span>
+      <span><a href="https://github.com/chevp/chevp-ai-framework">github.com/chevp</a></span>
+    </footer>
+
+  </main>
+</body>
+</html>

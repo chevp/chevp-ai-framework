@@ -1,0 +1,30 @@
+---
+id: plans-index
+title: Plans
+sidebar_position: 0
+slug: /plans
+---
+
+import PlanList from '@site/src/components/PlanList';
+
+# Plans
+
+All plans in the Lab, grouped by their `status` frontmatter property.
+
+The folder structure under `/plans/` is **flat** — there is no `active/` or `finished/` subfolder. Status is metadata that can change without renaming or moving anything. The lists below are filtered live from frontmatter at build time.
+
+## Active
+
+<PlanList status="active" />
+
+## Finished
+
+<PlanList status="finished" />
+
+## Archived
+
+<PlanList status="archived" />
+
+## Deprecated
+
+<PlanList status="deprecated" />
