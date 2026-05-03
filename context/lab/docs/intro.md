@@ -7,7 +7,7 @@ slug: /
 
 # chevp-ai-framework — Lab
 
-The **Lab** is the **canonical source-of-truth for plans and decisions** in the chevp-ai-framework. It is a Docusaurus subsite that lives at the `/flow/` subpath of [chevp.github.io/chevp-ai-framework](https://chevp.github.io/chevp-ai-framework/), alongside the existing static framework HTML pages.
+The **Lab** is the **canonical source-of-truth for plans and decisions** in the chevp-ai-framework. It is a Docusaurus site sourced from `context/lab/`, intended to be served at the `/flow/` subpath of `chevp.github.io/chevp-ai-framework` once the GitHub Pages deployment is wired up. Until then, the Lab is read locally via `npm run start` in `context/lab/` (and as plain markdown in the repo).
 
 Plans and decisions are authored here, in a flat global ID scheme (`P-<N>`, `D-<N>`), with one folder per plan and `status` as mutable frontmatter. The legacy `context/plans/` folder with `§`-numbering has been migrated and removed.
 
