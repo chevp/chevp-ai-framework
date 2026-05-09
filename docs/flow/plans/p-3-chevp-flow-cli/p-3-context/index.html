@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-plans/p-3-chevp-flow-cli/p-3-context" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.10.1">
+<title data-rh="true">Context | chevp-ai-framework — Lab</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://chevp.github.io/chevp-ai-framework/flow/plans/p-3-chevp-flow-cli/p-3-context/"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Context | chevp-ai-framework — Lab"><meta data-rh="true" name="description" content="Task"><meta data-rh="true" property="og:description" content="Task"><link data-rh="true" rel="icon" href="/chevp-ai-framework/flow/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://chevp.github.io/chevp-ai-framework/flow/plans/p-3-chevp-flow-cli/p-3-context/"><link data-rh="true" rel="alternate" href="https://chevp.github.io/chevp-ai-framework/flow/plans/p-3-chevp-flow-cli/p-3-context/" hreflang="en"><link data-rh="true" rel="alternate" href="https://chevp.github.io/chevp-ai-framework/flow/plans/p-3-chevp-flow-cli/p-3-context/" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Plans","item":"https://chevp.github.io/chevp-ai-framework/flow/plans"},{"@type":"ListItem","position":2,"name":"Context","item":"https://chevp.github.io/chevp-ai-framework/flow/plans/p-3-chevp-flow-cli/p-3-context"}]}</script><link rel="stylesheet" href="/chevp-ai-framework/flow/assets/css/styles.37c5df02.css">
+<script src="/chevp-ai-framework/flow/assets/js/runtime~main.ce58b4d9.js" defer="defer"></script>
+<script src="/chevp-ai-framework/flow/assets/js/main.7c18d4f5.js" defer="defer"></script>
+</head>
+<body>
+<svg style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light")),document.documentElement.setAttribute("data-theme-choice",t||"system")}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/chevp-ai-framework/flow/"><div class="navbar__logo"><img src="/chevp-ai-framework/flow/img/logo.svg" alt="chevp-ai-framework" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/chevp-ai-framework/flow/img/logo.svg" alt="chevp-ai-framework" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate">chevp-ai-framework Lab</b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/chevp-ai-framework/flow/">Docs</a></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href="https://chevp.github.io/chevp-ai-framework/" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">Main site<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><a href="https://github.com/chevp/chevp-ai-framework" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-label="(opens in new tab)" class="iconExternalLink_nPIU"><use href="#theme-svg-external-link"></use></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/chevp-ai-framework/flow/"><span title="Welcome to the Lab" class="linkLabel_WmDU">Welcome to the Lab</span></a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--active" href="/chevp-ai-framework/flow/plans/"><span title="Plans" class="categoryLinkLabel_W154">Plans</span></a><button aria-label="Collapse sidebar category &#x27;Plans&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul class="menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="true" tabindex="0" href="/chevp-ai-framework/flow/plans/p-1-lab-bootstrap/p-1-context/"><span title="P-1 Lab Bootstrap" class="categoryLinkLabel_W154">P-1 Lab Bootstrap</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/chevp-ai-framework/flow/plans/p-1-lab-bootstrap/p-1-context/"><span title="Context" class="linkLabel_WmDU">Context</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/chevp-ai-framework/flow/plans/p-1-lab-bootstrap/p-1-exploration/"><span title="Exploration" class="linkLabel_WmDU">Exploration</span></a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link" tabindex="0" href="/chevp-ai-framework/flow/plans/p-1-lab-bootstrap/p-1-insights/"><span title="Insights" class="linkLabel_WmDU">Insights</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/chevp-ai-framework/flow/plans/p-2-site-positioning-and-split/p-2-context/"><span title="P-2 Site Positioning &amp; Split" class="categoryLinkLabel_W154">P-2 Site Positioning &amp; Split</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret menu__link--active" role="button" aria-expanded="true" tabindex="0" href="/chevp-ai-framework/flow/plans/p-3-chevp-flow-cli/p-3-context/"><span title="P-3 chevp-flow CLI" class="categoryLinkLabel_W154">P-3 chevp-flow CLI</span></a></div><ul class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/chevp-ai-framework/flow/plans/p-3-chevp-flow-cli/p-3-context/"><span title="Context" class="linkLabel_WmDU">Context</span></a></li></ul></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/chevp-ai-framework/flow/plans/p-4-thinking-learning-upgrade/p-4-exploration/"><span title="P-4 Thinking &amp; Learning Upgrade" class="categoryLinkLabel_W154">P-4 Thinking &amp; Learning Upgrade</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/chevp-ai-framework/flow/plans/p-5-plugin-and-consumer-rollout/p-5-exploration/"><span title="P-5 Plugin &amp; Consumer Rollout" class="categoryLinkLabel_W154">P-5 Plugin &amp; Consumer Rollout</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/chevp-ai-framework/flow/plans/p-6-selective-rollback-and-assistant-reframe/p-6-exploration/"><span title="P-6 Selective Rollback &amp; Assistant Reframe" class="categoryLinkLabel_W154">P-6 Selective Rollback &amp; Assistant Reframe</span></a></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="categoryLink_byQd menu__link menu__link--sublist menu__link--sublist-caret" role="button" aria-expanded="false" tabindex="0" href="/chevp-ai-framework/flow/plans/proposals/prop-001/"><span title="Proposals" class="categoryLinkLabel_W154">Proposals</span></a></div></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/chevp-ai-framework/flow/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li class="breadcrumbs__item"><a class="breadcrumbs__link" href="/chevp-ai-framework/flow/plans/"><span>Plans</span></a></li><li class="breadcrumbs__item"><span class="breadcrumbs__link">P-3 chevp-flow CLI</span></li><li class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link">Context</span></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>P-3 — Context: chevp-flow — CLI adapter for the chevp-ai-framework lifecycle</h1></header>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="task">Task<a href="#task" class="hash-link" aria-label="Direct link to Task" title="Direct link to Task" translate="no">​</a></h2>
+<p>Design and build <code>chevp-flow</code>, a Go CLI (binary name: <code>chevp</code>) that mechanizes the chevp-ai-framework lifecycle (3 steps × 3 gates) by wrapping the <code>claude</code> CLI as a subprocess. Distributed as an independent public OSS GitHub repository (<code>chevp-flow</code>), consumed by <code>chevp-ai-framework</code> itself as a git submodule for dogfooding. Tech-stack: Go + Cobra (CLI args) + Charm Stack (Bubble Tea TUI, Huh forms, Glamour markdown rendering).</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="why-now">Why now<a href="#why-now" class="hash-link" aria-label="Direct link to Why now" title="Direct link to Why now" translate="no">​</a></h2>
+<p>The framework&#x27;s lifecycle is currently enforced via two layers: human discipline + the Claude-Code plugin layer (<code>hooks/</code>, <code>agents/</code>, <code>skills/</code>, <code>commands/</code>). Both bind the framework to a single interactive surface. Pain points that have accumulated:</p>
+<ul>
+<li class="">Lifecycle cannot be applied from terminal-only / CI flows</li>
+<li class="">External adopters must adopt Claude Code wholesale to follow the process</li>
+<li class="">The framework author cannot dogfood the lifecycle outside interactive chat</li>
+<li class="">&quot;Tool-independence&quot; remains an assertion, not a demonstrated property</li>
+</ul>
+<p>The framework has stabilized to v1 (CTX-001 finished, plugin layer in production, lifecycle proven internally). It is the right moment to extract the contract into a separate tool — both to validate portability and to provide a non-Claude-Code installation surface.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="decisions-captured-pre-g1">Decisions captured pre-G1<a href="#decisions-captured-pre-g1" class="hash-link" aria-label="Direct link to Decisions captured pre-G1" title="Direct link to Decisions captured pre-G1" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Bereich</th><th>Decision</th></tr></thead><tbody><tr><td>Tech-Stack</td><td><strong>Go + Charm Stack</strong> (Cobra for CLI args, Bubble Tea for TUI, Huh for forms, Glamour for markdown)</td></tr><tr><td>Go floor</td><td>1.22+</td></tr><tr><td>Auth-Pfad</td><td>Pfad 2 — <code>claude -p</code> subprocess, JSON streaming</td></tr><tr><td>Repo-Lokation</td><td>Separate public GitHub repo: <code>chevp-flow</code></td></tr><tr><td>Binary name</td><td><code>chevp</code> (matches gh/kubectl/helm pattern: short binary, descriptive repo)</td></tr><tr><td>License</td><td>Apache-2.0</td></tr><tr><td>Distribution</td><td>Single binary via Homebrew (<code>brew install chevp</code>) + GitHub Releases + <code>go install</code> + git submodule into chevp-ai-framework</td></tr><tr><td>Submodule path</td><td><code>tools/chevp-flow/</code></td></tr><tr><td>Module layout</td><td>Single Go module (no internal split for v1)</td></tr><tr><td>CLI-Modus</td><td>Async file-based (git-style: command → file diff → <code>approve</code> command); Huh forms used for interactive gate prompts</td></tr><tr><td>Mode handling</td><td>Explicit per command path (<code>chevp context init</code>, <code>chevp exploration plan</code>, etc.)</td></tr><tr><td>v1 command surface</td><td><code>init</code>, <code>status</code>, <code>approve</code>, <code>gate-check</code>, <code>new-adr</code></td></tr><tr><td>Subagent prompts</td><td>Vendored, version-pinned to a chevp-ai-framework release tag (Go embed.FS)</td></tr><tr><td>Kill Criterion</td><td>&quot;Gate-approvals become routine&quot; — framework would be self-defeating</td></tr><tr><td>Docker scope</td><td>Only gatekeeper subagents (read-only, deterministic); native Go Docker SDK</td></tr><tr><td>Audience</td><td>OSS / third-party developers (public repo)</td></tr></tbody></table>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="artifacts-to-readverify">Artifacts to Read/Verify<a href="#artifacts-to-readverify" class="hash-link" aria-label="Direct link to Artifacts to Read/Verify" title="Direct link to Artifacts to Read/Verify" translate="no">​</a></h2>
+<ul class="contains-task-list containsTaskList_mC6p">
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <a class="" href="/CLAUDE.md/">CLAUDE.md</a> — core principle, 13 rules, lifecycle summary</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <a class="" href="/LIFECYCLE.md/">LIFECYCLE.md</a> — 3 × 7 × 3 matrix, gates G1/G2/G3</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <a class="" href="/agents/">agents/</a> — <code>gatekeeper-g1/g2/g3</code> contracts; verdict format, blocking conditions, max-5 PROP rule extracted</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <a class="" href="/hooks/">hooks/</a> — <code>mode-context.py</code>, <code>gate-check.py</code>, <code>provenance-check.py</code>; field denylist (<code>decided-by</code>, <code>approved-by</code>, <code>approved-at</code>, <code>status: approved|accepted</code>) extracted; production-write block heuristic extracted</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <a class="" href="/skills/">skills/</a> — <code>create-ctx-plan</code>, <code>create-exp-plan</code>, <code>create-adr</code>, <code>sync-plan-issues</code>; invocation patterns extracted</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <a class="" href="/commands/">commands/</a> — all 9 slash commands (approve, context, explore, gate-check, gate-override, new-adr, produce, promote, reject); side effects + frontmatter mutations extracted</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <a class="" href="/templates/">templates/</a> — artifacts the CLI instantiates from</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <a class="" href="/guidelines/architecture-governance.md/">guidelines/architecture-governance.md</a> — Rule #7 enforcement: AI may set <code>proposed-by: ai|pair</code>, never <code>human</code>; never sets <code>decided-by</code>/<code>approved-by</code>/<code>approved-at</code> or <code>status: approved|accepted</code></li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <a class="" href="/guidelines/uncertainty-reduction.md/">guidelines/uncertainty-reduction.md</a> — <code>evidence:</code> block: hypothesis (falsifiable), result (observable), reasoning (bridge → action); generic content = automatic G1/G2/G3 block</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <a href="/chevp-ai-framework/flow/assets/files/plugin-9e4001ed4f867d920ec584286e6dd18b.json/" target="_blank" class="">.claude-plugin/plugin.json</a> — manifest registers <code>mode-context.py</code> (UserPromptSubmit), <code>gate-check.py</code> + <code>provenance-check.py</code> (PreToolUse on Write/Edit)</li>
+<li class="task-list-item"><input type="checkbox" disabled=""> <a href="https://chevp.github.io/chevp-workflow/index.md" target="_blank" rel="noopener noreferrer" class="">chevp.github.io/chevp-workflow/</a> — workspace-mode contract (relevant when wiring submodule; deferred until Production-step submodule integration)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="problem-statement-embedded--uncertainty-triplet-g1-prerequisite">Problem Statement (embedded — Uncertainty Triplet, G1 prerequisite)<a href="#problem-statement-embedded--uncertainty-triplet-g1-prerequisite" class="hash-link" aria-label="Direct link to Problem Statement (embedded — Uncertainty Triplet, G1 prerequisite)" title="Direct link to Problem Statement (embedded — Uncertainty Triplet, G1 prerequisite)" translate="no">​</a></h2>
+<p><strong>Who has the problem?</strong>
+Two distinct user groups: (a) the framework author, who currently must use Claude Code&#x27;s interactive chat to apply the lifecycle to his own projects — no batch, no CI, no terminal-only flow; (b) external developers evaluating the framework, who are forced to adopt Claude Code as a precondition.</p>
+<p><strong>What does not work today?</strong>
+The lifecycle&#x27;s mechanical guarantees (mode inference, gate enforcement, provenance checks) are implemented as Claude-Code-specific Python hooks. There is no way to: (1) run a gate-check from CI, (2) instantiate a CTX/EXP/PRD plan from the terminal, (3) invoke gatekeeper-subagents non-interactively, (4) apply the framework in a non-Claude-Code editor.</p>
+<p><strong>Why does it matter?</strong>
+Framework adoption is bottlenecked. Without a portable adapter, &quot;tool-independence&quot; is unsubstantiated, and the framework&#x27;s claim to be a <em>process</em> framework — orthogonal to tools — is not yet demonstrated. Cost: stalled OSS adoption; the author&#x27;s own ability to dogfood is constrained to interactive chat.</p>
+<p><strong>Why now?</strong>
+v1 of the framework has stabilized. CTX-001 (site reposition) is finished. The plugin layer is in production. Lifecycle is proven on internal projects. Without a second adapter, drift between &quot;framework theory&quot; and &quot;Claude-Code implementation&quot; will calcify.</p>
+<p><strong>Out-of-scope problems (intentionally)</strong></p>
+<ul>
+<li class="">Multi-provider LLM support (OpenAI, etc.) — Claude only in v1</li>
+<li class="">Editor/IDE plugins</li>
+<li class="">Web UI, dashboards, team collaboration</li>
+<li class="">Windows support</li>
+<li class="">Rewriting chevp-ai-framework&#x27;s existing plugin layer</li>
+<li class="">Adding new framework features</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="hypotheses">Hypotheses<a href="#hypotheses" class="hash-link" aria-label="Direct link to Hypotheses" title="Direct link to Hypotheses" translate="no">  ​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Hypothesis</th><th>Cheapest test</th><th>Kill criterion</th></tr></thead><tbody><tr><td>H1</td><td>If we build a Go CLI wrapping <code>claude -p</code> and exposing gate-checks as commands, then framework discipline becomes mechanizable in CI and terminal flows, <strong>because the lifecycle is fundamentally a state machine over markdown files</strong>.</td><td>Implement <code>chevp context init &quot;intent&quot;</code> → generate CTX-NNN draft → diff against what Claude Code produces.</td><td>If post-processing the generated draft is needed &gt;30% of the time, abstraction is too thin.</td></tr><tr><td>H2</td><td>If we choose async file-based interaction (git-style), then the CLI integrates naturally with editor + CI workflows, <strong>because all state already lives in markdown files</strong>.</td><td>Implement only <code>init</code>, <code>approve g1</code>, <code>status</code>; run one real CTX cycle end-to-end.</td><td>If approval flow takes more clicks than chat (&gt;2×), reconsider Hybrid mode.</td></tr><tr><td>H3</td><td>If we containerize only gatekeeper-subagents, we get reproducibility where it matters without DX overhead, <strong>because gatekeepers are read-only/deterministic and benefit from isolation, while interactive commands do not</strong>.</td><td>Dockerize one gatekeeper; benchmark cold-start vs. native.</td><td>If cold-start &gt;5s, fall back to native invocation with optional <code>--docker</code> flag.</td></tr></tbody></table>
+<p><strong>What we deliberately do NOT yet assume</strong></p>
+<ul>
+<li class="">That <code>claude -p</code> JSON-output schema is stable across versions (track upstream)</li>
+<li class="">That gatekeeper subagent prompts can be vendored into the CLI without drift (Q4)</li>
+<li class="">That the CLI&#x27;s command surface should mirror existing slash commands 1:1 (rationalization may be warranted)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="risks">Risks<a href="#risks" class="hash-link" aria-label="Direct link to Risks" title="Direct link to Risks" translate="no">​</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>#</th><th>Risk</th><th>Likelihood</th><th>Cost</th><th>Mitigation / early signal</th></tr></thead><tbody><tr><td>R1</td><td><code>claude -p</code> schema or auth flow changes break the CLI.</td><td>med</td><td>high</td><td>Pin minimum Claude Code version; parse defensively; integration tests against latest; declare supported version range.</td></tr><tr><td>R2</td><td>Gatekeeper-subagents are Claude-Code-native and lose context when invoked via subprocess.</td><td>med</td><td>high</td><td>Spike one gatekeeper end-to-end <strong>before G2</strong>; if context-loss material, vendor full prompts + tool definitions.</td></tr><tr><td>R3</td><td>CLI accidentally writes human-decision fields (<code>decided-by</code>, <code>approved-by</code>), breaking Rule #7 / provenance.</td><td>high w/o guardrails</td><td>high</td><td>Hardcode field allowlist; refuse writes; reuse <code>provenance-check.py</code> logic as library.</td></tr><tr><td>R4</td><td>Solo over-engineering / bikeshedding.</td><td>high</td><td>med</td><td>Hard MVP scope (≤8 commands v1); Kill Criterion enforced.</td></tr><tr><td>R5</td><td>Submodule integration friction for contributors.</td><td>med</td><td>low-med</td><td>Document both <code>pip install</code> and submodule path; CI test both.</td></tr><tr><td>R6</td><td>Adapter contract drift — framework evolves faster than CLI.</td><td>high over time</td><td>med</td><td>Declare adapter-contract-version in chevp-ai-framework; CLI announces compatibility range.</td></tr><tr><td>R7</td><td>Ironically: the &quot;process-driven, not spec-driven&quot; tension surfaces — <code>chevp context init INTENT</code> could be misused as one-shot spec generation.</td><td>med</td><td>high (constitutional)</td><td>Structurally enforce the <em>dialogue</em> nature of Context: <code>init</code> only seeds, requires explicit dialogue rounds before G1.</td></tr><tr><td>R8</td><td><code>anthropic-sdk-go</code> is younger and less feature-rich than the TS/Python SDK; if we ever add Pfad 3 (direct API) for fallback or non-Claude-Code envs, more boilerplate for streaming/tool-use.</td><td>med (deferred)</td><td>low-med</td><td>v1 stays on Pfad 2 only; Pfad 3 deferred until SDK matures or proven need. Re-evaluate at v2 planning.</td></tr><tr><td>R9</td><td>Go&#x27;s JSON-stream parsing of <code>claude -p</code> output is more verbose than Python (no Pydantic). Manual struct definitions per message type.</td><td>high</td><td>med</td><td>Define stable message-type structs in one package; integration tests against current <code>claude -p</code> output samples; pin minimum Claude Code version.</td></tr></tbody></table>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="top-3-expensive-failure-modes">Top-3 expensive failure modes<a href="#top-3-expensive-failure-modes" class="hash-link" aria-label="Direct link to Top-3 expensive failure modes" title="Direct link to Top-3 expensive failure modes" translate="no">​</a></h3>
+<ol>
+<li class=""><strong>R3 — Provenance-Bruch</strong> (constitutional violation, high prob without guardrails)</li>
+<li class=""><strong>R2 — Subagent-Kompatibilität</strong> (gates become weaker if context lost)</li>
+<li class=""><strong>R7 — Spec-driven slide</strong> (would invalidate the framework&#x27;s own premise)</li>
+</ol>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="counter-evidence-we-are-not-ignoring">Counter-evidence we are not ignoring<a href="#counter-evidence-we-are-not-ignoring" class="hash-link" aria-label="Direct link to Counter-evidence we are not ignoring" title="Direct link to Counter-evidence we are not ignoring" translate="no">​</a></h3>
+<p>Earlier in this design conversation the AI itself raised the spec-driven tension. The user chose not to reframe the question, but the tension didn&#x27;t disappear — it shows up as R7. The CLI must demonstrate that &quot;process-driven&quot; survives in non-interactive form, or the project disproves the framework.</p>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="risks-we-accept-knowingly">Risks we accept knowingly<a href="#risks-we-accept-knowingly" class="hash-link" aria-label="Direct link to Risks we accept knowingly" title="Direct link to Risks we accept knowingly" translate="no">​</a></h3>
+<ul>
+<li class="">v1 supports only Claude / Claude Code (not OpenCode, Cursor, raw API). Reason: validate the adapter contract on one tool first.</li>
+<li class="">v1 is mac/linux only. Reason: solo dogfooding context.</li>
+<li class="">Subagent prompts vendored at pinned version (drift accepted in exchange for reproducibility). Reason: Reproducibility &gt; freshness for v1.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="open-questions-resolved-by-human-via-askuserquestion-on-2026-04-24">Open Questions (resolved by human via AskUserQuestion on 2026-04-24)<a href="#open-questions-resolved-by-human-via-askuserquestion-on-2026-04-24" class="hash-link" aria-label="Direct link to Open Questions (resolved by human via AskUserQuestion on 2026-04-24)" title="Direct link to Open Questions (resolved by human via AskUserQuestion on 2026-04-24)" translate="no">​</a></h2>
+<ul class="contains-task-list containsTaskList_mC6p">
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <strong>Q1 — License</strong>: <strong>Apache-2.0</strong> chosen.</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <strong>Q2-revised — Go floor</strong>: <strong>Go 1.22</strong> chosen (range-over-func, generics stable, broad adoption). Original Python-3.11 answer superseded by tech-stack switch.</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <strong>Q3 — Submodule path</strong>: <strong><code>tools/chevp-flow/</code></strong> chosen.</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <strong>Q4 — Subagent prompts</strong>: <strong>vendored, version-pinned</strong> to a chevp-ai-framework release tag (now via Go <code>embed.FS</code>).</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <strong>Q5 — v1 command surface</strong>: <strong><code>init</code>, <code>status</code>, <code>approve</code>, <code>gate-check</code>, <code>new-adr</code></strong> (minimum + ADR support).</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <strong>Q6 — Mode-inference</strong>: <strong>explicit per command path</strong> (no inference; <code>chevp context init</code>, <code>chevp exploration plan</code>, …).</li>
+<li class="task-list-item"><input type="checkbox" disabled="" checked=""> <strong>Q7 — Module layout</strong>: <strong>single Go module</strong> for v1; split deferred until reuse pressure emerges.</li>
+</ul>
+<h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="tech-stack-switch-2026-04-24">Tech-Stack Switch (2026-04-24)<a href="#tech-stack-switch-2026-04-24" class="hash-link" aria-label="Direct link to Tech-Stack Switch (2026-04-24)" title="Direct link to Tech-Stack Switch (2026-04-24)" translate="no">​</a></h3>
+<p>After Q1–Q7 resolution, the human decided to switch from Python to Go + Charm Stack. Rationale:</p>
+<ul>
+<li class="">Single binary distribution (<code>brew install chevp</code>) eliminates Python-runtime install friction</li>
+<li class="">Native Go Docker SDK simplifies the gatekeeper-container path</li>
+<li class="">Huh forms map naturally to the framework&#x27;s <code>AskUserQuestion</code> clickable-decisions pattern (Rule #13)</li>
+<li class="">Acknowledged tradeoff: <code>anthropic-sdk-go</code> is younger and more boilerplate-heavy for streaming (captured as R8/R9)</li>
+</ul>
+<p>This switch supersedes prior Python-related decisions but does NOT change: Auth-Pfad (still Pfad 2), CLI-Modus (still async file-based), command surface, subagent vendoring, mode handling, kill criterion, docker scope, repo location, license, submodule path, module layout principle.</p>
+<p>All scope confirmation items below #5 are now satisfied (license, submodule path, command surface, vendoring, mode handling, module layout). Q2 must be re-asked for Go version floor before G1. Frontmatter <code>decided-by</code>/<code>approved-by</code> remain <code>—</code> until G1 itself is signed.</p>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="scope-boundaries-draft">Scope Boundaries (Draft)<a href="#scope-boundaries-draft" class="hash-link" aria-label="Direct link to Scope Boundaries (Draft)" title="Direct link to Scope Boundaries (Draft)" translate="no">​</a></h2>
+<p><strong>Likely in scope</strong></p>
+<ul>
+<li class="">Go 1.22+ CLI using Cobra (commands) + Charm Stack (Bubble Tea TUI, Huh forms, Glamour markdown rendering)</li>
+<li class="">Single static binary distribution: Homebrew tap + GitHub Releases (goreleaser) + <code>go install</code></li>
+<li class=""><code>claude -p</code> subprocess wrapper with JSON-stream parser (manual struct definitions in one package)</li>
+<li class="">v1 command surface: <code>init</code>, <code>status</code>, <code>approve</code>, <code>gate-check</code>, <code>new-adr</code> (per Q5)</li>
+<li class="">Markdown-file state layer (<code>context/</code>, <code>exploration/</code>, <code>production/</code>)</li>
+<li class="">Provenance guardrails (refuse to write human-decision fields — port logic from <code>provenance-check.py</code>)</li>
+<li class="">Native Go Docker SDK for gatekeeper-subagent isolation</li>
+<li class="">Vendored gatekeeper prompts via Go <code>embed.FS</code>, pinned to chevp-ai-framework release tag</li>
+<li class="">Apache-2.0 license + minimal <code>README.md</code>, <code>CONTRIBUTING.md</code>, <code>CHANGELOG.md</code></li>
+<li class="">Public GitHub repo at <code>github.com/chevp/chevp-flow</code></li>
+<li class="">Submodule integration into chevp-ai-framework at <code>tools/chevp-flow/</code> (per Q3)</li>
+<li class="">Adapter-contract document in chevp-ai-framework (parallel work)</li>
+</ul>
+<p><strong>Likely NOT in scope</strong></p>
+<ul>
+<li class="">Multi-provider LLM support</li>
+<li class="">Web UI / dashboard</li>
+<li class="">Team collaboration / multi-user state</li>
+<li class="">Windows support</li>
+<li class="">IDE/editor plugins</li>
+<li class="">Rewriting chevp-ai-framework&#x27;s plugin layer</li>
+<li class="">New framework features (this is a tool for the existing framework)</li>
+<li class="">Migration scripts from interactive Claude-Code state to CLI state</li>
+</ul>
+<p><strong>Out-of-scope items become proposals (per Rule #12)</strong>
+The Gatekeeper at G1 will spawn <code>PROP-NNN</code> files for any of the above that the human wants tracked instead of permanently dropped.</p>
+<p><strong>Uncertain / needs human input</strong></p>
+<ul>
+<li class="">Whether subagent prompts are vendored (Q4)</li>
+<li class="">License choice (Q1)</li>
+<li class="">Whether to also publish <code>chevp-flow-core</code> as a library (Q7)</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="confirmation-needed-for-g1">Confirmation Needed (for G1)<a href="#confirmation-needed-for-g1" class="hash-link" aria-label="Direct link to Confirmation Needed (for G1)" title="Direct link to Confirmation Needed (for G1)" translate="no">​</a></h2>
+<p>Before moving to Exploration, the human must confirm:</p>
+<ol>
+<li class=""><strong>Problem framing</strong> — Claude-Code-coupling is the actual blocker, CLI-as-adapter is the right shape (vs. e.g., browser extension, IDE plugin).</li>
+<li class=""><strong>Decisions table</strong> above (tech, auth path, repo, distribution, CLI-mode, docker scope) — frozen for v1.</li>
+<li class=""><strong>Kill Criterion</strong> — &quot;Gate-approvals become routine&quot; is the abort signal.</li>
+<li class=""><strong>Out-of-scope acknowledgement</strong> — multi-provider, web UI, Windows, plugin-layer rewrite are not in v1.</li>
+<li class=""><strong>License + Python floor + submodule path + command surface + subagent vendoring + mode inference</strong> — answers to Q1–Q7.</li>
+<li class=""><strong>Adapter-Contract parallel work</strong> — that chevp-ai-framework will gain an explicit adapter-contract document during this CTX, since chevp-flow is its first concrete adapter.</li>
+</ol>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="kill-criteria-for-this-context-effort-itself">Kill Criteria (for this Context effort itself)<a href="#kill-criteria-for-this-context-effort-itself" class="hash-link" aria-label="Direct link to Kill Criteria (for this Context effort itself)" title="Direct link to Kill Criteria (for this Context effort itself)" translate="no">​</a></h2>
+<ul>
+<li class="">If <strong>R2 (subagent-kompatibilität)</strong> cannot be resolved with a one-day spike before G1 confirms, <strong>escalate</strong> — gates without working gatekeepers are fake gates, and the project would be defective by construction.</li>
+<li class="">If after drafting the System Spec the v1 command surface exceeds 8 commands, <strong>reduce ruthlessly</strong> or split into v1/v2 release plan.</li>
+<li class="">If during Hypothesis-H1 testing the CLI-generated CTX draft requires post-processing &gt;30% of the time, <strong>abandon thin-wrapper approach</strong> — the abstraction is wrong, not just buggy.</li>
+</ul>
+<h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="next-steps-after-g1">Next steps after G1<a href="#next-steps-after-g1" class="hash-link" aria-label="Direct link to Next steps after G1" title="Direct link to Next steps after G1" translate="no">​</a></h2>
+<p>Once confirmed, the next deliverables move to Exploration (CTX → EXP transition):</p>
+<ul>
+<li class=""><strong>EXP-NNN-chevp-flow-architecture</strong> — module layout (command-layer / runtime-layer / state-layer / gate-layer / docker-layer), data flow, error model</li>
+<li class=""><strong>Fundamental ADRs</strong> drafted ✅ (six in <code>context/specs/chevp-flow/adr/</code>):
+<ul>
+<li class=""><a class="" href="/context/specs/chevp-flow/adr/ADR-001-async-file-based-cli.md/">ADR-001</a> — Async file-based CLI architecture</li>
+<li class=""><a class="" href="/context/specs/chevp-flow/adr/ADR-002-claude-subprocess-auth.md/">ADR-002</a> — Pfad 2 (<code>claude -p</code> subprocess) as auth strategy</li>
+<li class=""><a class="" href="/context/specs/chevp-flow/adr/ADR-003-go-charm-tech-stack.md/">ADR-003</a> — Go 1.22+ with Charm Stack (Cobra/Bubble Tea/Huh/Glamour)</li>
+<li class=""><a class="" href="/context/specs/chevp-flow/adr/ADR-004-apache-2-license.md/">ADR-004</a> — Apache-2.0 license</li>
+<li class=""><a class="" href="/context/specs/chevp-flow/adr/ADR-005-vendored-prompts-embed-fs.md/">ADR-005</a> — Subagent-prompt vendoring via Go <code>embed.FS</code></li>
+<li class=""><a class="" href="/context/specs/chevp-flow/adr/ADR-006-adapter-contract-location.md/">ADR-006</a> — Adapter-Contract spec lives in chevp-ai-framework</li>
+</ul>
+</li>
+<li class=""><strong>Deferred to Exploration</strong>: Distribution-strategy ADR (Homebrew + goreleaser concrete config), Module-internal-API ADR (if reuse pressure emerges)</li>
+<li class=""><strong>UX prototype</strong> for the four core commands&#x27; CLI output (Glamour markdown + Bubble Tea status views)</li>
+<li class=""><strong>Challenger output</strong> — top-3 failure modes, ≥2 alternative architectures (e.g., Python+Typer, TS+Bun rejected with reasons), strongest counter-argument, product-coherence check</li>
+<li class=""><strong><code>insights.md</code></strong> seeded</li>
+</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col noPrint_WFHX"><a href="https://github.com/chevp/chevp-ai-framework/edit/main/context/lab/docs/plans/p-3-chevp-flow-cli/context.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"><span class="theme-last-updated">Last updated<!-- --> on <b><time datetime="2026-05-02T10:20:24.000Z" itemprop="dateModified">May 2, 2026</time></b></span></div></div></footer></article><nav class="docusaurus-mt-lg pagination-nav" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/chevp-ai-framework/flow/plans/p-2-site-positioning-and-split/p-2-context/"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Context</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/chevp-ai-framework/flow/plans/p-4-thinking-learning-upgrade/p-4-exploration/"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Exploration</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#task" class="table-of-contents__link toc-highlight">Task</a></li><li><a href="#why-now" class="table-of-contents__link toc-highlight">Why now</a></li><li><a href="#decisions-captured-pre-g1" class="table-of-contents__link toc-highlight">Decisions captured pre-G1</a></li><li><a href="#artifacts-to-readverify" class="table-of-contents__link toc-highlight">Artifacts to Read/Verify</a></li><li><a href="#problem-statement-embedded--uncertainty-triplet-g1-prerequisite" class="table-of-contents__link toc-highlight">Problem Statement (embedded — Uncertainty Triplet, G1 prerequisite)</a></li><li><a href="#hypotheses" class="table-of-contents__link toc-highlight">Hypotheses</a></li><li><a href="#risks" class="table-of-contents__link toc-highlight">Risks</a><ul><li><a href="#top-3-expensive-failure-modes" class="table-of-contents__link toc-highlight">Top-3 expensive failure modes</a></li><li><a href="#counter-evidence-we-are-not-ignoring" class="table-of-contents__link toc-highlight">Counter-evidence we are not ignoring</a></li><li><a href="#risks-we-accept-knowingly" class="table-of-contents__link toc-highlight">Risks we accept knowingly</a></li></ul></li><li><a href="#open-questions-resolved-by-human-via-askuserquestion-on-2026-04-24" class="table-of-contents__link toc-highlight">Open Questions (resolved by human via AskUserQuestion on 2026-04-24)</a><ul><li><a href="#tech-stack-switch-2026-04-24" class="table-of-contents__link toc-highlight">Tech-Stack Switch (2026-04-24)</a></li></ul></li><li><a href="#scope-boundaries-draft" class="table-of-contents__link toc-highlight">Scope Boundaries (Draft)</a></li><li><a href="#confirmation-needed-for-g1" class="table-of-contents__link toc-highlight">Confirmation Needed (for G1)</a></li><li><a href="#kill-criteria-for-this-context-effort-itself" class="table-of-contents__link toc-highlight">Kill Criteria (for this Context effort itself)</a></li><li><a href="#next-steps-after-g1" class="table-of-contents__link toc-highlight">Next steps after G1</a></li></ul></div></div></div></div></main></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 Patrice Chevillat. Built with Docusaurus.</div></div></div></footer></div>
+</body>
+</html>
