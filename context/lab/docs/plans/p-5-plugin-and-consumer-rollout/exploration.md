@@ -89,4 +89,4 @@ This plan starts in **Exploration-A** because the open question is *whether the 
 - [ ] At least one plan in the pilot consumer repo runs through G1 → G2 under the new format
 - [ ] Time-to-G2 measured and compared to the P-4 kill criterion
 - [ ] `insights.md` for P-5 records the verdict (proceed / fall back / kill P-4)
-- [ ] Decision recorded in `governance-log.md`
+- [ ] Decision recorded in `governance-log.log`

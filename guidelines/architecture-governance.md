@@ -10,7 +10,7 @@ type: guideline
 
 **Why:** The framework's 5th core rule says *ownership stays with the human*. Without an explicit record of who decided what, that ownership is implicit and unauditable — "the AI did it" and "the human approved it" become indistinguishable in the history. Provenance turns the human/AI boundary from a convention into a queryable fact.
 
-**How to apply:** When AI creates or modifies a governed artifact, it fills `proposed-by: ai` and leaves the decision fields blank. A human crosses a gate or accepts a decision by running `/approve <artifact-id>` (or by manually filling the fields) — this is the only path from `proposed` to `approved`. Every gate crossing and ADR acceptance is appended to `governance-log.md`. Writes to production code are blocked when the referenced EXP plan has no `approved-by` set.
+**How to apply:** When AI creates or modifies a governed artifact, it fills `proposed-by: ai` and leaves the decision fields blank. A human crosses a gate or accepts a decision by running `/approve <artifact-id>` (or by manually filling the fields) — this is the only path from `proposed` to `approved`. Every gate crossing and ADR acceptance is appended to `governance-log.log`. Writes to production code are blocked when the referenced EXP plan has no `approved-by` set.
 
 ## Approval requires Evidence
 
@@ -60,7 +60,7 @@ AI **MUST NOT** write `decided-by`, `approved-by`, or `approved-at`. If AI finds
 
 ## The governance log
 
-A single append-only file `governance-log.md` at the repo root (or `context/governance-log.md` if context lives in a subfolder) records every gate crossing and every ADR acceptance:
+A single append-only file `governance-log.log` at the repo root (or `context/governance-log.log` if context lives in a subfolder) records every gate crossing and every ADR acceptance:
 
 ```
 2026-04-04  G1   CTX-003   proposed:ai    approved:lunral   "context inventory complete"
@@ -88,14 +88,14 @@ Mechanical checks live in [hooks/provenance-check.py](../hooks/provenance-check.
 - Writes to ADR/plan files that would set `status: accepted|approved` without `decided-by: human` are blocked.
 - Writes that set `proposed-by: human` by AI are flagged — AI may only set `proposed-by: ai` or `proposed-by: pair`.
 
-Human approval flows through `/approve <artifact-id>`, which is the only command authorized to set decision fields and append to `governance-log.md`.
+Human approval flows through `/approve <artifact-id>`, which is the only command authorized to set decision fields and append to `governance-log.log`.
 
 ## Governance queries
 
 Treat governance as queryable state:
 
 - *"What has the AI proposed that no human has yet approved?"* → `grep "status: proposed" **/*.md`
-- *"Every decision this quarter?"* → `governance-log.md` filtered by date
+- *"Every decision this quarter?"* → `governance-log.log` filtered by date
 - *"Did anything reach production without a human approval?"* → any PRD with `status: approved` but empty `approved-by` is a violation
 
 If these queries return something surprising, the governance invariant has been broken.
@@ -105,7 +105,7 @@ If these queries return something surprising, the governance invariant has been 
 | Anti-pattern | Why it breaks governance |
 |--------------|-------------------------|
 | AI edits `approved-by` | Human ownership becomes fiction |
-| Skipping `governance-log.md` on gate crossing | Audit trail has holes |
+| Skipping `governance-log.log` on gate crossing | Audit trail has holes |
 | Marking an artifact `accepted` without running `/approve` | Decision fields drift out of sync with reality |
 | Reusing an old artifact's id for a new decision | Supersession chain breaks |
 | Squash-merging commits that drop `Decided-By:` trailers | Git-level audit trail is destroyed |

@@ -60,7 +60,7 @@
     <div class="glass rounded-xl p-6 max-w-3xl mx-auto rwh">
       <div class="rwh-label">Rule</div><div class="rwh-text">Every governed artifact (ADR, CTX/EXP/PRD plan, spec) carries a provenance block stating who <strong>proposed</strong> it, who <strong>decided</strong> it, and when. AI may only set <code class="text-arctic-400">proposed-by</code>; only a human may set <code class="text-arctic-400">decided-by</code> / <code class="text-arctic-400">approved-by</code> / <code class="text-arctic-400">approved-at</code>.</div>
       <div class="rwh-label">Why</div><div class="rwh-text">Without an explicit record of who decided what, ownership is implicit and unauditable &mdash; "the AI did it" and "the human approved it" become indistinguishable.</div>
-      <div class="rwh-label">How</div><div class="rwh-text">When AI creates or modifies a governed artifact, it fills <code class="text-arctic-400">proposed-by: ai</code> and leaves the decision fields blank. A human approves via <a href="commands.html" class="text-arctic-400">/approve</a> &mdash; the only path from <code class="text-arctic-400">proposed</code> to <code class="text-arctic-400">approved</code>. Every gate crossing is appended to <code class="text-arctic-400">governance-log.md</code>.</div>
+      <div class="rwh-label">How</div><div class="rwh-text">When AI creates or modifies a governed artifact, it fills <code class="text-arctic-400">proposed-by: ai</code> and leaves the decision fields blank. A human approves via <a href="commands.html" class="text-arctic-400">/approve</a> &mdash; the only path from <code class="text-arctic-400">proposed</code> to <code class="text-arctic-400">approved</code>. Every gate crossing is appended to <code class="text-arctic-400">governance-log.log</code>.</div>
     </div>
   </section>
 
@@ -98,7 +98,7 @@
   <section class="max-w-4xl mx-auto px-6 py-12">
     <h2 class="text-2xl font-bold text-center mb-2 gradient-text">The Governance Log</h2>
     <div class="glass rounded-xl p-6 max-w-3xl mx-auto">
-      <p class="text-slate-300 text-sm mb-4">A single append-only file <code class="text-arctic-400">governance-log.md</code> records every gate crossing and ADR acceptance:</p>
+      <p class="text-slate-300 text-sm mb-4">A single append-only file <code class="text-arctic-400">governance-log.log</code> records every gate crossing and ADR acceptance:</p>
       <div class="code-block">
 2026-04-04  G1   CTX-003   proposed:ai    approved:lunral   "context inventory complete"
 2026-04-04  ADR  ADR-0007  proposed:ai    accepted:lunral   "use Postgres for primary storage"

@@ -23,7 +23,7 @@ This is a **human-only** action. The AI scribes the rejection — it does not de
 
 4. **Move the file** to `context/plans/proposals/rejected/PROP-NNN_<slug>.md`. Never delete — rejected proposals remain queryable history.
 
-5. **Append to `governance-log.md`**:
+5. **Append to `governance-log.log`**:
    ```
    <YYYY-MM-DD>  PROP  PROP-NNN  proposed:ai  rejected:<human>  "<reason>"
    ```

@@ -17,7 +17,7 @@ A G3 transition requires **all** of the following:
 4. **Documentation updated** as required by the PRD plan (CLAUDE.md, READMEs, ADRs touched)
 5. **`insights.md`** for the parent EXP plan has been updated with Production surprises (any Challenger failure mode that came true; any Risk that materialised)
 6. **`evidence:` block** in the PRD plan is filled (`hypothesis` from EXP, `result` from validation, `reasoning` for ship/rollback)
-7. **Provenance**: human approval recorded via `/approve PRD-<id>` and a line appended to `governance-log.md`
+7. **Provenance**: human approval recorded via `/approve PRD-<id>` and a line appended to `governance-log.log`
 8. **No production code outside the approved PRD scope** — surprise refactors are violations
 
 See [03-production/](../03-production/), [guidelines/architecture-governance.md](../guidelines/architecture-governance.md), [guidelines/uncertainty-reduction.md](../guidelines/uncertainty-reduction.md).
@@ -27,7 +27,7 @@ See [03-production/](../03-production/), [guidelines/architecture-governance.md]
 1. Identify the active PRD plan from the request
 2. Verify each acceptance criterion against the actual code/tests/build
 3. Verify the `insights.md` was updated AFTER Production work (not just copied from G2)
-4. Check `governance-log.md` for the approval line
+4. Check `governance-log.log` for the approval line
 5. Use Bash sparingly (only to run the build or tests when needed for verification — never to modify files)
 6. For every follow-up surfaced during Production (TODOs left, deferred refactors, new bugs filed, performance regressions accepted), draft a Plan Proposal stub
 7. Synthesise a **Verdict**

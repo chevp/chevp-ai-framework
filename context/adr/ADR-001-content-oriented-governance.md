@@ -20,7 +20,7 @@ Accepted
 
 ## Context
 
-Der bestehende Governance-Stack des Frameworks (Provenance-Frontmatter, `evidence:`-Block, `governance-log.md`, Gatekeeper-Subagents, `provenance-check.py`) prüft fast ausschliesslich das **Verfahren**: Wer hat vorgeschlagen, wer entschieden, lag Evidenz vor, ist die Statussequenz korrekt. Das ist notwendig, aber nicht hinreichend.
+Der bestehende Governance-Stack des Frameworks (Provenance-Frontmatter, `evidence:`-Block, `governance-log.log`, Gatekeeper-Subagents, `provenance-check.py`) prüft fast ausschliesslich das **Verfahren**: Wer hat vorgeschlagen, wer entschieden, lag Evidenz vor, ist die Statussequenz korrekt. Das ist notwendig, aber nicht hinreichend.
 
 Was fehlt, ist die Prüfung der **Substanz** über Zeit:
 
@@ -90,7 +90,7 @@ Nicht im Scope: Stilistische Code-Reviews, Performance, Security — diese liege
 
 ### 3. Slash-Command `/governance-audit`
 
-Triggert den Auditor on-demand und appended das Ergebnis (Finding-Liste, kein Verdict) in `governance-log.md` als eigenen Event-Typ:
+Triggert den Auditor on-demand und appended das Ergebnis (Finding-Liste, kein Verdict) in `governance-log.log` als eigenen Event-Typ:
 
 ```
 2026-04-25  AUDIT  —  proposed:ai  decided:—  "3 drift findings, 1 obsolete ADR"

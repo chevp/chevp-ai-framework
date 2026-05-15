@@ -1,11 +1,11 @@
 ---
-description: Run a content-level governance audit on the whole repo (ADR drift, undocumented patterns, obsolete ADRs) and append the result summary to governance-log.md.
+description: Run a content-level governance audit on the whole repo (ADR drift, undocumented patterns, obsolete ADRs) and append the result summary to governance-log.log.
 argument-hint: [note]
 ---
 
 Run a governance audit. Optional note: $ARGUMENTS
 
-This command delegates to the [governance-auditor](../agents/governance-auditor.md) subagent and records the audit event in `governance-log.md`. It is read-only with respect to code, ADRs, and invariants — it produces findings, never fixes.
+This command delegates to the [governance-auditor](../agents/governance-auditor.md) subagent and records the audit event in `governance-log.log`. It is read-only with respect to code, ADRs, and invariants — it produces findings, never fixes.
 
 Specified by [ADR-001](../context/adr/ADR-001-content-oriented-governance.md).
 
@@ -19,7 +19,7 @@ Specified by [ADR-001](../context/adr/ADR-001-content-oriented-governance.md).
 
 2. **Display the auditor output** to the human verbatim. Do not summarize away findings.
 
-3. **Append one line** to `governance-log.md` at the repo root:
+3. **Append one line** to `governance-log.log` at the repo root:
    ```
    <YYYY-MM-DD>  AUDIT  —  proposed:ai  decided:—  "<N> BLOCK / <M> CONCERN findings, <K> obsolete ADR candidates. <note>"
    ```
@@ -37,7 +37,7 @@ Specified by [ADR-001](../context/adr/ADR-001-content-oriented-governance.md).
 - This command does NOT change any ADR status, code file, or invariants file. It only reads and appends one log line.
 - Never invoke this command's append step without first showing the auditor output. The log line is the receipt; the findings are the substance.
 - If the auditor returns `INVARIANTS-FILE: MISSING`, still append the audit event — the missing-file finding is itself the audit result.
-- `governance-log.md` is append-only. Never rewrite prior lines.
+- `governance-log.log` is append-only. Never rewrite prior lines.
 - This is a manual-trigger command. There is no automatic schedule — that decision is delegated to the user via [/loop](https://docs.anthropic.com/) or `/schedule` if recurring audits are desired.
 
 ## When to run

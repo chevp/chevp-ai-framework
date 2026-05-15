@@ -13,7 +13,7 @@ This is a **human-only** action that exists for one reason: the Gatekeepers can 
 
 2. **Locate the plan file** in `context/plans/active/`, `context/plans/`, or its `finished/`/`archived/` variant.
 
-3. **Locate the latest Gatekeeper verdict** for this plan in the conversation or in `governance-log.md`. If no recent `block` verdict exists, STOP and ask the human to run `/gate-check` first — overrides only apply to actual blocks.
+3. **Locate the latest Gatekeeper verdict** for this plan in the conversation or in `governance-log.log`. If no recent `block` verdict exists, STOP and ask the human to run `/gate-check` first — overrides only apply to actual blocks.
 
 4. **Update the plan frontmatter** with an override block:
    ```yaml
@@ -26,7 +26,7 @@ This is a **human-only** action that exists for one reason: the Gatekeepers can 
    ```
    Append to the existing `gatekeeper-override:` list if one is already present (overrides accumulate).
 
-5. **Append to `governance-log.md`**:
+5. **Append to `governance-log.log`**:
    ```
    <YYYY-MM-DD>  GATE-OVERRIDE  <plan-id>  <gate>  blocked:gatekeeper  overridden:<human>  "<reason>"
    ```
@@ -41,4 +41,4 @@ This is a **human-only** action that exists for one reason: the Gatekeepers can 
 - Overrides accumulate — never overwrite an existing override block.
 - If the same plan has been overridden 3+ times across different gates, flag this to the human as a likely sign that either the plan is fundamentally wrong or the Gatekeeper is misconfigured.
 - An override does NOT bypass the `evidence:` block requirement. If the Gatekeeper blocked because the evidence is empty, the human must still fill it before `/approve`.
-- Querying overrides: `grep "GATE-OVERRIDE" governance-log.md` lists every override event for audit.
+- Querying overrides: `grep "GATE-OVERRIDE" governance-log.log` lists every override event for audit.
