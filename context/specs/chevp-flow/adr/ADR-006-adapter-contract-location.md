@@ -32,8 +32,7 @@ The contract describes:
 2. Artifact frontmatter schema and field allowlist/denylist (Rule #7)
 3. `evidence:` block validation rules
 4. Gatekeeper invocation interface (input plan + artifacts → verdict + proposals)
-5. `governance-log.log` append-only contract
-6. PROP-NNN spawn rules (max 5 per gate, format)
+5. PROP-NNN spawn rules (max 5 per gate, format)
 
 ## Decision
 

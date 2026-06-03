@@ -441,7 +441,7 @@ Items in a plan's NOT-in-Scope section, plus Challenger-identified failure modes
 | `/promote PROP-NNN` | Convert to a real CTX/EXP/PRD plan (AI generates the stub from the proposal) |
 | `/defer PROP-NNN` | Keep in proposals folder, revisit at next G1 |
 | `/reject PROP-NNN <reason>` | Move to `proposals/rejected/` with reason recorded |
-| `/gate-override <plan-id> <reason>` | Override a Gatekeeper `block` verdict (logged in plan frontmatter and `governance-log.log`) |
+| `/gate-override <plan-id> <reason>` | Override a Gatekeeper `block` verdict (logged in the plan frontmatter) |
 
 **Bounds (anti-spam):**
 - **Max 5 proposals per gate-check** — excess goes into a single Sammel-Notiz paragraph in the verdict report
@@ -468,7 +468,7 @@ approved-by: —           # human identifier
 approved-at: —           # YYYY-MM-DD
 ```
 
-**AI MUST NOT write `decided-by`, `approved-by`, or `approved-at`.** Only the human, via `/approve <artifact-id>`, may set decision fields. This is the only path from `proposed` to `approved`. Every gate crossing and ADR acceptance is appended to `governance-log.log` (one line per event, append-only).
+**AI MUST NOT write `decided-by`, `approved-by`, or `approved-at`.** Only the human, via `/approve <artifact-id>`, may set decision fields. This is the only path from `proposed` to `approved`. Every gate crossing and ADR acceptance is recorded in the artifact's provenance frontmatter and in the git history (a `Decided-By:` commit trailer).
 
 ### Approval requires Evidence
 

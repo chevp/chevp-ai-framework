@@ -1,11 +1,11 @@
 ---
-description: Run a content-level governance audit on the whole repo (ADR drift, undocumented patterns, obsolete ADRs) and append the result summary to governance-log.log.
+description: Run a content-level governance audit on the whole repo (ADR drift, undocumented patterns, obsolete ADRs) and report the findings.
 argument-hint: [note]
 ---
 
 Run a governance audit. Optional note: $ARGUMENTS
 
-This command delegates to the [governance-auditor](../agents/governance-auditor.md) subagent and records the audit event in `governance-log.log`. It is read-only with respect to code, ADRs, and invariants — it produces findings, never fixes.
+This command delegates to the [governance-auditor](../agents/governance-auditor.md) subagent and reports the audit findings. It is read-only with respect to code, ADRs, and invariants — it produces findings, never fixes.
 
 Specified by [ADR-001](../context/adr/ADR-001-content-oriented-governance.md).
 
@@ -19,25 +19,15 @@ Specified by [ADR-001](../context/adr/ADR-001-content-oriented-governance.md).
 
 2. **Display the auditor output** to the human verbatim. Do not summarize away findings.
 
-3. **Append one line** to `governance-log.log` at the repo root:
-   ```
-   <YYYY-MM-DD>  AUDIT  —  proposed:ai  decided:—  "<N> BLOCK / <M> CONCERN findings, <K> obsolete ADR candidates. <note>"
-   ```
-   - Replace `<N>`, `<M>`, `<K>` with the counts from the auditor output
-   - The `decided:—` placeholder is intentional — the audit itself isn't a decision; the human follows up with `/approve`, `/reject`, or `/supersede` on individual findings
-   - If the human passed a note via `$ARGUMENTS`, append it after the counts
-
-4. **Suggest next actions** based on the findings:
+3. **Suggest next actions** based on the findings:
    - For each `BLOCK`: name a concrete remediation (`/supersede ADR-NNN`, fix code at file:line, or document as accepted exception)
    - For each `CONCERN`: triage into a follow-up plan or accept and ignore
    - For each `OBSOLETE-ADR-CANDIDATE`: confirm with the human before any status change
 
 ## Rules
 
-- This command does NOT change any ADR status, code file, or invariants file. It only reads and appends one log line.
-- Never invoke this command's append step without first showing the auditor output. The log line is the receipt; the findings are the substance.
-- If the auditor returns `INVARIANTS-FILE: MISSING`, still append the audit event — the missing-file finding is itself the audit result.
-- `governance-log.log` is append-only. Never rewrite prior lines.
+- This command does NOT change any ADR status, code file, or invariants file. It only reads and reports findings.
+- If the auditor returns `INVARIANTS-FILE: MISSING`, still report the audit result — the missing-file finding is itself the audit result.
 - This is a manual-trigger command. There is no automatic schedule — that decision is delegated to the user via [/loop](https://docs.anthropic.com/) or `/schedule` if recurring audits are desired.
 
 ## When to run

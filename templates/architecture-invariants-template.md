@@ -143,4 +143,3 @@ Starter-pack invariants are exempt — they encode hygiene that pre-dates any AD
 | [agents/architecture-reviewer](../agents/architecture-reviewer.md) | Reads this file when reviewing individual changes |
 | [agents/governance-auditor](../agents/governance-auditor.md) | Reads this file when auditing the whole repo (drift detection) |
 | [guidelines/architecture-governance](../guidelines/architecture-governance.md) | This template implements the "Content Governance" section |
-| `governance-log.log` | Audit runs append findings as `AUDIT` events |

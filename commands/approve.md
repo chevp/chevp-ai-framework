@@ -1,5 +1,5 @@
 ---
-description: Record a human approval/acceptance for an artifact (ADR, CTX, EXP, PRD) and append it to governance-log.log.
+description: Record a human approval/acceptance for an artifact (ADR, CTX, EXP, PRD) in its provenance frontmatter.
 argument-hint: <artifact-id> [note]
 ---
 
@@ -23,17 +23,12 @@ This is a **human-only** action. When invoked, you are acting as a scribe for th
    - `approved-by:` → the human's identifier
    - `approved-at:` → today's date (YYYY-MM-DD)
 
-6. **Append one line** to `governance-log.log` at the repo root (create it if missing):
-   ```
-   <YYYY-MM-DD>  <GATE|ADR>  <ID>  proposed:<ai|human|pair>  <approved|accepted>:<name>  "<note>"
-   ```
-   - `GATE` = `G1` for CTX, `G2` for EXP, `G3` for PRD. `ADR` for ADRs.
+6. **Show the diff** to the human before writing. After writing, confirm the updated frontmatter.
 
-7. **Show the diff** to the human before writing. After writing, confirm the append to `governance-log.log`.
+7. **Suggest the commit trailer**: when the human commits this approval, the commit SHOULD carry a `Decided-By: <name>` trailer (see [guidelines/architecture-governance.md](../guidelines/architecture-governance.md) §Git-level provenance). The git history is the authoritative audit trail for gate crossings and ADR acceptances.
 
 ## Rules
 
 - NEVER run this command on behalf of the AI. This command records a **human** decision.
 - NEVER overwrite an existing `approved-by` — if one is already set, the artifact is already approved. Report and stop.
-- The `governance-log.log` file is append-only. Never rewrite prior lines.
 - If the artifact's `proposed-by` is empty, fill it with a best-effort guess (`ai` if the conversation shows AI drafted it) and flag this to the human.

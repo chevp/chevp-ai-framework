@@ -76,7 +76,7 @@ What each gatekeeper specifically checks:
 
 - **G1** — CTX-Plan, the *uncertainty triplet* (problem-statement / hypotheses / risks), System Spec, Software Architecture, fundamental ADRs, Context Inventory, scope confirmation, non-generic `evidence:` block.
 - **G2** — EXP plan with `exploration-mode: A|B`, ≥3 implementation-ready steps, explicit Scope and NOT-in-Scope, **Kill Criteria**, ≥2 verifiable Acceptance Criteria, ≥2 Risks with mitigations, UX prototype, non-empty `insights.md`, **Challenger output that engages with this plan**, non-generic `evidence:` block.
-- **G3** — every PRD acceptance criterion satisfied with evidence, build passes, docs updated, `insights.md` updated with implementation surprises (not just copied from G2), human-approval line in `governance-log.log`, **no code outside the approved PRD scope** (surprise refactors are an automatic block).
+- **G3** — every PRD acceptance criterion satisfied with evidence, build passes, docs updated, `insights.md` updated with implementation surprises (not just copied from G2), human approval recorded in the PRD provenance frontmatter (`approved-by` / `approved-at`), **no code outside the approved PRD scope** (surprise refactors are an automatic block).
 
 ### architecture-reviewer — per-change review
 

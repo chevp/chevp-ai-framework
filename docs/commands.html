@@ -109,7 +109,7 @@
       <div class="card glass rounded-xl p-5"><div class="relative z-10">
         <div class="cat-pill cat-gate mb-3">Approval</div>
         <div class="cmd text-lg mb-2">/approve &lt;artifact-id&gt;</div>
-        <p class="text-slate-400 text-sm">Record a <strong>human</strong> approval/acceptance for an artifact (ADR/CTX/EXP/PRD). Sets <code class="text-arctic-400 text-xs">decided-by</code>/<code class="text-arctic-400 text-xs">approved-by</code>/<code class="text-arctic-400 text-xs">approved-at</code> and appends to <code class="text-arctic-400 text-xs">governance-log.log</code>.</p>
+        <p class="text-slate-400 text-sm">Record a <strong>human</strong> approval/acceptance for an artifact (ADR/CTX/EXP/PRD). Sets <code class="text-arctic-400 text-xs">decided-by</code>/<code class="text-arctic-400 text-xs">approved-by</code>/<code class="text-arctic-400 text-xs">approved-at</code> in the provenance frontmatter.</p>
       </div></div>
       <div class="card glass rounded-xl p-5"><div class="relative z-10">
         <div class="cat-pill cat-gate mb-3">Override</div>
@@ -169,7 +169,7 @@
           <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/produce</span></td><td class="px-5 py-3">Enter Production mode (requires G2)</td></tr>
           <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/gate-check G1|G2|G3</span></td><td class="px-5 py-3">Validate a quality gate via the matching gatekeeper</td></tr>
           <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/new-adr &lt;title&gt;</span></td><td class="px-5 py-3">Create new Architecture Decision Record</td></tr>
-          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/approve &lt;id&gt; [note]</span></td><td class="px-5 py-3">Record human approval, append to governance-log</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/approve &lt;id&gt; [note]</span></td><td class="px-5 py-3">Record human approval in the provenance frontmatter</td></tr>
           <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/promote &lt;PROP-id&gt;</span></td><td class="px-5 py-3">Promote a Plan Proposal to a real plan</td></tr>
           <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/reject &lt;PROP-id&gt; &lt;reason&gt;</span></td><td class="px-5 py-3">Reject a Plan Proposal with reason</td></tr>
           <tr class="border-b border-slate-700/30"><td class="px-5 py-3"><span class="cmd">/gate-override &lt;plan&gt; &lt;reason&gt;</span></td><td class="px-5 py-3">Override a Gatekeeper block verdict</td></tr>

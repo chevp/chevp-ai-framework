@@ -31,12 +31,7 @@ This is a **human-only** action. When invoked, you act as a scribe for the human
 
 6. **Move the proposal**: move the original `PROP-NNN_<slug>.md` to `proposals/promoted/PROP-NNN_<slug>.md` and update its frontmatter (`status: promoted`, add `promoted-to: <new plan id>`).
 
-7. **Append to `governance-log.log`**:
-   ```
-   <YYYY-MM-DD>  PROP  PROP-NNN  proposed:ai  promoted:<human>  "→ <new-plan-id>"
-   ```
-
-8. **Show the diff** to the human before writing. Confirm the new plan path after writing.
+7. **Show the diff** to the human before writing. Confirm the new plan path after writing.
 
 ## Rules
 

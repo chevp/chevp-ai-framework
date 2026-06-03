@@ -48,7 +48,7 @@ CTX-002 was approved at G1 on 2026-04-25, signed by `chevp`. Six fundamental ADR
 - Goreleaser config skeleton (`.goreleaser.yml`) for darwin/linux × amd64/arm64
 - One end-to-end working prototype: `chevp context init "test intent"` actually invokes `claude -p`, generates a valid CTX file, and round-trips through frontmatter validation
 - Prototype of `chevp gate-check G1` that runs the gatekeeper-g1 vendored prompt and parses the verdict
-- Prototype of `chevp approve CTX-NNN` that signs frontmatter + appends governance-log
+- Prototype of `chevp approve CTX-NNN` that signs frontmatter
 - One Huh-form prototype: PROP triage flow
 - Glamour rendering for verdicts and status output
 - `insights.md` capturing surprises, refuted assumptions, and product-coherence observations
@@ -84,11 +84,11 @@ CTX-002 was approved at G1 on 2026-04-25, signed by `chevp`. Six fundamental ADR
 
 6. **First flow: `chevp context init`** — Implement `internal/cli/context.go`. End-to-end test: `chevp context init "test intent"` writes a valid CTX-NNN file in a test directory, frontmatter validates against provenance rules, content streams through Bubble Tea progress view.
 
-7. **Second flow: `chevp approve <id>`** — Implement `internal/cli/approve.go`. Honor-System actor detection per SQ1: read `git config user.name`, warn if `CI=true` env. Refuse if `approved-by` already set. Append governance-log entry in canonical format.
+7. **Second flow: `chevp approve <id>`** — Implement `internal/cli/approve.go`. Honor-System actor detection per SQ1: read `git config user.name`, warn if `CI=true` env. Refuse if `approved-by` already set. Suggest a `Decided-By:` commit trailer for the audit trail.
 
 8. **Third flow: `chevp gate-check G1`** — Implement `internal/gates/checker.go` and `internal/gates/verdict.go` (parser for the `GATEKEEPER:/VERDICT:/...` block). Test: invoke against CTX-002 itself, expect `conditional-pass` verdict matching the Explore-agent simulation we ran on 2026-04-24/25.
 
-9. **Fourth flow: `chevp promote PROP-NNN`** — Implement `internal/cli/promote.go`. Read proposal, instantiate plan from template, move proposal to `proposals/promoted/`, append governance-log.
+9. **Fourth flow: `chevp promote PROP-NNN`** — Implement `internal/cli/promote.go`. Read proposal, instantiate plan from template, move proposal to `proposals/promoted/`.
 
 10. **TUI polish — Huh + Glamour** — Implement `internal/tui/forms.go` (Huh-based PROP triage) and `internal/tui/render.go` (Glamour wrapper). Prototype the triage flow end-to-end against the 5 PROPs from CTX-002.
 
@@ -160,9 +160,9 @@ All files NEW under `context/specs/chevp-flow/prototype/` (Exploration-stage ske
 
 - [ ] Prototype binary builds via `go build ./cmd/chevp` on macOS + Linux (no cross-compile failures)
 - [ ] `chevp context init "test"` end-to-end produces a valid CTX-NNN markdown file with correct frontmatter (parsed and verified by integration test)
-- [ ] `chevp approve CTX-NNN` correctly mutates frontmatter (`status`, `decided-by`, `approved-by`, `approved-at`) + appends governance-log line in canonical format; refuses if `approved-by` already set
+- [ ] `chevp approve CTX-NNN` correctly mutates frontmatter (`status`, `decided-by`, `approved-by`, `approved-at`); refuses if `approved-by` already set
 - [ ] `chevp gate-check G1` invokes gatekeeper-g1 prompt via `claude -p`, parses verdict, exits with appropriate code. **Verdict-fidelity (sharpened per Challenger FM-2 / Coherence-Check #2):** top-level verdict matches simulation on CTX-002, AND finding-level matches at ≥80% across at least 3 governed plans (CTX-002 + 2 additional plans to be selected during Step 8 — candidates: CTX-001, EXP-001 itself, or a synthetic test plan). Material divergence (>20% finding-level mismatch on any plan) triggers the Kill Criterion §"Subagent context-loss"
-- [ ] `chevp promote PROP-NNN` round-trips: reads proposal, creates plan stub, moves proposal to `proposals/promoted/`, appends governance-log
+- [ ] `chevp promote PROP-NNN` round-trips: reads proposal, creates plan stub, moves proposal to `proposals/promoted/`
 - [ ] Provenance unit tests pass with ≥10 fixture cases; output matches `provenance-check.py` reference on every case
 - [ ] `internal/state/artifact.go` round-trips field order on all 10 reference artifacts (byte-identical for properly-ordered inputs)
 - [ ] `insights.md` documents at least one hypothesis verdict (H1/H2/H3 from CTX-002 marked `confirmed`/`refuted`/`inconclusive`) and one production-coherence observation

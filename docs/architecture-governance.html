@@ -60,7 +60,7 @@
     <div class="glass rounded-xl p-6 max-w-3xl mx-auto rwh">
       <div class="rwh-label">Rule</div><div class="rwh-text">Every governed artifact (ADR, CTX/EXP/PRD plan, spec) carries a provenance block stating who <strong>proposed</strong> it, who <strong>decided</strong> it, and when. AI may only set <code class="text-arctic-400">proposed-by</code>; only a human may set <code class="text-arctic-400">decided-by</code> / <code class="text-arctic-400">approved-by</code> / <code class="text-arctic-400">approved-at</code>.</div>
       <div class="rwh-label">Why</div><div class="rwh-text">Without an explicit record of who decided what, ownership is implicit and unauditable &mdash; "the AI did it" and "the human approved it" become indistinguishable.</div>
-      <div class="rwh-label">How</div><div class="rwh-text">When AI creates or modifies a governed artifact, it fills <code class="text-arctic-400">proposed-by: ai</code> and leaves the decision fields blank. A human approves via <a href="commands.html" class="text-arctic-400">/approve</a> &mdash; the only path from <code class="text-arctic-400">proposed</code> to <code class="text-arctic-400">approved</code>. Every gate crossing is appended to <code class="text-arctic-400">governance-log.log</code>.</div>
+      <div class="rwh-label">How</div><div class="rwh-text">When AI creates or modifies a governed artifact, it fills <code class="text-arctic-400">proposed-by: ai</code> and leaves the decision fields blank. A human approves via <a href="commands.html" class="text-arctic-400">/approve</a> &mdash; the only path from <code class="text-arctic-400">proposed</code> to <code class="text-arctic-400">approved</code>. Every gate crossing is recorded in the artifact's provenance frontmatter and the git history.</div>
     </div>
   </section>
 
@@ -96,16 +96,16 @@
   </section>
 
   <section class="max-w-4xl mx-auto px-6 py-12">
-    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">The Governance Log</h2>
+    <h2 class="text-2xl font-bold text-center mb-2 gradient-text">The Audit Trail</h2>
     <div class="glass rounded-xl p-6 max-w-3xl mx-auto">
-      <p class="text-slate-300 text-sm mb-4">A single append-only file <code class="text-arctic-400">governance-log.log</code> records every gate crossing and ADR acceptance:</p>
+      <p class="text-slate-300 text-sm mb-4">Gate crossings and ADR acceptances are recorded in two coupled places: the <strong>artifact frontmatter</strong> (<code class="text-arctic-400">decided-by</code> / <code class="text-arctic-400">approved-by</code> / <code class="text-arctic-400">approved-at</code>) and the <strong>git history</strong>. Approval commits should carry a <code class="text-arctic-400">Decided-By:</code> trailer:</p>
       <div class="code-block">
-2026-04-04  G1   CTX-003   proposed:ai    approved:lunral   "context inventory complete"
-2026-04-04  ADR  ADR-0007  proposed:ai    accepted:lunral   "use Postgres for primary storage"
-2026-04-05  G2   EXP-012   proposed:ai    approved:lunral   "prototype validated"
-2026-04-05  G3   PRD-008   proposed:pair  approved:lunral   "ships, all AC met"
+Decided-By: lunral &lt;lunral@…&gt;
+
+# query every human decision point:
+git log --grep="Decided-By"
       </div>
-      <p class="text-slate-500 text-xs mt-4">One line per event. Never rewrite past lines. This is the authoritative audit trail.</p>
+      <p class="text-slate-500 text-xs mt-4">The frontmatter answers <em>what is the current decision state</em>; git answers <em>when and by whom</em>. Commits can't be silently rewritten, so the trail stays coherent.</p>
     </div>
   </section>
 
@@ -116,7 +116,7 @@
         <thead><tr class="border-b border-slate-700/50 bg-slate-900/30"><th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Anti-pattern</th><th class="text-left text-slate-300 font-semibold px-5 py-3 text-xs uppercase tracking-wider">Why it breaks governance</th></tr></thead>
         <tbody class="text-slate-400 text-xs">
           <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">AI edits <code class="text-arctic-400">approved-by</code></td><td class="px-5 py-3">Human ownership becomes fiction</td></tr>
-          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Skipping governance-log on gate crossing</td><td class="px-5 py-3">Audit trail has holes</td></tr>
+          <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Committing a gate crossing without a <code class="text-arctic-400">Decided-By:</code> trailer</td><td class="px-5 py-3">Git-level audit trail has holes</td></tr>
           <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Marking artifact <code class="text-arctic-400">accepted</code> without <code class="text-arctic-400">/approve</code></td><td class="px-5 py-3">Decision fields drift out of sync with reality</td></tr>
           <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Reusing an old artifact id for a new decision</td><td class="px-5 py-3">Supersession chain breaks</td></tr>
           <tr class="border-b border-slate-700/30"><td class="px-5 py-3 text-slate-200">Approving plan with empty evidence block</td><td class="px-5 py-3">Approval becomes rubber-stamp</td></tr>

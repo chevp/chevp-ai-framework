@@ -74,7 +74,7 @@ The 90-day auto-defer rule (enforced at G1 review time) prevents the proposal ba
 | Artifact | Relation |
 |----------|----------|
 | Source plan | The plan whose `NOT in Scope` (or Challenger output) produced this proposal — referenced via `source-plan` |
-| `governance-log.log` | Promotion / rejection events are appended (not pending or deferred) |
+| Git history | Promotion / rejection events are recorded by the commit that moves the proposal (not pending or deferred) |
 | `PLAN_REGISTRY.md` | Active proposals appear in a separate "Pending Proposals" section |
 | Real plans (after promotion) | Promoted proposals become regular CTX/EXP/PRD plans and stop being proposals |
 

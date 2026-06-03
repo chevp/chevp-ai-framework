@@ -27,12 +27,11 @@ parent-ctx: CTX-002
 3. **Claude subprocess runtime** — wrap `claude -p --output-format stream-json` with structured event consumption; surface streaming output via Bubble Tea
 4. **Provenance enforcement** — port `provenance-check.py` logic into `internal/state/provenance.go`; refuse to write `decided-by`, `approved-by`, `approved-at`, `status: approved|accepted`, and `proposed-by: human` from any non-approve command
 5. **Gate validation** — `chevp gate-check {G1|G2|G3}` invokes the corresponding gatekeeper subagent (vendored prompt from `embed.FS`), parses verdict block (`VERDICT: pass|conditional-pass|block`), parses spawned `PROP-NNN` entries
-6. **Plan Proposal handling** — write PROP files to `context/plans/proposals/`, drive Huh form for triage (promote/reject/defer), append `governance-log.log`
-7. **Append-only governance log** — `governance-log.log` writes are append-only; never rewrite existing lines
-8. **ADR creation** — `chevp adr new "<title>"` instantiates `context/adrs/ADR-NNNN.md` from vendored template
-9. **Approval flow** — `chevp approve <id> [note]` is the *only* path that may set human-decision fields; refuses if `approved-by` already set
-10. **Markdown rendering** — Glamour for all CLI output (verdicts, summaries, status)
-11. **Status query** — `chevp status` reports active step, last gate verdict, open Q-blocks, kill criteria reminders
+6. **Plan Proposal handling** — write PROP files to `context/plans/proposals/`, drive Huh form for triage (promote/reject/defer); promotion/rejection moves the file and is recorded by the git commit
+7. **ADR creation** — `chevp adr new "<title>"` instantiates `context/adrs/ADR-NNNN.md` from vendored template
+8. **Approval flow** — `chevp approve <id> [note]` is the *only* path that may set human-decision fields; refuses if `approved-by` already set
+9. **Markdown rendering** — Glamour for all CLI output (verdicts, summaries, status)
+10. **Status query** — `chevp status` reports active step, last gate verdict, open Q-blocks, kill criteria reminders
 
 ### Non-functional
 
@@ -157,7 +156,7 @@ func TriageProposals(props []Proposal) (TriageResults, error)   // Huh multi-sel
 4. Render verdict via Glamour
 5. Branch on `Verdict.Status`:
    - `block` → exit code 1; list unmet criteria; suggest fixes
-   - `conditional-pass` → write `PROP-NNN` files, drive Huh triage (promote/reject/defer per proposal), append governance-log
+   - `conditional-pass` → write `PROP-NNN` files, drive Huh triage (promote/reject/defer per proposal)
    - `pass` → exit 0; print `Run "chevp approve <id>" to sign G1`
 6. **Never auto-approve** — pass verdict only suggests next manual action
 
@@ -173,12 +172,11 @@ func TriageProposals(props []Proposal) (TriageResults, error)   // Huh multi-sel
    - `approved-at: <today YYYY-MM-DD>`
 5. `state.ValidateProvenance` in **human approve-mode** — these writes are *only* allowed via this command path (validated by call-site flag)
 6. `state.Write` artifact
-7. Append `governance-log.log` line: `<date>  G1  CTX-NNN  proposed:ai  approved:<user>  "<note>"`
-8. Render confirmation via Glamour
+7. Render confirmation via Glamour (suggest a `Decided-By: <user>` commit trailer when the human commits)
 
 **Flow D — `chevp promote PROP-012`**
 
-Mirrors `commands/promote.md` exactly: read proposal, scan for next plan id, instantiate from template with proposal `Goal`/`Kill Criteria`, set `proposed-by: pair`, write new plan, move proposal to `proposals/promoted/`, append governance-log.
+Mirrors `commands/promote.md` exactly: read proposal, scan for next plan id, instantiate from template with proposal `Goal`/`Kill Criteria`, set `proposed-by: pair`, write new plan, move proposal to `proposals/promoted/`.
 
 ### Module Structure
 
@@ -240,7 +238,7 @@ chevp-flow/                            (repo root)
 
 The CLI is stateless across invocations; **state lives in the markdown files**. Each command:
 
-1. **Reads** the relevant subset of `context/`, `02-exploration/`, `03-production/`, `governance-log.log`
+1. **Reads** the relevant subset of `context/`, `02-exploration/`, `03-production/`
 2. **Decides** allowed transitions from frontmatter `status` + provenance fields
 3. **Writes** new state via `state.Write` with provenance validation
 
@@ -274,7 +272,7 @@ All errors render via Glamour-styled red boxes; machine-readable JSON via `--out
 - [x] **SQ2** — Subagent-prompt update strategy: **Explicit `chevp prompts update --tag <version>`**. No auto-update; CHANGELOG documents the bundled chevp-ai-framework version.
 - [x] **SQ3** — Gatekeeper execution default: **Subprocess + `--docker` opt-in flag**. Fast cold-start without Docker dependency at v1.
 - [x] **SQ4** — Framework-repo detection: **v1 heuristic** (`context/plans/` exists or sibling), **v2 sentinel** (`.chevp/config.toml`). Avoids migration friction at v1.
-- [x] **SQ5** — Offline governance ops: **All non-claude commands work offline**. `approve`, `status`, `promote`, `reject`, `gate-check` operate on local markdown + governance-log.log only; no network.
+- [x] **SQ5** — Offline governance ops: **All non-claude commands work offline**. `approve`, `status`, `promote`, `reject`, `gate-check` operate on local markdown only; no network.
 
 ## Acceptance Criteria for SPEC approval
 

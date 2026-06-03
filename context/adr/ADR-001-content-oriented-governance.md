@@ -90,11 +90,7 @@ Nicht im Scope: Stilistische Code-Reviews, Performance, Security — diese liege
 
 ### 3. Slash-Command `/governance-audit`
 
-Triggert den Auditor on-demand und appended das Ergebnis (Finding-Liste, kein Verdict) in `governance-log.log` als eigenen Event-Typ:
-
-```
-2026-04-25  AUDIT  —  proposed:ai  decided:—  "3 drift findings, 1 obsolete ADR"
-```
+Triggert den Auditor on-demand und meldet das Ergebnis (Finding-Liste, kein Verdict) direkt an den Menschen. *(Ursprünglich appendete der Command das Ergebnis als `AUDIT`-Event in `governance-log.log`; dieser Log-Mechanismus wurde entfernt — siehe Amendment 2026-06-03.)*
 
 Der Mensch entscheidet Folgemassnahmen via `/approve`, `/reject`, oder ADR-Supersession — das Verfahren bleibt unverändert.
 
@@ -193,5 +189,6 @@ Das stärkste Argument gegen diesen ADR ist, dass wir ein Problem lösen, das wi
 | Date | Amendment | Proposed-by | Decided-by |
 |------|-----------|-------------|------------|
 | 2026-04-26 | §Decision-4 (Erweiterung `guidelines/architecture-governance.md`) auf **deferred** gesetzt. Bausteine 1–3 (Template, Agent, Slash-Command) bleiben implementiert; die Doku-Sektion in `architecture-governance.md` wird zurückgestellt, weil die anderen Artefakte selbstdokumentierend sind. Kann später ohne Supersession nachgezogen werden. | ai (scribe) | chevp |
+| 2026-06-03 | `governance-log.log` framework-weit entfernt. `/governance-audit` meldet Findings nur noch direkt an den Menschen statt sie als `AUDIT`-Event in den Log zu appenden (§Decision-3 angepasst). Der Audit-Trail für Gate-Crossings und ADR-Acceptances liegt jetzt allein in der Artefakt-Frontmatter + Git-History (`Decided-By:`-Trailer, siehe guidelines/architecture-governance.md §Audit-Trail). Substanz der Decision (Content-Drift-Detection via Invarianten + Auditor) unverändert; nur der Recording-Mechanismus entfällt. | ai (scribe) | chevp |
 
 Amendments dokumentieren Änderungen an einer bereits `accepted` ADR, ohne sie zu superseden. Sinnvoll, wenn die Decision in der Substanz steht, aber ein Detail (Reichweite, Reihenfolge, Optionalität) sich nach Approval ändert. Strukturelle Änderungen (anderer Mechanismus, anderes Prinzip) erfordern weiterhin eine Supersession-ADR.
