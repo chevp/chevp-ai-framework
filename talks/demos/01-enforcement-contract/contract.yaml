@@ -1,0 +1,21 @@
+# Gate-Vertrag — blockt Schreibzugriffe ohne freigegebenen Plan.
+#
+# Diese Datei IST der Vertrag. Sie ist sprach- und runtime-agnostisch:
+# ein Hook, ein Proxy, ein CI-Step oder check_gate.py können sie gleichermassen auswerten.
+# Architektur liegt hier — nicht in der ausfuehrenden Mechanik.
+
+id: require-approved-plan-before-write
+description: Kein Schreibzugriff, solange Gate G2 (Plan freigegeben) nicht passiert ist.
+
+on:                     # AUSLOESER — wann wird der Vertrag ueberhaupt geprueft?
+  tool: Write           #   nur bei Schreibzugriffen; Read/Grep/Glob loesen nichts aus
+
+when:                   # BEDINGUNG — unter welcher Lage greift das Verdict?
+  not:
+    state: plan.approved
+
+verdict: block          # ERGEBNIS, wenn die Bedingung zutrifft: block | allow | warn
+
+message: >
+  Kein freigegebener Plan vorhanden. Schreibzugriff blockiert.
+  Erst die Exploration abschliessen und Gate G2 durch den Menschen freigeben.
