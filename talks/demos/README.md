@@ -8,8 +8,8 @@ Nummer. Die Zuhörer sollen sich an die *Frage* erinnern, nicht an den Code.
 | Demo | Architekturfrage | Akt im Talk | Kern-Artefakt |
 |------|------------------|-------------|---------------|
 | [`01-enforcement-contract/`](01-enforcement-contract/) | **Wie erzwingt man Regeln außerhalb des Modells?** | Akt 2 | `contract.yaml` (deklarativer Gate-Vertrag) |
-| [`02-verification-capsule/`](02-verification-capsule/) | **Wie kapselt man Verifikation?** | Akt 3 | `gatekeeper.md` + `verdict.schema.json` |
-| [`03-who-decides/`](03-who-decides/) | **Wer trifft Entscheidungen?** | Akt 4 | `orchestrated.py` vs. `model_driven.py` |
+| [`02-who-decides/`](02-who-decides/) | **Wer trifft Entscheidungen?** | Akt 4 | `orchestrated.py` vs. `model_driven.py` |
+| [`03-verification-capsule/`](03-verification-capsule/) | **Wie kapselt man Verifikation?** | Akt 4 | `gatekeeper.md` + `verdict.schema.json` |
 
 ## Gemeinsame Prinzipien
 - **Deklarativ vor Code.** Das Architektur-Artefakt ist der Vertrag / das Schema / die
@@ -28,7 +28,7 @@ Nummer. Die Zuhörer sollen sich an die *Frage* erinnern, nicht an den Code.
 # Demo 1
 cd 01-enforcement-contract && python check_gate.py Write && cd ..
 # Demo 2
-cd 02-verification-capsule && python validate_verdict.py sample-verdict.json && cd ..
+cd 02-who-decides && python orchestrated.py && python model_driven.py && cd ..
 # Demo 3
-cd 03-who-decides && python orchestrated.py && python model_driven.py && cd ..
+cd 03-verification-capsule && python validate_verdict.py sample-verdict.json && cd ..
 ```

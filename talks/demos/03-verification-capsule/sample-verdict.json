@@ -1,0 +1,21 @@
+{
+  "artifact": "sample-plan.md",
+  "verdict": "block",
+  "findings": [
+    {
+      "criterion": "C1",
+      "severity": "block",
+      "detail": "evidence:-Block ist leer (hypothesis/result/reasoning ohne Inhalt)."
+    },
+    {
+      "criterion": "C2",
+      "severity": "block",
+      "detail": "Keine 'Kill Criteria'-Sektion vorhanden."
+    },
+    {
+      "criterion": "C3",
+      "severity": "conditional",
+      "detail": "Akzeptanzkriterium 'fuehlt sich schneller an' ist nicht pruefbar."
+    }
+  ]
+}
