@@ -8,27 +8,30 @@ Nummer. Die Zuhörer sollen sich an die *Frage* erinnern, nicht an den Code.
 | Demo | Architekturfrage | Akt im Talk | Kern-Artefakt |
 |------|------------------|-------------|---------------|
 | [`01-enforcement-contract/`](01-enforcement-contract/) | **Wie erzwingt man Regeln außerhalb des Modells?** | Akt 2 | `contract.yaml` (deklarativer Gate-Vertrag) |
-| [`02-who-decides/`](02-who-decides/) | **Wer trifft Entscheidungen?** | Akt 4 | `orchestrated.py` vs. `model_driven.py` |
+| [`02-who-decides/`](02-who-decides/) | **Wer trifft Entscheidungen?** | Akt 4 | `orchestrated.flow.md` vs. `model-driven.flow.md` |
 | [`03-verification-capsule/`](03-verification-capsule/) | **Wie kapselt man Verifikation?** | Akt 4 | `gatekeeper.md` + `verdict.schema.json` |
 
 ## Gemeinsame Prinzipien
-- **Deklarativ vor Code.** Das Architektur-Artefakt ist der Vertrag / das Schema / die
-  Markdown-Definition — die ausführende Mechanik ist nebensächlich und austauschbar.
-- **Dependency-frei.** Wo Code nötig ist, nur Python-3.10-stdlib — kein `pip install`, sofort
-  vorführbar.
-- **Cross-platform.** Forward-Slashes, ASCII-Ausgaben, keine Drive-Letter — läuft auf Windows,
-  macOS, Linux.
+- **Deklarativ statt Code.** Jede Demo ist ein deklaratives Artefakt (Vertrag / Flow-Definition
+  / Schema + Markdown-Subagent) plus ein **vorbereitetes Ergebnis** zum Zeigen. Bewusst
+  *ohne* ausführbare Skripte — die Botschaft des Talks ist „schaut auf den Vertrag, nicht auf
+  die Sprache", und das gilt auch für die Demos selbst.
+- **Vorführ-fertig.** Das erwartete Ergebnis liegt jeweils als Datei bei (`expected-output.md`,
+  Traces in den `*.flow.md`, `sample-verdict.json`) — kopierbar, zeigbar, als Screencast-Vorlage.
+- **Cross-platform.** Forward-Slashes, ASCII-Ausgaben, keine Drive-Letter — auf Windows,
+  macOS, Linux gleich zeigbar.
 
-## Voraussetzungen
-- Python ≥ 3.10 (für die Runner in Demo 1–3). Die Kern-Artefakte (YAML, Markdown, JSON)
-  sind auch ohne Python lesbar und zeigbar.
+## So führst du die Demos vor (kein Code nötig)
+- **Demo 1** — [`contract.yaml`](01-enforcement-contract/contract.yaml) +
+  [`state.json`](01-enforcement-contract/state.json) zeigen, dann
+  [`expected-output.md`](01-enforcement-contract/expected-output.md) (BLOCK → ALLOW → Read frei).
+- **Demo 2** — [`orchestrated.flow.md`](02-who-decides/orchestrated.flow.md) (identischer Trace)
+  gegen [`model-driven.flow.md`](02-who-decides/model-driven.flow.md) (driftender Trace) stellen.
+- **Demo 3** — [`sample-plan.md`](03-verification-capsule/sample-plan.md) →
+  [`gatekeeper.md`](03-verification-capsule/gatekeeper.md) →
+  [`sample-verdict.json`](03-verification-capsule/sample-verdict.json) neben
+  [`verdict.schema.json`](03-verification-capsule/verdict.schema.json) legen.
 
-## Schnelltest aller Demos
-```bash
-# Demo 1
-cd 01-enforcement-contract && python check_gate.py Write && cd ..
-# Demo 2
-cd 02-who-decides && python orchestrated.py && python model_driven.py && cd ..
-# Demo 3
-cd 03-verification-capsule && python validate_verdict.py sample-verdict.json && cd ..
-```
+> Wer eine Demo dennoch live ausführen will, kann jedes Artefakt von einer beliebigen Runtime
+> auswerten lassen (Hook, Proxy, CI-Step, JSON-Schema-Validator). Das Ergebnis ändert sich
+> nicht — es folgt allein aus dem deklarativen Artefakt.

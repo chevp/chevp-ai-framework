@@ -15,25 +15,27 @@ Die zentrale Aussage der Demo:
 > ([`verdict.schema.json`](verdict.schema.json)). Damit wird Verifikation **komponierbar,
 > testbar und automatisierbar** — ein Freitext-„sieht gut aus" wäre keins davon.
 
-## Dateien
+## Dateien (alle deklarativ — kein Code)
 | Datei | Rolle |
 |-------|-------|
 | [`gatekeeper.md`](gatekeeper.md) | Der Subagent: Rolle, Prüfkriterien, Output-Vertrag. In Markdown, nicht in Code. |
 | [`verdict.schema.json`](verdict.schema.json) | Das Schema, das jedes Verdict erfüllen muss. |
 | [`sample-plan.md`](sample-plan.md) | Beispiel-Input: ein Plan mit **leerem Evidence-Block** (Verstoß). |
-| [`sample-verdict.json`](sample-verdict.json) | Beispiel-Output: das strukturierte `block`-Verdict dazu. |
-| [`validate_verdict.py`](validate_verdict.py) | Mini-Validator (stdlib): prüft ein Verdict gegen das Schema. |
+| [`sample-verdict.json`](sample-verdict.json) | Beispiel-Output: das strukturierte `block`-Verdict dazu — das vorbereitete Ergebnis. |
 
-## Live-Ablauf (3 Min)
+## Live-Ablauf (3 Min) — ohne Code
 1. [`sample-plan.md`](sample-plan.md) zeigen — der Evidence-Block ist leer (Kill-Kriterium fehlt).
 2. [`gatekeeper.md`](gatekeeper.md) zeigen — der Prüfer ist *deklariert*: feste Kriterien,
    fester Output-Vertrag.
-3. [`sample-verdict.json`](sample-verdict.json) als das Ergebnis zeigen — maschinenlesbar.
-4. Validieren, dass das Verdict dem Vertrag entspricht:
-   ```bash
-   python validate_verdict.py sample-verdict.json
-   #   → OK: Verdict entspricht dem Schema (verdict=block, 2 Findings)
-   ```
+3. [`sample-verdict.json`](sample-verdict.json) als das Ergebnis zeigen — maschinenlesbar,
+   `verdict: block`, zwei Findings.
+4. [`verdict.schema.json`](verdict.schema.json) daneben legen — jedes Feld des Verdicts
+   entspricht dem Schema. Dass ein Verdict **maschinell prüfbar** ist, sieht man hier direkt;
+   ein beliebiger JSON-Schema-Validator würde es im Zweifel bestätigen — eigener Code ist dafür
+   nicht nötig.
+
+> Statt eines Validator-Skripts zeigt die Demo **Schema + Verdict nebeneinander**. Die
+> Aussage ist die Struktur, nicht das prüfende Tool — genau das ist der Punkt.
 
 ## Was die Zuhörer mitnehmen
 - Ein **Freitext-Verdict** ist nicht automatisierbar — ein **strukturiertes** schon

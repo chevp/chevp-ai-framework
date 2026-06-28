@@ -1,7 +1,7 @@
 # Gate-Vertrag — blockt Schreibzugriffe ohne freigegebenen Plan.
 #
 # Diese Datei IST der Vertrag. Sie ist sprach- und runtime-agnostisch:
-# ein Hook, ein Proxy, ein CI-Step oder check_gate.py können sie gleichermassen auswerten.
+# ein Hook, ein Proxy oder ein CI-Step können sie gleichermassen auswerten.
 # Architektur liegt hier — nicht in der ausfuehrenden Mechanik.
 
 id: require-approved-plan-before-write

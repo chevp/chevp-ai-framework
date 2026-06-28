@@ -590,9 +590,10 @@ zweitens.**
 
 ## Offene Punkte (vor Foliensatz zu klären)
 
-1. **Demo-Tiefe.** Die 3 Demos sind bewusst *konzeptionell* (Gate-Vertrag, strukturiertes
-   Verdict, Orchestrierungs-Vergleich), nicht code-zentriert. Für 45 Min ambitioniert;
-   Fallback: vorbereitete Screencasts. Implementierungssprache nie in den Vordergrund.
+1. **Demo-Tiefe.** Die 3 Demos sind bewusst **code-frei**: je ein deklaratives Artefakt
+   (Gate-Vertrag, Flow-Definitionen, Schema + Markdown-Gatekeeper) plus ein vorbereitetes
+   Ergebnis zum Zeigen/Screencast — keine ausführbaren Skripte. Das hält die Botschaft
+   („schaut auf den Vertrag, nicht auf die Sprache") auch in den Demos konsequent.
 2. **Anatomie-Tempo.** Akt 3 hält fünf Verantwortlichkeiten in 9 Min — Intent + State sind
    bereits zu einer Folie zusammengezogen. Bei Zeitdruck Orchestration (S12) als reine
    Brücke in 30 Sek. fahren.
