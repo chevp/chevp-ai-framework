@@ -77,7 +77,7 @@ Hook & Leitfrage  →  Problem  →  Enforcement-Demo  →  Warum braucht man da
 | 1 · Das Problem | 4 min | Prompt-Ketten haben keinen Controller | Niemand kontrolliert |
 | 2 · Der Moment der Kontrolle | 7 min | **Demo 1** zuerst — Agent wird geblockt | Wer darf stoppen? |
 | 3 · Anatomie als Ablauf | 10 min | Intent → State → Orchestration → Execution → Verification (+ **Demo 2**) | Wer kontrolliert *was*? |
-| 4 · Die Kernentscheidung | 7 min | Determinismus ↔ Autonomie (+ **Demo 3**) | Wer entscheidet? |
+| 4 · Die Kernentscheidung | 7 min | Spektrum + **Control Surface** (+ **Demo 3**) | Wer entscheidet? |
 | 5 · Governance als Querschnitt | 5 min | Schichtenmodell, Audit, Multi-Agent-Isolation | Wer kann es nachvollziehen? |
 | 6 · Failure Modes | 4 min | Fehler → Folge | Wo bricht Kontrolle weg? |
 | 7 · Takeaways | 4 min | Checkliste + eine Botschaft + Q&A | Wende es selbst an |
@@ -158,7 +158,23 @@ Hook & Leitfrage  →  Problem  →  Enforcement-Demo  →  Warum braucht man da
 - **S17 · Das Spektrum** — Determinismus ↔ Autonomie. Links: skriptgesteuerte Pipeline
   (vorhersagbar, starr). Rechts: modellgetriebene Autonomie (flexibel, unvorhersehbar).
   Architektur = *bewusst* positionieren — **pro Teilschritt**, nicht global.
-- **S18 · Kontrast: Wer trifft welche Entscheidung?** —
+- **S18 · Die Control Surface — die zentrale Architekturentscheidung** —
+  Auf dem Spektrum wird *eine Linie* gezogen: oberhalb entscheidet das Modell,
+  unterhalb entscheidet die Mechanik. **Diese Linie *ist* die Architektur.**
+  ```
+                    Modell
+                darf entscheiden
+  ═════════════ Architekturgrenze ═════════════
+                    Runtime
+                    Policies
+                    Contracts
+                    Human
+  ```
+  > **Architektur besteht darin, die Grenze zwischen modellgetriebenen und
+  > mechanisch kontrollierten Entscheidungen bewusst zu ziehen.**
+  Rückbezug: Demo 1 (Enforcement) liegt *unter* der Linie — Demo 3 zeigt beide Seiten
+  am selben Task.
+- **S19 · Kontrast: Wer trifft welche Entscheidung?** —
 
   | Modell entscheidet | Workflow entscheidet |
   |---|---|
@@ -173,7 +189,7 @@ Hook & Leitfrage  →  Problem  →  Enforcement-Demo  →  Warum braucht man da
 ### Akt 5 — Governance als Querschnitt (5 min)
 > Governance ist **kein Feature**, das man anhängt — sie liegt **quer über allem**.
 
-- **S19 · Das Schichtenmodell** — Governance/Evidence/Audit ziehen sich durch jede Schicht:
+- **S20 · Das Schichtenmodell** — Governance/Evidence/Audit ziehen sich durch jede Schicht:
   ```
   ┌──────────────────────────────────────────────┐
   │  Runtime                                       │
@@ -186,13 +202,13 @@ Hook & Leitfrage  →  Problem  →  Enforcement-Demo  →  Warum braucht man da
   Architektur erzeugt die *Spur* (Evidence-Blöcke, signierte Entscheidungen, Out-of-scope →
   Proposal), nicht das Gewissen des Entwicklers. Leitfrage: *Wer kann Entscheidungen später
   nachvollziehen?*
-- **S20 · Komposition & Layering** — `workflow → framework → domain → project`;
+- **S21 · Komposition & Layering** — `workflow → framework → domain → project`;
   Regel *tighten, never loosen*. Wie man Governance vererbbar macht.
-- **S21 · Multi-Agent-Isolation** — *Ein Agent = ein Branch = ein Working Dir*.
+- **S22 · Multi-Agent-Isolation** — *Ein Agent = ein Branch = ein Working Dir*.
   Nebenläufigkeitsmodell, Worktrees, Merge-Punkt als einziger Konfliktort.
 
 ### Akt 6 — Failure Modes (4 min)
-- **S22 · Architekturfehler → Konsequenz** —
+- **S23 · Architekturfehler → Konsequenz** —
 
   | Fehler | Folge |
   |---|---|
@@ -204,17 +220,17 @@ Hook & Leitfrage  →  Problem  →  Enforcement-Demo  →  Warum braucht man da
   | Kein Kill-Kriterium | Sunk Cost, kein Ausstieg |
 
 ### Akt 7 — Takeaways & Q&A (4 min)
-- **S23 · Die Architekten-Checkliste** — sechs Fragen, sofort auf die eigene Architektur anwendbar:
-  1. **Wer besitzt den Zustand?**
-  2. **Wer entscheidet über den nächsten Schritt?**
+- **S24 · Die Architekten-Checkliste** — sechs Fragen, sofort auf die eigene Architektur anwendbar:
+  1. **Welche Komponente besitzt den Zustand?**
+  2. **Welche Entscheidungen sind explizit delegiert?**
   3. **Welche Regeln sind mechanisch erzwingbar?**
-  4. **Welche Entscheidungen trifft das Modell?**
+  4. **Welche Entscheidungen bleiben modellgetrieben?**
   5. **Wo entstehen Audit-Artefakte?**
   6. **Wie werden Agenten voneinander isoliert?**
-- **S24 · Eine Botschaft** — Zurück zur Leitfrage:
+- **S25 · Eine Botschaft** — Zurück zur Leitfrage:
   > „Architektur für Agenten heißt: **den Handlungsspielraum entwerfen — und Kontrolle
   > mechanisch erzwingen.** Wer das nicht entscheidet, hat es trotzdem entschieden — implizit."
-- **S25 · Links / Repo / Kontakt** — `chevp-ai-framework`, Demos, Speaker-Bio (Embabel-Stil).
+- **S26 · Links / Repo / Kontakt** — `chevp-ai-framework`, Demos, Speaker-Bio (Embabel-Stil).
 
 ---
 
@@ -232,10 +248,12 @@ Hook & Leitfrage  →  Problem  →  Enforcement-Demo  →  Warum braucht man da
 
 ## Key Takeaways
 
-1. **Agenten sind keine Bibliotheken** — entwirf ihren Handlungsspielraum, nicht ihren Pfad.
+1. **Entwirf den Handlungsspielraum, nicht den Pfad** — ein Agent ist ein laufendes System mit eigenem Kontrollfluss; Architektur definiert seine Runtime und ihren Controller.
 2. **Kontrolle ist die Leitfrage** — bei jeder Schicht: *wer kontrolliert hier?*
 3. **Enforcement außerhalb des Modells** — Prompt-Disziplin ist eine Bitte, Mechanik ein Vertrag.
-4. **Positioniere jeden Teilschritt bewusst** auf dem Determinismus ↔ Autonomie-Spektrum.
+4. **Zieh die Control Surface bewusst** — die Grenze zwischen modellgetriebenen und
+   mechanisch kontrollierten Entscheidungen *ist* die Architektur; positioniere jeden
+   Teilschritt einzeln auf dem Determinismus ↔ Autonomie-Spektrum.
 5. **Governance liegt quer** — Audit & Evidence sind Querschnitt, kein Add-on.
 
 ---
